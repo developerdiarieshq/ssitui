@@ -1,7 +1,7 @@
 <template>
   <div>
    <Header />
-    <NavBar />
+    <NavBar />  
     <NoticeBar />
     <HeroCarousel />
     <IndustryHighlights />

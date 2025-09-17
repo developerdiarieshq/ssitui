@@ -96,16 +96,16 @@
             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Departments</a>
             <ul class="dropdown-menu">
               <li><router-link to="/cse" class="dropdown-item">CSE</router-link></li>
-              <li><a class="dropdown-item" href="#">CSE (AI & ML)</a></li>
-              <li><a class="dropdown-item" href="#">CSE (AI & DS)</a></li>
-              <li><a class="dropdown-item" href="#">ECE</a></li>
-              <li><a class="dropdown-item" href="#">EEE</a></li>
-              <li><a class="dropdown-item" href="#">S&amp;H</a></li>
-              <li><a class="dropdown-item" href="#">MECH</a></li>
-              <li><a class="dropdown-item" href="#">MBA</a></li>
-              <li><a class="dropdown-item" href="#">POLYTECHNIC</a></li>
-              <li><a class="dropdown-item" href="#">Examination Branch</a></li>
-              <li><a class="dropdown-item" href="#">Administrative Office</a></li>
+              <li><router-link to="/cse-ai" class="dropdown-item">CSE (AI & ML)</router-link></li>
+              <li><router-link to="/cse-aids" class="dropdown-item">CSE (AI & DS)</router-link></li> 
+              <li><router-link to="/ece" class="dropdown-item">ECE</router-link></li>
+              <li><router-link to="/eee" class="dropdown-item">EEE</router-link></li>
+              <li><router-link to="/sh" class="dropdown-item">S&amp;H</router-link></li>
+              <li><router-link to="/mech" class="dropdown-item">MECH</router-link></li>
+              <li><router-link to="/mba" class="dropdown-item">MBA</router-link></li>
+              <li><router-link to="/polytechnic" class="dropdown-item">POLYTECHNIC</router-link></li>
+              <li><router-link to="/examination-branch" class="dropdown-item">Examination Branch</router-link></li>
+              <li><router-link to="/administrative-office" class="dropdown-item">Administrative Office</router-link></li>
             </ul>
           </li>
 

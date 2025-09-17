@@ -1,4 +1,6 @@
 <template>
+  <Header/>
+  <NavBar/>
   <section class="page-bg">
     <!-- HERO -->
     <header class="hero" role="banner" aria-label="Central Library Hero">
@@ -300,9 +302,13 @@
       </div>
     </main>
   </section>
+  <Footer />
 </template>
 
 <script>
+import Header from '../../components/Header.vue';
+import NavBar from '../../components/NavBar.vue';
+import Footer from '../../components/Footer.vue';
 export default {
   name: "Library",
   data() {

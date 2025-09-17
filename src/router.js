@@ -35,7 +35,15 @@ import StaffQuarters from './views/amenities/StaffQuarters.vue'
 import Temple from './views/amenities/Temple.vue'
 
 //DEPARATMENTS
-import CSE from './views/departments/CSE.vue'
+import Cse from './views/departments/Cse.vue'
+import CseAi from './views/departments/CseAi.vue'
+import CseAiDs from './views/departments/CseAiDs.vue'
+import Ece from './views/departments/Ece.vue'
+import Sh from './views/departments/Sh.vue'
+import Polytechnic from './views/departments/Polytechnic.vue'
+import Eee from './views/departments/Eee.vue'
+import Mech from './views/departments/Mech.vue'
+import Examination from './views/departments/Examination.vue'
 
 
 
@@ -76,7 +84,16 @@ const routes = [
     { path: '/e-classrooms', component: EClassRooms },
     { path: '/staff-quarters', component: StaffQuarters },
     { path: '/temple', component: Temple },
-    { path: '/cse', component: CSE }
+    { path: '/cse', component: Cse },
+    { path: '/cse-ai', component: CseAi },
+    { path: '/cse-aids', component: CseAiDs },
+    { path: '/ece', component: Ece },
+    { path: '/sh', component: Sh },
+    { path: '/polytechnic', component: Polytechnic },
+    { path: '/eee', component: Eee },
+    { path: '/mech', component: Mech },
+    { path: '/examination-branch', component: Examination }
+
 ]
 
 const router = createRouter({
