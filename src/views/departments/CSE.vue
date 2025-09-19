@@ -386,35 +386,83 @@ const faculty = ref([
   {
     name: 'Dr. Shaik Yakoob', designation: 'Professor & HOD',
     qualification: 'Ph.D., M.Tech',
-    expertise: ['AI/ML', 'Data Mining', 'Software Engineering'],
+    expertise: ['AI/ML'],
     email: 'hod.cse@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1607746882042-944635dfe10e?q=80&w=400',
+    photo: new URL('@/assets/faculty/cse/1-440193931.jpg', import.meta.url).href,
     profile: '#', linkedin: '#'
   },
   {
-    name: 'Dr. P. Sekharbabu', designation: 'Professor',
+    name: 'Mr. N Venkateswararo', designation: 'Professor',
     qualification: 'Ph.D., M.Tech',
-    expertise: ['VLSI', 'Embedded Systems', 'IoT'],
+    expertise: ['Java','Web Dev'],
     email: 'sekharbabu@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=400',
+    photo: new URL('@/assets/faculty/cse/1-440099235.jpg', import.meta.url).href,
     profile: '#', linkedin: '#'
   },
   {
-    name: 'Ms. Ananya Rao', designation: 'Assistant Professor',
+    name: 'Dr. Thotakura Veeranna', designation: 'Assistant Professor',
     qualification: 'M.Tech',
-    expertise: ['Web Dev', 'Cloud', 'DevOps'],
+    expertise: ['C','Web Dev', 'Cloud', 'DevOps'],
     email: 'ananya.rao@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400',
+    photo: new URL('@/assets/faculty/cse/CS04.jpg', import.meta.url).href,
     profile: '#', linkedin: '#'
   },
   {
-    name: 'Mr. Kiran Kumar', designation: 'Assistant Professor',
+    name: 'Mr. Cheepu Balakrishna', designation: 'Assistant Professor',
+    qualification: 'M.Tech',
+    expertise: ['Data Mining', 'Cybersecurity', 'Networks'],
+    email: 'kiran.kumar@ssit.edu.in',
+    photo: new URL('@/assets/faculty/cse/1-440400711.jpg', import.meta.url).href,
+    profile: '#', linkedin: '#'
+  },
+  {
+    name: 'Mr. V Venkata Sivaprasad', designation: 'Assistant Professor',
     qualification: 'M.Tech',
     expertise: ['Cybersecurity', 'Networks'],
     email: 'kiran.kumar@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1540539234-c67a9b2cdda1?q=80&w=400',
+    photo: new URL('@/assets/faculty/cse/1-761771724.jpg', import.meta.url).href,
     profile: '#', linkedin: '#'
-  }
+  },
+  {
+    name: 'Mrs. J Rajakala', designation: 'Assistant Professor',
+    qualification: 'M.Tech',
+    expertise: ['Cybersecurity', 'Networks'],
+    email: 'kiran.kumar@ssit.edu.in',
+    photo: new URL('@/assets/faculty/cse/CS07.jpg', import.meta.url).href,
+    profile: '#', linkedin: '#'
+  },
+  {
+    name: 'Mr. Vanaparthi S R Krishna', designation: 'Assistant Professor',
+    qualification: 'M.Tech',
+    expertise: ['Cybersecurity', 'Networks'],
+    email: 'kiran.kumar@ssit.edu.in',
+    photo: new URL('@/assets/faculty/cse/CS18.jpg', import.meta.url).href,
+    profile: '#', linkedin: '#'
+  },
+  {
+    name: 'Mr. B Santosh Kumar', designation: 'Assistant Professor',
+    qualification: 'M.Tech',
+    expertise: ['Cybersecurity', 'Networks'],
+    email: 'kiran.kumar@ssit.edu.in',
+    photo: new URL('@/assets/faculty/cse/CS11.jpg', import.meta.url).href,
+    profile: '#', linkedin: '#'
+  },
+    {
+    name: 'Mrs. M Thirupathamma ', designation: 'Assistant Professor',
+    qualification: 'M.Tech',
+    expertise: ['Cybersecurity', 'Networks'],
+    email: 'kiran.kumar@ssit.edu.in',
+    photo: new URL('@/assets/faculty/cse/CS10.jpg', import.meta.url).href,
+    profile: '#', linkedin: '#'
+  } ,
+  {
+    name: 'Mr. CH Siva Prakash ', designation: 'Assistant Professor',
+    qualification: 'M.Tech',
+    expertise: ['Cybersecurity', 'Networks'],
+    email: 'kiran.kumar@ssit.edu.in',
+   photo: new URL('@/assets/faculty/cse/CS22.jpg', import.meta.url).href,
+    profile: '#', linkedin: '#'
+  } 
 ])
 const designations = ['Professor & HOD', 'Professor', 'Associate Professor', 'Assistant Professor']
 const query = ref('')
