@@ -19,128 +19,202 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- Menu Items -->
+      <!-- Menu -->
       <div class="collapse navbar-collapse" id="mainNavbar">
         <ul class="navbar-nav mx-auto">
 
-          <!-- Home --> 
-          <li class="nav-item"><router-link to="/" class="nav-link">Home</router-link></li>
+          <!-- Home -->
+          <li class="nav-item">
+            <router-link to="/" class="nav-link">Home</router-link>
+          </li>
 
           <!-- About -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">About</a>
-            <ul class="dropdown-menu">
-              <li><router-link to="/about-us" class="dropdown-item">About SSIT</router-link></li>
-              <!-- <li><router-link to="/vision-mission" class="dropdown-item">Vision & Mission</router-link></li> -->
-              <!-- <li><router-link to="/management" class="dropdown-item">Management</router-link></li> -->
+            <ul class="dropdown-menu shadow">
+              <li><router-link to="/management" class="dropdown-item">Management</router-link></li>
+              <li><router-link to="/society" class="dropdown-item">Society</router-link></li>
+              <li><router-link to="/vision-mission" class="dropdown-item">Vision & Mission</router-link></li>
+              <li><router-link to="/quality-policy" class="dropdown-item">Quality Policy</router-link></li>
+              <li><router-link to="/governing-body" class="dropdown-item">Governing Body</router-link></li>
+              <li><router-link to="/principal-desk" class="dropdown-item">Principal</router-link></li>
               <li><router-link to="/academic-council" class="dropdown-item">Academic Council</router-link></li>
-              <li><router-link to="/strength" class="dropdown-item">Strengths</router-link></li>
-              <!-- <li><a class="dropdown-item" href="#">Quality Policy</a></li> -->
-              <li><router-link to="/mandatory-disclosure" class="dropdown-item">Mandatory Disclosure</router-link></li>
-              <li><a class="dropdown-item" href="#">ICT Facilities</a></li>
-            </ul>
-          </li>
-
-          <!-- Governance -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Governance</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Organogram</a></li>
-               <li><router-link to="/trust" class="dropdown-item">Trust</router-link></li>
-               <li><router-link to="/governing-body" class="dropdown-item">Governing Body</router-link></li>
-                <li><router-link to="/principal-desk" class="dropdown-item">Principal's Desk</router-link></li>
-              <li><a class="dropdown-item" href="#">Strategic Plan</a></li>
-              <li><a class="dropdown-item" href="#">Academic Council</a></li>
-              <li><router-link to="/policies" class="dropdown-item">Policies</router-link></li>
-              <li><router-link to="/committees" class="dropdown-item">Committees</router-link></li>
-              <li><a class="dropdown-item" href="#">R&amp;D</a></li>
-              <li><router-link to="/iqac" class="dropdown-item">IQAC</router-link></li>
-              
             </ul>
           </li>
 
           <!-- Academics -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Academics</a>
-            <ul class="dropdown-menu">
-              <li><router-link to="/academic-regulations" class="dropdown-item">Academic Regulations</router-link></li>
-              <li><router-link to="/academic-calendar" class="dropdown-item">Academic Calendar</router-link></li>
-              <li><router-link to="/incentives" class="dropdown-item">Incentives</router-link></li>
-            </ul>
+            <div class="dropdown-menu mega-menu p-4 shadow-lg">
+              <div class="row">
+                <div class="col-md-4">
+                  <h6 class="fw-bold text-uppercase mb-2">Academics</h6>
+                  <router-link to="/academic-regulations" class="dropdown-item">Academic Regulations</router-link>
+                  <router-link to="/academic-calendar" class="dropdown-item">Academic Calendar</router-link>
+                  <router-link to="/incentives" class="dropdown-item">Incentives</router-link>
+                  <router-link to="/awards" class="dropdown-item">Awards & Recognitions</router-link>
+                  <router-link to="/committees" class="dropdown-item">Committees</router-link>
+                  <router-link to="/approvals" class="dropdown-item">Approvals</router-link>
+                </div>
+                <div class="col-md-4">
+                  <h6 class="fw-bold text-uppercase mb-2">Departments</h6>
+                  <router-link to="/cse" class="dropdown-item">CSE</router-link>
+                  <router-link to="/ece" class="dropdown-item">ECE</router-link>
+                  <router-link to="/eee" class="dropdown-item">EEE</router-link>
+                  <router-link to="/ai-ds" class="dropdown-item">AI & DS</router-link>
+                  <router-link to="/aiml" class="dropdown-item">AIML</router-link>
+                  <router-link to="/mech" class="dropdown-item">MECH</router-link>
+                  <router-link to="/sh" class="dropdown-item">S & H</router-link>
+                  <router-link to="/mba" class="dropdown-item">MBA</router-link>
+                  <router-link to="/polytechnic" class="dropdown-item">Polytechnic</router-link>
+                </div>
+                <div class="col-md-4">
+                  <h6 class="fw-bold text-uppercase mb-2">Placements</h6>
+                  <router-link to="/placements-records" class="dropdown-item">Placement Records</router-link>
+                  <router-link to="/companies" class="dropdown-item">Companies</router-link>
+                </div>
+              </div>
+            </div>
           </li>
 
-          <!-- Admissions -->
+          <!-- Admissions & Accreditations -->
           <li class="nav-item dropdown">
-            <!-- <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Admissions</a> -->
-            <router-link to="/admissions" class="nav-link">Admissions</router-link>
-            <!-- <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Admission Procedure</a></li>
-              <li><a class="dropdown-item" href="#">Fee Structure</a></li>
-            </ul> -->
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Admissions & Accreditations</a>
+            <div class="dropdown-menu mega-menu p-4 shadow-lg">
+              <div class="row">
+                <div class="col-md-4">
+                  <h6 class="fw-bold text-uppercase mb-2">Admissions</h6>
+                  <router-link to="/admission-procedure" class="dropdown-item">Admission Procedure</router-link>
+                  <router-link to="/fee-structure" class="dropdown-item">Fee Structure</router-link>
+                  <router-link to="/admission-form" class="dropdown-item">Admission Form</router-link>
+                  <router-link to="/contact-admission" class="dropdown-item">Contact for Admission</router-link>
+                </div>
+                <div class="col-md-4">
+                  <h6 class="fw-bold text-uppercase mb-2">Accreditations / Quality</h6>
+                  <router-link to="/iqac" class="dropdown-item">IQAC</router-link>
+                  <router-link to="/iiqa" class="dropdown-item">IIQA</router-link>
+                  <router-link to="/ssr" class="dropdown-item">SSR</router-link>
+                  <router-link to="/dvv" class="dropdown-item">DVV</router-link>
+                </div>
+                <div class="col-md-4">
+                  <h6 class="fw-bold text-uppercase mb-2">Rankings</h6>
+                  <router-link to="/nirf-overall" class="dropdown-item">NIRF Overall</router-link>
+                  <router-link to="/nirf-engineering" class="dropdown-item">NIRF Engineering</router-link>
+                  <router-link to="/nirf-management" class="dropdown-item">NIRF Management</router-link>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- Examinations -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Examinations</a>
+            <div class="dropdown-menu mega-menu p-4 shadow-lg">
+              <div class="row">
+                <div class="col-md-6">
+                  <h6 class="fw-bold text-uppercase mb-2">Examinations</h6>
+                  <router-link to="/coe" class="dropdown-item">COE</router-link>
+                  <router-link to="/exam-notices" class="dropdown-item">Notices</router-link>
+                  <router-link to="/exam-regulations" class="dropdown-item">Academic Regulations</router-link>
+                  <router-link to="/exam-calendar" class="dropdown-item">Academic Calendar</router-link>
+                  <router-link to="/exam-syllabus" class="dropdown-item">Syllabus</router-link>
+                  <router-link to="/exam-timetables" class="dropdown-item">Timetables</router-link>
+                  <router-link to="/exam-results" class="dropdown-item">Results</router-link>
+                </div>
+                <div class="col-md-6">
+                  <h6 class="fw-bold text-uppercase mb-2">More</h6>
+                  <router-link to="/exam-portal" class="dropdown-item">Examination Portal</router-link>
+                  <router-link to="/malpractice-guidelines" class="dropdown-item">Malpractice Guidelines</router-link>
+                  <h6 class="fw-bold text-uppercase mt-3 mb-2">JNTUH Specific</h6>
+                  <router-link to="/jntuh-circulars" class="dropdown-item">Circulars</router-link>
+                  <router-link to="/jntuh-syllabus" class="dropdown-item">Syllabus</router-link>
+                  <router-link to="/jntuh-timetables" class="dropdown-item">Timetables</router-link>
+                  <router-link to="/jntuh-results" class="dropdown-item">Results</router-link>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- Campus -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Campus</a>
+            <div class="dropdown-menu mega-menu p-4 shadow-lg dropdown-menu-end">
+              <div class="row">
+                <div class="col-md-8">
+                  <h6 class="fw-bold text-uppercase mb-3">Amenities</h6>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <router-link to="/library" class="dropdown-item">Library</router-link>
+                      <router-link to="/digital-library" class="dropdown-item">Digital Library</router-link>
+                      <router-link to="/english-lab" class="dropdown-item">English Lab</router-link>
+                      <router-link to="/seminar-halls" class="dropdown-item">Seminar Halls</router-link>
+                      <router-link to="/hostels" class="dropdown-item">Hostels</router-link>
+                      <router-link to="/cafeteria" class="dropdown-item">Cafeteria</router-link>
+                      <router-link to="/e-classrooms" class="dropdown-item">E-Classrooms</router-link>
+                    </div>
+                    <div class="col-md-6">
+                      <router-link to="/staff-quarters" class="dropdown-item">Staff Quarters</router-link>
+                      <router-link to="/college-temple" class="dropdown-item">College Temple</router-link>
+                      <router-link to="/internet" class="dropdown-item">Internet</router-link>
+                      <router-link to="/ict-facilities" class="dropdown-item">ICT Facilities</router-link>
+                      <router-link to="/sports" class="dropdown-item">Sports & Games</router-link>
+                      <router-link to="/transportation" class="dropdown-item">Transportation</router-link>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <h6 class="fw-bold text-uppercase mb-3">Gallery</h6>
+                  <router-link to="/campus-gallery" class="dropdown-item">Campus Photos</router-link>
+                </div>
+              </div>
+            </div>
           </li>
 
           <!-- Student Corner -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Student Corner</a>
-            <ul class="dropdown-menu">
-              <li><router-link to="/scholarship" class="dropdown-item">Scholarship</router-link></li>
-              <li><router-link to="/anti-ragging" class="dropdown-item">Anti Ragging</router-link></li>
-               <router-link to="/sports" class="dropdown-item">Sports</router-link>
-              <li><router-link to="/cafeteria" class="dropdown-item">Cafeteria</router-link></li>
-              <li><router-link to="/social-services" class="dropdown-item">Social Services</router-link></li>
-            </ul>
+            <div class="dropdown-menu mega-menu p-4 shadow-lg dropdown-menu-end">
+              <div class="row">
+                <div class="col-md-4">
+                  <h6 class="fw-bold text-uppercase mb-3">Student Services</h6>
+                  <router-link to="/scholarship" class="dropdown-item">Scholarship</router-link>
+                  <router-link to="/clubs" class="dropdown-item">Clubs</router-link>
+                  <router-link to="/nss" class="dropdown-item">NSS (Social Service)</router-link>
+                </div>
+                <div class="col-md-4">
+                  <h6 class="fw-bold text-uppercase mb-3">Alumni</h6>
+                  <router-link to="/alumni-invitation-21-22" class="dropdown-item">Invitation (Year 21-22)</router-link>
+                  <router-link to="/alumni-registration" class="dropdown-item">Alumni Registration</router-link>
+                  <router-link to="/view-alumni" class="dropdown-item">View Alumni Students</router-link>
+                </div>
+                <div class="col-md-4">
+                  <h6 class="fw-bold text-uppercase mb-3">Feedback / Grievances</h6>
+                  <router-link to="/grievance-form" class="dropdown-item">Grievance Form</router-link>
+                  <router-link to="/ic-committee" class="dropdown-item">IC Committee</router-link>
+                  <router-link to="/aicte-feedback" class="dropdown-item">AICTE Feedback</router-link>
+                  <router-link to="/teacher-feedback" class="dropdown-item">Teacher Feedback</router-link>
+                  <router-link to="/student-feedback" class="dropdown-item">Student Feedback</router-link>
+                  <router-link to="/employer-feedback" class="dropdown-item">Employer Feedback</router-link>
+                  <router-link to="/alumni-feedback" class="dropdown-item">Alumni Feedback</router-link>
+                </div>
+              </div>
+            </div>
           </li>
 
-          <!-- Departments -->
+          <!-- Quick Links -->
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Departments</a>
-            <ul class="dropdown-menu">
-              <li><router-link to="/cse" class="dropdown-item">CSE</router-link></li>
-              <li><router-link to="/cse-ai" class="dropdown-item">CSE (AI & ML)</router-link></li>
-              <li><router-link to="/cse-aids" class="dropdown-item">CSE (AI & DS)</router-link></li> 
-              <li><router-link to="/ece" class="dropdown-item">ECE</router-link></li>
-              <li><router-link to="/eee" class="dropdown-item">EEE</router-link></li>
-              <li><router-link to="/sh" class="dropdown-item">S&amp;H</router-link></li>
-              <li><router-link to="/mech" class="dropdown-item">MECH</router-link></li>
-              <li><router-link to="/mba" class="dropdown-item">MBA</router-link></li>
-              <li><router-link to="/polytechnic" class="dropdown-item">POLYTECHNIC</router-link></li>
-              <li><router-link to="/examination-branch" class="dropdown-item">Examination Branch</router-link></li>
-              <li><router-link to="/administrative-office" class="dropdown-item">Administrative Office</router-link></li>
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Quick Links</a>
+            <ul class="dropdown-menu shadow">
+              <li><router-link to="/strengths" class="dropdown-item">Strengths</router-link></li>
+              <li><router-link to="/social-service" class="dropdown-item">Social Service</router-link></li>
+              <li><router-link to="/incentives" class="dropdown-item">Incentives</router-link></li>
+              <li><router-link to="/login" class="dropdown-item">Login</router-link></li>
             </ul>
           </li>
 
-          <!-- Amenities -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Amenities</a>
-            <ul class="dropdown-menu">
-              <li><router-link to="/library" class="dropdown-item">Library</router-link></li>
-              <!-- <li><a class="dropdown-item" href="#">Library</a></li> -->
-              <li><a class="dropdown-item" href="#">Digital Library</a></li>
-              <li><router-link to="/internet" class="dropdown-item">Internet</router-link></li>
-              <li><router-link to="/english-labs" class="dropdown-item">English Labs</router-link></li>
-              <li><router-link to="/counselling" class="dropdown-item">Counselling</router-link></li>
-              <li><router-link to="/seminar-hall" class="dropdown-item">Seminar Halls</router-link></li>
-              <li><router-link to="/sports" class="dropdown-item">Sports & Games</router-link></li>
-              <li><router-link to="/hostels" class="dropdown-item">Hostels</router-link></li>
-              <li><router-link to="/transportation" class="dropdown-item">Transportation</router-link></li>
-             <li><router-link to="/e-classrooms" class="dropdown-item">E-Class Rooms</router-link></li>
-              <li><router-link to="/staff-quarters" class="dropdown-item">Staff Quarters</router-link></li>
-              <li><router-link to="/temple" class="dropdown-item">Temple in College</router-link></li>
-            </ul>
-          </li>
-
-          <!-- Placements -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Placements</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Placements Record</a></li>
-              <li><a class="dropdown-item" href="#">Companies</a></li>
-            </ul>
-          </li>
-
-          <!-- Careers -->
+          <!-- Contact -->
           <li class="nav-item">
-            <a class="nav-link" href="#">Careers</a>
+            <router-link to="/contact" class="nav-link">Contact</router-link>
           </li>
 
         </ul>
@@ -150,25 +224,24 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from "vue";
 
-const isScrolled = ref(false)
+const isScrolled = ref(false);
 
 const handleScroll = () => {
-  // Show logo when scroll passes header (120px threshold, adjust as needed)
-  isScrolled.value = window.scrollY > 120
-}
+  isScrolled.value = window.scrollY > 120;
+};
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
-})
-
+  window.addEventListener("scroll", handleScroll);
+});
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
-})
+  window.removeEventListener("scroll", handleScroll);
+});
 </script>
 
 <style scoped>
+/* Logo */
 .navbar-logo {
   height: 35px;
   width: 35px;
@@ -176,45 +249,103 @@ onUnmounted(() => {
   object-fit: cover;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
+
+/* Top-level links */
 .nav-link {
   font-weight: 500;
   color: #333 !important;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
 }
 .nav-link:hover,
-.dropdown-item:hover {
-  color: #FF6F00 !important;
-}
-.dropdown-menu {
-  min-width: 220px;
-  max-height: 70vh;
-  overflow-y: auto;
-}
-/* Main nav items */
-.nav-link {
-  font-weight: 500;
-  color: #333 !important;
-  padding: 8px 16px;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-}
-
-.nav-link:hover {
-  background-color: #FF6F00;  /* orange background */
-  color: #fff !important;     /* white text */
-}
-
-/* Dropdown menu items */
-.dropdown-item {
-  font-weight: 500;
-  color: #333;
-  padding: 8px 16px;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-}
-
-.dropdown-item:hover {
-  background-color: #FF6F00;  /* orange background */
+.nav-link:focus {
+  background: #ff6f00;
   color: #fff !important;
 }
 
+/* Dropdown items */
+.dropdown-item {
+  font-weight: 500;
+  color: #333 !important;
+  padding: 8px 14px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+.dropdown-item:hover {
+  background: #ff6f00;
+  color: #fff !important;
+}
+
+/* ====== Mega Menu ====== */
+.mega-menu {
+  position: absolute;
+  top: 100%;
+  padding: 1.5rem;
+  border: none;
+  border-radius: 8px;
+  width: auto;
+  min-width: 600px;
+  max-width: min(95vw, 1100px);
+  overflow-x: hidden;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Section headings */
+.mega-menu h6 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #ff6f00;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 4px;
+}
+
+/* Column dividers */
+.mega-menu .col-md-4 {
+  border-right: 1px solid #eee;
+}
+.mega-menu .col-md-4:last-child {
+  border-right: none;
+}
+
+/* Links inside mega menu */
+.mega-menu .dropdown-item {
+  font-weight: 500;
+  color: #333 !important;
+  padding: 6px 10px;
+  border-radius: 4px;
+}
+.mega-menu .dropdown-item:hover {
+  background: #ff6f00;
+  color: #fff !important;
+}
+
+/* Alignment helpers */
+:deep(.dropdown-menu-start) {
+  left: 0;
+  right: auto;
+}
+:deep(.dropdown-menu-end) {
+  right: 0;
+  left: auto;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .mega-menu {
+    min-width: 100%;
+    max-width: 100%;
+    padding: 1rem;
+  }
+  .mega-menu .row {
+    flex-direction: column;
+  }
+  .mega-menu .col-md-4,
+  .mega-menu .col-md-6 {
+    border-right: none;
+    margin-bottom: 1rem;
+  }
+}
 </style>
