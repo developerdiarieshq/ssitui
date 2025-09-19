@@ -281,13 +281,14 @@ onUnmounted(() => {
 .mega-menu {
   position: absolute;
   top: 100%;
-  padding: 1.5rem;
+  padding: 1rem;
   border: none;
   border-radius: 8px;
   width: auto;
   min-width: 600px;
-  max-width: min(95vw, 1100px);
+  max-width: min(90vw, 900px);
   overflow-x: hidden;
+  overflow-y: auto;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
 }
 
@@ -295,11 +296,13 @@ onUnmounted(() => {
 .mega-menu h6 {
   font-size: 15px;
   font-weight: 700;
-  color: #ff6f00;
+  color: #fff;
+  background-color: #ff6f00;
   text-transform: uppercase;
   margin-bottom: 0.75rem;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 4px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  text-align: center;
 }
 
 /* Column dividers */
@@ -310,15 +313,79 @@ onUnmounted(() => {
   border-right: none;
 }
 
+/* Column dividers for 2-column layout */
+.mega-menu .col-md-6 {
+  border-right: 1px solid #eee;
+}
+.mega-menu .col-md-6:last-child {
+  border-right: none;
+}
+
+/* Column dividers for 8-column layout */
+.mega-menu .col-md-8 {
+  border-right: 1px solid #eee;
+}
+.mega-menu .col-md-8:last-child {
+  border-right: none;
+}
+
 /* Links inside mega menu */
 .mega-menu .dropdown-item {
   font-weight: 500;
   color: #333 !important;
   padding: 6px 10px;
   border-radius: 4px;
+  transition: all 0.3s ease;
+  display: block;
+  text-decoration: none;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.mega-menu .dropdown-item:hover {
-  background: #ff6f00;
+
+/* Regular dropdown items (About, Quick Links) - same font size */
+.dropdown-menu .dropdown-item {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.mega-menu .dropdown-item:hover,
+.mega-menu .dropdown-item:focus,
+.mega-menu .dropdown-item:active {
+  background-color: #ff6f00 !important;
+  color: #fff !important;
+  outline: none !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+}
+
+/* General dropdown item styles */
+.dropdown-item:hover,
+.dropdown-item:focus,
+.dropdown-item:active,
+.dropdown-item.router-link-active,
+.dropdown-item.router-link-exact-active {
+  background-color: #ff6f00 !important;
+  color: #fff !important;
+  outline: none !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+}
+
+/* Override Bootstrap's default dropdown item styles */
+:deep(.navbar .dropdown-menu .dropdown-item:hover),
+:deep(.navbar .dropdown-menu .dropdown-item:focus),
+:deep(.navbar .dropdown-menu .dropdown-item:active) {
+  background-color: #ff6f00 !important;
+  color: #fff !important;
+}
+
+/* Additional deep selector for mega menu items */
+:deep(.mega-menu .dropdown-item:hover),
+:deep(.mega-menu .dropdown-item:focus),
+:deep(.mega-menu .dropdown-item:active) {
+  background-color: #ff6f00 !important;
   color: #fff !important;
 }
 
@@ -348,4 +415,6 @@ onUnmounted(() => {
     margin-bottom: 1rem;
   }
 }
+
+
 </style>
