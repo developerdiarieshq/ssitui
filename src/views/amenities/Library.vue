@@ -33,7 +33,9 @@
           <div class="col-6 col-md-3" v-for="stat in stats" :key="stat.label">
             <div class="stat-card h-100">
               <div class="d-flex align-items-center gap-3">
-                <i :class="stat.icon"></i>
+                <div class="stat-icon">
+                  <i :class="stat.icon"></i>
+                </div>
                 <div>
                   <div class="stat-number">{{ stat.value }}</div>
                   <div class="stat-label">{{ stat.label }}</div>
@@ -64,25 +66,28 @@
           </p>
         </div>
 
-        <!-- Tabs -->
-        <ul class="nav nav-tabs overflow-auto flex-nowrap mb-4" role="tablist">
-          <li class="nav-item" v-for="tab in tabs" :key="tab.id" role="presentation">
-            <button
-              class="nav-link"
-              :class="{ active: activeTab === tab.id }"
-              type="button"
-              role="tab"
-              @click="activeTab = tab.id"
-            >
-              <i :class="tab.icon" class="me-2"></i>{{ tab.label }}
-            </button>
-          </li>
-        </ul>
+    <!-- STICKY SUB NAV (nav-pills) -->
+    <nav class="subnav" aria-label="Section navigation">
+      <div class="container subnav-inner">
+        <button
+          v-for="tab in tabs"
+          :key="tab.id"
+          class="chip"
+          :class="{ active: activeTab === tab.id }"
+          @click="setTab(tab.id)"
+          :aria-controls="tab.id"
+          role="tab"
+          :aria-selected="activeTab === tab.id"
+        >
+          <i :class="tab.icon" aria-hidden="true"></i> {{ tab.label }}
+        </button>
+      </div>
+    </nav>
 
-        <!-- Tab Panels -->
-        <div class="tab-content">
-          <!-- Resources -->
-          <div v-if="activeTab === 'resources'" class="tab-pane fade show active">
+    <!-- CONTENT (tab panes) -->
+    <main class="container content" id="content">
+      <!-- Resources -->
+      <section :id="tabsMap.resources" class="card-section" v-show="activeTab==='resources'">
             <div class="elev-card p-4 p-md-5">
               <h3 class="h4">Resources &amp; Services</h3>
               <p class="text-muted">Collections • Digital platforms • Access tools</p>
@@ -111,10 +116,10 @@
                 </div>
               </div>
             </div>
-          </div>
+          </section>
 
           <!-- Facilities -->
-          <div v-if="activeTab === 'facilities'" class="tab-pane fade show active">
+          <section :id="tabsMap.facilities" class="card-section" v-show="activeTab==='facilities'">
             <div class="elev-card p-4 p-md-5">
               <h3 class="h4">Facilities</h3>
               <div class="table-responsive">
@@ -138,10 +143,10 @@
                 </table>
               </div>
             </div>
-          </div>
+          </section>
 
           <!-- Membership -->
-          <div v-if="activeTab === 'membership'" class="tab-pane fade show active">
+          <section :id="tabsMap.membership" class="card-section" v-show="activeTab==='membership'">
             <div class="elev-card p-4 p-md-5">
               <h3 class="h4">Membership</h3>
               <div class="row g-4 mt-2">
@@ -154,10 +159,10 @@
                 </div>
               </div>
             </div>
-          </div>
+          </section>
 
           <!-- Services -->
-          <div v-if="activeTab === 'services'" class="tab-pane fade show active">
+          <section :id="tabsMap.services" class="card-section" v-show="activeTab==='services'">
             <div class="elev-card p-4 p-md-5">
               <h3 class="h4">Services Offered</h3>
               <ul>
@@ -168,10 +173,10 @@
                 <li><i class="fa-solid fa-paper-plane me-2 text-secondary"></i>News distribution</li>
               </ul>
             </div>
-          </div>
+          </section>
 
           <!-- Digital -->
-          <div v-if="activeTab === 'digital'" class="tab-pane fade show active">
+          <section :id="tabsMap.digital" class="card-section" v-show="activeTab==='digital'">
             <div class="elev-card p-4 p-md-5">
               <h3 class="h4">Digital Library</h3>
               <div class="row g-4 mt-2">
@@ -197,10 +202,10 @@
                 </div>
               </div>
             </div>
-          </div>
+          </section>
 
           <!-- Timings -->
-          <div v-if="activeTab === 'timings'" class="tab-pane fade show active">
+          <section :id="tabsMap.timings" class="card-section" v-show="activeTab==='timings'">
             <div class="elev-card p-4 p-md-5">
               <h3 class="h4">Timings</h3>
               <div class="table-responsive">
@@ -218,10 +223,10 @@
                 </table>
               </div>
             </div>
-          </div>
+          </section>
 
           <!-- Team -->
-          <div v-if="activeTab === 'team'" class="tab-pane fade show active">
+          <section :id="tabsMap.team" class="card-section" v-show="activeTab==='team'">
             <div class="elev-card p-4 p-md-5">
               <h3 class="h4">Library Team</h3>
               <div class="table-responsive mt-3">
@@ -238,10 +243,10 @@
                 </table>
               </div>
             </div>
-          </div>
+          </section>
 
           <!-- Downloads -->
-          <div v-if="activeTab === 'downloads'" class="tab-pane fade show active">
+          <section :id="tabsMap.downloads" class="card-section" v-show="activeTab==='downloads'">
             <div class="elev-card p-4 p-md-5">
               <h3 class="h4">Downloads</h3>
               <div class="d-grid gap-3" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
@@ -250,10 +255,10 @@
                 </a>
               </div>
             </div>
-          </div>
+          </section>
 
           <!-- News -->
-          <div v-if="activeTab === 'news'" class="tab-pane fade show active">
+          <section :id="tabsMap.news" class="card-section" v-show="activeTab==='news'">
             <div class="elev-card p-4 p-md-5">
               <h3 class="h4">News &amp; Updates</h3>
               <div v-for="n in news" :key="n.title" class="elev-card p-3 mb-3">
@@ -261,10 +266,10 @@
                 <div class="small text-muted">{{ n.desc }}</div>
               </div>
             </div>
-          </div>
+          </section>
 
           <!-- FAQ -->
-          <div v-if="activeTab === 'faq'" class="tab-pane fade show active">
+          <section :id="tabsMap.faq" class="card-section" v-show="activeTab==='faq'">
             <div class="elev-card p-4 p-md-5">
               <h3 class="h4">FAQ</h3>
               <div class="accordion" id="faqAcc">
@@ -284,8 +289,8 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </section>
+        </main>
 
         <!-- Contact -->
         <section class="my-5">
@@ -311,10 +316,27 @@ import NavBar from '../../components/NavBar.vue';
 import Footer from '../../components/Footer.vue';
 export default {
   name: "Library",
+  components: {
+    Header,
+    NavBar,
+    Footer
+  },
   data() {
     return {
       activeTab: "resources",
       openFAQ: null,
+      tabsMap: {
+        resources: "resources",
+        facilities: "facilities", 
+        membership: "membership",
+        services: "services",
+        digital: "digital",
+        timings: "timings",
+        team: "team",
+        downloads: "downloads",
+        news: "news",
+        faq: "faq"
+      },
       stats: [
         { value: "55,000+", label: "Total Collection", icon: "fa-solid fa-book fa-lg text-warning" },
         { value: "12,500+", label: "E-Books & Journals", icon: "fa-solid fa-tablet-screen-button fa-lg text-primary" },
@@ -368,6 +390,9 @@ export default {
     };
   },
   methods: {
+    setTab(id) {
+      this.activeTab = id;
+    },
     toggleFAQ(i) {
       this.openFAQ = this.openFAQ === i ? null : i;
     },
@@ -376,14 +401,83 @@ export default {
 </script>
 
 <style scoped>
-/* Same styles from HTML version, shortened here */
+/* THEME TOKENS */
+:root{
+  --navy:#1e40af; --navy-2:#153a9c;
+  --orange:#f97316; --bg:#f7f9fc; --card:#fff;
+  --border:#e5e7eb; --muted:#6b7280; --ink:#111827;
+}
+
+/* GENERIC */
+.container{ width:min(1180px,92%); margin-inline:auto; }
+.mb-0{margin-bottom:0} .mt-1{margin-top:1rem} .mt-2{margin-top:1.25rem}
+.mb-2{margin-bottom:.75rem} .h5{font-size:1.1rem} .h6{font-size:1rem}
+.text-muted{color:var(--muted)} .muted{color:var(--muted)}
+.lead{font-size:1.05rem; color:#374151}
+
+/* PAGE BACKGROUND */
 .page-bg { background: linear-gradient(180deg, #fff 0%, #eef3ff 100%); }
-.hero { background: linear-gradient(60deg, #0b3d91 0%, #143f8c 100%); color: #fff; padding: 4rem 0 2rem; }
+
+/* HERO */
+.hero { background: linear-gradient(135deg, #FF7701, #FF6F00); color: #fff; padding: 4rem 0 2rem; }
 .badge-pill { background: rgba(255,255,255,0.15); border-radius: 999px; padding: .25rem .75rem; }
-.stat-card { background:#fff; border-radius:1rem; box-shadow:0 6px 24px rgba(0,0,0,.08); padding:1rem; }
+.stat-card { background:#fff; border-radius:1rem; box-shadow:0 6px 24px rgba(0,0,0,.08); padding:1rem; color: #0b3d91; }
 .stat-number { font-weight:800; color:#0b3d91; }
+
+/* SUBNAV */
+.subnav{ position:sticky; top:0; z-index:20; background:#fff; border-bottom:1px solid var(--border); }
+.subnav-inner{ display:flex; gap:.5rem; padding:.6rem 1rem; overflow-x:auto; overflow-y:hidden; justify-content:flex-start; flex-wrap:nowrap; }
+.chip{ border:1px solid var(--border); background:#fff; color:#111; border-radius:999px; padding:.5rem .9rem; font-weight:600; display:flex; align-items:center; gap:.5rem; white-space:nowrap; cursor:pointer; transition:all 0.3s ease; flex-shrink:0; }
+.chip i{ color:var(--navy) }
+.chip.active{ border-color:var(--navy); background:rgba(30,64,175,.08); color:var(--navy) }
+.chip:hover{ border-color:var(--orange); background:rgba(249,115,22,.05); }
+
+/* CONTENT */
+.content{ padding:1.8rem 0 2.6rem }
+.card-section{ margin:1.2rem 0 }
 .elev-card { border-radius:1rem; box-shadow:0 6px 24px rgba(0,0,0,.08); background:#fff; }
 .section-title { color:#0b3d91; font-weight:800; }
-.nav-tabs .nav-link.active { border-bottom:3px solid #ff6f00; color:#0b3d91; }
 .contact-chip { border:1px dashed rgba(0,0,0,.1); border-radius:999px; padding:.35rem .75rem; }
+
+/* Ensure all text is visible */
+.elev-card {
+  color: #0b3d91;
+}
+
+.elev-card h1,
+.elev-card h2,
+.elev-card h3,
+.elev-card h4,
+.elev-card h5,
+.elev-card h6 {
+  color: #0b3d91;
+}
+
+.elev-card p,
+.elev-card span,
+.elev-card li,
+.elev-card label,
+.elev-card td,
+.elev-card th {
+  color: #0b3d91;
+}
+
+.stat-label {
+  color: #0b3d91;
+  font-size: 0.9rem;
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(255, 119, 1, 0.1);
+}
+
+.stat-icon i {
+  font-size: 1.5rem;
+}
 </style>

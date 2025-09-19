@@ -53,6 +53,7 @@ import Examination from './views/departments/Examination.vue'
 
 const routes = [
     { path: '/', component: Home },
+    { path: '/home', component: Home },
     { path: '/about-us', component: AboutUs },
     { path: '/principal-desk', component: PrincipalDesk },
     { path: '/academic-council', component: AcademicCouncil },

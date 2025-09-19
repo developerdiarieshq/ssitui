@@ -16,7 +16,8 @@
 
     <!-- Top Header -->
     <div class="top-bar">
-      <div class="container d-flex justify-content-between align-items-center flex-wrap">
+      <!-- Desktop Content -->
+      <div class="container d-flex justify-content-between align-items-center flex-wrap d-none d-md-flex">
         <!-- Left: Logo + Info -->
         <div class="d-flex align-items-center">
           <img src="@/assets/college-logo.png" alt="College Logo" class="logo me-3" />
@@ -42,6 +43,11 @@
           </div>
           <div class="college-code">EAPCET CODE : SAIS</div>
         </div>
+      </div>
+
+      <!-- Mobile Content - Header Image -->
+      <div class="container d-block d-md-none">
+        <img src="@/assets/Header.png" alt="Sai Spurthi Institute of Technology" class="mobile-header-image" />
       </div>
     </div>
   </header>
@@ -130,6 +136,16 @@
   font-size: 0.95rem;
   letter-spacing: 0.5px;
   margin-top: 5px;
+}
+
+/* 🔹 Mobile Header Image */
+.mobile-header-image {
+  width: 100%;
+  height: auto;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 </style>

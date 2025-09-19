@@ -60,8 +60,8 @@
       <hr class="border-secondary my-4" />
 
       <!-- Bottom -->
-      <div class="text-center text-muted small">
-        © {{ year }} Sai Spurthi Institute of Technology. All Rights Reserved.  
+      <div class="text-center small">
+        <span class="copyright-text">© {{ year }} Sai Spurthi Institute of Technology. All Rights Reserved.</span>
         <br />
         <span class="made-love">Made with ❤️ & knowledge at SSIT</span>
       </div>
@@ -130,6 +130,11 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll))
 .social-icon:hover {
   color: #FF7701;
   transform: translateY(-3px);
+}
+
+.copyright-text {
+  color: #FF7701;
+  font-weight: 600;
 }
 
 .made-love {

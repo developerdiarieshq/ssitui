@@ -1,7 +1,14 @@
 <template>
-  <article class="hetero" :aria-label="i18n.ariaLabel">
-    <!-- HERO -->
-    <header class="hero" role="banner">
+  <div class="scholarship-page">
+    <!-- Header -->
+    <Header />
+    
+    <!-- Navigation -->
+    <NavBar />
+
+    <article class="hetero" :aria-label="i18n.ariaLabel">
+      <!-- HERO -->
+      <header class="hero" role="banner">
       <div class="container hero__grid">
         <div class="hero__brand">
           <div class="brand-logos">
@@ -313,19 +320,18 @@
         </div>
       </div>
     </footer>
+    </article>
 
-    <!-- Sticky quick-contact -->
-    <a class="fab fab--phone" :href="`tel:${contacts.phones[0]}`" aria-label="Call us">
-      <i class="fa-solid fa-phone"></i>
-    </a>
-    <a class="fab fab--wa" :href="whatsAppLink" target="_blank" rel="noopener" aria-label="WhatsApp">
-      <i class="fa-brands fa-whatsapp"></i>
-    </a>
-  </article>
+    <!-- Footer -->
+    <Footer />
+  </div>
 </template>
 
 <script setup>
 import { ref, reactive, computed, onMounted, onBeforeUnmount } from 'vue'
+import Header from '../../components/Header.vue'
+import NavBar from '../../components/NavBar.vue'
+import Footer from '../../components/Footer.vue'
 
 defineEmits(['register'])
 
@@ -372,8 +378,8 @@ const stats = reactive([
 ])
 
 const assets = {
-  heteroLogo: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Caduceus_symbol.svg',
-  ssitLogo: 'https://upload.wikimedia.org/wikipedia/commons/6/6e/Books-aj.svg_aj_ashton_01.svg'
+  heteroLogo: new URL('@/assets/hetero.png', import.meta.url).href,
+  ssitLogo: new URL('@/assets/college-logo.png', import.meta.url).href
 }
 
 /* ---------- STATE ---------- */
@@ -534,44 +540,262 @@ const branchLabel = computed(() => branches.find(b => b.code === selectedBranch.
 
 /* -------- HERO -------- */
 .hero{
-  background: linear-gradient(135deg, var(--blue), #1346b9 40%, #0ea5a6);
+  background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
   color:#fff;
-  padding: 28px 0 10px;
+  padding: 4rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 70% 80%, rgba(249, 115, 22, 0.1) 0%, transparent 50%);
+  pointer-events: none;
 }
 .hero__grid{
-  display:grid; grid-template-columns: 1.15fr .85fr; gap:16px;
+  display:grid; 
+  grid-template-columns: 1.2fr .8fr; 
+  gap:32px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
 }
-@media (max-width: 900px){ .hero__grid{ grid-template-columns: 1fr; } }
+@media (max-width: 900px){ 
+  .hero__grid{ 
+    grid-template-columns: 1fr; 
+    gap: 24px;
+    text-align: center;
+  } 
+}
 
-.hero__brand .title{ margin:8px 0 6px; font-size: clamp(1.4rem, 3.2vw, 2.2rem); font-weight:900; line-height:1.15; }
-.hero__brand .eyebrow{ display:block; font-size:.85rem; letter-spacing:.2em; opacity:.95; color:#e0eaff; }
-.subtitle{ margin:0 0 10px; font-size:1.05rem; color:#eef2ff; }
-.hero__meta{ list-style:none; padding:0; margin:10px 0 14px; display:grid; gap:6px; }
-.hero__meta i{ color:#cfe4ff; }
+.hero__brand{ 
+  text-align: left;
+  position: relative;
+  z-index: 1;
+}
+.hero__brand .title{ 
+  margin:12px 0 8px; 
+  font-size: clamp(1.8rem, 4vw, 2.8rem); 
+  font-weight:800; 
+  line-height:1.2; 
+  color:#fff;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+.hero__brand .eyebrow{ 
+  display:block; 
+  font-size:.9rem; 
+  letter-spacing:.2em; 
+  opacity:.95; 
+  color:#60a5fa; 
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.subtitle{ 
+  margin:0 0 24px; 
+  font-size:1.2rem; 
+  color:#f8fafc; 
+  font-weight:500;
+  line-height: 1.6;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+.subtitle strong{ 
+  color:#fff; 
+  font-weight:800;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+.hero__meta{ 
+  list-style:none; 
+  padding:0; 
+  margin:20px 0 24px; 
+  display:grid; 
+  gap:12px; 
+  text-align:left;
+}
+.hero__meta li{ 
+  color:#f1f5f9; 
+  font-size:1rem;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  transition: color 0.3s ease;
+}
+.hero__meta li:hover{ 
+  color:#fff; 
+}
+.hero__meta li:last-child{ 
+  border-bottom: none;
+}
+.hero__meta i{ 
+  color:#60a5fa; 
+  margin-right: 12px;
+  width: 18px;
+  font-size: 1.1rem;
+}
+.hero__meta strong{ 
+  color:#fff; 
+  font-weight:800;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
 
-.brand-logos{ display:flex; align-items:center; gap:10px; }
-.brand-logos .logo{ width:56px; height:56px; object-fit:contain; background:#fff; border-radius: 12px; padding:6px; box-shadow: var(--shadow); }
-.brand-logos .x{ opacity:.8; font-weight:700; }
+.brand-logos{ 
+  display:flex; 
+  align-items:center; 
+  gap:16px; 
+  justify-content:center;
+  margin-bottom: 20px;
+}
+.brand-logos .logo{ 
+  width:64px; 
+  height:64px; 
+  object-fit:contain; 
+  background:#fff; 
+  border-radius: 16px; 
+  padding:8px; 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+}
+.brand-logos .logo:hover{ 
+  transform: scale(1.05);
+}
+.brand-logos .x{ 
+  opacity:.8; 
+  font-weight:700; 
+  font-size: 1.2rem;
+  color: #94a3b8;
+}
 
-.cta-row{ display:flex; gap:10px; flex-wrap:wrap; }
+.cta-row{ 
+  display:flex; 
+  gap:12px; 
+  flex-wrap:wrap; 
+  justify-content:center;
+  margin-top: 24px;
+}
 .btn{
-  background:#fff; color:var(--ink); font-weight:700; border:1px solid #e5e9f2; border-radius: 10px;
-  padding:10px 14px; display:inline-flex; align-items:center; gap:8px; box-shadow: var(--shadow);
+  background:#fff; 
+  color:var(--ink); 
+  font-weight:700; 
+  border:1px solid #e5e9f2; 
+  border-radius: 12px;
+  padding:12px 18px; 
+  display:inline-flex; 
+  align-items:center; 
+  gap:8px; 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-decoration:none; 
+  transition:all .3s ease; 
+  cursor:pointer;
+  font-size: 0.95rem;
 }
-.btn:hover{ box-shadow: 0 0 0 5px var(--ring); border-color:transparent; }
-.btn--primary{ background: var(--navy); color:#fff; border-color: transparent; }
+.btn:hover{ 
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+.btn--primary{ 
+  background: var(--orange); 
+  color:#fff; 
+  border-color: var(--orange);
+}
+.btn--primary:hover{ 
+  background:#e65f00;
+  border-color:#e65f00;
+}
 .btn--ghost{ background: transparent; border-style:dashed; }
 .btn--gold{ background: linear-gradient(135deg, #fcd34d, #f59e0b); color:#1f2937; border:0; }
 
-.hero__right .countdown{ display:flex; gap:8px; margin:6px 0 12px; }
-.hero__right .cell{ display:grid; place-items:center; background:#0d1b57; border:1px solid rgba(255,255,255,.15); border-radius: 10px; padding:8px 10px; min-width:60px; }
-.hero__right .cell span{ font-size:1.25rem; font-weight:900; line-height:1; }
-.badge{ display:inline-flex; align-items:center; gap:8px; padding:8px 12px; background:#083; color:#fff; border-radius:999px; font-weight:700; }
-.badge--done{ background:#06603f; }
-.hero__nums{ display:flex; gap:10px; flex-wrap:wrap; }
-.num-card{ display:flex; gap:10px; align-items:center; background:#0f2d7a; border:1px solid rgba(255,255,255,.15); border-radius: 12px; padding:10px 12px; }
-.num-card i{ color:#a7f3d0; }
-.num-card b{ display:block; font-size:1.1rem; }
+.hero__right{ 
+  background: rgba(255,255,255,0.05); 
+  border: 1px solid rgba(255,255,255,0.1); 
+  border-radius: 16px; 
+  padding: 24px; 
+  backdrop-filter: blur(10px);
+  margin-bottom: 32px;
+}
+.hero__right .h6{ 
+  color: #fff; 
+  font-weight: 700; 
+  margin-bottom: 16px; 
+  font-size: 1.1rem;
+}
+.hero__right .countdown{ 
+  display:flex; 
+  gap:12px; 
+  margin:8px 0 20px; 
+}
+.hero__right .cell{ 
+  display:grid; 
+  place-items:center; 
+  background: rgba(59, 130, 246, 0.2); 
+  border:1px solid rgba(59, 130, 246, 0.3); 
+  border-radius: 12px; 
+  padding:12px 14px; 
+  min-width:70px; 
+}
+.hero__right .cell span{ 
+  font-size:1.4rem; 
+  font-weight:900; 
+  line-height:1; 
+  color: #fff;
+}
+.hero__right .cell small{ 
+  color: #e2e8f0; 
+  font-size: 0.8rem;
+}
+.badge{ 
+  display:inline-flex; 
+  align-items:center; 
+  gap:10px; 
+  padding:12px 16px; 
+  background: linear-gradient(135deg, #10b981, #059669); 
+  color:#fff; 
+  border-radius:999px; 
+  font-weight:700; 
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+.badge--done{ 
+  background: linear-gradient(135deg, #059669, #047857); 
+}
+.hero__nums{ 
+  display:flex; 
+  gap:12px; 
+  flex-wrap:wrap; 
+  margin-top: 20px;
+}
+.num-card{ 
+  display:flex; 
+  gap:12px; 
+  align-items:center; 
+  background: rgba(255,255,255,0.08); 
+  border:1px solid rgba(255,255,255,0.15); 
+  border-radius: 14px; 
+  padding:14px 16px; 
+  flex: 1;
+  min-width: 140px;
+}
+.num-card i{ 
+  color:#60a5fa; 
+  font-size: 1.2rem;
+}
+.num-card b{ 
+  display:block; 
+  font-size:1.2rem; 
+  color: #fff;
+  font-weight: 800;
+}
+.num-card small{ 
+  color: #cbd5e1; 
+  font-size: 0.85rem;
+}
 
 /* -------- LAYOUT -------- */
 .grid-2{ display:grid; grid-template-columns: 1fr 1fr; gap:16px; }
@@ -639,13 +863,36 @@ const branchLabel = computed(() => branches.find(b => b.code === selectedBranch.
 .cta-footer .actions{ display:flex; gap:10px; flex-wrap:wrap; }
 .btn--gold:hover{ filter: brightness(1.05); }
 
-/* FABs */
-.fab{
-  position: fixed; right: 18px; width: 50px; height: 50px; border-radius: 50%;
-  display:grid; place-items:center; color:#fff; box-shadow: var(--shadow); z-index: 20;
+/* Scholarship Page Styling */
+.scholarship-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8f9fc 0%, #e8f2ff 100%);
 }
-.fab--phone{ bottom: 86px; background:#0a7f47; }
-.fab--wa{ bottom: 24px; background:#25D366; }
+
+/* Ensure all text is visible */
+.scholarship-page * {
+  color: inherit;
+}
+
+.scholarship-page .card {
+  color: var(--ink);
+}
+
+.scholarship-page .card h1,
+.scholarship-page .card h2,
+.scholarship-page .card h3,
+.scholarship-page .card h4,
+.scholarship-page .card h5,
+.scholarship-page .card h6 {
+  color: var(--ink);
+}
+
+.scholarship-page .card p,
+.scholarship-page .card span,
+.scholarship-page .card li,
+.scholarship-page .card label {
+  color: var(--ink);
+}
 
 /* Print */
 @media print{

@@ -4,33 +4,35 @@
   <section class="principal-page">
     <!-- Hero Section -->
     <header class="hero">
-      <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
-        <!-- Left content -->
-        <div class="hero-left">
-          <h1 class="hero-title">Principal's Desk</h1>
-          <p class="hero-subtitle">
-            Leading with vision, commitment, and dedication to academic excellence and student success
-          </p>
-          <div class="mt-4">
-            <button class="btn btn-orange me-2">
-              <i class="fas fa-envelope me-2"></i> Contact Principal
-            </button>
-            <button class="btn btn-outline-light">
-              <i class="fas fa-phone me-2"></i> Schedule Meeting
-            </button>
+      <div class="container">
+        <div class="row align-items-center">
+          <!-- Left content -->
+          <div class="col-md-6">
+            <h1 class="hero-title">Principal's Desk</h1>
+            <p class="hero-subtitle">
+              Leading with vision, commitment, and dedication to academic excellence and student success
+            </p>
+            <div class="hero-buttons">
+              <button class="btn btn-orange me-2">
+                <i class="fas fa-envelope me-2"></i> Contact Principal
+              </button>
+              <button class="btn btn-outline-light">
+                <i class="fas fa-phone me-2"></i> Schedule Meeting
+              </button>
+            </div>
           </div>
-        </div>
 
-        <!-- Right: Profile -->
-        <div class="hero-right text-center mt-5 mt-md-0">
-          <img
-            src="@/assets/management/principal.jpg"
-            alt="Principal"
-            class="principal-photo mb-3"
-          />
-          <h4 class="text-white mb-1">Dr. V.S.R.Kumari</h4>
-          <p class="text-light small mb-0">Principal</p>
-          <p class="text-light small">Ph.D. Computer Science | 20+ Years Experience</p>
+          <!-- Right: Profile -->
+          <div class="col-md-6 text-center">
+            <img
+              src="@/assets/management/principal.jpg"
+              alt="Principal"
+              class="principal-photo"
+            />
+            <h4 class="principal-name">Dr. V.S.R.Kumari</h4>
+            <p class="principal-title">Principal</p>
+            <p class="principal-details">Ph.D. Computer Science | 20+ Years Experience</p>
+          </div>
         </div>
       </div>
     </header>
@@ -104,38 +106,77 @@ import Footer from '../../components/Footer.vue';
 
 /* Hero */
 .hero {
-  background: linear-gradient(135deg, #0d2a87, #1e3a8a);
+  background: linear-gradient(135deg, #1a2238, #1a2238);
   color: white;
-  padding: 4rem 0;
+  padding: 2rem 0;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
 }
 .hero-title {
   font-weight: 800;
-  font-size: 2.5rem;
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
 }
 .hero-subtitle {
-  max-width: 550px;
-  font-size: 1.1rem;
-  line-height: 1.6;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  opacity: 0.95;
+}
+.hero-buttons {
+  margin-top: 1rem;
 }
 .principal-photo {
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
-  border: 6px solid rgba(255, 255, 255, 0.3);
+  border: 4px solid rgba(255, 255, 255, 0.3);
   object-fit: cover;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  margin-bottom: 1rem;
+}
+.principal-name {
+  color: white;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.principal-title {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+.principal-details {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  margin-bottom: 0;
 }
 .btn-orange {
-  background: var(--orange);
-  color: #fff;
+  background: white;
+  color: #FF7701;
   font-weight: 600;
   border-radius: 6px;
   transition: all 0.3s ease;
+  border: none;
+  padding: 0.5rem 1rem;
 }
 .btn-orange:hover {
-  background: #e65f00;
+  background: rgba(255, 255, 255, 0.9);
+  color: #FF7701;
+  transform: translateY(-2px);
+}
+.btn-outline-light {
+  border: 2px solid white;
+  color: white;
+  background: transparent;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+}
+.btn-outline-light:hover {
+  background: white;
+  color: #FF7701;
+  transform: translateY(-2px);
 }
 
 /* Message */

@@ -1,0 +1,125 @@
+/* THEME TOKENS */
+:root {
+    --navy: #1e40af;
+    --navy-2: #153a9c;
+    --orange: #f97316;
+    --bg: #f7f9fc;
+    --card: #fff;
+    --border: #e5e7eb;
+    --muted: #6b7280;
+    --ink: #111827;
+}
+
+/* GENERIC */
+.container {
+    width: min(1180px, 92%);
+    margin-inline: auto;
+}
+
+.mb-0 {
+    margin-bottom: 0
+}
+
+.mt-1 {
+    margin-top: 1rem
+}
+
+.mt-2 {
+    margin-top: 1.25rem
+}
+
+.mb-2 {
+    margin-bottom: .75rem
+}
+
+.h5 {
+    font-size: 1.1rem
+}
+
+.h6 {
+    font-size: 1rem
+}
+
+.text-muted {
+    color: var(--muted)
+}
+
+.muted {
+    color: var(--muted)
+}
+
+.lead {
+    font-size: 1.05rem;
+    color: #374151
+}
+
+/* STICKY SUB NAVIGATION - Global Styles */
+.subnav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    margin: 1rem auto;
+    width: 100%;
+    max-width: none;
+}
+
+.subnav-inner {
+    display: flex;
+    gap: .5rem;
+    padding: .6rem 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    justify-content: center;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+.nav-chip {
+    border: 2px solid var(--border);
+    background: #fff;
+    color: #111;
+    border-radius: 25px;
+    padding: .5rem .9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-height: 40px;
+    min-width: fit-content;
+    flex-shrink: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-chip i {
+    color: var(--navy)
+}
+
+.nav-chip.active {
+    border: 2px solid var(--navy);
+    background: rgba(30, 64, 175, .08);
+    color: var(--navy);
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(30, 64, 175, 0.2);
+}
+
+.nav-chip:hover {
+    border: 2px solid var(--orange);
+    background: rgba(249, 115, 22, .05);
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(249, 115, 22, 0.2);
+    transform: translateY(-1px);
+}
+
+/* CONTENT */
+.content {
+    padding: 1.8rem 0 2.6rem
+}
+
+.card-section {
+    margin: 1.2rem 0
+}

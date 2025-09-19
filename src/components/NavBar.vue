@@ -59,14 +59,14 @@
                 <div class="col-md-4">
                   <h6 class="fw-bold text-uppercase mb-2">Departments</h6>
                   <router-link to="/cse" class="dropdown-item">CSE</router-link>
+                  <router-link to="/cse-ai" class="dropdown-item">CSE (AI & ML)</router-link>
+                  <router-link to="/cse-aids" class="dropdown-item">CSE (AI & DS)</router-link>
                   <router-link to="/ece" class="dropdown-item">ECE</router-link>
                   <router-link to="/eee" class="dropdown-item">EEE</router-link>
-                  <router-link to="/ai-ds" class="dropdown-item">AI & DS</router-link>
-                  <router-link to="/aiml" class="dropdown-item">AIML</router-link>
                   <router-link to="/mech" class="dropdown-item">MECH</router-link>
                   <router-link to="/sh" class="dropdown-item">S & H</router-link>
-                  <router-link to="/mba" class="dropdown-item">MBA</router-link>
                   <router-link to="/polytechnic" class="dropdown-item">Polytechnic</router-link>
+                  <router-link to="/examination-branch" class="dropdown-item">Examination Branch</router-link>
                 </div>
                 <div class="col-md-4">
                   <h6 class="fw-bold text-uppercase mb-2">Placements</h6>
