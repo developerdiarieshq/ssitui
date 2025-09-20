@@ -12,12 +12,31 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/ssitui/apple-touch-icon.png" />
   <link rel="manifest" href="/ssitui/site.webmanifest" />
   <title>SAI SPURTHI INSTITUTE OF TECHNOLOGY</title>
-  <script type="module" crossorigin src="/ssitui/assets/index-DeMM5Hxo.js"></script>
-  <link rel="stylesheet" crossorigin href="/ssitui/assets/index-D0GaxGCS.css">
+  <script type="module" crossorigin src="/ssitui/assets/index-C6sKgNk4.js"></script>
+  <link rel="stylesheet" crossorigin href="/ssitui/assets/index-BLsinDrJ.css">
 </head>
 
 <body>
   <div id="app"></div>
+
+  <!-- Universal SPA redirect script for GitHub Pages -->
+  <script type="text/javascript">
+    // Only run on GitHub Pages (detected by github.io domain or ssitui path)
+    if (window.location.hostname.includes('github.io') || window.location.pathname.includes('/ssitui/')) {
+      // Single Page Apps for GitHub Pages
+      // MIT License - https://github.com/rafgraph/spa-github-pages
+      (function (l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search.slice(1).split('&').map(function (s) {
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+            l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location))
+    }
+  </script>
 </body>
 
 </html>
