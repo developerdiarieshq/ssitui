@@ -86,6 +86,103 @@
         </div>
       </div>
     </section>
+
+    <!-- Vision & Mission Section -->
+    <section class="vision-mission-section py-4">
+      <div class="container">
+        <div class="text-center mb-4">
+          <h3 class="section-title">Vision & Mission</h3>
+          <div class="underscore"></div>
+          <p class="text-muted">Guiding principles that drive our educational excellence</p>
+        </div>
+
+        <div class="row g-3">
+          <!-- Vision -->
+          <div class="col-md-6">
+            <div class="vm-card h-100 text-center p-3 shadow-sm">
+              <div class="icon-box mb-2">
+                <i class="fas fa-eye"></i>
+              </div>
+              <h5 class="fw-bold mb-2 text-orange">Vision</h5>
+              <p class="text-muted small">
+                To make the students achieve highest standards of quality technical education adaptable to suit the present day requirements in the fields of science and technology and to mould them morally into persons of character and integrity.
+              </p>
+            </div>
+          </div>
+
+          <!-- Mission -->
+          <div class="col-md-6">
+            <div class="vm-card h-100 text-center p-3 shadow-sm">
+              <div class="icon-box mb-2">
+                <i class="fas fa-rocket"></i>
+              </div>
+              <h5 class="fw-bold mb-2 text-orange">Mission</h5>
+              <p class="text-muted small">
+                To awaken the students to the reality of identifying their hidden potentials and talents through meticulous and systematic grooming to gain the spirit and inventiveness to build a career full of glorious prospects and eventful future.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Strengths Section -->
+    <section class="strengths-section py-4">
+      <div class="container">
+        <!-- Section Title -->
+        <div class="text-center mb-4">
+          <h3 class="section-title">Our Strengths</h3>
+          <div class="underscore"></div>
+          <p class="text-muted">Key pillars that define excellence at SSIT</p>
+        </div>
+
+        <!-- Strengths Cards -->
+        <div class="row g-3">
+          <!-- Infrastructure & Faculty -->
+          <div class="col-md-4">
+            <div class="strength-card h-100 text-center p-3 shadow-sm">
+              <div class="icon-box mb-2">
+                <i class="fas fa-network-wired"></i>
+              </div>
+              <h5 class="fw-bold mb-2">Infrastructure & Faculty</h5>
+              <p class="text-muted small">
+                Ultra Modern Labs with more than 430 Systems having multiple platforms like Linux, Windows and Ubuntu.
+                24/7 Internet Facility with 300 MBPS through two different ISPs.
+                Well Experienced and University Ratified Faculty.
+              </p>
+            </div>
+          </div>
+
+          <!-- Training & Placements -->
+          <div class="col-md-4">
+            <div class="strength-card h-100 text-center p-3 shadow-sm">
+              <div class="icon-box mb-2">
+                <i class="fas fa-briefcase"></i>
+              </div>
+              <h5 class="fw-bold mb-2">Training & Placements</h5>
+              <p class="text-muted small">
+                Conducting Industry relevant Training Programmes and providing Placements in various MNCs
+                through On-Campus/Off-Campus.
+              </p>
+            </div>
+          </div>
+
+          <!-- Research & Development -->
+          <div class="col-md-4">
+            <div class="strength-card h-100 text-center p-3 shadow-sm">
+              <div class="icon-box mb-2">
+                <i class="fas fa-flask"></i>
+              </div>
+              <h5 class="fw-bold mb-2">Research & Development</h5>
+              <p class="text-muted small">
+                More than 50% Faculty Pursuing Ph.Ds from Reputed Universities and publishing their
+                Research Papers in Various Good Impact Journals.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </section>
   <Footer/>
 </template>
@@ -194,6 +291,22 @@ import Footer from '../../components/Footer.vue';
   background: var(--orange);
   margin: 10px auto 20px;
   border-radius: 2px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scaleX(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
 }
 .message-card {
   border-radius: 16px;
@@ -220,5 +333,79 @@ import Footer from '../../components/Footer.vue';
 }
 .signature {
   margin-top: 1.5rem;
+}
+
+/* Vision & Mission Section */
+.vision-mission-section {
+  background: var(--light-bg);
+}
+
+.vm-card {
+  background: #fff;
+  border-radius: 14px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(255, 119, 1, 0.1);
+}
+
+.vm-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+  border-color: var(--orange);
+}
+
+.vm-card .icon-box {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 119, 1, 0.1);
+  color: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin: 0 auto;
+  transition: 0.3s ease;
+}
+
+.vm-card:hover .icon-box {
+  background: var(--orange);
+  color: #fff;
+}
+
+/* Strengths Section */
+.strengths-section {
+  background: #f8f9fc;
+}
+
+.strength-card {
+  background: #fff;
+  border-radius: 14px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(255, 119, 1, 0.1);
+}
+
+.strength-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+  border-color: var(--orange);
+}
+
+.strength-card .icon-box {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 119, 1, 0.1);
+  color: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin: 0 auto;
+  transition: 0.3s ease;
+}
+
+.strength-card:hover .icon-box {
+  background: var(--orange);
+  color: #fff;
 }
 </style>

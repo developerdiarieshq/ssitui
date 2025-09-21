@@ -1,7 +1,8 @@
 <template>
-  <Header/>
-  <NavBar/>
-  <section class="py-5 bg-light">
+  <div class="grievance-page">
+    <Header/>
+    <NavBar/>
+    <section class="py-5 bg-light">
     <div class="container">
       <!-- Title -->
       <div class="text-center mb-5">
@@ -39,9 +40,10 @@
 
       
     </div>
-  </section>
-  <EnquiryFormModal/>
-  <Footer/>
+    </section>
+    <EnquiryFormModal/>
+    <Footer/>
+  </div>
 </template>
 
 <script setup>

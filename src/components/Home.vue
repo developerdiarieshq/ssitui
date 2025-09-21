@@ -5,10 +5,13 @@
     <NoticeBar />
     <HeroCarousel />
     <IndustryHighlights />
-    <VisionMission />
+    
+    <VisionMissionQuality />
     <CoursesOffered />
+    <PlacementHighlights />
     <EventsCirculars />
     <CampusLife />
+    <Statistics />
     <MOUs />
     <QuickLinks />
     <Footer />
@@ -21,8 +24,10 @@ import NavBar from '@/components/NavBar.vue'
 import NoticeBar from '@/components/NoticeBar.vue'
 import HeroCarousel from '@/components/HeroCarousel.vue'
 import IndustryHighlights from './IndustryHighlights.vue'
-import VisionMission from '@/components/VisionMission.vue'
+import Statistics from '@/components/Statistics.vue'
+import VisionMissionQuality from '@/components/VisionMissionQuality.vue'
 import CoursesOffered from '@/components/CoursesOffered.vue'
+import PlacementHighlights from '@/components/PlacementHighlights.vue'
 import CampusLife from '@/components/CampusLife.vue'
 import MOUs from '@/components/MOU.vue'
 import QuickLinks from '@/components/QuickLinks.vue'

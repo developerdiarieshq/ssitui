@@ -1,10 +1,17 @@
 <template>
+  <Header/>
+  <NavBar/>
   <section class="management-page">
-    <!-- Hero -->
-    <header class="hero">
-      <div class="container text-center">
-        <h1 class="title">Leadership &amp; Management</h1>
+    <!-- Hero Section -->
+    <header class="hero text-center text-white">
+      <div class="container">
+        <h1 class="title">Leadership & Management</h1>
         <p class="subtitle">Guiding Excellence Through Visionary Leadership</p>
+        <p class="context">
+          Sai Spurthi Institute of Technology | 
+          Established in 2001 by VIPASSANA Educational Society | 
+          Affiliated to JNTU Hyderabad | AICTE Approved
+        </p>
       </div>
     </header>
 
@@ -14,7 +21,7 @@
         <div
           v-for="p in profiles"
           :key="p.name"
-          class="col-md-4"
+          class="col-lg-3 col-md-6 col-sm-12"
         >
           <div class="card h-100 shadow-sm border-0 text-center profile-card">
             <div class="photo-wrap">
@@ -44,6 +51,13 @@
       </div>
     </div>
 
+    <!-- View Governing Body Button -->
+    <div class="text-center mt-5 mb-4">
+      <router-link to="/governing-body" class="btn btn-outline-orange btn-lg px-5">
+        <i class="fas fa-users me-2"></i>View Governing Body
+      </router-link>
+    </div>
+
     <!-- Custom Modal -->
     <div v-if="selectedProfile" class="custom-modal-overlay" @click.self="closeModal">
       <div class="custom-modal">
@@ -68,38 +82,51 @@
       </div>
     </div>
   </section>
+  <Footer/>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import Header from '../../components/Header.vue'
+import NavBar from '../../components/NavBar.vue'
+import Footer from '../../components/Footer.vue'
 
 const profiles = ref([
   {
-    role: 'Chairman',
+    role: 'CHAIRMAN',
     name: 'Dr. B. Pardha Saradhi Reddy',
     img: new URL('@/assets/management/chairman.jpg', import.meta.url).href,
     summary:
-      'Philanthropist and education champion focused on accessible, high-quality technical education.',
+      'Noted industrialist, founder of HETERO Pharmaceuticals, and Member of Parliament with philanthropic vision.',
     desc:
-      "Dr. B. Pardha Saradhi Reddy's endeavor to establish an institute with a philanthropic mission underscores his commitment to addressing societal needs through education. By prioritizing the provision of high-quality technical education to economically disadvantaged rural communities, he is contributing significantly to upliftment and opportunity creation in these areas. The institute's focus on creating an enriching academic environment amidst natural serenity reflects a strategic approach to fostering holistic education, facilitating creativity, critical thinking, and a deeper connection to nature."
+      'Sri Dr. B. Pardha Saradhi Reddy is a noted industrialist, the founder of HETERO Pharmaceuticals, Hyd, a member of Parliament, and a resident of Kandukuru, Khammam District, TS. He established the institute with a philanthropic motto to impart quality technical education that can lift the poorer aspirations of the rural surroundings in a serene and enthralling academic and natural ambience. The motive of establishing the college here is to impart quality technical education to the rural people and to uplift the economically backward students talent to greater levels.'
   },
   {
-    role: 'Secretary & Correspondent',
+    role: 'SECRETARY & CORRESPONDENT',
     name: 'Sri D. Prabhakar Reddy',
     img: new URL('@/assets/management/secretary.jpg', import.meta.url).href,
     summary:
-      'Visionary academic leader steering value-added education and student transformation.',
+      'Renowned academician promoting quality technical education through VIPASSANA Educational Society.',
     desc:
-      'Sri D. Prabhakar Reddy, a renowned academician in the vicinity, has been promoting quality technical education through the VIPASSANA Educational Society. He has been nurturing many young rural students towards all-round progression through value-added education. As a visionary leader, he witnesses the transformation of average intermediate students into disciplined and sincere engineers of future India. He takes active interest in the day-to-day smooth running of the college through watchful monitoring and serves as a constant source of inspiration for students and staff.'
+      'Sri D. Prabhakar Reddy, a renowned academician in the vicinity, has been promoting an institute for the noble cause of promoting quality technical education through the VIPASSANA Educational Society, thanks to the enthused idea of Dr. B. Pardha Saradhi Reddy garu, who established the institute. It has been nurturing the many young poor rural lots towards all-round progression, which is possible only through value-added education. Sri D. Prabhakar Reddy is a visionary to witness the revolution of converting a near average student in intermediate into a disciplined and sincere engineer of a future India. He constantly advises the staff to put this concept in practice. Sri D. Prabhakar Reddy takes active interest in the day-to-day smooth running of the college through watchful monitoring of the college. He periodically visits the college to consolidate the functioning as per the plan that has been drawn earlier. He is a constant source of inspiration for the students and staff of the college.'
   },
   {
-    role: 'Trustee',
+    role: 'VIPASSANA EDUCATIONAL TRUSTEE',
     name: 'Smt. Bandi Anvida',
     img: new URL('@/assets/management/Trustee-1.png', import.meta.url).href,
     summary:
-      'Trustee dedicated to inclusive growth, ethical governance, and student success.',
+      'Trustee dedicated to advancing education and fostering community development.',
     desc:
-      'Smt. Bandi Anvida serves as the trustee of VIPASSANA EDUCATIONAL SOCIETY, demonstrating unwavering dedication and expertise in guiding the institution. With profound commitment to advancing education and fostering community development, she plays a pivotal role in shaping strategic direction and policies. Her visionary leadership focuses on fostering an inclusive environment where every student has access to quality education and opportunities for personal growth, centered around academic excellence, ethical values, and community engagement.'
+      'Smt. Bandi Anvida serves as the trustee of VIPASSANA EDUCATIONAL SOCIETY, demonstrating unwavering dedication and expertise in guiding our institution. With a profound commitment to advancing education and fostering community development, Smt. Anvida plays a pivotal role in shaping the strategic direction and policies of our trust. Her visionary leadership and steadfast support are instrumental in driving our mission forward, ensuring the success and empowerment of our students and stakeholders. I am committed to fostering an inclusive environment where every student has access to quality education and opportunities for personal growth. My vision for the college is centered around academic excellence, ethical values, and community engagement. I believe in providing students with a well-rounded education that equips them with the skills and knowledge to succeed in an ever-changing world. Together, let us work towards realizing this vision and creating a brighter future for our students and communities.'
+  },
+  {
+    role: 'PRINCIPAL',
+    name: 'Dr. V.S.R Kumari',
+    img: new URL('@/assets/management/principal.jpg', import.meta.url).href,
+    summary:
+      'Leading Principal committed to academic excellence with global technical and industry orientation.',
+    desc:
+      'Dr. V.S.R Kumari, a leading Principal. It is an extreme honour to be a part of achieving academic excellence with the institute and I am much obliged to felicitate the infrastructure of global technical and industry orientation while safeguarding the values and esteem of the institute and taking them to the next level by integrating my research, academic and technical exposure and also in collaboration with good many value nurturing institutions.'
   }
 ])
 
@@ -123,21 +150,22 @@ const closeModal = () => {
   --muted: #6b7280;
 }
 
-/* Hero */
+/* HERO */
 .hero {
-  background: linear-gradient(180deg, rgba(255, 119, 1, 0.06) 0%, rgba(255, 119, 1, 0.02) 100%),
-    url('https://images.unsplash.com/photo-1523246191871-c4d6a3f9a6a1?q=80&w=1920&auto=format&fit=crop')
-      center/cover no-repeat;
-  padding: 2rem 0;
+  background: var(--ink);
+  padding: 3rem 0;
 }
 .title {
-  color: var(--ink);
   font-weight: 800;
+  font-size: 2.2rem;
 }
 .subtitle {
-  color: var(--muted);
-  max-width: 720px;
-  margin: 0 auto;
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+}
+.context {
+  font-size: 0.9rem;
+  opacity: 0.9;
 }
 
 /* Cards */
@@ -220,5 +248,21 @@ const closeModal = () => {
 }
 .btn-orange:hover {
   background: #e65f00;
+}
+
+/* Outline Orange Button */
+.btn-outline-orange {
+  background: transparent;
+  color: var(--orange);
+  border: 2px solid var(--orange);
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+.btn-outline-orange:hover {
+  background: var(--orange);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 119, 1, 0.3);
 }
 </style>

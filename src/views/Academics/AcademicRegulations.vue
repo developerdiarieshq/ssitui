@@ -238,8 +238,9 @@ const docsPG = [
 
 <style scoped>
 :root {
+  --orange: #FF7701;
+  --ink: #1a2238;
   --navy: #1e40af;
-  --orange: #f97316;
   --bg-light: #f7fafc;
   --white: #ffffff;
   --border-base: #e5e7eb;
@@ -260,79 +261,100 @@ const docsPG = [
   padding: 0 1rem;
 }
 
+.content {
+  padding: 2rem 0;
+}
+
 .hero {
-  background: linear-gradient(135deg, var(--navy), #3b82f6);
-  color: var(--white);
-  padding: 3rem 1rem;
-  border-radius: 12px;
+  background: var(--ink);
+  color: white;
+  padding: 3rem 0;
   margin-bottom: 2rem;
-  box-shadow: 0 4px 14px rgb(0 0 0 / 0.15);
   text-align: center;
 }
 
 .title {
-  font-size: 2.4rem;
-  font-weight: 900;
+  font-weight: 800;
+  font-size: 2.2rem;
   margin: 0 0 0.3rem 0;
+  color: white;
 }
 
 .subtitle {
-  font-size: 1.4rem;
-  margin-bottom: 0.4rem;
-  opacity: 0.85;
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+  opacity: 0.9;
+  color: white;
 }
 
 .meta {
-  font-size: 1rem;
-  margin-bottom: 1rem;
-  opacity: 0.7;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.9;
+  color: white;
 }
 
 .intro {
   max-width: 640px;
   margin: 0 auto;
-  font-size: 1.1rem;
-  line-height: 1.6;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  opacity: 0.9;
+  color: white;
 }
 
 .tabs {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  margin: 1rem auto;
+  width: 100%;
+  max-width: none;
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
+  gap: .5rem;
+  padding: .6rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  justify-content: center;
+  flex-wrap: nowrap;
+  width: 100%;
 }
 
 .tab {
-  border: 2px solid var(--border-base);
-  background: var(--white);
-  border-radius: 0.75rem;
-  padding: 0.6rem 1.25rem;
+  border: 1px solid var(--border-base);
+  background: #fff;
+  color: #111;
+  border-radius: 999px;
+  padding: .5rem .9rem;
   font-weight: 600;
-  color: var(--navy);
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  user-select: none;
+  gap: .5rem;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-height: 40px;
+  min-width: fit-content;
+  flex-shrink: 0;
 }
 
-.tab:hover {
-  background-color: var(--navy);
-  color: var(--white);
+.tab i {
+  color: var(--ink);
 }
 
 .tab.active {
-  background-color: var(--navy);
-  color: var(--white);
-  border-color: var(--navy);
+  border-color: var(--ink);
+  background: rgba(30, 64, 175, 0.08);
+  color: var(--ink);
 }
 
 .section-title {
-  font-size: 1.8rem;
   font-weight: 700;
-  color: var(--navy);
-  margin-bottom: 1rem;
+  color: var(--orange);
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
   gap: 0.6rem;
@@ -344,7 +366,12 @@ const docsPG = [
 }
 
 .panel {
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+  background: var(--white);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 119, 1, 0.1);
 }
 
 .grid-2 {
@@ -362,13 +389,40 @@ const docsPG = [
 .elev-card {
   background: var(--white);
   border-radius: 12px;
-  box-shadow: 0 2px 10px rgb(0 0 0 / 0.05);
-  padding: 1.25rem;
-  transition: box-shadow 0.3s;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 119, 1, 0.1);
 }
 
 .elev-card:hover {
-  box-shadow: 0 5px 20px rgb(0 0 0 / 0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 28px rgba(255, 119, 1, 0.15);
+  border-color: var(--orange);
+}
+
+.elev-card h3 {
+  color: var(--ink);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.elev-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.elev-card li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255, 119, 1, 0.1);
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+.elev-card li:last-child {
+  border-bottom: none;
 }
 
 .doc-list {
@@ -388,23 +442,53 @@ const docsPG = [
 .btn-sm {
   background-color: var(--orange);
   color: var(--white);
-  padding: 0.4em 0.9em;
-  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
   font-size: 0.85rem;
+  font-weight: 600;
   cursor: pointer;
   text-decoration: none;
-  transition: background-color 0.25s ease;
+  transition: all 0.3s ease;
+  border: 2px solid var(--orange);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .btn-sm:hover {
-  background-color: #ea7516;
+  background-color: var(--white);
+  color: var(--orange);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 119, 1, 0.3);
 }
 
 .ticks {
-  list-style: disc;
-  margin-left: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
   color: var(--text-dark);
   font-size: 1rem;
+}
+
+.ticks li {
+  position: relative;
+  padding: 0.75rem 0 0.75rem 2rem;
+  border-bottom: 1px solid rgba(255, 119, 1, 0.1);
+  font-weight: 500;
+}
+
+.ticks li:last-child {
+  border-bottom: none;
+}
+
+.ticks li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 0.75rem;
+  color: var(--orange);
+  font-weight: bold;
+  font-size: 1.1rem;
 }
 
 .table-wrap {
@@ -428,17 +512,78 @@ const docsPG = [
   background-color: var(--orange);
   color: var(--white);
   font-weight: 600;
+  border: none;
+  padding: 1rem;
+  text-align: center;
 }
 
 .table tbody tr:nth-child(odd) {
-  background-color: #fff4e5;
+  background-color: rgba(255, 119, 1, 0.05);
+}
+
+.table tbody tr:hover {
+  background-color: rgba(255, 119, 1, 0.1);
+}
+
+.table tbody td {
+  border-color: rgba(255, 119, 1, 0.1);
+  font-weight: 500;
+  padding: 1rem;
+  text-align: center;
+}
+
+.table tbody tr:first-child td {
+  border-top: 2px solid var(--orange);
+}
+
+.table {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
 .last-updated {
   text-align: right;
   font-size: 0.9rem;
   color: var(--text-muted);
-  margin-top: 2rem;
+  margin-top: 3rem;
   margin-bottom: 2rem;
+  padding: 1rem 0;
+  border-top: 1px solid rgba(255, 119, 1, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero {
+    padding: 2rem 0;
+  }
+  
+  .title {
+    font-size: 1.8rem;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+  }
+  
+  .panel {
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .elev-card {
+    padding: 1rem;
+  }
+  
+  .tabs {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .tab {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
 }
 </style>

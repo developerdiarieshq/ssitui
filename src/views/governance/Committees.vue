@@ -1,28 +1,18 @@
 <template>
-  <section class="committees-page" aria-labelledby="page-title">
-    <!-- Breadcrumb -->
-    <nav class="breadcrumb-wrap" aria-label="Breadcrumb">
-      <ol class="breadcrumb container">
-        <li><a href="/" aria-label="Home">Home</a></li>
-        <li><a href="/governance" aria-label="Governance">Governance</a></li>
-        <li aria-current="page">Institute Level Committees</li>
-      </ol>
-    </nav>
+  <div class="committees-page">
+    <!-- HEADER + NAV -->
+    <Header />
+    <NavBar />
 
-    <!-- Header / Hero -->
+    <!-- HERO -->
     <header class="hero">
-      <div class="container hero-inner">
-        <div>
-          <h1 id="page-title" class="display-title">Institute Level Committees</h1>
-          <p class="subtitle">Ensuring Excellence Through Structured Governance</p>
-          <p class="intro">
-            At Sai Spurthi Institute of Technology, committees strengthen governance, uphold quality,
-            and safeguard student welfare. Explore roles, coordinators, and how to get support.
-          </p>
-        </div>
-        <div class="hero-art" aria-hidden="true">
-          <i class="fa-solid fa-sitemap"></i>
-        </div>
+      <div class="container text-center">
+        <h1 class="title">Institute Level Committees</h1>
+        <p class="subtitle">Ensuring Excellence Through Structured Governance</p>
+        <p class="context">
+          At Sai Spurthi Institute of Technology, committees strengthen governance, uphold quality,
+          and safeguard student welfare. Explore roles, coordinators, and how to get support.
+        </p>
       </div>
     </header>
 
@@ -122,11 +112,14 @@
           </p>
 
           <div class="btn-row">
-            <button class="btn more" @click="toggleOpen(c.id)" :aria-controls="`details-${c.id}`">
-              <span v-if="openId !== c.id">More Details</span>
-              <span v-else>Hide Details</span>
-              <i class="fa-solid" :class="openId === c.id ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
-            </button>
+            <router-link 
+              :to="getCommitteeRoute(c)" 
+              class="btn view-btn"
+              :aria-label="`View detailed information for ${c.name}`"
+            >
+              <i class="fa-solid fa-eye"></i>
+              <span>View Details</span>
+            </router-link>
             <div class="share-row" aria-label="Share">
               <a
                 class="share"
@@ -203,16 +196,36 @@
       <div class="container">
         <div class="qc-card">
           <div class="qc-head">
-            <i class="fa-solid fa-address-book"></i>
-            <h2>Quick Contacts (Coordinators)</h2>
-            <a class="btn dl" href="#" @click.prevent title="Download PDF (sample)">Download PDF</a>
+            <h2 class="section-title">
+              <i class="fa-solid fa-address-book"></i>
+              <span>Quick Contacts (Coordinators)</span>
+            </h2>
+            <a class="btn dl" href="#" @click.prevent title="Download PDF (sample)">
+              <i class="fa-solid fa-download"></i>
+              <span>Download PDF</span>
+            </a>
           </div>
           <div class="qc-grid">
             <div v-for="c in filtered" :key="`qc-${c.id}`" class="qc-item">
-              <strong>{{ c.name }}</strong>
-              <span>— {{ c.coordinator }}</span>
-              <a :href="`mailto:${c.email}`" class="qc-link">{{ c.email }}</a>
-              <a :href="`tel:${c.mobile}`" class="qc-link">{{ c.mobile }}</a>
+              <div class="qc-header-item">
+                <div class="qc-icon" :style="{ background: categoryColor(c.category) }">
+                  <i :class="c.icon"></i>
+                </div>
+                <div class="qc-info">
+                  <h3 class="qc-name">{{ c.name }}</h3>
+                  <p class="qc-coordinator">{{ c.coordinator }}</p>
+                </div>
+              </div>
+              <div class="qc-contact">
+                <a :href="`mailto:${c.email}`" class="qc-link">
+                  <i class="fa-solid fa-envelope"></i>
+                  <span>{{ c.email }}</span>
+                </a>
+                <a :href="`tel:${c.mobile}`" class="qc-link">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>{{ c.mobile }}</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -222,13 +235,27 @@
     <!-- Recent Activities -->
     <section class="updates">
       <div class="container">
-        <h2 class="section-title"><i class="fa-regular fa-newspaper"></i> Recent Committee Activities</h2>
+        <h2 class="section-title">
+          <i class="fa-solid fa-newspaper"></i>
+          <span>Recent Committee Activities</span>
+        </h2>
         <div class="updates-grid">
           <article v-for="(u, i) in updates" :key="i" class="update-card">
+            <div class="update-header">
+              <div class="update-icon">
+                <i class="fa-solid fa-calendar-check"></i>
+              </div>
+              <div class="update-meta">
+                <span class="update-date">{{ u.date }}</span>
+                <span class="update-committee">{{ u.committee }}</span>
+              </div>
+            </div>
             <h3 class="u-title">{{ u.title }}</h3>
-            <div class="u-meta">{{ u.date }} • {{ u.committee }}</div>
-            <p>{{ u.summary }}</p>
-            <a href="#" class="u-link">Read more</a>
+            <p class="update-summary">{{ u.summary }}</p>
+            <a href="#" class="u-link">
+              <i class="fa-solid fa-arrow-right"></i>
+              <span>Read more</span>
+            </a>
           </article>
         </div>
       </div>
@@ -237,32 +264,46 @@
     <!-- Footer Section -->
     <footer class="page-footer">
       <div class="container">
-        <div class="footer-grid">
-          <div>
-            <h3>Need Assistance?</h3>
-            <p>For committee-related queries, write to <a href="mailto:committees@ssit.edu.in">committees@ssit.edu.in</a> or contact the respective coordinator.</p>
-          </div>
-          <nav aria-label="Related pages">
-            <h3>Related Links</h3>
-            <ul class="footer-links">
-              <li><a href="/governance/iqac">IQAC</a></li>
-              <li><a href="/policies/anti-ragging">Anti-Ragging Policy</a></li>
-              <li><a href="/cells/rd">R&D Cell</a></li>
-            </ul>
-          </nav>
-          <div>
-            <h3>Page Info</h3>
-            <p class="updated">Last updated: <time :datetime="lastUpdatedISO">{{ lastUpdated }}</time></p>
+        <div class="assistance-section">
+          <div class="assistance-card">
+            <div class="assistance-icon">
+              <i class="fa-solid fa-headset"></i>
+            </div>
+            <div class="assistance-content">
+              <h3>Need Assistance?</h3>
+              <p>For committee-related queries, write to <a href="mailto:committees@saispurthi.ac.in">committees@saispurthi.ac.in</a> or contact the respective coordinator.</p>
+              <div class="assistance-actions">
+                <a href="mailto:committees@saispurthi.ac.in" class="assistance-btn">
+                  <i class="fa-solid fa-envelope"></i>
+                  <span>Email Us</span>
+                </a>
+                <a href="tel:+919876543210" class="assistance-btn">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Call Us</span>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </footer>
-  </section>
+    <!-- FOOTER -->
+    <Footer />
+  </div>
 </template>
 
 <script>
+import Header from '@/components/Header.vue'
+import NavBar from '@/components/NavBar.vue'
+import Footer from '@/components/Footer.vue'
+
 export default {
   name: "Committees",
+  components: {
+    Header,
+    NavBar,
+    Footer
+  },
   data() {
     return {
       // UI state
@@ -568,6 +609,15 @@ export default {
     shareText(c) {
       return `${c.name} — Coordinator: ${c.coordinator} (${c.email}, ${c.mobile}) — SSIT`;
     },
+    getCommitteeRoute(c) {
+      // Generate a URL-friendly slug from committee name
+      const slug = c.name
+        .toLowerCase()
+        .replace(/[^a-z0-9\s]/g, '') // Remove special characters
+        .replace(/\s+/g, '-') // Replace spaces with hyphens
+        .trim();
+      return `/committee/${slug}`;
+    },
   },
 };
 </script>
@@ -575,8 +625,10 @@ export default {
 <style scoped>
 /* ---------- THEME ---------- */
 :root {
+  --orange: #FF7701;
+  --ink: #1a2238;
   --primary: #1e40af;     /* Institution blue */
-  --accent:  #f97316;     /* Orange accent */
+  --accent:  #FF7701;     /* Orange accent */
   --ok:      #0f766e;
   --purple:  #7c3aed;
   --outreach:#ae3a1e;
@@ -592,20 +644,41 @@ export default {
 .container { width: min(1200px, 92%); margin-inline: auto; }
 .visually-hidden { position: absolute; left: -10000px; }
 
-/* ---------- BREADCRUMB ---------- */
-.breadcrumb-wrap { background: #eef2ff; border-bottom: 1px solid var(--border); }
-.breadcrumb { display: flex; gap: .5rem; padding: .75rem 0; margin: 0; list-style: none; }
-.breadcrumb li { color: var(--muted); }
-.breadcrumb a { color: var(--primary); text-decoration: none; }
-.breadcrumb li+li::before { content: "›"; margin: 0 .5rem; color: #64748b; }
 
 /* ---------- HERO ---------- */
-.hero { background: linear-gradient(135deg, #1e40af 0%, #1c3a8d 60%); color: #fff; }
-.hero-inner { display: grid; grid-template-columns: 1fr auto; gap: 2rem; padding: 3rem 0; align-items: center; }
-.display-title { font-size: clamp(1.75rem, 3vw, 2.5rem); margin: 0 0 .25rem; }
-.subtitle { font-size: 1.05rem; margin: 0 0 .75rem; color: #c7d2fe; }
-.intro { margin: 0; color: #e0e7ff; max-width: 64ch; }
-.hero-art { font-size: clamp(48px, 10vw, 96px); opacity: .2; }
+.hero { 
+  background: var(--ink); 
+  color: white; 
+  padding: 3rem 0; 
+  margin-bottom: 2rem; 
+  text-align: center; 
+}
+.container { 
+  width: min(1200px, 92%); 
+  margin: auto; 
+  padding: 0 1rem; 
+}
+.title { 
+  font-weight: 800; 
+  font-size: 2.2rem; 
+  margin: 0 0 0.3rem 0; 
+  color: white; 
+}
+.subtitle { 
+  font-size: 1.1rem; 
+  margin-bottom: 0.3rem; 
+  opacity: 0.9; 
+  color: white; 
+}
+.context { 
+  font-size: 0.9rem; 
+  margin-bottom: 0.5rem; 
+  opacity: 0.9; 
+  color: white; 
+  max-width: 640px; 
+  margin: 0 auto; 
+  line-height: 1.5; 
+}
 
 /* ---------- CONTROLS ---------- */
 .controls { padding: 1.25rem 0 0.5rem; }
@@ -655,13 +728,29 @@ export default {
 .contact-list { list-style: none; padding: 0; margin: 0; display: grid; gap: .35rem; }
 .contact-list a { color: var(--primary); text-decoration: none; }
 .desc { color: #374151; margin: .25rem 0 .5rem; }
-.btn-row { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
-.btn.more {
-  display: inline-flex; align-items: center; gap: .5rem; background: var(--primary); color: #fff;
-  border: 0; padding: .55rem .9rem; border-radius: .6rem; cursor: pointer; transition: background .2s ease, transform .1s ease;
+.btn-row { 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  gap: .75rem; 
+  flex-wrap: wrap; 
 }
-.btn.more:hover { background: #243fa7; }
-.btn.more:active { transform: translateY(1px); }
+.btn-row .btn {
+  flex-shrink: 0;
+}
+
+.btn.view-btn {
+  display: inline-flex; align-items: center; gap: .5rem; background: var(--orange); color: #fff;
+  border: 2px solid var(--orange); padding: .55rem .9rem; border-radius: .6rem; cursor: pointer; 
+  transition: all .3s ease; text-decoration: none; font-size: 0.9rem; font-weight: 600;
+}
+.btn.view-btn:hover { 
+  background: white; 
+  color: var(--orange); 
+  transform: translateY(-2px); 
+  box-shadow: 0 4px 12px rgba(255, 119, 1, 0.3); 
+}
+.btn.view-btn:active { transform: translateY(1px); }
 .share-row { display: inline-flex; gap: .5rem; }
 .share { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: #eef2ff; color: var(--primary); text-decoration: none; }
 .share:hover { background: #e0e7ff; }
@@ -684,40 +773,382 @@ export default {
 .card.cat-outreach:hover   { box-shadow: 0 14px 40px rgba(174,58,30,.15); }
 
 /* ---------- QUICK CONTACTS ---------- */
-.quick-contacts { background: #fff; border-top: 1px solid var(--border); padding: 1.5rem 0; }
-.qc-card { background: #fff; border: 1px solid var(--border); border-radius: 1rem; padding: 1rem; }
-.qc-head { display: flex; align-items: center; gap: .75rem; justify-content: space-between; }
-.qc-head h2 { margin: 0; font-size: 1.1rem; color: var(--primary); display: flex; gap: .5rem; align-items: center; }
-.qc-head i { color: var(--primary); }
-.btn.dl { background: var(--accent); color: #fff; padding: .5rem .75rem; border-radius: .6rem; text-decoration: none; }
-.qc-grid { display: grid; gap: .75rem; grid-template-columns: repeat(3, 1fr); margin-top: .75rem; }
-.qc-item { display: grid; gap: .15rem; font-size: .95rem; }
-.qc-link { color: var(--primary); text-decoration: none; }
+.quick-contacts { 
+  background: var(--bg); 
+  border-top: 1px solid rgba(255, 119, 1, 0.1); 
+  padding: 2rem 0; 
+}
+.qc-card { 
+  background: var(--white); 
+  border: 1px solid rgba(255, 119, 1, 0.1); 
+  border-radius: 12px; 
+  padding: 2rem; 
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+.qc-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(255, 119, 1, 0.15);
+}
+.qc-head { 
+  display: flex; 
+  align-items: center; 
+  gap: .75rem; 
+  justify-content: space-between; 
+  margin-bottom: 1.5rem;
+}
+.qc-head .section-title {
+  margin: 0;
+  font-size: 1.8rem;
+  color: var(--orange);
+  display: flex;
+  gap: .6rem;
+  align-items: center;
+}
+.qc-head .section-title i {
+  color: var(--orange);
+  font-size: 1.5rem;
+}
+.btn.dl { 
+  background: var(--orange); 
+  color: white; 
+  padding: .6rem 1rem; 
+  border-radius: 8px; 
+  text-decoration: none; 
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  border: 2px solid var(--orange);
+}
+.btn.dl:hover {
+  background: white;
+  color: var(--orange);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 119, 1, 0.3);
+}
+.qc-grid { 
+  display: grid; 
+  gap: 1.5rem; 
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+}
+.qc-item { 
+  background: rgba(255, 119, 1, 0.05);
+  border: 1px solid rgba(255, 119, 1, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+.qc-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 119, 1, 0.15);
+  border-color: var(--orange);
+}
+.qc-header-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.qc-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+}
+.qc-info {
+  flex: 1;
+}
+.qc-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 0.25rem 0;
+}
+.qc-coordinator {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin: 0;
+  font-weight: 500;
+}
+.qc-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.qc-link { 
+  color: var(--ink); 
+  text-decoration: none; 
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+.qc-link:hover {
+  color: var(--orange);
+  transform: translateX(3px);
+}
+.qc-link i {
+  color: var(--orange);
+  width: 16px;
+}
 
 /* ---------- UPDATES ---------- */
-.updates { background: #f8fafc; padding: 1.75rem 0 2.25rem; }
-.section-title { display: flex; align-items: center; gap: .5rem; color: var(--primary); margin: 0 0 1rem; }
-.updates-grid { display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); }
-.update-card { background: #fff; border: 1px solid var(--border); border-radius: .9rem; padding: 1rem; box-shadow: 0 8px 30px rgba(2,6,23,.04); }
-.u-title { margin: 0 0 .25rem; font-size: 1rem; font-weight: 700; }
-.u-meta { color: var(--muted); font-size: .9rem; margin-bottom: .5rem; }
-.u-link { color: var(--primary); text-decoration: none; }
+.updates { 
+  background: var(--bg); 
+  padding: 2rem 0 3rem; 
+  border-top: 1px solid rgba(255, 119, 1, 0.1);
+}
+.updates .section-title { 
+  display: flex; 
+  align-items: center; 
+  gap: .6rem; 
+  color: var(--orange); 
+  margin: 0 0 2rem; 
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+.updates .section-title i {
+  color: var(--orange);
+  font-size: 1.5rem;
+}
+.updates-grid { 
+  display: grid; 
+  gap: 1.5rem; 
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+}
+.update-card { 
+  background: var(--white); 
+  border: 1px solid rgba(255, 119, 1, 0.1); 
+  border-radius: 12px; 
+  padding: 1.5rem; 
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+.update-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 28px rgba(255, 119, 1, 0.15);
+  border-color: var(--orange);
+}
+.update-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 119, 1, 0.1);
+}
+.update-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--orange);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1rem;
+}
+.update-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.update-date {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+.update-committee {
+  font-size: 0.8rem;
+  color: var(--orange);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.u-title { 
+  margin: 0 0 1rem; 
+  font-size: 1.1rem; 
+  font-weight: 700; 
+  color: var(--ink);
+  line-height: 1.4;
+}
+.update-summary {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+.u-link { 
+  color: var(--orange); 
+  text-decoration: none; 
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+.u-link:hover {
+  color: var(--ink);
+  transform: translateX(3px);
+}
+.u-link i {
+  font-size: 0.8rem;
+  transition: transform 0.3s ease;
+}
+.u-link:hover i {
+  transform: translateX(2px);
+}
 
 /* ---------- FOOTER ---------- */
-.page-footer { background: #111827; color: #d1d5db; padding: 1.75rem 0; }
-.footer-grid { display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); }
-.footer-links { list-style: none; margin: .25rem 0 0; padding: 0; display: grid; gap: .25rem; }
-.footer-links a { color: #e5e7eb; text-decoration: none; }
-.updated { color: #9ca3af; }
+.page-footer { 
+  background: var(--bg); 
+  padding: 2rem 0; 
+  border-top: 1px solid rgba(255, 119, 1, 0.1);
+}
+.assistance-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.assistance-card {
+  background: var(--white);
+  border: 1px solid rgba(255, 119, 1, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 600px;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+.assistance-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(255, 119, 1, 0.15);
+  border-color: var(--orange);
+}
+.assistance-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--orange), #ff8c42);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  box-shadow: 0 3px 12px rgba(255, 119, 1, 0.3);
+}
+.assistance-content {
+  flex: 1;
+}
+.assistance-content h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 0.75rem 0;
+}
+.assistance-content p {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0 0 1rem 0;
+}
+.assistance-content a {
+  color: var(--orange);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.assistance-content a:hover {
+  color: var(--ink);
+  text-decoration: underline;
+}
+.assistance-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.assistance-btn {
+  background: var(--orange);
+  color: white !important;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.3s ease;
+  border: 2px solid var(--orange);
+}
+.assistance-btn:hover {
+  background: white;
+  color: var(--orange) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 119, 1, 0.3);
+}
+.assistance-btn:hover i {
+  color: var(--orange);
+}
+.assistance-btn:hover span {
+  color: var(--orange);
+}
+.assistance-btn i {
+  font-size: 0.9rem;
+  color: white;
+}
+.assistance-btn span {
+  color: white;
+}
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 1024px) {
-  .grid, .updates-grid, .footer-grid, .qc-grid, .detail-grid { grid-template-columns: repeat(2, 1fr); }
+  .grid, .updates-grid, .qc-grid, .detail-grid { grid-template-columns: repeat(2, 1fr); }
   .hero-inner { grid-template-columns: 1fr; }
 }
+@media (max-width: 768px) {
+  .assistance-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+    padding: 1.25rem;
+  }
+  .assistance-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+  .assistance-content h3 {
+    font-size: 1.2rem;
+  }
+  .assistance-actions {
+    justify-content: center;
+  }
+}
 @media (max-width: 640px) {
-  .grid, .updates-grid, .footer-grid, .qc-grid, .detail-grid { grid-template-columns: 1fr; }
+  .grid, .updates-grid, .qc-grid, .detail-grid { grid-template-columns: 1fr; }
   .controls-row { flex-direction: column; align-items: stretch; }
+  .assistance-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  .assistance-btn {
+    width: 100%;
+    max-width: 200px;
+    justify-content: center;
+  }
 }
 
 /* ---------- PRINT ---------- */

@@ -1,7 +1,8 @@
 <template>
-  <Header/>
-  <Navbar/>
-  <section class="md-page">
+  <div class="mandatory-disclosure-page">
+    <Header/>
+    <NavBar/>
+    <section class="md-page">
     <!-- Hero -->
     <header class="hero">
       <div class="container">
@@ -270,13 +271,14 @@
         </div>
       </section>
     </div>
-  </section>
-  <Footer/>
+    </section>
+    <Footer/>
+  </div>
 </template>
 
 <script setup>
 import Header from '../../components/Header.vue'
-import Navbar from '../../components/Navbar.vue'
+import NavBar from '../../components/NavBar.vue'
 import Footer from '../../components/Footer.vue'
 import { ref, computed } from 'vue'
 

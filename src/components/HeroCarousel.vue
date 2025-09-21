@@ -49,20 +49,25 @@ import { ref } from 'vue'
 
 // Carousel data object
 const carouselData = ref([
+{
+    image: new URL('@/assets/image.png', import.meta.url).href,
+    // alt: 'College Events',
+    // title: 'College Events'
+  },
   {
     image: new URL('@/assets/campus2.jpg', import.meta.url).href,
-    alt: 'Modern Labs and Infrastructure',
-    title: 'Laboratory Facilities'
+    // alt: 'Modern Labs and Infrastructure',
+    // title: 'Laboratory Facilities'
   },
   {
     image: new URL('@/assets/6.jpg', import.meta.url).href,
-    alt: 'Campus View',
-    title: 'Campus Overview'
+    // alt: 'Campus View',
+    // title: 'Campus Overview'
   },
   {
     image: new URL('@/assets/8.jpg', import.meta.url).href,
-    alt: 'College Events',
-    title: 'College Events'
+    // alt: 'College Events',
+    // title: 'College Events'
   }
 ])
 

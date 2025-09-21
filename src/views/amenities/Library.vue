@@ -1,7 +1,8 @@
 <template>
-  <Header/>
-  <NavBar/>
-  <section class="page-bg">
+  <div class="library-page">
+    <Header/>
+    <NavBar/>
+    <section class="page-bg">
     <!-- HERO -->
     <header class="hero" role="banner" aria-label="Central Library Hero">
       <div class="container">
@@ -306,8 +307,9 @@
         </section>
       </div>
     </main>
-  </section>
-  <Footer />
+    </section>
+    <Footer />
+  </div>
 </template>
 
 <script>

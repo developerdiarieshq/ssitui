@@ -1,8 +1,9 @@
 <template>
-  <Header/>
-  <NavBar/>
+  <div class="about-page">
+    <Header/>
+    <NavBar/>
 
-  <section class="about-section py-5 bg-light">
+    <section class="about-section py-5 bg-light">
     <div class="container">
       <!-- Section Title -->
       <div class="text-center mb-4">
@@ -55,15 +56,16 @@
       </div>
     </div>
   </section>
-  <Management/>
-  <Strengths/>
-  <Footer/>
+ <!-- <Management/> -->
+    <Strengths/>
+    <Footer/>
+  </div>
 </template>
 
 <script setup>
 import Header from '../../components/Header.vue';
 import NavBar from '../../components/NavBar.vue';
-import Management from './Management.vue';
+//import Management from './Management.vue';
 import Strengths from './Strengths.vue';
 import Footer from '../../components/Footer.vue';
 

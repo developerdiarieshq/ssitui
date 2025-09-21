@@ -161,8 +161,9 @@ function resetFilter() {
 
 <style scoped>
 :root {
+  --orange: #FF7701;
+  --ink: #1a2238;
   --navy: #1e40af;
-  --orange: #f97316;
   --bg: #f7f9fc;
   --card: #fff;
   --border: #e5e7eb;
@@ -177,23 +178,30 @@ function resetFilter() {
 .container {
   width: min(1180px, 92%);
   margin: auto;
+  padding: 0 1rem;
+}
+
+.content {
+  padding: 2rem 0;
 }
 
 .hero {
-  background: linear-gradient(60deg, var(--navy), #153a9c);
-  color: #fff;
-  padding: 3rem 1rem;
-  border-radius: 0.75rem;
-  margin-bottom: 2.2rem;
-  box-shadow: 0 2px 18px rgba(30,64,175,0.10);
+  background: var(--ink);
+  color: white;
+  padding: 3rem 0;
+  margin-bottom: 2rem;
+  text-align: center;
 }
 
 .title {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
   font-size: 2.2rem;
   font-weight: 800;
+  color: white;
+  margin: 0 0 0.3rem 0;
 }
 
 .title i {
@@ -202,11 +210,13 @@ function resetFilter() {
 }
 
 .subtitle {
-  font-size: 1.2rem;
-  color: #dbeafe;
-  margin-top: 0.5rem;
+  font-size: 1.1rem;
+  color: white;
+  margin-bottom: 0.3rem;
+  opacity: 0.9;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.7rem;
 }
 
@@ -217,18 +227,24 @@ function resetFilter() {
 
 .card {
   background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 0.75rem;
-  padding: 1.5rem;
+  border: 1px solid rgba(255, 119, 1, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
   margin: 2rem 0;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(255, 119, 1, 0.15);
 }
 
 .section-title {
-  font-size: 1.32rem;
   font-weight: 700;
-  color: var(--navy);
-  margin-bottom: 1rem;
+  color: var(--orange);
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
   gap: 0.6rem;
@@ -237,11 +253,6 @@ function resetFilter() {
 .section-title i {
   color: var(--orange);
   font-size: 1.5rem;
-  vertical-align: -2px;
-}
-
-.section-title span {
-  padding-left: 0.3em;
 }
 
 .filter-form {
@@ -292,10 +303,15 @@ button {
 }
 .btn-primary {
   background: var(--orange);
-  color: #fff;
+  color: white;
+  border: 2px solid var(--orange);
+  transition: all 0.3s ease;
 }
 .btn-primary:hover {
-  background: #ea580c;
+  background: white;
+  color: var(--orange);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 119, 1, 0.3);
 }
 .btn-secondary {
   background: #e5e7eb;
@@ -316,16 +332,19 @@ button {
 }
 .table th,
 .table td {
-  padding: 0.75rem 1.1rem;
-  border-bottom: 1px solid var(--border);
-  text-align: left;
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 119, 1, 0.1);
+  text-align: center;
   vertical-align: middle;
+  font-weight: 500;
 }
 .table thead th {
-  background: var(--orange);
-  color: #fff;
-  font-size: 1rem;
+  background-color: var(--orange);
+  color: white;
   font-weight: 600;
+  border: none;
+  padding: 1rem;
+  text-align: center;
   white-space: nowrap;
 }
 .table th i,
@@ -334,7 +353,17 @@ button {
 }
 
 .table-striped tbody tr:nth-child(odd) {
-  background: #f4f8ff;
+  background-color: rgba(255, 119, 1, 0.05);
+}
+
+.table tbody tr:hover {
+  background-color: rgba(255, 119, 1, 0.1);
+}
+
+.table {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
 .no-records {
@@ -357,7 +386,20 @@ button {
     margin-top: 0.5rem;
   }
   .hero {
-    padding: 2.1rem 0.8rem;
+    padding: 2rem 0;
+  }
+  
+  .title {
+    font-size: 1.8rem;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+  }
+  
+  .card {
+    padding: 1.5rem;
+    margin: 1.5rem 0;
   }
 }
 

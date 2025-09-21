@@ -1,7 +1,8 @@
 <template>
-  <Header/>
-  <NavBar/>
-  <section class="py-5 bg-light">
+  <div class="sports-page">
+    <Header/>
+    <NavBar/>
+    <section class="py-5 bg-light">
     <div class="container">
       <!-- Title -->
       <div class="text-center mb-5">
@@ -66,12 +67,15 @@
         </div>
       </div>
     </div>
-  </section>
+    </section>
+    <Footer/>
+  </div>
 </template>
 
 <script setup>
 import Header from '@/components/Header.vue'
 import NavBar from '@/components/NavBar.vue'
+import Footer from '@/components/Footer.vue'
 const sports = [
   { img: '@/assets/sports/cricket.jpg', title: 'Cricket' },
   { img: '@/assets/sports/football.jpg', title: 'Football' },

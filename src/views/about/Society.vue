@@ -169,10 +169,9 @@ const pillars = [
 
 /* Hero */
 .trust-hero {
-  background: radial-gradient(1200px 600px at 75% -100px, rgba(255,255,255,.08), transparent) ,
-              linear-gradient(180deg, #14204b 0%, #162a6b 100%);
+  background: var(--ink);
   color: #fff;
-  padding: 2.75rem 0;
+  padding: 3rem 0;
 }
 .hero-title {
   font-weight: 800;

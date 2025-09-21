@@ -28,7 +28,7 @@
             <h5 class="fw-bold mt-4 mb-2">Phone</h5>
             <p>
               <i class="fas fa-phone me-2 text-orange"></i>
-              +91 9032956083
+              <a href="tel:+919032956083" class="phone-link">+91 9032956083</a>
             </p>
           </div>
         </div>
@@ -157,5 +157,16 @@ const submitForm = () => {
 }
 .btn-orange:hover {
   background: #e65f00;
+}
+
+.phone-link {
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.phone-link:hover {
+  color: #FF7701;
+  text-decoration: none;
 }
 </style>
