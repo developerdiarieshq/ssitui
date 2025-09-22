@@ -11,7 +11,7 @@
           <span class="badge-pill">AICTE Approved</span>
         </div>
 
-        <div class="row align-items-center mt-4 gy-4">
+        <div class="row align-items-center mt-3 gy-4">
           <div class="col-lg-7">
             <h1 class="display-5 fw-bold">Central Library &amp; Department Libraries</h1>
             <p class="lead mb-3">Knowledge Hub for Students &amp; Faculty</p>
@@ -23,14 +23,14 @@
           <div class="col-lg-5">
             <img
               class="img-fluid rounded-4 shadow"
-              alt="Library reading hall"
-              src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1200&auto=format&fit=crop"
+              alt="SSIT Library - Students studying in the library"
+              src="@/assets/campuslife/students-in-college-library-studying.jpg"
             />
           </div>
         </div>
 
         <!-- Stats -->
-        <div class="row g-3 mt-4" aria-label="Library summary statistics">
+        <div class="row g-3 mt-3" aria-label="Library summary statistics">
           <div class="col-6 col-md-3" v-for="stat in stats" :key="stat.label">
             <div class="stat-card h-100">
               <div class="d-flex align-items-center gap-3">
@@ -75,36 +75,37 @@
       <!-- Overview -->
       <section :id="tabsMap.overview" class="card-section overview-section" v-show="activeTab==='overview'">
         <div class="elev-card p-4 p-md-5">
-          <h2 class="section-title h3">Overview</h2>
-          <p class="section-subtitle">Mission • Membership • Academic Support</p>
+          <h2 class="section-title h3">About Library</h2>
+          <p class="section-subtitle">Central Library • Departmental Sections • Academic Support</p>
           <p>
-            The SSIT Central Library serves as the academic anchor for students and faculty, providing
-            curated print and digital collections, research support, and collaborative learning spaces.
-            Our mission is to enable inquiry, innovation, and excellence in teaching and research across
-            all departments.
+            The SSIT Library System consists of a Central Library with 6 departmental sections (Libraries), which collectively support the teaching, research and extension programmes of the Institute. All students, faculty members and employees of the Institute are entitled to make use of the Library facilities on taking library membership.
+          </p>
+          <p>
+            The Library, besides having 52,937 volumes and digital library with huge collection of e-books for engineering, science, Management and humanities offers library services through its various divisions.
           </p>
           <p class="mb-0">
-            <strong>Membership:</strong> All SSIT students, faculty, and staff are automatic members with
-            valid ID. External scholars may apply for reference access subject to approval.
+            <strong>Area & Capacity:</strong> Plinth Area: 435 sq.m | Seating Capacity: 200
           </p>
         </div>
       </section>
 
-      <!-- Resources -->
-      <section :id="tabsMap.resources" class="card-section" v-show="activeTab==='resources'">
+          <!-- Resources -->
+          <section :id="tabsMap.resources" class="card-section" v-show="activeTab==='resources'">
             <div class="elev-card p-4 p-md-5">
               <h3 class="h4">Resources &amp; Services</h3>
               <p class="text-muted">Collections • Digital platforms • Access tools</p>
-              <div class="row g-4 mt-2">
+              
+              <!-- Collection Summary -->
+              <div class="row g-4 mt-2 mb-4">
                 <div class="col-md-6">
                   <div class="elev-card p-4 h-100">
-                    <h4 class="h6 text-uppercase text-muted mb-3">Collections</h4>
+                    <h4 class="h6 text-uppercase text-muted mb-3">Collection Summary</h4>
                     <ul class="list-unstyled mb-0">
-                      <li><i class="fa-solid fa-book me-2 text-warning"></i><strong>Print Volumes:</strong> 55,000+</li>
-                      <li><i class="fa-solid fa-file-pdf me-2 text-danger"></i><strong>E-Books:</strong> 9,000+</li>
-                      <li><i class="fa-solid fa-newspaper me-2 text-secondary"></i><strong>Journals:</strong> 450+</li>
-                      <li><i class="fa-solid fa-scroll me-2 text-primary"></i><strong>Newspapers:</strong> 25+</li>
-                      <li><i class="fa-solid fa-flask me-2 text-success"></i><strong>Projects/Thesis:</strong> Department repos</li>
+                      <li><i class="fa-solid fa-book me-2 text-warning"></i><strong>Total Titles:</strong> 9,498</li>
+                      <li><i class="fa-solid fa-bookmark me-2 text-danger"></i><strong>Total Volumes:</strong> 48,789</li>
+                      <li><i class="fa-solid fa-compact-disc me-2 text-info"></i><strong>NPTEL CD-ROMs:</strong> 2,657</li>
+                      <li><i class="fa-solid fa-file-alt me-2 text-success"></i><strong>Project Reports:</strong> 950</li>
+                      <li><i class="fa-solid fa-newspaper me-2 text-secondary"></i><strong>Journals:</strong> 100+ (National & International)</li>
                     </ul>
                   </div>
                 </div>
@@ -115,8 +116,41 @@
                       <li><i class="fa-solid fa-magnifying-glass me-2 text-primary"></i><strong>OPAC:</strong> Search &amp; reserve</li>
                       <li><i class="fa-solid fa-network-wired me-2 text-success"></i><strong>DELNET:</strong> Inter-library loan</li>
                       <li><i class="fa-solid fa-graduation-cap me-2 text-warning"></i><strong>NDL:</strong> National resources</li>
+                      <li><i class="fa-solid fa-scroll me-2 text-danger"></i><strong>SHODHA SINDHU:</strong> E-resources</li>
                     </ul>
                   </div>
+                </div>
+              </div>
+
+              <!-- Department-wise Collections -->
+              <div class="elev-card p-4">
+                <h4 class="h6 text-uppercase text-muted mb-3">Department-wise Collections</h4>
+                <div class="table-responsive">
+                  <table class="table table-sm">
+                    <thead>
+                      <tr>
+                        <th>Department</th>
+                        <th>Titles</th>
+                        <th>Volumes</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr><td><strong>Electronics and Communication Engineering</strong></td><td>1,930</td><td>8,600</td></tr>
+                      <tr><td><strong>Computer Science Engineering</strong></td><td>1,610</td><td>7,582</td></tr>
+                      <tr><td><strong>Electrical and Electronics Engineering</strong></td><td>1,260</td><td>6,514</td></tr>
+                      <tr><td><strong>Mechanical Engineering</strong></td><td>1,370</td><td>7,745</td></tr>
+                      <tr><td><strong>Computer Science and Engineering (AI & ML)</strong></td><td>350</td><td>1,000</td></tr>
+                      <tr><td><strong>Artificial Intelligence and Data Science</strong></td><td>350</td><td>500</td></tr>
+                      <tr><td><strong>Diploma in Electronics and Communication Engineering</strong></td><td>580</td><td>3,300</td></tr>
+                      <tr><td><strong>Diploma in Electrical and Electronics Engineering</strong></td><td>580</td><td>3,064</td></tr>
+                      <tr><td><strong>Diploma in Computer Science and Engineering</strong></td><td>460</td><td>2,455</td></tr>
+                      <tr><td><strong>Master of Business Administration</strong></td><td>1,000</td><td>7,868</td></tr>
+                      <tr><td><strong>SC/ST Students Book Bank</strong></td><td>650</td><td>2,889</td></tr>
+                      <tr><td><strong>Reference Books</strong></td><td>-</td><td>7,145</td></tr>
+                      <tr><td><strong>Circulation Books</strong></td><td>-</td><td>35,589</td></tr>
+                      <tr class="table-primary"><td><strong>Total</strong></td><td><strong>9,498</strong></td><td><strong>48,789</strong></td></tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
@@ -169,13 +203,36 @@
           <section :id="tabsMap.services" class="card-section" v-show="activeTab==='services'">
             <div class="elev-card p-4 p-md-5">
               <h3 class="h4">Services Offered</h3>
-              <ul>
-                <li><i class="fa-solid fa-hand-holding me-2 text-success"></i>Lending & renewals</li>
-                <li><i class="fa-solid fa-people-arrows me-2 text-primary"></i>Reference support</li>
-                <li><i class="fa-solid fa-bell-concierge me-2 text-warning"></i>Reservations via OPAC</li>
-                <li><i class="fa-solid fa-cloud-arrow-down me-2 text-danger"></i>Digital access</li>
-                <li><i class="fa-solid fa-paper-plane me-2 text-secondary"></i>News distribution</li>
-              </ul>
+              <div class="row g-4 mt-2">
+                <div class="col-md-6">
+                  <div class="elev-card p-4 h-100">
+                    <h4 class="h6 text-uppercase text-muted mb-3">Core Services</h4>
+                    <ul class="list-unstyled mb-0">
+                      <li><i class="fa-solid fa-robot me-2 text-success"></i>Fully Automated</li>
+                      <li><i class="fa-solid fa-door-open me-2 text-primary"></i>Open Access System</li>
+                      <li><i class="fa-solid fa-exchange me-2 text-warning"></i>Circulation (Issues & Returns)</li>
+                      <li><i class="fa-solid fa-search me-2 text-danger"></i>Reference</li>
+                      <li><i class="fa-solid fa-book-open me-2 text-secondary"></i>Reading</li>
+                      <li><i class="fa-solid fa-desktop me-2 text-info"></i>Online Public Access Catalogue (OPAC)</li>
+                      <li><i class="fa-solid fa-hand-holding me-2 text-success"></i>Book Lending Service</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="elev-card p-4 h-100">
+                    <h4 class="h6 text-uppercase text-muted mb-3">Additional Services</h4>
+                    <ul class="list-unstyled mb-0">
+                      <li><i class="fa-solid fa-copy me-2 text-primary"></i>Photo Copying Services</li>
+                      <li><i class="fa-solid fa-calendar-check me-2 text-warning"></i>Reservation Facility</li>
+                      <li><i class="fa-solid fa-building me-2 text-success"></i>Department Libraries</li>
+                      <li><i class="fa-solid fa-newspaper me-2 text-danger"></i>Newspapers for Hostels</li>
+                      <li><i class="fa-solid fa-bell me-2 text-secondary"></i>Current Awareness Services</li>
+                      <li><i class="fa-solid fa-file-alt me-2 text-info"></i>Project Reports & Newspapers</li>
+                      <li><i class="fa-solid fa-archive me-2 text-primary"></i>Back Volumes</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
           </section>
 
@@ -186,25 +243,45 @@
               <div class="row g-4 mt-2">
                 <div class="col-md-6">
                   <div class="elev-card p-4 h-100">
-                    <h4 class="h6 text-uppercase text-muted">Infrastructure</h4>
-                    <ul>
-                      <li>40 systems • Headphones</li>
-                      <li>High-speed internet</li>
-                      <li>SSO login</li>
-                    </ul>
+                    <h4 class="h6 text-uppercase text-muted mb-3">Digital Resources</h4>
+                    <div class="table-responsive">
+                      <table class="table table-sm">
+                        <thead>
+                          <tr><th>S.No</th><th>Title</th><th>Course</th></tr>
+                        </thead>
+                        <tbody>
+                          <tr><td>1</td><td>JST</td><td>J-GATE SCIENCE AND TECHNOLOGY</td></tr>
+                          <tr><td>2</td><td>DELNET</td><td>E-journals</td></tr>
+                          <tr><td>3</td><td>NDL</td><td>NDL India</td></tr>
+                          <tr><td>4</td><td>SHODHA SINDHU</td><td>ONLINE E-RESOURCE REQUISITION SYSTEMS</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="elev-card p-4 h-100">
-                    <h4 class="h6 text-uppercase text-muted">Login Steps</h4>
-                    <ol>
-                      <li>Open portal</li>
-                      <li>Login with SSO</li>
-                      <li>Search & download</li>
-                    </ol>
+                    <h4 class="h6 text-uppercase text-muted mb-3">Library Automation</h4>
+                    <p>The Central Library has computerized all its activities including Acquisition, Cataloguing, Circulation and stock verification using Clarity 2000 software.</p>
+                    <p>The Central Library using barcode technology for computerized circulation system and stock verification. The Central Library has developed Clarity 2000 software facilities for bar coding of books and ID cards.</p>
+                    <p><strong>Features:</strong></p>
+                    <ul class="mb-0">
+                      <li>Computerized circulation system</li>
+                      <li>Barcode technology</li>
+                      <li>Stock verification</li>
+                      <li>Book and ID card bar coding</li>
+                    </ul>
                   </div>
                 </div>
               </div>
+            </div>
+          </section>
+
+          <!-- Vision -->
+          <section :id="tabsMap.vision" class="card-section" v-show="activeTab==='vision'">
+            <div class="elev-card p-4 p-md-5">
+              <h3 class="h4">Vision</h3>
+              <p>We impart futuristic technical education and instill high patterns of discipline through our dedicated management and staff set to global standards, making our students technologically superior and ethically strong who in turn shall improve the quality and disciplined Life of the human race.</p>
             </div>
           </section>
 
@@ -338,16 +415,17 @@ export default {
         services: "services",
         digital: "digital",
         timings: "timings",
+        vision: "vision",
         team: "team",
         downloads: "downloads",
         news: "news",
         faq: "faq"
       },
       stats: [
-        { value: "55,000+", label: "Total Collection", icon: "fa-solid fa-book fa-lg text-warning" },
-        { value: "12,500+", label: "E-Books & Journals", icon: "fa-solid fa-tablet-screen-button fa-lg text-primary" },
-        { value: "240", label: "Seating Capacity", icon: "fa-solid fa-chair fa-lg text-success" },
-        { value: "OPAC/DELNET/NDL", label: "Digital Access", icon: "fa-solid fa-globe fa-lg text-danger" },
+        { value: "48,789", label: "Total Volumes", icon: "fa-solid fa-book fa-lg text-warning" },
+        { value: "9,498", label: "Total Titles", icon: "fa-solid fa-bookmark fa-lg text-primary" },
+        { value: "200", label: "Seating Capacity", icon: "fa-solid fa-chair fa-lg text-success" },
+        { value: "435 sq.m", label: "Plinth Area", icon: "fa-solid fa-ruler-combined fa-lg text-danger" },
       ],
       tabs: [
         { id: "overview", label: "Overview", icon: "fa-solid fa-info-circle" },
@@ -357,28 +435,35 @@ export default {
         { id: "services", label: "Services Offered", icon: "fa-solid fa-hands-holding-circle" },
         { id: "digital", label: "Digital Library", icon: "fa-solid fa-wifi" },
         { id: "timings", label: "Timings", icon: "fa-regular fa-clock" },
+        { id: "vision", label: "Vision", icon: "fa-solid fa-eye" },
         { id: "team", label: "Library Team", icon: "fa-solid fa-people-group" },
         { id: "downloads", label: "Downloads", icon: "fa-solid fa-download" },
         { id: "news", label: "News/Updates", icon: "fa-regular fa-newspaper" },
         { id: "faq", label: "FAQ", icon: "fa-regular fa-circle-question" },
       ],
       facilities: [
-        { name: "Reading Room", capacity: "240 seats", access: "All members", hours: "Mon–Sat, 9–19", icon: "fa-solid fa-book-open-reader text-primary" },
-        { name: "Digital Library", capacity: "40 systems", access: "SSO login", hours: "Mon–Sat, 9–18", icon: "fa-solid fa-computer text-success" },
-        { name: "Photocopy & Print", capacity: "Queue based", access: "Paid", hours: "Mon–Sat, 10–17:30", icon: "fa-solid fa-print text-secondary" },
+        { name: "Central Library", capacity: "200 seats", access: "All members", hours: "Mon–Sat, 8:00–20:00", icon: "fa-solid fa-building-columns text-primary" },
+        { name: "Department Libraries", capacity: "6 sections", access: "Department members", hours: "Mon–Sat, 8:00–20:00", icon: "fa-solid fa-book-open-reader text-success" },
+        { name: "Digital Library", capacity: "Computer systems", access: "Library members", hours: "Mon–Sat, 8:00–20:00", icon: "fa-solid fa-computer text-warning" },
+        { name: "Reference Section", capacity: "Study area", access: "All members", hours: "Mon–Sat, 8:00–20:00", icon: "fa-solid fa-search text-info" },
+        { name: "Photocopy Services", capacity: "Available", access: "Paid service", hours: "Mon–Sat, 9:00–17:00", icon: "fa-solid fa-print text-secondary" },
       ],
       membership: [
-        { title: "Eligibility", text: "All SSIT students, faculty, staff. External visitors may request reference access." },
-        { title: "Application", text: "Activate membership at Circulation Desk with ID." },
-        { title: "Rules", list: ["Maintain silence", "Return on time", "Follow license terms"] },
+        { title: "Eligibility", text: "All Students, Faculty, Administrative staff and supporting staff of the college are entitled to become members of the central library." },
+        { title: "Application", text: "The membership application forms can be obtained from circulation counter and should be submitted through proper channel." },
+        { title: "Benefits", list: ["Access to 52,937 volumes", "Digital library resources", "Departmental libraries", "Reference services", "Current awareness services"] },
       ],
       timings: [
-        { service: "Central Library", days: "Mon–Sat", hours: "09:00–19:00" },
-        { service: "Circulation Desk", days: "Mon–Sat", hours: "09:30–17:30" },
+        { service: "Library Working Hours", days: "Monday–Saturday", hours: "8:00 A.M to 8:00 P.M" },
+        { service: "Holidays", days: "Sundays & Public Holidays", hours: "9:00 A.M to 1:00 P.M" },
+        { service: "Book Circulation", days: "Monday–Saturday", hours: "9:00 A.M to 5:00 P.M" },
+        { service: "Reference Section", days: "Monday–Saturday", hours: "8:00 A.M to 8:00 P.M" },
       ],
       team: [
-        { name: "Dr. A. Priya", degree: "MLISc, PhD", role: "Chief Librarian", photo: "https://images.unsplash.com/photo-1544005313-94ddf0286df2" },
-        { name: "Mr. K. Suresh", degree: "MLISc", role: "Asst. Librarian", photo: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c" },
+        { name: "G. UPENDRA RAO", degree: "MA, B.Ed., MLISc, PGDCA", role: "LIBRARIAN", photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" },
+        { name: "V. VENKATESWER RAO", degree: "BA, B.LISc", role: "Library Assistant", photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" },
+        { name: "O. VENKATA KRISHNA", degree: "BSc Computers", role: "Book Keeper", photo: "https://images.unsplash.com/photo-1560250097-0b93528c311a" },
+        { name: "M. MAHA LAKSHMI", degree: "SSC", role: "Attender", photo: "https://images.unsplash.com/photo-1494790108755-2616b612b786" },
       ],
       downloads: [
         { label: "Membership Form", icon: "fa-solid fa-file-pdf" },
@@ -387,8 +472,10 @@ export default {
         { label: "E-Journal List", icon: "fa-solid fa-newspaper" },
       ],
       news: [
-        { title: "New E-Book Pack Added", desc: "Engineering Foundations • Access via Digital Portal" },
-        { title: "Orientation: OPAC & DELNET", desc: "Friday, 3:30 PM • Digital Library Lab" },
+        { title: "Newspapers Available", desc: "We are providing English Newspapers to each student of boys and girls hostel. We keep the following English and Telugu Newspapers in the library." },
+        { title: "English Newspapers", desc: "DECCAN CHRONICLE, HANS INDIA, EMPLOYMENT NEWS (Weekly)" },
+        { title: "Telugu Newspapers", desc: "EENADU, ANDHRA JYOTHI, SAKSHI, NAMASTE TELANGANA, ANDHRA PRABHA" },
+        { title: "Print Journals & Magazines", desc: "More than 100 Journals (National and International) related to various disciplines area available in the central library." },
       ],
       faq: [
         { q: "How do I access e-books off campus?", a: "Login via Digital Library Portal with VPN." },
@@ -426,7 +513,7 @@ export default {
 .page-bg { background: linear-gradient(180deg, #fff 0%, #eef3ff 100%); }
 
 /* HERO */
-.hero { background: var(--ink); color: #fff; padding: 4rem 0 2rem; }
+.hero { background: var(--ink); color: #fff; padding: 2rem 0 1.5rem; }
 .hero .text-white-50 { color: rgba(255, 255, 255, 0.9) !important; font-size: 1.1rem; }
 .badge-pill { background: rgba(255,255,255,0.15); border-radius: 999px; padding: .25rem .75rem; }
 .stat-card { background:#fff; border-radius:1rem; box-shadow:0 6px 24px rgba(0,0,0,.08); padding:1rem; color: #0b3d91; }
@@ -450,7 +537,7 @@ export default {
 
 /* Ensure all text is visible */
 .elev-card {
-  color: #0b3d91;
+  color: #000;
 }
 
 .elev-card h1,
@@ -459,7 +546,7 @@ export default {
 .elev-card h4,
 .elev-card h5,
 .elev-card h6 {
-  color: #0b3d91;
+  color: var(--ink);
 }
 
 .elev-card p,
@@ -468,7 +555,16 @@ export default {
 .elev-card label,
 .elev-card td,
 .elev-card th {
-  color: #0b3d91;
+  color: #000;
+}
+
+/* Content section headings specifically */
+.elev-card .h4 {
+  color: var(--ink) !important;
+}
+
+.elev-card .h6 {
+  color: var(--ink) !important;
 }
 
 /* Overview section specific styling */
@@ -516,3 +612,4 @@ export default {
   font-size: 1.5rem;
 }
 </style>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
