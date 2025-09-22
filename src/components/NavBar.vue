@@ -146,8 +146,8 @@
                     <div class="col-md-6">
                       <router-link to="/library" class="dropdown-item">Library</router-link>
                       <router-link to="/digital-library" class="dropdown-item">Digital Library</router-link>
-                      <router-link to="/english-lab" class="dropdown-item">English Lab</router-link>
-                      <router-link to="/seminar-halls" class="dropdown-item">Seminar Halls</router-link>
+                      <router-link to="/english-labs" class="dropdown-item">English Labs</router-link>
+                      <router-link to="/seminar-hall" class="dropdown-item">Seminar Hall</router-link>
                       <router-link to="/hostels" class="dropdown-item">Hostels</router-link>
                       <router-link to="/cafeteria" class="dropdown-item">Cafeteria</router-link>
                       <router-link to="/e-classrooms" class="dropdown-item">E-Classrooms</router-link>
