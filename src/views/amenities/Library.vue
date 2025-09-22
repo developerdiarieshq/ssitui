@@ -51,21 +51,6 @@
     <!-- CONTENT -->
     <main id="content" tabindex="-1">
       <div class="container py-5">
-        <!-- Overview -->
-        <div class="elev-card p-4 p-md-5 mb-5">
-          <h2 class="section-title h3">Overview</h2>
-          <p class="section-subtitle">Mission • Membership • Academic Support</p>
-          <p>
-            The SSIT Central Library serves as the academic anchor for students and faculty, providing
-            curated print and digital collections, research support, and collaborative learning spaces.
-            Our mission is to enable inquiry, innovation, and excellence in teaching and research across
-            all departments.
-          </p>
-          <p class="mb-0">
-            <strong>Membership:</strong> All SSIT students, faculty, and staff are automatic members with
-            valid ID. External scholars may apply for reference access subject to approval.
-          </p>
-        </div>
 
     <!-- STICKY SUB NAV (nav-pills) -->
     <nav class="subnav" aria-label="Section navigation">
@@ -87,6 +72,24 @@
 
     <!-- CONTENT (tab panes) -->
     <main class="container content" id="content">
+      <!-- Overview -->
+      <section :id="tabsMap.overview" class="card-section overview-section" v-show="activeTab==='overview'">
+        <div class="elev-card p-4 p-md-5">
+          <h2 class="section-title h3">Overview</h2>
+          <p class="section-subtitle">Mission • Membership • Academic Support</p>
+          <p>
+            The SSIT Central Library serves as the academic anchor for students and faculty, providing
+            curated print and digital collections, research support, and collaborative learning spaces.
+            Our mission is to enable inquiry, innovation, and excellence in teaching and research across
+            all departments.
+          </p>
+          <p class="mb-0">
+            <strong>Membership:</strong> All SSIT students, faculty, and staff are automatic members with
+            valid ID. External scholars may apply for reference access subject to approval.
+          </p>
+        </div>
+      </section>
+
       <!-- Resources -->
       <section :id="tabsMap.resources" class="card-section" v-show="activeTab==='resources'">
             <div class="elev-card p-4 p-md-5">
@@ -325,9 +328,10 @@ export default {
   },
   data() {
     return {
-      activeTab: "resources",
+      activeTab: "overview",
       openFAQ: null,
       tabsMap: {
+        overview: "overview",
         resources: "resources",
         facilities: "facilities", 
         membership: "membership",
@@ -346,6 +350,7 @@ export default {
         { value: "OPAC/DELNET/NDL", label: "Digital Access", icon: "fa-solid fa-globe fa-lg text-danger" },
       ],
       tabs: [
+        { id: "overview", label: "Overview", icon: "fa-solid fa-info-circle" },
         { id: "resources", label: "Resources & Services", icon: "fa-solid fa-layer-group" },
         { id: "facilities", label: "Facilities", icon: "fa-solid fa-building-columns" },
         { id: "membership", label: "Membership", icon: "fa-solid fa-id-card" },
@@ -415,13 +420,14 @@ export default {
 .mb-0{margin-bottom:0} .mt-1{margin-top:1rem} .mt-2{margin-top:1.25rem}
 .mb-2{margin-bottom:.75rem} .h5{font-size:1.1rem} .h6{font-size:1rem}
 .text-muted{color:var(--muted)} .muted{color:var(--muted)}
-.lead{font-size:1.05rem; color:#374151}
+.lead{font-size:1.2rem; color:#fff; font-weight:600}
 
 /* PAGE BACKGROUND */
 .page-bg { background: linear-gradient(180deg, #fff 0%, #eef3ff 100%); }
 
 /* HERO */
-.hero { background: linear-gradient(135deg, #FF7701, #FF6F00); color: #fff; padding: 4rem 0 2rem; }
+.hero { background: var(--ink); color: #fff; padding: 4rem 0 2rem; }
+.hero .text-white-50 { color: rgba(255, 255, 255, 0.9) !important; font-size: 1.1rem; }
 .badge-pill { background: rgba(255,255,255,0.15); border-radius: 999px; padding: .25rem .75rem; }
 .stat-card { background:#fff; border-radius:1rem; box-shadow:0 6px 24px rgba(0,0,0,.08); padding:1rem; color: #0b3d91; }
 .stat-number { font-weight:800; color:#0b3d91; }
@@ -430,12 +436,13 @@ export default {
 .subnav{ position:sticky; top:0; z-index:20; background:#fff; border-bottom:1px solid var(--border); }
 .subnav-inner{ display:flex; gap:.5rem; padding:.6rem 1rem; overflow-x:auto; overflow-y:hidden; justify-content:flex-start; flex-wrap:nowrap; }
 .chip{ border:1px solid var(--border); background:#fff; color:#111; border-radius:999px; padding:.5rem .9rem; font-weight:600; display:flex; align-items:center; gap:.5rem; white-space:nowrap; cursor:pointer; transition:all 0.3s ease; flex-shrink:0; }
-.chip i{ color:var(--navy) }
-.chip.active{ border-color:var(--navy); background:rgba(30,64,175,.08); color:var(--navy) }
-.chip:hover{ border-color:var(--orange); background:rgba(249,115,22,.05); }
+.chip i{ color:var(--orange) }
+.chip.active{ border-color:var(--orange); background:var(--orange); color:#fff }
+.chip:hover{ border-color:var(--orange); background:var(--orange); color:#fff; }
+.chip:hover i{ color:#fff }
 
 /* CONTENT */
-.content{ padding:1.8rem 0 2.6rem }
+.content{ padding:1rem 0 2.6rem }
 .card-section{ margin:1.2rem 0 }
 .elev-card { border-radius:1rem; box-shadow:0 6px 24px rgba(0,0,0,.08); background:#fff; }
 .section-title { color:#0b3d91; font-weight:800; }
@@ -462,6 +469,32 @@ export default {
 .elev-card td,
 .elev-card th {
   color: #0b3d91;
+}
+
+/* Overview section specific styling */
+.overview-section .section-title {
+  color: var(--ink) !important;
+}
+
+.overview-section .section-subtitle {
+  color: var(--ink) !important;
+}
+
+.overview-section p {
+  color: #000 !important;
+}
+
+/* Contact section specific styling */
+.contact-card .section-title {
+  color: var(--ink) !important;
+}
+
+.contact-card .section-subtitle {
+  color: var(--ink) !important;
+}
+
+.contact-card .contact-chip {
+  color: #000 !important;
 }
 
 .stat-label {
