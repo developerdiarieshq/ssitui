@@ -154,7 +154,7 @@
                     </div>
                     <div class="col-md-6">
                       <router-link to="/staff-quarters" class="dropdown-item">Staff Quarters</router-link>
-                      <router-link to="/college-temple" class="dropdown-item">College Temple</router-link>
+                      <router-link to="/temple" class="dropdown-item">College Temple</router-link>
                       <router-link to="/internet" class="dropdown-item">Internet</router-link>
                       <router-link to="/ict-facilities" class="dropdown-item">ICT Facilities</router-link>
                       <router-link to="/sports" class="dropdown-item">Sports & Games</router-link>
@@ -208,6 +208,7 @@
               <li><router-link to="/strengths" class="dropdown-item">Strengths</router-link></li>
               <li><router-link to="/social-service" class="dropdown-item">Social Service</router-link></li>
               <li><router-link to="/incentives" class="dropdown-item">Incentives</router-link></li>
+              <li><router-link to="/campus-gallery" class="dropdown-item">Campus Gallery</router-link></li>
               <li><router-link to="/login" class="dropdown-item">Login</router-link></li>
             </ul>
           </li>

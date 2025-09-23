@@ -11,20 +11,21 @@ import VisionMission from './views/about/VisionMission.vue'
 import Quality from './views/about/Quality.vue'
 import ContactUs from '@/components/ContactUs.vue'
 import Sports from '@/views/studentcorner/Sports.vue'
+import CampusGallery from '@/views/CampusGallery.vue'
 import Greivence from '@/views/greivence/Greivence.vue'
 import Strength from './views/about/Strength.vue'
 import MandatoryDisclosure from './views/about/MandatoryDisclosure.vue'
 import Library from './views/amenities/Library.vue'
 import Scholarship from './views/studentcorner/Scholarship.vue'
-import Cafeteria from '@/views/studentcorner/Cafeteria.vue'
+import Cafeteria from '@/views/amenities/Cafeteria.vue'
 import SocialServices from './views/studentcorner/SocialServices.vue'
 import Committees from './views/governance/Committees.vue'
 import GoverningBody from './views/governance/GoverningBody.vue'
 import iqac from './views/governance/iqac.vue'
 import Policies from './views/governance/Policies.vue'
-import AcademicRegulations from './views/academics/AcademicRegulations.vue'
+import AcademicRegulations from './views/Academics/AcademicRegulations.vue'
 import AcademicCalendar from './views/Academics/AcademicCalendar.vue'
-import incentives from './views/Academics/incentives.vue'
+import Incentives from './views/Academics/Incentives.vue'
 import Awards from './views/Academics/Awards.vue'
 import Approvals from './views/Academics/Approvals.vue'
 import Admissions from './views/Admissions/Admissions.vue'
@@ -38,13 +39,15 @@ import Transportation from './views/amenities/Transportation.vue'
 import EClassRooms from './views/amenities/EClassRooms.vue'
 import StaffQuarters from './views/amenities/StaffQuarters.vue'
 import Temple from './views/amenities/Temple.vue'
+import DigitalLibrary from './views/amenities/DigitalLibrary.vue'
+import IctFacilities from './views/amenities/IctFacilities.vue'
 
-//DEPARATMENTS
-import Cse from './views/departments/Cse.vue'
+//DEPARTMENTS
+import Cse from './views/departments/CSE.vue'
 import CseAi from './views/departments/CseAi.vue'
 import CseAiDs from './views/departments/CseAiDs.vue'
 import Ece from './views/departments/Ece.vue'
-import Sh from './views/departments/Sh.vue'
+import Sh from './views/departments/sh.vue'
 import Polytechnic from './views/departments/Polytechnic.vue'
 import Eee from './views/departments/Eee.vue'
 import Mech from './views/departments/Mech.vue'
@@ -54,7 +57,7 @@ import Examination from './views/departments/Examination.vue'
 
 
 
-//staudent corenr
+//student corner
 
 const routes = [
     { path: '/', component: Home },
@@ -81,7 +84,7 @@ const routes = [
     { path: '/policies', component: Policies },
     { path: '/academic-regulations', component: AcademicRegulations },
     { path: '/academic-calendar', component: AcademicCalendar },
-    { path: '/incentives', component: incentives },
+    { path: '/incentives', component: Incentives },
     { path: '/awards', component: Awards },
     { path: '/approvals', component: Approvals },
     { path: '/admissions', component: Admissions },
@@ -92,9 +95,12 @@ const routes = [
     { path: '/seminar-hall', component: SeminarHall },
     { path: '/hostels', component: Hostels },
     { path: '/transportation', component: Transportation },
+    { path: '/campus-gallery', component: CampusGallery },
     { path: '/e-classrooms', component: EClassRooms },
     { path: '/staff-quarters', component: StaffQuarters },
     { path: '/temple', component: Temple },
+    { path: '/digital-library', component: DigitalLibrary },
+    { path: '/ict-facilities', component: IctFacilities },
     { path: '/cse', component: Cse },
     { path: '/cse-ai', component: CseAi },
     { path: '/cse-aids', component: CseAiDs },

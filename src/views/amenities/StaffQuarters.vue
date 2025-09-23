@@ -1,212 +1,358 @@
 <template>
-  <div class="quarters-page">
-    <!-- Header & Navbar -->
+  <div class="page-bg">
+    <!-- HEADER -->
     <Header />
+    
+    <!-- NAVBAR -->
     <NavBar />
+    
+    <!-- HERO -->
+    <header class="hero" role="banner" aria-label="Staff Quarters Hero">
+      <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+          <span class="badge-pill">SSIT • Faculty Housing</span>
+          <span class="badge-pill">AICTE Approved</span>
+        </div>
 
-    <!-- Hero Section -->
-    <header class="hero">
-      <div class="overlay"></div>
-      <div class="hero-content text-center">
-        <h1 class="title">Staff Quarters</h1>
-        <p class="subtitle">
-          Comfortable Residential Facilities for Faculty & Staff
-        </p>
+        <div class="row align-items-center mt-3 gy-4">
+          <div class="col-lg-7">
+            <h1 class="display-5 fw-bold">Staff Quarters</h1>
+            <p class="lead mb-3">Comfortable Residential Facilities for Faculty & Staff</p>
+            <p class="mb-0 text-white-50">
+              Modern residential accommodations designed to provide comfortable living spaces 
+              for faculty members and staff, ensuring convenience and proximity to campus.
+            </p>
+          </div>
+          <div class="col-lg-5">
+            <img
+              class="img-fluid rounded-4 shadow"
+              alt="SSIT Staff Quarters - Modern residential facility"
+              src="@/assets/campuslife/modern-college-hostel-rooms.jpg"
+            />
+          </div>
+        </div>
       </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="container content">
-      <!-- About Section -->
-      <section class="card">
-        <h2 class="section-title">
-          <i class="fa-solid fa-house-user"></i> About Staff Quarters
-        </h2>
-        <p>
-          For better administrative control, Sai Spurthi Institute of Technology
-          provides well-planned <strong>staff quarters</strong> for its
-          employees. The management ensures all modern facilities with a
-          community-friendly environment.
-        </p>
-        <ul class="features">
-          <li><i class="fa-solid fa-bolt"></i> 24x7 electricity supply</li>
-          <li><i class="fa-solid fa-faucet"></i> Purified water facility</li>
-          <li><i class="fa-solid fa-wifi"></i> Internet and telephone access</li>
-          <li><i class="fa-solid fa-tv"></i> Cable TV connection</li>
-          <li><i class="fa-solid fa-shield-halved"></i> 24x7 security services</li>
-          <li><i class="fa-solid fa-bus"></i> Transport for school-going children</li>
-          <li><i class="fa-solid fa-children"></i> Playgrounds for sports and recreation</li>
-          <li><i class="fa-solid fa-utensils"></i> Two canteens (separate for gents & ladies)</li>
-        </ul>
-      </section>
-
-      <!-- Capacity -->
-      <section class="card">
-        <h2 class="section-title">
-          <i class="fa-solid fa-users"></i> Capacity & Facilities
-        </h2>
-        <p>
-          The staff quarters consist of <strong>3 blocks</strong> named
-          <em>Krishna (A), Godhavari (B), and Kinnerasani (C)</em>. Each block
-          has <strong>12 two-bedroom flats</strong>, accommodating a total of
-          <strong>41 families</strong>. About <strong>30 children</strong> of
-          staff are benefitting from the dedicated school transport facility.
-        </p>
-      </section>
-
-      <!-- Blocks Section -->
-      <section class="blocks">
-        <div class="block-card" v-for="block in blocks" :key="block.name">
-          <i :class="block.icon"></i>
-          <h3>{{ block.name }}</h3>
-          <p>{{ block.detail }}</p>
+    <!-- STATS -->
+    <section class="py-4">
+      <div class="container">
+        <div class="row g-3">
+          <div class="col-6 col-md-3" v-for="stat in stats" :key="stat.label">
+            <div class="stat-card text-center">
+              <i :class="stat.icon"></i>
+              <div class="stat-number">{{ stat.value }}</div>
+              <div class="stat-label">{{ stat.label }}</div>
+            </div>
+          </div>
         </div>
-      </section>
+      </div>
+    </section>
+
+    <!-- CONTENT -->
+    <main class="content">
+      <div class="container">
+        <!-- About Staff Quarters -->
+        <div class="elev-card p-4 p-md-5 mb-4">
+          <h2 class="section-title h4">About Staff Quarters</h2>
+          <p class="section-subtitle">Better Administrative Control • Three Blocks • Complete Amenities</p>
+          
+          <div class="row g-4 mt-3">
+            <div class="col-md-8">
+              <p>
+                For a better <strong>administrative control</strong>, Sai Spurthi provides quarters for the employees of Sai Spurthi. 
+                The Management provides sufficient number of staff quarters named <strong>A(Krishna), B(Godhavari) & C(Kinnerasani) Blocks</strong>.
+              </p>
+              <p>
+                Every Block has <strong>'12' staff quarters</strong>. Each and every staff quarter is of a <strong>two bed room flat</strong> 
+                with all provisions like <strong>'24' hours supply of electricity & purified water</strong>.
+              </p>
+              <p class="mb-0">
+                The quarters can accommodate <strong>'41' families</strong>. There is transport facility for school going children. 
+                About <strong>'30' children</strong> are getting the benefit of this facility.
+              </p>
+            </div>
+            <div class="col-md-4">
+              <div class="elev-card p-4 h-100">
+                <h4 class="h6 text-uppercase text-muted mb-3">Quick Facts</h4>
+                <div class="mb-3">
+                  <i class="fa-solid fa-building text-primary me-2"></i>
+                  <strong>3 Blocks</strong>
+                </div>
+                <div class="mb-3">
+                  <i class="fa-solid fa-home text-success me-2"></i>
+                  <strong>36 Quarters Total</strong>
+                </div>
+                <div class="mb-3">
+                  <i class="fa-solid fa-users text-warning me-2"></i>
+                  <strong>41 Families</strong>
+                </div>
+                <div>
+                  <i class="fa-solid fa-bus text-info me-2"></i>
+                  <strong>30 Children Transport</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Staff Quarters Blocks -->
+        <div class="elev-card p-4 p-md-5 mb-4">
+          <h2 class="section-title h4">Staff Quarters Blocks</h2>
+          <p class="section-subtitle">Three Blocks • Designated for Different Staff Categories • 12 Quarters Each</p>
+          
+          <div class="row g-4 mt-3">
+            <div class="col-md-4">
+              <div class="elev-card p-4 h-100 text-center">
+                <i class="fa-solid fa-user-tie fa-2x text-primary mb-3"></i>
+                <h5 class="h6">A-Block - Krishna</h5>
+                <p class="small mb-0">This Block will accommodate principal, head of the department & professors</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="elev-card p-4 h-100 text-center">
+                <i class="fa-solid fa-chalkboard-teacher fa-2x text-success mb-3"></i>
+                <h5 class="h6">B-Block - Godhavari</h5>
+                <p class="small mb-0">This block will accommodate for associative & assistant professors</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="elev-card p-4 h-100 text-center">
+                <i class="fa-solid fa-users fa-2x text-warning mb-3"></i>
+                <h5 class="h6">C-Block - Kinnerasani</h5>
+                <p class="small mb-0">This Block will accommodate for non-teaching staff</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Facilities & Amenities -->
+        <div class="elev-card p-4 p-md-5 mb-4">
+          <h2 class="section-title h4">Facilities & Amenities</h2>
+          <p class="section-subtitle">Complete Infrastructure • Essential Services • Family Support</p>
+          
+          <div class="row g-4 mt-3">
+            <div class="col-md-6">
+              <h5 class="h6 text-uppercase text-muted mb-3">Block Facilities</h5>
+              <ul class="list-unstyled mb-0">
+                <li class="mb-3">
+                  <i class="fa-solid fa-wifi text-primary me-2"></i>
+                  <strong>Internet Connection:</strong> Every Block has been equipped with internet
+                </li>
+                <li class="mb-3">
+                  <i class="fa-solid fa-phone text-success me-2"></i>
+                  <strong>Telephone:</strong> Telephone connection in every block
+                </li>
+                <li class="mb-3">
+                  <i class="fa-solid fa-tv text-warning me-2"></i>
+                  <strong>Cable TV:</strong> Cable TV connection available
+                </li>
+                <li class="mb-0">
+                  <i class="fa-solid fa-shield-halved text-info me-2"></i>
+                  <strong>24 Hours Security:</strong> Security arrangement in every block
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <h5 class="h6 text-uppercase text-muted mb-3">Additional Amenities</h5>
+              <ul class="list-unstyled mb-0">
+                <li class="mb-3">
+                  <i class="fa-solid fa-bus text-primary me-2"></i>
+                  <strong>Transport Facility:</strong> For school going children (30 children benefit)
+                </li>
+                <li class="mb-3">
+                  <i class="fa-solid fa-table-tennis-paddle-ball text-success me-2"></i>
+                  <strong>Playgrounds:</strong> Shuttle cock court, volley ball, cricket grounds
+                </li>
+                <li class="mb-3">
+                  <i class="fa-solid fa-utensils text-warning me-2"></i>
+                  <strong>Canteens:</strong> Two canteens - one for gents & one for ladies
+                </li>
+                <li class="mb-0">
+                  <i class="fa-solid fa-droplet text-info me-2"></i>
+                  <strong>Purified Water:</strong> 24 hours supply of purified water
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quarter Specifications -->
+        <div class="elev-card p-4 p-md-5 mb-4">
+          <h2 class="section-title h4">Quarter Specifications</h2>
+          <p class="section-subtitle">Two Bedroom Flats • Complete Provisions • Modern Living</p>
+          
+          <div class="row g-4 mt-3">
+            <div class="col-md-4">
+              <div class="elev-card p-4 h-100 text-center">
+                <i class="fa-solid fa-bed fa-2x text-primary mb-3"></i>
+                <h5 class="h6">Two Bedroom Flat</h5>
+                <p class="small mb-0">Each staff quarter is of a two bed room flat with all provisions</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="elev-card p-4 h-100 text-center">
+                <i class="fa-solid fa-bolt fa-2x text-success mb-3"></i>
+                <h5 class="h6">24 Hours Electricity</h5>
+                <p class="small mb-0">Continuous power supply with all necessary provisions</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="elev-card p-4 h-100 text-center">
+                <i class="fa-solid fa-droplet fa-2x text-warning mb-3"></i>
+                <h5 class="h6">Purified Water</h5>
+                <p class="small mb-0">24 hours supply of purified water for all quarters</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact -->
+        <section class="my-5">
+          <div class="elev-card p-4 p-md-5 contact-card">
+            <h2 class="section-title h4">Contact — Staff Quarters</h2>
+            <p class="section-subtitle">We're here to help with your accommodation needs</p>
+            
+            <div class="row g-4 mt-3">
+              <div class="col-md-6">
+                <div class="contact-chip mb-3">
+                  <i class="fa-solid fa-map-marker-alt text-primary me-2"></i>
+                  <strong>Location:</strong> SSIT Campus, Khammam
+                </div>
+                <div class="contact-chip mb-3">
+                  <i class="fa-solid fa-envelope text-success me-2"></i>
+                  <strong>Email:</strong> staffquarters@ssit.edu.in
+                </div>
+                <div class="contact-chip">
+                  <i class="fa-solid fa-phone text-warning me-2"></i>
+                  <strong>Phone:</strong> +91-98765-43210
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="contact-chip mb-3">
+                  <i class="fa-solid fa-clock text-info me-2"></i>
+                  <strong>Office Hours:</strong> 9:00 AM - 5:00 PM
+                </div>
+                <div class="contact-chip mb-3">
+                  <i class="fa-solid fa-calendar text-primary me-2"></i>
+                  <strong>Days:</strong> Monday - Saturday
+                </div>
+                <div class="contact-chip">
+                  <i class="fa-solid fa-user-tie text-success me-2"></i>
+                  <strong>Contact:</strong> Estate Manager
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
     </main>
 
-    <!-- Footer -->
+    <!-- FOOTER -->
     <Footer />
   </div>
 </template>
 
-<script setup>
-import Header from "@/components/Header.vue";
-import NavBar from "@/components/NavBar.vue";
-import Footer from "@/components/Footer.vue";
+<script>
+import Header from '@/components/Header.vue'
+import NavBar from '@/components/NavBar.vue'
+import Footer from '@/components/Footer.vue'
 
-const blocks = [
-  {
-    name: "A-Block - Krishna",
-    detail:
-      "Accommodates the Principal, Heads of Departments, and Professors.",
-    icon: "fa-solid fa-user-tie",
+export default {
+  name: 'StaffQuarters',
+  components: {
+    Header,
+    NavBar,
+    Footer
   },
-  {
-    name: "B-Block - Godhavari",
-    detail: "Reserved for Associate and Assistant Professors.",
-    icon: "fa-solid fa-chalkboard-teacher",
+  data() {
+    return {
+      stats: [
+        { value: "36", label: "Staff Quarters", icon: "fa-solid fa-home fa-lg text-primary" },
+        { value: "41", label: "Families", icon: "fa-solid fa-users fa-lg text-success" },
+        { value: "30", label: "Children Transport", icon: "fa-solid fa-bus fa-lg text-warning" },
+        { value: "24/7", label: "Security", icon: "fa-solid fa-shield-halved fa-lg text-info" },
+      ],
+    };
   },
-  {
-    name: "C-Block - Kinnerasani",
-    detail: "Allocated for Non-teaching staff members.",
-    icon: "fa-solid fa-people-group",
-  },
-];
+};
 </script>
 
 <style scoped>
+/* CSS VARIABLES */
 :root {
-  --navy: #1e40af;
-  --orange: #f97316;
-  --bg: #f9fafb;
-  --card: #fff;
-  --border: #e5e7eb;
-  --muted: #6b7280;
+  --orange: #FF7701;
+  --ink: #0b3d91;
+  --muted: #6c757d;
 }
 
-/* Hero */
-.hero {
-  position: relative;
-  background: url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c")
-    center/cover no-repeat;
-  height: 45vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-}
-.hero .overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(30, 64, 175, 0.7);
-}
-.hero-content {
-  position: relative;
-  z-index: 2;
-}
-.title {
-  font-size: 2.4rem;
-  font-weight: 800;
-}
-.subtitle {
-  font-size: 1.2rem;
-  margin-top: 0.5rem;
-  color: #e0e7ff;
+/* UTILITY CLASSES */
+.container{ width:min(1180px,92%); margin-inline:auto; }
+.mb-0{margin-bottom:0} .mt-1{margin-top:1rem} .mt-2{margin-top:1.25rem}
+.mb-2{margin-bottom:.75rem} .h5{font-size:1.1rem} .h6{font-size:1rem}
+.text-muted{color:var(--muted)} .muted{color:var(--muted)}
+.lead{font-size:1.2rem; color:#fff; font-weight:600}
+
+/* PAGE BACKGROUND */
+.page-bg { background: linear-gradient(180deg, #fff 0%, #eef3ff 100%); }
+
+/* HERO */
+.hero { background: var(--ink); color: #fff; padding: 2rem 0 1.5rem; }
+.hero .text-white-50 { color: rgba(255, 255, 255, 0.9) !important; font-size: 1.1rem; }
+.badge-pill { background: rgba(255,255,255,0.15); border-radius: 999px; padding: .25rem .75rem; }
+.stat-card { background:#fff; border-radius:1rem; box-shadow:0 6px 24px rgba(0,0,0,.08); padding:1rem; color: #0b3d91; }
+.stat-number { font-weight:800; color:#0b3d91; }
+
+/* CONTENT */
+.content{ padding:1rem 0 2.6rem }
+.card-section{ margin:1.2rem 0 }
+.elev-card { border-radius:1rem; box-shadow:0 6px 24px rgba(0,0,0,.08); background:#fff; }
+.section-title { color:#0b3d91; font-weight:800; }
+.contact-chip { border:1px dashed rgba(0,0,0,.1); border-radius:999px; padding:.35rem .75rem; }
+
+/* Ensure all text is visible */
+.elev-card {
+  color: #000;
 }
 
-/* Content */
-.content {
-  margin: 2rem 0;
-}
-.card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 0.75rem;
-  padding: 2rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-}
-.section-title {
-  color: var(--navy);
-  font-size: 1.4rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-.section-title i {
-  color: var(--orange);
+.elev-card h1,
+.elev-card h2,
+.elev-card h3,
+.elev-card h4,
+.elev-card h5,
+.elev-card h6 {
+  color: var(--ink);
 }
 
-/* Features */
-.features {
-  list-style: none;
-  padding: 0;
-}
-.features li {
-  font-size: 1rem;
-  margin: 0.5rem 0;
-  color: var(--muted);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-.features i {
-  color: var(--orange);
+.elev-card p,
+.elev-card span,
+.elev-card li,
+.elev-card label,
+.elev-card td,
+.elev-card th {
+  color: #000;
 }
 
-/* Blocks */
-.blocks {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1rem;
+.elev-card .h4,
+.elev-card .h6 {
+  color: var(--ink) !important;
 }
-.block-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 0.75rem;
-  padding: 1.5rem;
-  text-align: center;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s ease;
+
+/* Contact section styling */
+.contact-card .section-title,
+.contact-card .section-subtitle {
+  color: var(--ink) !important;
 }
-.block-card:hover {
-  transform: translateY(-4px);
+
+.contact-card .contact-chip {
+  color: #000 !important;
 }
-.block-card i {
-  font-size: 2rem;
-  color: var(--orange);
-  margin-bottom: 0.5rem;
-}
-.block-card h3 {
-  color: var(--navy);
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-}
-.block-card p {
-  color: var(--muted);
-  font-size: 0.95rem;
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero { padding: 1.5rem 0 1rem; }
+  .hero .display-5 { font-size: 2rem; }
+  .content { padding: 0.5rem 0 2rem; }
+  .elev-card { padding: 1.5rem !important; }
 }
 </style>
