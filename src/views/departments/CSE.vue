@@ -1026,8 +1026,9 @@ const alumni = ref([
     yop: '2017',
     linkedin: '#',
     github: '#',
-    photo: 'https://media.licdn.com/dms/image/v2/C5603AQEA1eQ0HoxEww/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1628270985547?e=1761782400&v=beta&t=ssw3ER8WXGb_wAgGq3Up2gmi-BIYHUYKZxwsCOAqhA8'
+    photo: '' 
   }
+  
 ])
 
 /* Contact */
