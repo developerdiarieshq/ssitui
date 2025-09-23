@@ -553,16 +553,41 @@
 
       <!-- ALUMNI -->
       <section :id="tabsMap.alumni" class="card-section" v-show="activeTab==='alumni'">
-        <h2 class="section-title"><i class="fa-solid fa-user-graduate"></i> Alumni Network</h2>
+        <div class="alumni-header">
+          <h2 class="section-title"><i class="fa-solid fa-user-graduate"></i> Alumni Network</h2>
+          <div class="year-filter">
+            <label for="yearSelect" class="filter-label">Filter by Year:</label>
+            <select 
+              id="yearSelect" 
+              v-model="selectedYear" 
+              class="year-select"
+              aria-label="Filter alumni by graduation year"
+            >
+              <option 
+                v-for="year in availableYears" 
+                :key="year" 
+                :value="year"
+              >
+                {{ year === 'ALL' ? 'All Years' : year }}
+              </option>
+            </select>
+          </div>
+        </div>
         <div class="alumni-grid">
-          <article v-for="al in alumni" :key="al.name" class="alumni-card">
+          <article v-for="al in filteredAlumni" :key="al.name" class="alumni-card">
             <img :src="al.photo" :alt="al.name" class="avatar" />
-            <div>
+            <div class="alumni-info">
               <h3 class="h6">{{ al.name }}</h3>
               <p class="muted">{{ al.role }} — {{ al.company }}</p>
-              <a v-if="al.linkedin" :href="al.linkedin" target="_blank" rel="noopener" class="icon-link">
-                <i class="fa-brands fa-linkedin"></i> Connect
-              </a>
+              <p class="yop" v-if="al.yop"><strong>YOP:</strong> {{ al.yop }}</p>
+              <div class="social-links">
+                <a v-if="al.linkedin" :href="al.linkedin" target="_blank" rel="noopener" class="social-link" title="LinkedIn">
+                  <i class="fa-brands fa-linkedin"></i>
+                </a>
+                <a v-if="al.github" :href="al.github" target="_blank" rel="noopener" class="social-link" title="GitHub">
+                  <i class="fa-brands fa-github"></i>
+                </a>
+              </div>
             </div>
           </article>
         </div>
@@ -694,6 +719,27 @@ const openEventsModal = () => {
   currentEventImageIndex.value = 0
   showEventsModal.value = true
 }
+
+// Alumni Year Filter
+const selectedYear = ref('ALL')
+const currentYear = new Date().getFullYear()
+
+// Generate years from 2017 to current year
+const availableYears = computed(() => {
+  const years = ['ALL']
+  for (let year = currentYear; year >= 2017; year--) {
+    years.push(year.toString())
+  }
+  return years
+})
+
+// Filter alumni by selected year
+const filteredAlumni = computed(() => {
+  if (selectedYear.value === 'ALL') {
+    return alumni.value
+  }
+  return alumni.value.filter(al => al.yop === selectedYear.value)
+})
 
 // Modal functions now handled by ImagePreviewer component
 
@@ -954,29 +1000,35 @@ const placements = {
 }
 
 /* Alumni */
-const alumni = [
+const alumni = ref([
   {
-    name: 'Sai Teja K',
-    company: 'Google',
-    role: 'Software Engineer',
+    name: 'Akhil Abothu',
+    company: 'Capgemini',
+    role: 'Senior Platform Engineer Consultant',
+    yop: '2017',
     linkedin: '#',
-    photo: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&w=400'
+    github: '#',
+    photo: 'https://media.licdn.com/dms/image/v2/D5635AQGrYzncDgGS1Q/profile-framedphoto-shrink_200_200/B56ZjN3G.xG4AY-/0/1755800432850?e=1759215600&v=beta&t=ZE0KCp_j4yVGPenARi5O90U0comTo2uR1tbyslg9jbc'
   },
   {
-    name: 'Anusha P',
-    company: 'Microsoft',
-    role: 'Cloud Engineer',
+    name: 'Ashok Mamilla',
+    company: 'NIT Data',
+    role: 'Senior Platform Engineer Consultant',
+    yop: '2017',
     linkedin: '#',
-    photo: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?q=80&w=400'
+    github: '#',
+    photo: 'https://media.licdn.com/dms/image/v2/D4E03AQGHbD3lO6v7Uw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1693902610456?e=1761782400&v=beta&t=uL-QElO9gSubyoOJqUcTCMX0tGhSCWb7aIAclCnE0bg'
   },
   {
-    name: 'Rahul V',
-    company: 'Wipro',
-    role: 'Data Scientist',
+    name: 'Suggala Tejaswi',
+    company: 'SR Intelligent Technologies',
+    role: 'Technical Specialist',
+    yop: '2017',
     linkedin: '#',
-    photo: 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=400'
+    github: '#',
+    photo: 'https://media.licdn.com/dms/image/v2/C5603AQEA1eQ0HoxEww/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1628270985547?e=1761782400&v=beta&t=ssw3ER8WXGb_wAgGq3Up2gmi-BIYHUYKZxwsCOAqhA8'
   }
-]
+])
 
 /* Contact */
 const hod = {
@@ -1021,21 +1073,31 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 .hero-art .hero-img{ width:100%; border-radius:1rem; box-shadow:0 10px 30px rgba(0,0,0,.25); object-fit:cover }
 
 /* SUBNAV */
-.subnav{ position:sticky; top:0; z-index:20; background:#fff; border-bottom:1px solid var(--border); }
-.subnav-inner{ display:flex; gap:.5rem; padding:.6rem 0; overflow:auto }
+.subnav{ 
+  position:sticky; 
+  top:0; 
+  z-index:20; 
+  background:#fff; 
+  border-bottom:1px solid var(--border);
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+}
+.subnav-inner{ display:flex; gap:.5rem; padding:.6rem 1rem; overflow-x:auto; overflow-y:hidden; justify-content:flex-start; flex-wrap:nowrap; }
 .chip{ 
   border:1px solid var(--border); 
   background:#fff; 
   color:var(--ink); 
   border-radius:999px; 
-  padding:.5rem .9rem; 
+  padding:.6rem 1rem; 
   font-weight:600; 
   display:flex; 
   align-items:center; 
-  gap:.5rem; 
+  gap:.6rem; 
   white-space:nowrap;
   transition:all 0.3s ease;
   cursor:pointer;
+  flex-shrink:0;
+  box-shadow:0 2px 4px rgba(0,0,0,0.05);
+  font-size:0.95rem;
 }
 .chip i{ color:var(--orange) }
 .chip:hover{ 
@@ -1051,6 +1113,8 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
   background:var(--orange); 
   color:#fff;
   box-shadow:0 4px 12px rgba(249,115,22,0.3);
+  transform:translateY(-2px);
+  font-weight:700;
 }
 .chip.active i{ color:#fff }
 
@@ -1388,6 +1452,46 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 .row-actions{ display:flex; gap:.6rem; flex-wrap:wrap }
 
 /* ALUMNI */
+.alumni-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:1.5rem;
+  flex-wrap:wrap;
+  gap:1rem;
+}
+.year-filter{
+  display:flex;
+  align-items:center;
+  gap:0.5rem;
+}
+.filter-label{
+  font-size:0.9rem;
+  font-weight:600;
+  color:var(--ink);
+  white-space:nowrap;
+}
+.year-select{
+  padding:0.5rem 0.75rem;
+  border:1px solid var(--border);
+  border-radius:0.5rem;
+  background:#fff;
+  color:var(--ink);
+  font-size:0.9rem;
+  font-weight:600;
+  cursor:pointer;
+  transition:all 0.3s ease;
+  min-width:120px;
+}
+.year-select:hover{
+  border-color:var(--orange);
+  box-shadow:0 2px 4px rgba(249,115,22,0.1);
+}
+.year-select:focus{
+  outline:none;
+  border-color:var(--orange);
+  box-shadow:0 0 0 3px rgba(249,115,22,0.1);
+}
 .alumni-grid{ 
   display:grid; 
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); 
@@ -1430,6 +1534,53 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
   font-size:0.9rem;
   margin:0;
   line-height:1.4;
+}
+.alumni-info{ flex:1 }
+.yop{
+  color:var(--orange);
+  font-size:0.85rem;
+  margin:0.3rem 0;
+  font-weight:600;
+}
+.social-links{
+  display:flex;
+  gap:0.5rem;
+  margin-top:0.5rem;
+}
+.social-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  background:rgba(249,115,22,0.1);
+  color:var(--orange);
+  text-decoration:none;
+  transition:all 0.3s ease;
+  font-size:1rem;
+}
+.social-link:hover{
+  background:var(--orange);
+  color:#fff;
+  transform:translateY(-2px);
+  box-shadow:0 4px 8px rgba(249,115,22,0.3);
+}
+
+/* Responsive Alumni Header */
+@media (max-width:768px){
+  .alumni-header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:0.8rem;
+  }
+  .year-filter{
+    align-self:stretch;
+    justify-content:space-between;
+  }
+  .year-select{
+    min-width:140px;
+  }
 }
 
 /* CONTACT */
