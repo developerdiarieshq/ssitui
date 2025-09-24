@@ -746,85 +746,165 @@ const filteredAlumni = computed(() => {
 /* Faculty */
 const faculty = ref([
   {
-    name: 'Dr. Shaik Yakoob', designation: 'Professor & HOD',
-    qualification: 'Ph.D., M.Tech',
-    expertise: ['AI/ML'],
+    name: 'Dr. SK YAKOOB', 
+    designation: 'ASSOCIATE PROFESSOR',
+    qualification: 'Ph.D',
+    expertise: ['AI/ML', 'Data Structures'],
     email: 'hod.cse@ssit.edu.in',
     photo: new URL('@/assets/faculty/cse/1-440193931.jpg', import.meta.url).href,
-    profile: '#', linkedin: '#'
+    profile: '#', linkedin: '#',
+    experience: 20
   },
   {
-    name: 'Mr. N Venkateswararo', designation: 'Professor',
-    qualification: 'Ph.D., M.Tech',
-    expertise: ['Java','Web Dev'],
-    email: 'sekharbabu@ssit.edu.in',
-    photo: new URL('@/assets/faculty/cse/1-440099235.jpg', import.meta.url).href,
-    profile: '#', linkedin: '#'
-  },
-  {
-    name: 'Dr. Thotakura Veeranna', designation: 'Assistant Professor',
-    qualification: 'M.Tech',
-    expertise: ['C','Web Dev', 'Cloud', 'DevOps'],
-    email: 'ananya.rao@ssit.edu.in',
-    photo: new URL('@/assets/faculty/cse/CS04.jpg', import.meta.url).href,
-    profile: '#', linkedin: '#'
-  },
-  {
-    name: 'Mr. Cheepu Balakrishna', designation: 'Assistant Professor',
-    qualification: 'M.Tech',
-    expertise: ['Data Mining', 'Cybersecurity', 'Networks'],
-    email: 'kiran.kumar@ssit.edu.in',
+    name: 'CHEEPU BALAKRISHNA', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH, (Ph.D)',
+    expertise: ['Programming', 'Web Development'],
+    email: 'balakrishna@ssit.edu.in',
     photo: new URL('@/assets/faculty/cse/1-440400711.jpg', import.meta.url).href,
-    profile: '#', linkedin: '#'
+    profile: '#', linkedin: '#',
+    experience: 17
   },
   {
-    name: 'Mr. V Venkata Sivaprasad', designation: 'Assistant Professor',
-    qualification: 'M.Tech',
-    expertise: ['Cybersecurity', 'Networks'],
-    email: 'kiran.kumar@ssit.edu.in',
+    name: 'VEERAM VENKATA SIVAPRASAD', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Software Engineering', 'Database Systems'],
+    email: 'sivaprasad@ssit.edu.in',
     photo: new URL('@/assets/faculty/cse/1-761771724.jpg', import.meta.url).href,
-    profile: '#', linkedin: '#'
+    profile: '#', linkedin: '#',
+    experience: 14
   },
   {
-    name: 'Mrs. J Rajakala', designation: 'Assistant Professor',
-    qualification: 'M.Tech',
-    expertise: ['Cybersecurity', 'Networks'],
-    email: 'kiran.kumar@ssit.edu.in',
+    name: 'JALADI RAJAKALA', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Computer Networks', 'Security'],
+    email: 'rajakala@ssit.edu.in',
     photo: new URL('@/assets/faculty/cse/CS07.jpg', import.meta.url).href,
-    profile: '#', linkedin: '#'
+    profile: '#', linkedin: '#',
+    experience: 17
   },
   {
-    name: 'Mr. Vanaparthi S R Krishna', designation: 'Assistant Professor',
-    qualification: 'M.Tech',
-    expertise: ['Cybersecurity', 'Networks'],
-    email: 'kiran.kumar@ssit.edu.in',
+    name: 'VANAPARTHI SAIRAMAKRISHNA', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Operating Systems', 'Algorithms'],
+    email: 'sairamakrishna@ssit.edu.in',
     photo: new URL('@/assets/faculty/cse/CS18.jpg', import.meta.url).href,
-    profile: '#', linkedin: '#'
+    profile: '#', linkedin: '#',
+    experience: 12
   },
   {
-    name: 'Mr. B Santosh Kumar', designation: 'Assistant Professor',
-    qualification: 'M.Tech',
-    expertise: ['Cybersecurity', 'Networks'],
-    email: 'kiran.kumar@ssit.edu.in',
+    name: 'BATHINA SANTHOSH KUMAR', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Machine Learning', 'Python'],
+    email: 'santhosh@ssit.edu.in',
     photo: new URL('@/assets/faculty/cse/CS11.jpg', import.meta.url).href,
-    profile: '#', linkedin: '#'
+    profile: '#', linkedin: '#',
+    experience: 8
   },
-    {
-    name: 'Mrs. M Thirupathamma ', designation: 'Assistant Professor',
-    qualification: 'M.Tech',
-    expertise: ['Cybersecurity', 'Networks'],
-    email: 'kiran.kumar@ssit.edu.in',
-    photo: new URL('@/assets/faculty/cse/CS10.jpg', import.meta.url).href,
-    profile: '#', linkedin: '#'
-  } ,
   {
-    name: 'Mr. CH Siva Prakash ', designation: 'Assistant Professor',
-    qualification: 'M.Tech',
-    expertise: ['Cybersecurity', 'Networks'],
-    email: 'kiran.kumar@ssit.edu.in',
-   photo: new URL('@/assets/faculty/cse/CS22.jpg', import.meta.url).href,
-    profile: '#', linkedin: '#'
-  } 
+    name: 'KANDURI RAGHUVARDHAN', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Data Science', 'Statistics'],
+    email: 'raghuvardhan@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 8
+  },
+  {
+    name: 'BADAM VEERA PRATHAP', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Web Technologies', 'JavaScript'],
+    email: 'veeraprathap@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 10
+  },
+  {
+    name: 'MAHADEVA ARUNA', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Database Management', 'SQL'],
+    email: 'aruna@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 8
+  },
+  {
+    name: 'CHANDA SIVAPRAKASH', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Computer Graphics', 'C++'],
+    email: 'sivaprakash@ssit.edu.in',
+    photo: new URL('@/assets/faculty/cse/CS22.jpg', import.meta.url).href,
+    profile: '#', linkedin: '#',
+    experience: 5
+  },
+  {
+    name: 'MEKALA MAHESH', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Mobile Computing', 'Android'],
+    email: 'mahesh@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 4
+  },
+  {
+    name: 'ANGIDI NAGARJUNA', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Cloud Computing', 'AWS'],
+    email: 'nagarjuna@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 8
+  },
+  {
+    name: 'J KRISHNA', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Cyber Security', 'Ethical Hacking'],
+    email: 'krishna@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 6
+  },
+  {
+    name: 'MANUBOLLA THIRUPATHAMMA', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Artificial Intelligence', 'Deep Learning'],
+    email: 'thirupathamma@ssit.edu.in',
+    photo: new URL('@/assets/faculty/cse/CS10.jpg', import.meta.url).href,
+    profile: '#', linkedin: '#',
+    experience: 4
+  },
+  {
+    name: 'BOLLU SAILAJA', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Software Testing', 'Quality Assurance'],
+    email: 'sailaja@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 8
+  },
+  {
+    name: 'SIARASANI RAJINI', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Data Mining', 'Big Data'],
+    email: 'rajini@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 1
+  }
 ])
 const designations = ['Professor & HOD', 'Professor', 'Associate Professor', 'Assistant Professor']
 const query = ref('')

@@ -382,36 +382,54 @@ const setTab = (id) => { activeTab.value = id } // tabbed view, no scroll
 /* Faculty */
 const faculty = ref([
   {
-    name: 'Dr. R. Anitha', designation: 'Professor & HOD',
-    qualification: 'Ph.D., AI',
-    expertise: ['AI', 'NLP', 'Responsible AI'],
-    email: 'hod.aids@ssit.edu.in',
+    name: 'Dr. K BHASKARMUTYALU', 
+    designation: 'ASSOCIATE PROFESSOR',
+    qualification: 'Ph.D',
+    expertise: ['Thermodynamics', 'Heat Transfer'],
+    email: 'bhaskarmutyalu@ssit.edu.in',
     photo: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&w=400',
-    profile: '#', linkedin: '#'
+    profile: '#', linkedin: '#',
+    experience: 25
   },
   {
-    name: 'Mr. K. Manoj', designation: 'Assistant Professor',
-    qualification: 'M.Tech (Data Science)',
-    expertise: ['Data Science', 'Big Data', 'Python'],
-    email: 'manoj@ssit.edu.in',
+    name: 'VEDURU VENKATRAMI REDDY', 
+    designation: 'ASSOCIATE PROFESSOR',
+    qualification: 'M.TECH, (Ph.D)',
+    expertise: ['Machine Design', 'CAD/CAM'],
+    email: 'venkatrami@ssit.edu.in',
     photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400',
-    profile: '#', linkedin: '#'
+    profile: '#', linkedin: '#',
+    experience: 13
   },
   {
-    name: 'Ms. Neha Varma', designation: 'Assistant Professor',
-    qualification: 'M.Tech (AI)',
-    expertise: ['Computer Vision', 'Deep Learning'],
-    email: 'neha.varma@ssit.edu.in',
+    name: 'KOMATI SRINIVASARAO', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Manufacturing', 'Production'],
+    email: 'srinivasarao@ssit.edu.in',
     photo: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=400',
-    profile: '#', linkedin: '#'
+    profile: '#', linkedin: '#',
+    experience: 9
   },
   {
-    name: 'Dr. T. Raghav', designation: 'Associate Professor',
-    qualification: 'Ph.D., ML',
-    expertise: ['Time Series', 'Reinforcement Learning'],
-    email: 'raghav@ssit.edu.in',
+    name: 'BANDA NARESH', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Fluid Mechanics', 'Hydraulics'],
+    email: 'naresh@ssit.edu.in',
     photo: 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=400',
-    profile: '#', linkedin: '#'
+    profile: '#', linkedin: '#',
+    experience: 11
+  },
+  {
+    name: 'KOWLURI POLAIAH', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Strength of Materials', 'Mechanics'],
+    email: 'polaiah@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 9
   }
 ])
 const designations = ['Professor & HOD', 'Professor', 'Associate Professor', 'Assistant Professor']

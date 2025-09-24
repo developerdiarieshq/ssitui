@@ -382,36 +382,94 @@ const setTab = (id) => { activeTab.value = id } // tabbed view, no scroll
 /* Faculty */
 const faculty = ref([
   {
-    name: 'Dr. R. Anitha', designation: 'Professor & HOD',
-    qualification: 'Ph.D., AI',
-    expertise: ['AI', 'NLP', 'Responsible AI'],
+    name: 'ADABALA SRINIVAS RAO', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH, (Ph.D)',
+    expertise: ['Data Science', 'Big Data Analytics'],
     email: 'hod.aids@ssit.edu.in',
     photo: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&w=400',
-    profile: '#', linkedin: '#'
+    profile: '#', linkedin: '#',
+    experience: 19
   },
   {
-    name: 'Mr. K. Manoj', designation: 'Assistant Professor',
-    qualification: 'M.Tech (Data Science)',
-    expertise: ['Data Science', 'Big Data', 'Python'],
-    email: 'manoj@ssit.edu.in',
+    name: 'R. ADI NARAYANA', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH, (Ph.D)',
+    expertise: ['Machine Learning', 'Statistical Analysis'],
+    email: 'adinarayana@ssit.edu.in',
     photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400',
-    profile: '#', linkedin: '#'
+    profile: '#', linkedin: '#',
+    experience: 19
   },
   {
-    name: 'Ms. Neha Varma', designation: 'Assistant Professor',
-    qualification: 'M.Tech (AI)',
-    expertise: ['Computer Vision', 'Deep Learning'],
-    email: 'neha.varma@ssit.edu.in',
+    name: 'A ANJANEYULU', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Python Programming', 'Data Visualization'],
+    email: 'anjaneyulu@ssit.edu.in',
     photo: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=400',
-    profile: '#', linkedin: '#'
+    profile: '#', linkedin: '#',
+    experience: 10
   },
   {
-    name: 'Dr. T. Raghav', designation: 'Associate Professor',
-    qualification: 'Ph.D., ML',
-    expertise: ['Time Series', 'Reinforcement Learning'],
-    email: 'raghav@ssit.edu.in',
+    name: 'M SRINIVASA RAO', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Database Systems', 'SQL'],
+    email: 'srinivasa@ssit.edu.in',
     photo: 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=400',
-    profile: '#', linkedin: '#'
+    profile: '#', linkedin: '#',
+    experience: 4
+  },
+  {
+    name: 'A PRAGNYA', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Data Mining', 'Predictive Analytics'],
+    email: 'pragnya@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 4
+  },
+  {
+    name: 'B DHARANI NADH', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Deep Learning', 'Neural Networks'],
+    email: 'dharani@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 6
+  },
+  {
+    name: 'CH MOHAN TEJA', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Computer Vision', 'Image Processing'],
+    email: 'mohanteja@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 3
+  },
+  {
+    name: 'V PRADEEP', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Natural Language Processing', 'Text Analytics'],
+    email: 'pradeep@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 5
+  },
+  {
+    name: 'G RAJESWARI', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['AI Applications', 'Business Intelligence'],
+    email: 'rajeswari@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 3
   }
 ])
 const designations = ['Professor & HOD', 'Professor', 'Associate Professor', 'Assistant Professor']

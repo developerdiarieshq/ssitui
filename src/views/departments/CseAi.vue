@@ -1,49 +1,42 @@
 <template>
-  <div class="aiml-page">
+  <div class="cseai-page">
     <!-- HEADER + NAV -->
     <Header />
     <NavBar />
 
     <!-- HERO -->
-    <header class="hero" role="banner" aria-label="CSE AI&ML Hero">
+    <header class="hero" role="banner" aria-label="CSE AI&ML Department Hero">
       <div class="overlay"></div>
       <div class="container hero-inner">
         <div class="hero-copy">
-          <h1 class="title">Department of Computer Science &amp; Engineering (AI &amp; ML)</h1>
-          <p class="tagline">Designing Intelligent Solutions, Empowering Future Innovators</p>
-
-          <!-- Quick Facts -->
+          <h1 class="title">Department of Computer Science & Engineering (AI & ML)</h1>
+          <p class="tagline">Innovate • Code • Transform</p>
           <ul class="quickfacts" aria-label="Quick facts">
             <li>
-              <span class="qf-label">Year Introduced</span>
-              <span class="qf-value">{{ facts.year }}</span>
+              <span class="qf-label">Established</span>
+              <span class="qf-value">2020</span>
             </li>
             <li>
-              <span class="qf-label">Annual Intake</span>
-              <span class="qf-value">{{ facts.intake }}</span>
+              <span class="qf-label">Intake (UG)</span>
+              <span class="qf-value">60</span>
             </li>
             <li>
-              <span class="qf-label">AI/ML Labs</span>
-              <span class="qf-value">{{ facts.labs }}</span>
-            </li>
-            <li>
-              <span class="qf-label">Top Recruiters</span>
-              <span class="qf-value">{{ facts.recruiters }}</span>
+              <span class="qf-label">Programs</span>
+              <span class="qf-value">B.Tech (CSE AI & ML)</span>
             </li>
           </ul>
         </div>
-
         <picture class="hero-art" aria-hidden="true">
           <img
+            src="@/assets/engineering-students-lab.png"
+            alt="CSE AI & ML Department - Students in Computer Lab"
             class="hero-img"
-            alt="AI & ML themed lab with students building models"
-            src="https://images.unsplash.com/photo-1555255707-c07966088b7b?q=80&w=1600&auto=format&fit=crop"
           />
         </picture>
       </div>
     </header>
 
-    <!-- STICKY SUB NAV (TABS) -->
+    <!-- STICKY SUB NAV (nav-pills) -->
     <nav class="subnav" aria-label="Section navigation">
       <div class="container subnav-inner">
         <button
@@ -51,33 +44,27 @@
           :key="tab.id"
           class="chip"
           :class="{ active: activeTab === tab.id }"
-          @click="activeTab = tab.id"
+          @click="setTab(tab.id)"
+          :aria-controls="tab.id"
           role="tab"
           :aria-selected="activeTab === tab.id"
-          :aria-controls="`panel-${tab.id}`"
         >
           <i :class="tab.icon" aria-hidden="true"></i> {{ tab.label }}
         </button>
       </div>
     </nav>
 
-    <!-- TABBED CONTENT -->
+    <!-- CONTENT (tab panes) -->
     <main class="container content" id="content">
-      <!-- Overview -->
-      <section
-        v-show="activeTab === 'overview'"
-        :id="`panel-overview`"
-        class="card-section"
-        role="tabpanel"
-        aria-labelledby="overview"
-      >
+      <!-- ABOUT -->
+      <section :id="tabsMap.overview" class="card-section" v-show="activeTab==='overview'">
         <div class="card">
-          <h2 class="section-title"><i class="fa-solid fa-brain"></i> About the Department</h2>
+          <h2 class="section-title"><i class="fa-solid fa-school"></i> About the Department</h2>
           <p class="lead">
-            Launched in {{ facts.year }}, the CSE (AI &amp; ML) Department blends rigorous
-            computer science foundations with cutting-edge AI/ML curricula. We enable
-            hands-on learning, interdisciplinary projects, and impactful research for real-world
-            problem solving.
+            Studying for a Computer Science & Engineering (AI & ML) degree is exciting enough as it will open the doors to very cool jobs. It is truly amazing to catch the trend with SSIT. Because SSIT takes care to maximize the learning opportunities by keeping up-to-date and continuous with highly qualified and richly experienced faculty to meet the present requirement at global scenario.
+          </p>
+          <p class="lead">
+            Department Offers an intake of 60 with total student strength is about 240.
           </p>
 
           <div class="stats">
@@ -95,56 +82,269 @@
           <article class="card">
             <h3 class="h5 text-muted mb-2">Vision</h3>
             <p>
-              To be a nationally recognized center of excellence in Artificial Intelligence &amp;
-              Machine Learning education and research that advances human potential and societal well-being.
+              Establish Industry ready high academic standards in Computer Science Engineering education and research and accomplish this goal.
             </p>
             <h3 class="h5 text-muted mt-4 mb-2">Mission</h3>
-            <ul class="bullets">
-              <li>Deliver advanced AI/ML education with strong CS foundations.</li>
-              <li>Promote industry readiness, entrepreneurship, and innovation.</li>
-              <li>Foster impactful research and responsible AI practices.</li>
-              <li>Encourage lifelong learning and interdisciplinary collaboration.</li>
-            </ul>
+            <p>
+              Establish high quality interactive programmes in partnership with other eminent institutes of national importance and train the students to become leaders and masters of technology with academic excellence.
+            </p>
           </article>
 
           <article class="card">
             <h3 class="section-title-sm"><i class="fa-solid fa-diagram-project"></i> Programs Offered</h3>
             <ul class="bullets">
-              <li><strong>B.Tech in CSE (AI &amp; ML)</strong> — {{ facts.intake }} seats, EAMCET eligibility, modern electives.</li>
-              <li><strong>Minors / Certifications</strong> — Deep Learning, NLP, Computer Vision, Data Science.</li>
-              <li><strong>Industry Modules</strong> — with Microsoft, AWS, Google/Azure AI (logo collaborations).</li>
+              <li><strong>B.Tech (CSE AI & ML)</strong> — 60 seats, EAMCET eligibility, modern AI/ML specializations.</li>
+              <li><strong>Specializations</strong> — Deep Learning, Computer Vision, NLP, Data Science, MLOps.</li>
+              <li><strong>Research Projects</strong> — Industry collaboration and cutting-edge AI research.</li>
             </ul>
             <div class="row-actions">
-              <a class="btn btn-primary" @click.prevent="activeTab = 'curriculum'"><i class="fa-solid fa-file-arrow-down"></i> Syllabus</a>
-              <a class="btn btn-soft" @click.prevent="activeTab = 'placements'"><i class="fa-solid fa-briefcase"></i> Placements</a>
+              <a class="btn btn-primary" href="#curriculum" @click.prevent="setTab('curriculum')">Download Syllabus</a>
+              <a class="btn btn-soft" href="#placements" @click.prevent="setTab('placements')">Placement Highlights</a>
             </div>
           </article>
         </div>
 
-        <div class="grid-3">
-          <article class="card">
-            <h3 class="section-title-sm"><i class="fa-solid fa-bullseye"></i> PEOs</h3>
-            <ul class="bullets small">
-              <li>Excel in AI/ML careers and higher studies.</li>
-              <li>Lead multidisciplinary teams with innovation.</li>
-              <li>Build ethical and socially responsible AI solutions.</li>
-            </ul>
-          </article>
-          <article class="card">
-            <h3 class="section-title-sm"><i class="fa-solid fa-list-check"></i> POs</h3>
-            <ul class="bullets small">
-              <li>Apply engineering knowledge, problem analysis, and design.</li>
-              <li>Use modern tools, communicate effectively, manage projects.</li>
-              <li>Commit to ethics, environment, sustainability, and lifelong learning.</li>
-            </ul>
-          </article>
-          <article class="card">
-            <h3 class="section-title-sm"><i class="fa-solid fa-robot"></i> PSOs</h3>
-            <ul class="bullets small">
-              <li>Design & deploy AI/ML models at scale.</li>
-              <li>Specialize in DL, NLP, CV, Data Engineering, MLOps.</li>
-            </ul>
-          </article>
+        <!-- Strengths Section -->
+        <Strengths />
+
+        <!-- Program Objectives & Outcomes Accordion -->
+        <div class="card">
+          <h2 class="section-title"><i class="fa-solid fa-graduation-cap"></i> Program Educational Objectives, Outcomes and Specific Outcomes</h2>
+          
+          <!-- Accordion Container -->
+          <div class="accordion-container">
+            
+            <!-- PEOs Accordion -->
+            <div class="accordion-item">
+              <button 
+                class="accordion-header" 
+                @click="toggleAccordion('peos')"
+                :class="{ active: activeAccordion === 'peos' }"
+              >
+                <div class="accordion-title">
+                  <i class="fa-solid fa-bullseye"></i>
+                  <span>Program Educational Objectives (PEOs)</span>
+                  <span class="accordion-count">3 Items</span>
+                </div>
+                <i class="fa-solid fa-chevron-down accordion-icon" :class="{ rotated: activeAccordion === 'peos' }"></i>
+              </button>
+              <div class="accordion-content" :class="{ active: activeAccordion === 'peos' }">
+                <div class="outcome-grid">
+                  <div class="outcome-card">
+                    <div class="outcome-number">PEO 1</div>
+                    <div class="outcome-content">
+                      <h4>Knowledge & Analysis</h4>
+                      <p>To acquire the essential knowledge of basic sciences and fundamentals in engineering and analyze technical solutions to computational problems by developing the algorithms.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">PEO 2</div>
+                    <div class="outcome-content">
+                      <h4>Application & Development</h4>
+                      <p>To apply knowledge in the identification, design, development, production, configuration and maintenance of computing systems for real life problems.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">PEO 3</div>
+                    <div class="outcome-content">
+                      <h4>Leadership & Ethics</h4>
+                      <p>To develop managerial skills, meeting societal needs, leadership, entrepreneurial skills, sustainable competitive edge in R&D and adhering professional and ethical skills.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- POs Accordion -->
+            <div class="accordion-item">
+              <button 
+                class="accordion-header" 
+                @click="toggleAccordion('pos')"
+                :class="{ active: activeAccordion === 'pos' }"
+              >
+                <div class="accordion-title">
+                  <i class="fa-solid fa-list-check"></i>
+                  <span>Program Outcomes (POs)</span>
+                  <span class="accordion-count">12 Items</span>
+                </div>
+                <i class="fa-solid fa-chevron-down accordion-icon" :class="{ rotated: activeAccordion === 'pos' }"></i>
+              </button>
+              <div class="accordion-content" :class="{ active: activeAccordion === 'pos' }">
+                <div class="outcome-grid">
+                  <div class="outcome-card">
+                    <div class="outcome-number">PO 1</div>
+                    <div class="outcome-content">
+                      <h4>Engineering Knowledge</h4>
+                      <p>Apply the knowledge of mathematics, science, engineering fundamentals, and an engineering specialization to the solution of complex engineering problems.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">PO 2</div>
+                    <div class="outcome-content">
+                      <h4>Problem Analysis</h4>
+                      <p>Identify, formulate, review research literature, and analyze complex engineering problems reaching substantiated conclusions using first principles of mathematics, natural sciences, and engineering sciences.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">PO 3</div>
+                    <div class="outcome-content">
+                      <h4>Design/Development of Solutions</h4>
+                      <p>Design solutions for complex engineering problems and design system components or processes that meet the specified needs with appropriate consideration for the public health and safety, and the cultural, societal, and environmental considerations.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">PO 4</div>
+                    <div class="outcome-content">
+                      <h4>Conduct Investigations of Complex Problems</h4>
+                      <p>Use research-based knowledge and research methods including design of experiments, analysis and interpretation of data, and synthesis of the information to provide valid conclusions.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">PO 5</div>
+                    <div class="outcome-content">
+                      <h4>Modern Tool Usage</h4>
+                      <p>Create, select, and apply appropriate techniques, resources, and modern engineering and IT tools including prediction and modeling to complex engineering activities with an understanding of the limitations.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">PO 6</div>
+                    <div class="outcome-content">
+                      <h4>The Engineer and Society</h4>
+                      <p>Apply reasoning informed by the contextual knowledge to assess societal, health, safety, legal and cultural issues and the consequent responsibilities relevant to the professional engineering practice.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">PO 7</div>
+                    <div class="outcome-content">
+                      <h4>Environment and Sustainability</h4>
+                      <p>Understand the impact of the professional engineering solutions in societal and environmental contexts, and demonstrate the knowledge of, and need for sustainable development.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">PO 8</div>
+                    <div class="outcome-content">
+                      <h4>Ethics</h4>
+                      <p>Apply ethical principles and commit to professional ethics and responsibilities and norms of the engineering practice.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">PO 9</div>
+                    <div class="outcome-content">
+                      <h4>Individual and Team Work</h4>
+                      <p>Function effectively as an individual, and as a member or leader in diverse teams, and in multidisciplinary settings.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">PO 10</div>
+                    <div class="outcome-content">
+                      <h4>Communication</h4>
+                      <p>Communicate effectively on complex engineering activities with the engineering community and with society at large, such as, being able to comprehend and write effective reports and design documentation, make effective presentations, and give and receive clear instructions.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">PO 11</div>
+                    <div class="outcome-content">
+                      <h4>Project Management and Finance</h4>
+                      <p>Demonstrate knowledge and understanding of the engineering and management principles and apply these to one's own work, as a member and leader in a team, to manage projects and in multidisciplinary environments.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">PO 12</div>
+                    <div class="outcome-content">
+                      <h4>Life-Long Learning</h4>
+                      <p>Recognize the need for, and have the preparation and ability to engage in independent and life-long learning in the broadest context of technological change.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PSOs Accordion -->
+            <div class="accordion-item">
+              <button 
+                class="accordion-header" 
+                @click="toggleAccordion('psos')"
+                :class="{ active: activeAccordion === 'psos' }"
+              >
+                <div class="accordion-title">
+                  <i class="fa-solid fa-robot"></i>
+                  <span>Program Specific Outcomes (PSOs)</span>
+                  <span class="accordion-count">3 Items</span>
+                </div>
+                <i class="fa-solid fa-chevron-down accordion-icon" :class="{ rotated: activeAccordion === 'psos' }"></i>
+              </button>
+              <div class="accordion-content" :class="{ active: activeAccordion === 'psos' }">
+                <div class="outcome-grid">
+                  <div class="outcome-card">
+                    <div class="outcome-number">PSO 1</div>
+                    <div class="outcome-content">
+                      <h4>Foundation of Mathematical Concepts</h4>
+                      <p>To use mathematical methodologies to crack problem using suitable mathematical analysis, data structure and suitable algorithm.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">PSO 2</div>
+                    <div class="outcome-content">
+                      <h4>Foundation of Computer System</h4>
+                      <p>The ability to interpret the fundamental concepts and methodology of computer systems. Students can understand the functionality of hardware and software aspects of computer systems.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">PSO 3</div>
+                    <div class="outcome-content">
+                      <h4>Foundations of Software Development</h4>
+                      <p>The ability to grasp the software development lifecycle and methodologies of software systems. Possess competent skills and knowledge of software design process. Familiarity and practical proficiency with a broad area of programming concepts and provide new ideas and innovations towards research.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- COs Accordion -->
+            <div class="accordion-item">
+              <button 
+                class="accordion-header" 
+                @click="toggleAccordion('cos')"
+                :class="{ active: activeAccordion === 'cos' }"
+              >
+                <div class="accordion-title">
+                  <i class="fa-solid fa-graduation-cap"></i>
+                  <span>Course Outcomes (COs)</span>
+                  <span class="accordion-count">2 Regulations</span>
+                </div>
+                <i class="fa-solid fa-chevron-down accordion-icon" :class="{ rotated: activeAccordion === 'cos' }"></i>
+              </button>
+              <div class="accordion-content" :class="{ active: activeAccordion === 'cos' }">
+                <div class="regulation-tabs">
+                  <button 
+                    class="regulation-tab"
+                    :class="{ active: activeRegulation === 'r18' }"
+                    @click="activeRegulation = 'r18'"
+                  >
+                    R18
+                  </button>
+                  <button 
+                    class="regulation-tab"
+                    :class="{ active: activeRegulation === 'r22' }"
+                    @click="activeRegulation = 'r22'"
+                  >
+                    R22
+                  </button>
+                </div>
+                <div class="regulation-content">
+                  <div v-if="activeRegulation === 'r18'" class="regulation-details">
+                    <h4>R18 Regulation Course Outcomes</h4>
+                    <p>Course outcomes for R18 regulation are designed to align with the traditional computer science curriculum with foundational programming and system concepts.</p>
+                  </div>
+                  <div v-if="activeRegulation === 'r22'" class="regulation-details">
+                    <h4>R22 Regulation Course Outcomes</h4>
+                    <p>Course outcomes for R22 regulation incorporate modern AI/ML concepts, updated programming paradigms, and industry-relevant skills for contemporary software development.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
       </section>
 
@@ -414,6 +614,7 @@ import { ref, computed } from 'vue'
 import Header from '@/components/Header.vue'
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/Footer.vue'
+import Strengths from '@/views/about/Strengths.vue'
 
 /* Facts */
 const facts = {
@@ -445,39 +646,117 @@ const tabs = [
 ]
 const activeTab = ref('overview')
 
+/* Tab mapping */
+const tabsMap = {
+  overview: 'overview',
+  faculty: 'faculty',
+  labs: 'labs',
+  curriculum: 'curriculum',
+  activities: 'activities',
+  research: 'research',
+  placements: 'placements',
+  alumni: 'alumni',
+  contact: 'contact'
+}
+
+/* Tab functions */
+const setTab = (tabId) => {
+  activeTab.value = tabId
+}
+
+/* Accordion functionality */
+const activeAccordion = ref('peos')
+const activeRegulation = ref('r18')
+
+const toggleAccordion = (accordionId) => {
+  if (activeAccordion.value === accordionId) {
+    activeAccordion.value = null
+  } else {
+    activeAccordion.value = accordionId
+  }
+}
+
 /* Faculty */
 const faculty = ref([
   {
-    name: 'Dr. Anitha R', designation: 'Professor & HOD',
-    qualification: 'Ph.D., M.Tech',
-    expertise: ['Deep Learning', 'Computer Vision', 'MLOps'],
+    name: 'Dr. T VEERANNA', 
+    designation: 'ASSOCIATE PROFESSOR',
+    qualification: 'Ph.D',
+    expertise: ['Machine Learning', 'Deep Learning'],
     email: 'hod.aiml@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400',
-    profile: '#', linkedin: '#'
+    photo: new URL('@/assets/faculty/cse/CS04.jpg', import.meta.url).href,
+    profile: '#', linkedin: '#',
+    experience: 19
   },
   {
-    name: 'Mr. Arjun K', designation: 'Associate Professor',
-    qualification: 'M.Tech',
-    expertise: ['NLP', 'Generative AI', 'Data Engineering'],
-    email: 'arjun.k@ssit.edu.in',
+    name: 'NALLAPANENI SUDHA RANI', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Artificial Intelligence', 'Neural Networks'],
+    email: 'sudharani@ssit.edu.in',
     photo: 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=400',
-    profile: '#', linkedin: '#'
+    profile: '#', linkedin: '#',
+    experience: 21
   },
   {
-    name: 'Ms. Neha S', designation: 'Assistant Professor',
-    qualification: 'M.Tech',
-    expertise: ['Reinforcement Learning', 'Robotics'],
-    email: 'neha.s@ssit.edu.in',
+    name: 'BADDE SRINIVASARAO', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Data Mining', 'Pattern Recognition'],
+    email: 'srinivasa@ssit.edu.in',
     photo: 'https://images.unsplash.com/photo-1540539234-c67a9b2cdda1?q=80&w=400',
-    profile: '#', linkedin: '#'
+    profile: '#', linkedin: '#',
+    experience: 10
   },
   {
-    name: 'Mr. Pranav T', designation: 'Assistant Professor',
-    qualification: 'M.Tech',
-    expertise: ['Cloud AI', 'MLOps', 'DevOps'],
-    email: 'pranav.t@ssit.edu.in',
+    name: 'VARIKUTI NARESH', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Computer Vision', 'Image Processing'],
+    email: 'naresh@ssit.edu.in',
     photo: 'https://images.unsplash.com/photo-1607746882042-944635dfe10e?q=80&w=400',
-    profile: '#', linkedin: '#'
+    profile: '#', linkedin: '#',
+    experience: 10
+  },
+  {
+    name: 'SOYAM SUNEELKUMAR', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Natural Language Processing', 'Text Mining'],
+    email: 'suneel@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 5
+  },
+  {
+    name: 'VALAPULA LALITHA', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Robotics', 'AI Applications'],
+    email: 'lalitha@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 5
+  },
+  {
+    name: 'K BABU', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Machine Learning', 'Statistical Learning'],
+    email: 'babu@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 1
+  },
+  {
+    name: 'K N DURGA RAO', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['AI Ethics', 'Responsible AI'],
+    email: 'durgarao@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 1
   }
 ])
 const designations = ['Professor & HOD', 'Professor', 'Associate Professor', 'Assistant Professor']
@@ -618,7 +897,6 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 <style scoped>
 /* THEME TOKENS */
 :root{
-  --navy:#1e40af; --navy-2:#153a9c;
   --orange:#f97316; --bg:#f7f9fc; --card:#fff;
   --border:#e5e7eb; --muted:#6b7280; --ink:#111827;
 }
@@ -628,10 +906,10 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 .mb-0{margin-bottom:0} .mt-1{margin-top:1rem}
 .h5{font-size:1.1rem} .h6{font-size:1rem}
 .text-muted{color:var(--muted)} .muted{color:var(--muted)}
-.lead{font-size:1.05rem; color:#374151}
+.lead{font-size:1.05rem; color:#000; line-height:1.6}
 
 /* HERO */
-.hero{ position:relative; color:#fff; background:linear-gradient(60deg,var(--navy),var(--navy-2)); }
+.hero{ position:relative; color:#fff; background:var(--ink); }
 .hero .overlay{ position:absolute; inset:0; background:linear-gradient(90deg,rgba(0,0,0,.15),rgba(0,0,0,.2)); }
 .hero-inner{ position:relative; display:grid; grid-template-columns:1.2fr .8fr; gap:2rem; align-items:center; padding:3.2rem 0; }
 .title{ font-size:2.2rem; font-weight:800; line-height:1.2 }
@@ -643,19 +921,65 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 .hero-art .hero-img{ width:100%; border-radius:1rem; box-shadow:0 10px 30px rgba(0,0,0,.25); object-fit:cover }
 
 /* SUBNAV */
-.subnav{ position:sticky; top:0; z-index:20; background:#fff; border-bottom:1px solid var(--border); }
-.subnav-inner{ display:flex; gap:.5rem; padding:.6rem 0; overflow:auto }
-.chip{ border:1px solid var(--border); background:#fff; color:#111; border-radius:999px; padding:.5rem .9rem; font-weight:700; display:flex; align-items:center; gap:.5rem; white-space:nowrap }
-.chip i{ color:var(--navy) }
-.chip.active{ border-color:var(--navy); background:rgba(30,64,175,.08); color:var(--navy) }
+.subnav{ 
+  position:sticky; 
+  top:0; 
+  z-index:20; 
+  background:#fff; 
+  border-bottom:1px solid var(--border); 
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+}
+.subnav-inner{ 
+  display:flex; 
+  gap:.5rem; 
+  padding:.6rem 1rem; 
+  overflow:auto;
+  justify-content:flex-start; 
+  flex-wrap:nowrap;
+}
+.chip{ 
+  border:1px solid var(--border); 
+  background:#fff; 
+  color:var(--ink); 
+  border-radius:999px; 
+  padding:.6rem 1rem; 
+  font-weight:600; 
+  display:flex; 
+  align-items:center; 
+  gap:.6rem; 
+  white-space:nowrap;
+  cursor:pointer;
+  flex-shrink:0;
+  box-shadow:0 2px 4px rgba(0,0,0,0.05);
+  font-size:0.95rem;
+  transition:all 0.2s ease;
+}
+.chip i{ color:var(--orange) }
+.chip:hover{ 
+  background:var(--orange); 
+  color:#fff; 
+  border-color:var(--orange);
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(249,115,22,0.3);
+}
+.chip:hover i{ color:#fff }
+.chip.active{ 
+  border-color:var(--orange); 
+  background:var(--orange); 
+  color:#fff;
+  box-shadow:0 4px 12px rgba(249,115,22,0.3);
+  transform:translateY(-2px);
+  font-weight:700;
+}
+.chip.active i{ color:#fff }
 
 /* CONTENT */
 .content{ padding:1.8rem 0 2.6rem; background:var(--bg) }
 .card-section{ margin:1.2rem 0 }
 .card{ background:var(--card); border:1px solid var(--border); border-radius:1rem; padding:1.5rem 1.25rem; box-shadow:0 6px 24px rgba(0,0,0,.06) }
-.section-title{ font-size:1.35rem; font-weight:800; color:var(--navy); display:flex; align-items:center; gap:.6rem; margin:0 0 1rem }
+.section-title{ font-size:1.35rem; font-weight:800; color:var(--ink); display:flex; align-items:center; gap:.6rem; margin:0 0 1rem }
 .section-title i{ color:var(--orange) }
-.section-title-sm{ font-weight:800; color:var(--navy); font-size:1.05rem; display:flex; align-items:center; gap:.5rem; margin-bottom:.6rem }
+.section-title-sm{ font-weight:800; color:var(--ink); font-size:1.05rem; display:flex; align-items:center; gap:.5rem; margin-bottom:.6rem }
 
 /* GRIDS */
 .grid-2{ display:grid; grid-template-columns:repeat(2,1fr); gap:1.2rem; margin-top:1.2rem }
@@ -665,13 +989,13 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 .stats{ display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:.9rem; margin-top:1rem }
 .stat{ border:1px dashed var(--border); border-radius:.9rem; padding:.9rem; display:flex; gap:.7rem; align-items:center; background:#fff }
 .stat i{ color:var(--orange); font-size:1.25rem }
-.num{ font-weight:900; font-size:1.25rem; color:var(--navy) }
+.num{ font-weight:900; font-size:1.25rem; color:var(--ink) }
 .label{ font-size:.85rem; color:var(--muted) }
 
 /* BULLETS */
 .bullets{ padding-left:1.2rem }
-.bullets li{ margin:.4rem 0; color:#374151 }
-.bullets.small li{ font-size:.95rem; color:#4b5563 }
+.bullets li{ margin:.4rem 0; color:#000; line-height:1.6 }
+.bullets.small li{ font-size:.95rem; color:#000 }
 
 /* FACULTY */
 .section-header{ display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap }
@@ -716,10 +1040,40 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 .logo-row img:hover{ filter:none; opacity:1 }
 
 /* BUTTONS */
-.btn{ border-radius:.7rem; padding:.55rem .9rem; font-weight:700; border:1px solid transparent; display:inline-flex; gap:.5rem; align-items:center; cursor:pointer }
-.btn-primary{ background:var(--navy); color:#fff }
-.btn-soft{ background:#fff; color:var(--navy); border-color:var(--navy) }
-.btn:hover{ filter:brightness(1.02) }
+.btn{ 
+  border-radius:.7rem; 
+  padding:.55rem .9rem; 
+  font-weight:700; 
+  border:1px solid transparent; 
+  display:inline-flex; 
+  gap:.5rem; 
+  align-items:center;
+  cursor:pointer;
+  transition:all 0.3s ease;
+  text-decoration:none;
+}
+.btn-primary{ 
+  background:var(--orange); 
+  color:#fff; 
+  border-color:var(--orange) 
+}
+.btn-primary:hover{ 
+  background:#e55a00; 
+  border-color:#e55a00;
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(249,115,22,0.3);
+}
+.btn-soft{ 
+  background:#fff; 
+  color:var(--ink); 
+  border-color:var(--ink) 
+}
+.btn-soft:hover{ 
+  background:var(--ink); 
+  color:#fff;
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(0,0,0,0.2);
+}
 .row-actions{ display:flex; gap:.6rem; flex-wrap:wrap }
 
 /* ALUMNI */
@@ -741,5 +1095,153 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
   .grid-3{ grid-template-columns:1fr }
   .contact-card .contact-grid{ grid-template-columns:1fr }
   .quickfacts li{ min-width:140px }
+}
+
+/* ACCORDION STYLING */
+.accordion-container{ margin-top:1.5rem }
+.accordion-item{ 
+  border:1px solid var(--border); 
+  border-radius:1rem; 
+  margin-bottom:.8rem; 
+  overflow:hidden;
+  background:#fff;
+  transition:all 0.3s ease;
+}
+.accordion-item:hover{ border-color:var(--orange) }
+.accordion-header{ 
+  width:100%; 
+  padding:1.2rem 1.5rem; 
+  background:#fff; 
+  border:none; 
+  display:flex; 
+  align-items:center; 
+  justify-content:space-between;
+  cursor:pointer;
+  transition:all 0.3s ease;
+}
+.accordion-header:hover{ background:rgba(249,115,22,0.05) }
+.accordion-header.active{ 
+  background:var(--orange); 
+  color:#fff;
+}
+.accordion-header.active .accordion-title i{ color:#fff }
+.accordion-header.active .accordion-count{ 
+  background:rgba(255,255,255,0.2); 
+  color:#fff;
+}
+.accordion-title{ 
+  display:flex; 
+  align-items:center; 
+  gap:.8rem; 
+  font-weight:700; 
+  font-size:1.1rem;
+}
+.accordion-title i{ color:var(--orange); font-size:1.2rem }
+.accordion-count{ 
+  background:rgba(249,115,22,0.1); 
+  color:var(--orange); 
+  padding:.2rem .6rem; 
+  border-radius:.5rem; 
+  font-size:.8rem; 
+  font-weight:600;
+  margin-left:1rem;
+}
+.accordion-icon{ 
+  color:var(--ink); 
+  font-size:1rem; 
+  transition:transform 0.3s ease;
+}
+.accordion-icon.rotated{ transform:rotate(180deg) }
+.accordion-header.active .accordion-icon{ color:#fff }
+.accordion-content{ 
+  max-height:0; 
+  overflow:hidden; 
+  transition:max-height 0.3s ease;
+  background:#f8f9fc;
+}
+.accordion-content.active{ 
+  max-height:2000px; 
+  padding:1.5rem;
+}
+
+/* OUTCOME GRID INSIDE ACCORDION */
+.outcome-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1rem; margin-top:0 }
+.outcome-grid.grid-2{ grid-template-columns:repeat(auto-fit,minmax(280px,1fr)) }
+.outcome-card{ 
+  border:1px solid var(--border); 
+  border-radius:1rem; 
+  padding:1.2rem; 
+  background:#fff; 
+  display:flex; 
+  gap:1rem; 
+  align-items:flex-start;
+  transition:all 0.3s ease;
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
+}
+.outcome-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 25px rgba(0,0,0,.12);
+  border-color:var(--orange);
+  background:rgba(249,115,22,0.02);
+}
+.outcome-number{ 
+  background:var(--orange); 
+  color:#fff; 
+  border-radius:.6rem; 
+  padding:.4rem .8rem; 
+  font-weight:800; 
+  font-size:.85rem; 
+  white-space:nowrap;
+  min-width:60px;
+  text-align:center;
+}
+.outcome-content h4{ 
+  font-size:1rem; 
+  font-weight:700; 
+  color:var(--ink); 
+  margin:0 0 .5rem;
+  line-height:1.3;
+}
+.outcome-content p{ 
+  color:#000; 
+  font-size:.9rem; 
+  line-height:1.5; 
+  margin:0;
+}
+
+/* REGULATION TABS */
+.regulation-tabs{ 
+  display:flex; 
+  gap:.5rem; 
+  margin-bottom:1.5rem; 
+  border-bottom:1px solid var(--border);
+}
+.regulation-tab{ 
+  background:none; 
+  border:none; 
+  padding:.6rem 1.2rem; 
+  border-bottom:2px solid transparent;
+  color:var(--muted);
+  font-weight:600;
+  cursor:pointer;
+  transition:all 0.3s ease;
+}
+.regulation-tab:hover{ color:var(--ink); background:rgba(249,115,22,0.05) }
+.regulation-tab.active{ 
+  color:var(--orange); 
+  border-bottom-color:var(--orange);
+  background:rgba(249,115,22,0.05);
+}
+.regulation-content{ margin-top:1rem }
+.regulation-details h4{ 
+  font-size:1.1rem; 
+  font-weight:700; 
+  color:var(--ink); 
+  margin-bottom:.8rem;
+}
+.regulation-details p{ 
+  color:#000; 
+  line-height:1.6; 
+  margin:0;
 }
 </style>

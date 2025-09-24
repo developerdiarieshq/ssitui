@@ -382,36 +382,94 @@ const setTab = (id) => { activeTab.value = id } // tabbed view, no scroll
 /* Faculty */
 const faculty = ref([
   {
-    name: 'Dr. R. Anitha', designation: 'Professor & HOD',
-    qualification: 'Ph.D., AI',
-    expertise: ['AI', 'NLP', 'Responsible AI'],
-    email: 'hod.aids@ssit.edu.in',
+    name: 'KOTA RAMAKRISHNA PRASAD', 
+    designation: 'ASSOCIATE PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Power Systems', 'Electrical Machines'],
+    email: 'ramakrishna@ssit.edu.in',
     photo: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&w=400',
-    profile: '#', linkedin: '#'
+    profile: '#', linkedin: '#',
+    experience: 16
   },
   {
-    name: 'Mr. K. Manoj', designation: 'Assistant Professor',
-    qualification: 'M.Tech (Data Science)',
-    expertise: ['Data Science', 'Big Data', 'Python'],
-    email: 'manoj@ssit.edu.in',
+    name: 'AVUDURTHI GOPI', 
+    designation: 'ASSOCIATE PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Control Systems', 'Power Electronics'],
+    email: 'gopi@ssit.edu.in',
     photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400',
-    profile: '#', linkedin: '#'
+    profile: '#', linkedin: '#',
+    experience: 15
   },
   {
-    name: 'Ms. Neha Varma', designation: 'Assistant Professor',
-    qualification: 'M.Tech (AI)',
-    expertise: ['Computer Vision', 'Deep Learning'],
-    email: 'neha.varma@ssit.edu.in',
+    name: 'THOMMANDRU RAMBABU', 
+    designation: 'ASSOCIATE PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Electrical Circuits', 'Electronics'],
+    email: 'rambabu@ssit.edu.in',
     photo: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=400',
-    profile: '#', linkedin: '#'
+    profile: '#', linkedin: '#',
+    experience: 14
   },
   {
-    name: 'Dr. T. Raghav', designation: 'Associate Professor',
-    qualification: 'Ph.D., ML',
-    expertise: ['Time Series', 'Reinforcement Learning'],
-    email: 'raghav@ssit.edu.in',
+    name: 'JAKKULA KANTHAIAH', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Digital Electronics', 'Microcontrollers'],
+    email: 'kanthaiah@ssit.edu.in',
     photo: 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=400',
-    profile: '#', linkedin: '#'
+    profile: '#', linkedin: '#',
+    experience: 12
+  },
+  {
+    name: 'MORAVENENI PRATHIMA', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Power Systems', 'Renewable Energy'],
+    email: 'prathima@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 8
+  },
+  {
+    name: 'NARAPOGU G. VENKATA KRISHNA', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Control Systems', 'Automation'],
+    email: 'venkatakrishna@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 7
+  },
+  {
+    name: 'VANAPARTHI SATYAVARDHAN RAO', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Power Electronics', 'Drives'],
+    email: 'satyavardhan@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 8
+  },
+  {
+    name: 'DARIPALLI NAGASESHU', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Electrical Measurements', 'Instrumentation'],
+    email: 'nagaseshu@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 2
+  },
+  {
+    name: 'SHAIK SAIDULU', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Network Analysis', 'Signals'],
+    email: 'saidulu@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 7
   }
 ])
 const designations = ['Professor & HOD', 'Professor', 'Associate Professor', 'Assistant Professor']

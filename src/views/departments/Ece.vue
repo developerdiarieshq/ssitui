@@ -382,36 +382,144 @@ const setTab = (id) => { activeTab.value = id } // tabbed view, no scroll
 /* Faculty */
 const faculty = ref([
   {
-    name: 'Dr. R. Anitha', designation: 'Professor & HOD',
-    qualification: 'Ph.D., AI',
-    expertise: ['AI', 'NLP', 'Responsible AI'],
-    email: 'hod.aids@ssit.edu.in',
+    name: 'Dr. V.S.R KUMARI', 
+    designation: 'PROFESSOR',
+    qualification: 'Ph.D',
+    expertise: ['Digital Communications', 'Signal Processing'],
+    email: 'hod.ece@ssit.edu.in',
     photo: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&w=400',
-    profile: '#', linkedin: '#'
+    profile: '#', linkedin: '#',
+    experience: 31
   },
   {
-    name: 'Mr. K. Manoj', designation: 'Assistant Professor',
-    qualification: 'M.Tech (Data Science)',
-    expertise: ['Data Science', 'Big Data', 'Python'],
-    email: 'manoj@ssit.edu.in',
+    name: 'Dr. P SEKHAR BABU', 
+    designation: 'ASSOCIATE PROFESSOR',
+    qualification: 'Ph.D',
+    expertise: ['VLSI Design', 'Embedded Systems'],
+    email: 'sekhar@ssit.edu.in',
     photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400',
-    profile: '#', linkedin: '#'
+    profile: '#', linkedin: '#',
+    experience: 19
   },
   {
-    name: 'Ms. Neha Varma', designation: 'Assistant Professor',
-    qualification: 'M.Tech (AI)',
-    expertise: ['Computer Vision', 'Deep Learning'],
-    email: 'neha.varma@ssit.edu.in',
+    name: 'MODUGU RAMBABU', 
+    designation: 'ASSOCIATE PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Electronics', 'Circuit Design'],
+    email: 'rambabu@ssit.edu.in',
     photo: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=400',
-    profile: '#', linkedin: '#'
+    profile: '#', linkedin: '#',
+    experience: 18
   },
   {
-    name: 'Dr. T. Raghav', designation: 'Associate Professor',
-    qualification: 'Ph.D., ML',
-    expertise: ['Time Series', 'Reinforcement Learning'],
-    email: 'raghav@ssit.edu.in',
+    name: 'MARSAKATLA SUNDARA RAO', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Analog Electronics', 'Communication Systems'],
+    email: 'sundara@ssit.edu.in',
     photo: 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=400',
-    profile: '#', linkedin: '#'
+    profile: '#', linkedin: '#',
+    experience: 14
+  },
+  {
+    name: 'PENUMOODI NAGASEKHAR', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH, (Ph.D)',
+    expertise: ['Digital Signal Processing', 'MATLAB'],
+    email: 'nagasekhar@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 18
+  },
+  {
+    name: 'BANDAM NARENDAR', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH, (Ph.D)',
+    expertise: ['Microcontrollers', 'Embedded Programming'],
+    email: 'narendar@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 11
+  },
+  {
+    name: 'M VARA PRASAD', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH, (Ph.D)',
+    expertise: ['VLSI', 'Digital Design'],
+    email: 'varaprasad@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 11
+  },
+  {
+    name: 'PEDURI RAJA SEKHAR', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Wireless Communications', 'Antenna Design'],
+    email: 'rajasekhar@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 5
+  },
+  {
+    name: 'T KEERTHI', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Network Analysis', 'Control Systems'],
+    email: 'keerthi@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 6
+  },
+  {
+    name: 'G SRILATHA', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Digital Electronics', 'Microprocessors'],
+    email: 'srilatha@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 4
+  },
+  {
+    name: 'MANDADUPU ANUSHA', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['RF Engineering', 'Microwave Engineering'],
+    email: 'anusha@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 4
+  },
+  {
+    name: 'V.B.GOPALA KRISHNA', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH, (Ph.D)',
+    expertise: ['Communication Networks', 'Data Communications'],
+    email: 'gopalakrishna@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 11
+  },
+  {
+    name: 'GOLLAMUDI RANI', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH, (Ph.D)',
+    expertise: ['Image Processing', 'Computer Vision'],
+    email: 'rani@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 5
+  },
+  {
+    name: 'VEERLA RANI', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Electromagnetic Fields', 'Antenna Theory'],
+    email: 'veerla@ssit.edu.in',
+    photo: '#',
+    profile: '#', linkedin: '#',
+    experience: 4
   }
 ])
 const designations = ['Professor & HOD', 'Professor', 'Associate Professor', 'Assistant Professor']
