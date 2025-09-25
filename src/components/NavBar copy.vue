@@ -97,7 +97,7 @@
             <ul class="dropdown-menu">
               <li><router-link to="/cse" class="dropdown-item">CSE</router-link></li>
               <li><router-link to="/cse-ai" class="dropdown-item">CSE (AI & ML)</router-link></li>
-              <li><router-link to="/cse-aids" class="dropdown-item">CSE (AI & DS)</router-link></li> 
+              <li><router-link to="/cse-ai-ds" class="dropdown-item">CSE (AI & DS)</router-link></li> 
               <li><router-link to="/ece" class="dropdown-item">ECE</router-link></li>
               <li><router-link to="/eee" class="dropdown-item">EEE</router-link></li>
               <li><router-link to="/sh" class="dropdown-item">S&amp;H</router-link></li>

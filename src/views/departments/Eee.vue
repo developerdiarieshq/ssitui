@@ -5,7 +5,7 @@
     <NavBar />
 
     <!-- HERO -->
-    <header class="hero" role="banner" aria-label="CSE AI & DS Department Hero">
+    <header class="hero" role="banner" aria-label="EEE Department Hero">
       <div class="overlay"></div>
       <div class="container hero-inner">
         <div class="hero-copy">
@@ -13,7 +13,7 @@
           <p class="tagline">Powering Progress, One Circuit at a Time</p>
           <ul class="quickfacts" aria-label="Quick facts">
             <li>
-              <span class="qf-label">Introduced</span>
+              <span class="qf-label">Established</span>
               <span class="qf-value">{{ facts.established }}</span>
             </li>
             <li>
@@ -21,19 +21,15 @@
               <span class="qf-value">{{ facts.intakeUG }}</span>
             </li>
             <li>
-              <span class="qf-label">AI/DS Labs</span>
-              <span class="qf-value">{{ facts.labs }}</span>
-            </li>
-            <li>
-              <span class="qf-label">Top Recruiters</span>
-              <span class="qf-value">Google • Microsoft • AWS</span>
+              <span class="qf-label">Programs</span>
+              <span class="qf-value">B.Tech (EEE), Honors/Minors</span>
             </li>
           </ul>
         </div>
         <picture class="hero-art" aria-hidden="true">
           <img
-            src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1600&auto=format&fit=crop"
-            alt="AI & Data Science themed visual"
+            src="@/assets/engineering-students-lab.png"
+            alt="EEE Department - Students in Electrical Lab"
             class="hero-img"
           />
         </picture>
@@ -61,13 +57,17 @@
     <!-- CONTENT (tab panes) -->
     <main class="container content" id="content">
       <!-- ABOUT -->
-      <section class="card-section" v-show="activeTab==='overview'">
+      <section :id="tabsMap.overview" class="card-section" v-show="activeTab==='overview'">
         <div class="card">
           <h2 class="section-title"><i class="fa-solid fa-school"></i> About the Department</h2>
           <p class="lead">
-            Launched in {{ facts.established }}, the CSE (AI & DS) department focuses on cutting-edge Artificial Intelligence
-            and Data Science education, research, and real-world applications. Distinctive strengths include an
-            interdisciplinary curriculum, project-based learning, and strong industry collaboration.
+            Electrical and Electronics Engineering degree is a stepping stone to a wide range of careers ranging from computer science to business. SSIT prepares sound ground to equip the students to this creative engineering streak.
+          </p>
+          <p class="lead">
+            The EEE department technical association provides opportunities to the students to give weekly seminars on current topics of interest, Guest lectures are also arranged in the Association activities. The Association conducts competitions in technical paper presentations, working models exhibition, technical Quiz etc., and gives awards & prizes.
+          </p>
+          <p class="lead">
+            The Intake of 60 students and the total student strength is about 240.
           </p>
           <div class="stats">
             <div class="stat" v-for="s in aboutStats" :key="s.label">
@@ -84,24 +84,29 @@
           <article class="card">
             <h3 class="h5 text-muted mb-2">Vision</h3>
             <p>
-              To be a premier center for Artificial Intelligence and Data Science, creating intelligent, ethical,
-              and scalable solutions that advance society.
+              To develop highly skilled professionals with ethics and human values to produce competent electrical engineers in the field of Electrical and Electronics Engineering
             </p>
             <h3 class="h5 text-muted mt-4 mb-2">Mission</h3>
+            <p>
+              To impact quality education with industrial exposure, professional training and also to achieve excellence in teaching - learning, research and development activities.
+            </p>
+            <h3 class="h5 text-muted mt-4 mb-2">Goals</h3>
             <ul class="bullets">
-              <li>Deliver advanced AI & DS education aligned with global industry trends.</li>
-              <li>Foster research, innovation, and entrepreneurship with societal impact.</li>
-              <li>Build industry-ready graduates with strong fundamentals and hands-on skills.</li>
-              <li>Promote lifelong learning, ethics, and responsible AI practices.</li>
+              <li><strong>Research & Development:</strong> R&D is focused on applied research for the benefit of power sector along with product/instrumentation development in our department.</li>
+              <li><strong>Training Programs:</strong> The program is an amalgam of skill training education that aims at making our students interview ready in every way by development of applied knowledge well thought out integration of technical skills and academic knowledge put into practical use in projects.</li>
+              <li><strong>Training & Placements:</strong> Training & placement was created as a way to provide best in class training to our students. The aim was to develop specific skills in people so they can achieve their goals and meet their objectives.</li>
+              <li><strong>Industrial Development:</strong> It is held that all societies undergo changes from traditional, transitional and modern stages of development. It stands for rapid industrialization, technological advancement, modernization, full employment and continuous process of liberalization of society, economy and polity.</li>
             </ul>
           </article>
 
           <article class="card">
             <h3 class="section-title-sm"><i class="fa-solid fa-diagram-project"></i> Programs Offered</h3>
             <ul class="bullets">
-              <li><strong>B.Tech in CSE (AI & DS)</strong> — {{ facts.intakeUG }} seats; EAMCET eligibility; capstone projects.</li>
-              <li><strong>Minors / Certifications</strong> — Deep Learning, NLP, Computer Vision, Data Analytics.</li>
-              <li><strong>Industry Modules</strong> — Offered with partners (AWS Academy, Microsoft, CISCO).</li>
+              <li><strong>B.Tech in EEE</strong> — {{ facts.intakeUG }} seats; EAMCET eligibility; comprehensive electrical engineering curriculum.</li>
+              <li><strong>Technical Association</strong> — Weekly seminars, guest lectures, competitions, and awards.</li>
+              <li><strong>Research & Development</strong> — Applied research in power sector and product development.</li>
+              <li><strong>Industry Training</strong> — Skill development programs for interview readiness and practical application.</li>
+              <li><strong>Total Student Strength</strong> — About 240 students across all years.</li>
             </ul>
             <div class="row-actions">
               <a class="btn btn-primary" href="#curriculum" @click.prevent="setTab('curriculum')">Download Syllabus</a>
@@ -110,31 +115,236 @@
           </article>
         </div>
 
-        <div class="grid-3">
-          <article class="card">
-            <h3 class="section-title-sm"><i class="fa-solid fa-bullseye"></i> PEOs</h3>
-            <ul class="bullets small">
-              <li>Excel in AI/DS careers and higher studies at premier institutions.</li>
-              <li>Lead multi-disciplinary teams to deliver intelligent solutions.</li>
-              <li>Commit to ethical, sustainable, and impactful technology.</li>
-            </ul>
-          </article>
-          <article class="card">
-            <h3 class="section-title-sm"><i class="fa-solid fa-list-check"></i> POs</h3>
-            <ul class="bullets small">
-              <li>Strong foundation in AI, ML, statistics, and data engineering.</li>
-              <li>Proficiency with modern stacks (TensorFlow, PyTorch, Spark, Cloud).</li>
-              <li>Effective communication, teamwork, and project management.</li>
-            </ul>
-          </article>
-          <article class="card">
-            <h3 class="section-title-sm"><i class="fa-solid fa-code-branch"></i> PSOs</h3>
-            <ul class="bullets small">
-              <li>Design, train, and deploy intelligent models for real-world problems.</li>
-              <li>Analyze and interpret complex datasets to drive decisions.</li>
-            </ul>
-          </article>
+        <!-- Program Objectives & Outcomes Accordion -->
+        <div class="card">
+          <h2 class="section-title"><i class="fa-solid fa-graduation-cap"></i> Program Educational Objectives, Outcomes and Specific Outcomes</h2>
+          
+          <!-- Accordion Container -->
+          <div class="accordion-container">
+            
+            <!-- PEOs Accordion -->
+            <div class="accordion-item">
+              <button 
+                class="accordion-header" 
+                @click="toggleAccordion('peos')"
+                :class="{ active: activeAccordion === 'peos' }"
+              >
+                <div class="accordion-title">
+                  <i class="fa-solid fa-bullseye"></i>
+                  <span>Program Educational Objectives (PEOs)</span>
+                  <span class="accordion-count">3 Items</span>
+                </div>
+                <i class="fa-solid fa-chevron-down accordion-icon" :class="{ rotated: activeAccordion === 'peos' }"></i>
+              </button>
+              <div class="accordion-content" :class="{ active: activeAccordion === 'peos' }">
+                <div class="outcome-grid">
+                  <div class="outcome-card">
+                    <div class="outcome-number">PEO 1</div>
+                    <div class="outcome-content">
+                      <h4>Technical Excellence</h4>
+                      <p>To excel in electrical and electronics engineering careers and pursue higher studies at premier institutions with strong foundation in power systems and electronics.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">PEO 2</div>
+                    <div class="outcome-content">
+                      <h4>Innovation & Leadership</h4>
+                      <p>To lead multi-disciplinary teams in developing innovative electrical systems and electronic solutions for real-world applications in power and energy sectors.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">PEO 3</div>
+                    <div class="outcome-content">
+                      <h4>Professional Ethics</h4>
+                      <p>To commit to ethical, sustainable, and impactful electrical engineering practices while contributing to society through responsible power and energy solutions.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- POs Accordion -->
+            <div class="accordion-item">
+              <button 
+                class="accordion-header" 
+                @click="toggleAccordion('pos')"
+                :class="{ active: activeAccordion === 'pos' }"
+              >
+                <div class="accordion-title">
+                  <i class="fa-solid fa-list-check"></i>
+                  <span>Program Outcomes (POs)</span>
+                  <span class="accordion-count">12 Items</span>
+                </div>
+                <i class="fa-solid fa-chevron-down accordion-icon" :class="{ rotated: activeAccordion === 'pos' }"></i>
+              </button>
+              <div class="accordion-content" :class="{ active: activeAccordion === 'pos' }">
+                <div class="outcome-grid grid-2">
+                  <div class="outcome-card">
+                    <div class="outcome-number">PO 1</div>
+                    <div class="outcome-content">
+                      <h4>Engineering Knowledge</h4>
+                      <p>Apply the knowledge of mathematics, science, engineering fundamentals, and EEE specialization to the solution of complex engineering problems.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">PO 2</div>
+                    <div class="outcome-content">
+                      <h4>Problem Analysis</h4>
+                      <p>Identify, formulate, review research literature, and analyze complex engineering problems reaching substantiated conclusions using first principles.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">PO 3</div>
+                    <div class="outcome-content">
+                      <h4>Design/Development of Solutions</h4>
+                      <p>Design solutions for complex engineering problems and design system components or processes that meet the specified needs with appropriate consideration.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">PO 4</div>
+                    <div class="outcome-content">
+                      <h4>Conduct Investigations</h4>
+                      <p>Use research-based knowledge and research methods including design of experiments, analysis and interpretation of data to provide valid conclusions.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">PO 5</div>
+                    <div class="outcome-content">
+                      <h4>Modern Tool Usage</h4>
+                      <p>Create, select, and apply appropriate techniques, resources, and modern EEE tools including MATLAB, Simulink, and PSpice to complex activities.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">PO 6</div>
+                    <div class="outcome-content">
+                      <h4>The Engineer and Society</h4>
+                      <p>Apply reasoning informed by contextual knowledge to assess societal, health, safety, legal and cultural issues relevant to professional EEE practice.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">PO 7</div>
+                    <div class="outcome-content">
+                      <h4>Environment & Sustainability</h4>
+                      <p>Understand the impact of professional engineering solutions in societal and environmental contexts, and demonstrate knowledge of sustainable development.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">PO 8</div>
+                    <div class="outcome-content">
+                      <h4>Ethics</h4>
+                      <p>Apply ethical principles and commit to professional ethics and responsibilities and norms of the engineering practice.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">PO 9</div>
+                    <div class="outcome-content">
+                      <h4>Individual & Team Work</h4>
+                      <p>Function effectively as an individual, and as a member or leader in diverse teams, and in multidisciplinary settings.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">PO 10</div>
+                    <div class="outcome-content">
+                      <h4>Communication</h4>
+                      <p>Communicate effectively on complex engineering activities with the engineering community and with society at large.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">PO 11</div>
+                    <div class="outcome-content">
+                      <h4>Project Management</h4>
+                      <p>Demonstrate knowledge and understanding of the engineering and management principles and apply these to one's own work.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">PO 12</div>
+                    <div class="outcome-content">
+                      <h4>Lifelong Learning</h4>
+                      <p>Recognize the need for, and have the preparation and ability to engage in independent and lifelong learning in the broadest context of technological change.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PSOs Accordion -->
+            <div class="accordion-item">
+              <button 
+                class="accordion-header" 
+                @click="toggleAccordion('psos')"
+                :class="{ active: activeAccordion === 'psos' }"
+              >
+                <div class="accordion-title">
+                  <i class="fa-solid fa-code-branch"></i>
+                  <span>Program Specific Outcomes (PSOs)</span>
+                  <span class="accordion-count">3 Items</span>
+                </div>
+                <i class="fa-solid fa-chevron-down accordion-icon" :class="{ rotated: activeAccordion === 'psos' }"></i>
+              </button>
+              <div class="accordion-content" :class="{ active: activeAccordion === 'psos' }">
+                <div class="outcome-grid">
+                  <div class="outcome-card">
+                    <div class="outcome-number">PSO 1</div>
+                    <div class="outcome-content">
+                      <h4>Power System Design</h4>
+                      <p>Design and implement electrical power systems, including generation, transmission, and distribution networks using modern tools and technologies.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">PSO 2</div>
+                    <div class="outcome-content">
+                      <h4>Electronics & Control Systems</h4>
+                      <p>Analyze and design electronic circuits, control systems, and automation solutions for industrial and power applications.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">PSO 3</div>
+                    <div class="outcome-content">
+                      <h4>Renewable Energy Systems</h4>
+                      <p>Develop renewable energy systems and smart grid solutions while ensuring proper integration, testing, and optimization of electrical systems.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- COs Accordion -->
+            <div class="accordion-item">
+              <button 
+                class="accordion-header" 
+                @click="toggleAccordion('cos')"
+                :class="{ active: activeAccordion === 'cos' }"
+              >
+                <div class="accordion-title">
+                  <i class="fa-solid fa-book-open"></i>
+                  <span>Course Outcomes (COs)</span>
+                  <span class="accordion-count">2 Regulations</span>
+                </div>
+                <i class="fa-solid fa-chevron-down accordion-icon" :class="{ rotated: activeAccordion === 'cos' }"></i>
+              </button>
+              <div class="accordion-content" :class="{ active: activeAccordion === 'cos' }">
+                <div class="outcome-grid">
+                  <div class="outcome-card">
+                    <div class="outcome-number">R22</div>
+                    <div class="outcome-content">
+                      <h4>Current Regulation (R22)</h4>
+                      <p>Course outcomes aligned with latest EEE curriculum including modern power systems, renewable energy, and smart grid applications.</p>
+                    </div>
+                  </div>
+                  <div class="outcome-card">
+                    <div class="outcome-number">R18</div>
+                    <div class="outcome-content">
+                      <h4>Previous Regulation (R18)</h4>
+                      <p>Legacy course outcomes for students enrolled under the previous curriculum with foundational EEE concepts and traditional approaches.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
+
       </section>
 
       <!-- FACULTY DIRECTORY -->
@@ -199,12 +409,20 @@
               <h3 class="lab-title">{{ lab.title }}</h3>
               <p class="lab-text">{{ lab.desc }}</p>
               <ul class="lab-tags"><li v-for="t in lab.tags" :key="t">{{ t }}</li></ul>
+              <div class="lab-actions">
+                <button 
+                  class="btn btn-primary view-images-btn" 
+                  @click="openImageModal(lab.images)"
+                >
+                  <i class="fa-solid fa-images"></i> View Images
+                </button>
+              </div>
             </div>
           </article>
         </div>
         <div class="muted mt-1">
-          <i class="fa-solid fa-server"></i> GPU servers • <i class="fa-solid fa-cloud"></i> Cloud credits •
-          <i class="fa-solid fa-database"></i> Open datasets • <i class="fa-solid fa-gear"></i> TF • PyTorch • Scikit-learn
+          <i class="fa-solid fa-cogs"></i> Modern Equipment • <i class="fa-solid fa-laptop-code"></i> Simulation Software •
+          <i class="fa-solid fa-bolt"></i> Power Systems • <i class="fa-solid fa-microchip"></i> Control Systems
         </div>
       </section>
 
@@ -344,6 +562,14 @@
 
     <!-- FOOTER -->
     <Footer />
+
+    <!-- Image Previewer Modal -->
+    <ImagePreviewer
+      v-model:show="showImageModal"
+      v-model:currentIndex="currentImageIndex"
+      v-model:isFullscreen="isFullscreen"
+      :images="labImagesForModal"
+    />
   </div>
 </template>
 
@@ -352,14 +578,15 @@ import { ref, computed } from 'vue'
 import Header from '@/components/Header.vue'
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/Footer.vue'
+import ImagePreviewer from '@/views/utils/ImagePreviewer.vue'
 
 /* Facts / Quick Stats */
-const facts = { established: '2020', intakeUG: '120', labs: '6+' }
+const facts = { established: '2001', intakeUG: '60', programs: 'B.Tech (EEE), Honors/Minors' }
 
 /* About stats */
 const aboutStats = [
-  { label: 'Faculty', value: '20+', icon: 'fa-solid fa-user-tie' },
-  { label: 'AI/DS Labs', value: '6', icon: 'fa-solid fa-flask' },
+  { label: 'Faculty', value: '28+', icon: 'fa-solid fa-user-tie' },
+  { label: 'Labs', value: '8', icon: 'fa-solid fa-flask' },
   { label: 'Projects / Yr', value: '15+', icon: 'fa-solid fa-diagram-project' },
   { label: 'Placement', value: '85%+', icon: 'fa-solid fa-briefcase' }
 ]
@@ -376,8 +603,9 @@ const tabs = [
   { id: 'alumni',     label: 'Alumni',     icon: 'fa-solid fa-user-graduate' },
   { id: 'contact',    label: 'Contact',    icon: 'fa-solid fa-address-book' }
 ]
+const tabsMap = tabs.reduce((acc, t) => ((acc[t.id] = t.id), acc), {})
 const activeTab = ref(tabs[0].id)
-const setTab = (id) => { activeTab.value = id } // tabbed view, no scroll
+const setTab = (id) => { activeTab.value = id } // no scroll/jump
 
 /* Faculty */
 const faculty = ref([
@@ -475,6 +703,33 @@ const faculty = ref([
 const designations = ['Professor & HOD', 'Professor', 'Associate Professor', 'Assistant Professor']
 const query = ref('')
 const designation = ref('ALL')
+
+// Accordion state
+const activeAccordion = ref('')
+const toggleAccordion = (section) => {
+  activeAccordion.value = activeAccordion.value === section ? '' : section
+}
+
+// Image Modal state
+const showImageModal = ref(false)
+const currentImageIndex = ref(0)
+const currentLabImages = ref([])
+const isFullscreen = ref(false)
+
+// Computed properties for ImagePreviewer
+const labImagesForModal = computed(() => {
+  return currentLabImages.value.map(src => ({ 
+    src: src.startsWith('@/') ? new URL(src, import.meta.url).href : src, 
+    title: '', 
+    desc: '' 
+  }))
+})
+
+const openImageModal = (labImages) => {
+  currentLabImages.value = labImages
+  currentImageIndex.value = 0
+  showImageModal.value = true
+}
 const filteredFaculty = computed(() => {
   const q = query.value.trim().toLowerCase()
   return faculty.value.filter(f => {
@@ -488,28 +743,58 @@ const filteredFaculty = computed(() => {
 /* Labs & Infrastructure */
 const labs = [
   {
-    title: 'AI Lab',
-    desc: 'Model training with TensorFlow & PyTorch; MLOps pipelines.',
-    img: 'https://images.unsplash.com/photo-1555255707-c07966088b7b?q=80&w=1200',
-    tags: ['TensorFlow', 'PyTorch', 'MLOps']
+    title: 'Electrical Machines Lab',
+    desc: 'Advanced electrical machines laboratory with DC motors, AC motors, transformers, and generators for comprehensive hands-on training.',
+    img: '@/assets/engineering-students-lab.png',
+    images: [
+      '@/assets/engineering-students-lab.png',
+      '@/assets/campuslife/engineering-students-lab.png',
+      '@/assets/campuslife/students-in-college-library-studying.jpg'
+    ],
+    tags: ['DC Motors', 'AC Motors', 'Transformers']
   },
   {
-    title: 'Data Science Studio',
-    desc: 'Analytics, visualization, and data engineering workflows.',
-    img: 'https://images.unsplash.com/photo-1534759846116-5797a4d0f2c1?q=80&w=1200',
-    tags: ['Pandas', 'Spark', 'Visualization']
+    title: 'Electrical Circuits Lab',
+    desc: 'Fundamental electrical circuits laboratory with circuit analysis, network theorems, and power electronics experiments.',
+    img: '@/assets/campuslife/engineering-students-lab.png',
+    images: [
+      '@/assets/campuslife/engineering-students-lab.png',
+      '@/assets/engineering-students-lab.png',
+      '@/assets/campuslife/students-in-college-library-studying.jpg'
+    ],
+    tags: ['Circuit Analysis', 'Network Theorems', 'Power Electronics']
   },
   {
-    title: 'IoT & Robotics Lab',
-    desc: 'Edge AI, sensors, embedded vision & control systems.',
-    img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200',
-    tags: ['Edge AI', 'Arduino', 'Robotics']
+    title: 'Power Systems Lab',
+    desc: 'High voltage and power systems laboratory with transmission line models, power flow analysis, and protection systems.',
+    img: '@/assets/campuslife/students-in-college-library-studying.jpg',
+    images: [
+      '@/assets/campuslife/students-in-college-library-studying.jpg',
+      '@/assets/engineering-students-lab.png',
+      '@/assets/campuslife/engineering-students-lab.png'
+    ],
+    tags: ['Power Flow', 'Protection', 'High Voltage']
   },
   {
-    title: 'Cloud AI Lab',
-    desc: 'Cloud credits & GPU instances for scalable model training.',
-    img: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=1200',
-    tags: ['AWS', 'Azure', 'Kubernetes']
+    title: 'PE and EM Lab',
+    desc: 'Power Electronics and Electrical Machines laboratory combining power converters, motor drives, and control systems.',
+    img: '@/assets/engineering-students-lab.png',
+    images: [
+      '@/assets/engineering-students-lab.png',
+      '@/assets/campuslife/students-in-college-library-studying.jpg',
+      '@/assets/campuslife/engineering-students-lab.png'
+    ],
+    tags: ['Power Converters', 'Motor Drives', 'Control Systems']
+  },
+  {
+    title: 'Simulation Lab',
+    desc: 'Computer-aided design and simulation laboratory with MATLAB, Simulink, and specialized electrical engineering software.',
+    img: '@/assets/campuslife/engineering-students-lab.png',
+    images: [
+      '@/assets/campuslife/engineering-students-lab.png',
+      '@/assets/engineering-students-lab.png'
+    ],
+    tags: ['MATLAB', 'Simulink', 'CAD Tools']
   }
 ]
 
@@ -611,10 +896,10 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 .mb-0{margin-bottom:0} .mt-1{margin-top:1rem} .mt-2{margin-top:1.25rem}
 .mb-2{margin-bottom:.75rem} .h5{font-size:1.1rem} .h6{font-size:1rem}
 .text-muted{color:var(--muted)} .muted{color:var(--muted)}
-.lead{font-size:1.05rem; color:#374151}
+.lead{font-size:1.05rem; color:#000; line-height:1.6}
 
 /* HERO */
-.hero{ position:relative; color:#fff; background:linear-gradient(60deg,var(--navy),var(--navy-2)); }
+.hero{ position:relative; color:#fff; background:var(--ink); }
 .hero .overlay{ position:absolute; inset:0; background:linear-gradient(90deg,rgba(0,0,0,.15),rgba(0,0,0,.2)); }
 .hero-inner{ position:relative; display:grid; grid-template-columns:1.2fr .8fr; gap:2rem; align-items:center; padding:3.2rem 0; }
 .title{ font-size:2.2rem; font-weight:800; line-height:1.2 }
@@ -626,19 +911,70 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 .hero-art .hero-img{ width:100%; border-radius:1rem; box-shadow:0 10px 30px rgba(0,0,0,.25); object-fit:cover }
 
 /* SUBNAV */
-.subnav{ position:sticky; top:0; z-index:20; background:#fff; border-bottom:1px solid var(--border); }
-.subnav-inner{ display:flex; gap:.5rem; padding:.6rem 0; overflow:auto }
-.chip{ border:1px solid var(--border); background:#fff; color:#111; border-radius:999px; padding:.5rem .9rem; font-weight:600; display:flex; align-items:center; gap:.5rem; white-space:nowrap }
-.chip i{ color:var(--navy) }
-.chip.active{ border-color:var(--navy); background:rgba(30,64,175,.08); color:var(--navy) }
+.subnav{ 
+  position:sticky; 
+  top:0; 
+  z-index:20; 
+  background:#fff; 
+  border-bottom:1px solid var(--border);
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+}
+.subnav-inner{ display:flex; gap:.5rem; padding:.6rem 1rem; overflow-x:auto; overflow-y:hidden; justify-content:flex-start; flex-wrap:nowrap; }
+.chip{ 
+  border:1px solid var(--border); 
+  background:#fff; 
+  color:#111; 
+  border-radius:999px; 
+  padding:.5rem .9rem; 
+  font-weight:600; 
+  display:flex; 
+  align-items:center; 
+  gap:.5rem; 
+  white-space:nowrap;
+  transition:all 0.2s ease;
+}
+.chip i{ color:var(--orange) }
+.chip:hover{ 
+  background:var(--orange); 
+  color:#fff; 
+  border-color:var(--orange);
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(249,115,22,0.3);
+}
+.chip:hover i{ color:#fff }
+.chip.active{ 
+  border-color:var(--orange); 
+  background:var(--orange); 
+  color:#fff;
+  box-shadow:0 4px 12px rgba(249,115,22,0.3);
+  transform:translateY(-2px);
+  font-weight:700;
+}
+.chip.active i{ color:#fff }
 
 /* CONTENT */
 .content{ padding:1.8rem 0 2.6rem }
 .card-section{ margin:1.2rem 0 }
 .card{ background:var(--card); border:1px solid var(--border); border-radius:1rem; padding:1.5rem 1.25rem; box-shadow:0 6px 24px rgba(0,0,0,.06) }
-.section-title{ font-size:1.35rem; font-weight:800; color:var(--navy); display:flex; align-items:center; gap:.6rem; margin:0 0 1rem }
+.section-title{ 
+  font-size:1.35rem; 
+  font-weight:800; 
+  color:var(--ink); 
+  display:flex; 
+  align-items:center;
+  gap:.6rem; 
+  margin:0 0 1rem 
+}
 .section-title i{ color:var(--orange) }
-.section-title-sm{ font-weight:800; color:var(--navy); font-size:1.05rem; display:flex; align-items:center; gap:.5rem; margin-bottom:.6rem }
+.section-title-sm{ 
+  font-weight:800; 
+  color:var(--ink); 
+  font-size:1.05rem; 
+  display:flex; 
+  align-items:center; 
+  gap:.5rem; 
+  margin-bottom:.6rem 
+}
 
 /* GRIDS */
 .grid-2{ display:grid; grid-template-columns:repeat(2,1fr); gap:1.2rem; margin-top:1.2rem }
@@ -648,7 +984,7 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 .stats{ display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:.9rem; margin-top:1rem }
 .stat{ border:1px dashed var(--border); border-radius:.9rem; padding:.9rem; display:flex; gap:.7rem; align-items:center; background:#fff }
 .stat i{ color:var(--orange); font-size:1.25rem }
-.num{ font-weight:900; font-size:1.25rem; color:var(--navy) }
+.num{ font-weight:900; font-size:1.25rem; color:var(--ink) }
 .label{ font-size:.85rem; color:var(--muted) }
 
 /* BULLETS */
@@ -671,8 +1007,8 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 .badge{ background:rgba(249,115,22,.1); color:var(--orange); padding:.15rem .45rem; border-radius:.4rem; font-size:.78rem; font-weight:700 }
 .fc-tags{ color:#374151; font-size:.92rem }
 .fc-links{ display:flex; gap:.5rem; margin-top:.4rem }
-.icon-link{ width:36px; height:36px; display:grid; place-items:center; border:1px solid var(--border); border-radius:.6rem; color:var(--navy) }
-.icon-link:hover{ background:rgba(30,64,175,.06) }
+.icon-link{ width:36px; height:36px; display:grid; place-items:center; border:1px solid var(--border); border-radius:.6rem; color:var(--ink) }
+.icon-link:hover{ background:rgba(17,24,39,.06) }
 
 /* LABS */
 .labs-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem }
@@ -682,7 +1018,27 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 .lab-title{ margin:0 0 .25rem; font-weight:800; color:var(--ink) }
 .lab-text{ color:#374151; font-size:.95rem }
 .lab-tags{ display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.5rem; padding:0; list-style:none }
-.lab-tags li{ border:1px solid var(--border); border-radius:999px; padding:.15rem .55rem; font-size:.78rem; color:#334155 }
+.lab-tags li{ border:1px solid var(--border); border-radius:999px; padding:.15rem .55rem; font-size:.78rem; color:#4b5563 }
+
+.lab-actions{
+  margin-top:.75rem;
+  padding-top:.75rem;
+  border-top:1px solid rgba(0,0,0,0.06);
+}
+
+.view-images-btn{
+  width:100%;
+  font-size:.85rem;
+  padding:.5rem .75rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.5rem;
+}
+
+.view-images-btn i{
+  font-size:.9rem;
+}
 
 /* DOWNLOADS */
 .downloads{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:.8rem }
@@ -699,10 +1055,31 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 .logo-row img:hover{ filter:none; opacity:1 }
 
 /* BUTTONS */
-.btn{ border-radius:.7rem; padding:.55rem .9rem; font-weight:700; border:1px solid transparent; display:inline-flex; gap:.5rem; align-items:center }
-.btn-primary{ background:var(--navy); color:#fff }
-.btn-soft{ background:#fff; color:var(--navy); border-color:var(--navy) }
-.btn:hover{ filter:brightness(1.02) }
+.btn{ 
+  border-radius:.7rem; 
+  padding:.55rem .9rem; 
+  font-weight:700; 
+  border:1px solid transparent; 
+  display:inline-flex; 
+  gap:.5rem; 
+  align-items:center;
+  transition:all 0.3s ease;
+  text-decoration:none;
+}
+.btn-primary{ background:var(--orange); color:#fff; border-color:var(--orange) }
+.btn-primary:hover{ 
+  background:#e55a00; 
+  border-color:#e55a00;
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(249,115,22,0.3);
+}
+.btn-soft{ background:#fff; color:var(--ink); border-color:var(--ink) }
+.btn-soft:hover{ 
+  background:var(--ink); 
+  color:#fff;
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(0,0,0,0.2);
+}
 .row-actions{ display:flex; gap:.6rem; flex-wrap:wrap }
 
 /* ALUMNI */
@@ -728,5 +1105,140 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
   .grid-3{ grid-template-columns:1fr }
   .contact-card .contact-grid{ grid-template-columns:1fr }
   .quickfacts li{ min-width:140px }
+}
+
+/* ACCORDION STYLES */
+.accordion-container{
+  margin-top:1rem;
+}
+.accordion-item{
+  border:1px solid var(--border);
+  border-radius:.75rem;
+  margin-bottom:.75rem;
+  overflow:hidden;
+  transition:all 0.3s ease;
+}
+.accordion-item:hover{
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+.accordion-header{
+  width:100%;
+  background:#fff;
+  border:none;
+  padding:1.2rem 1.5rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  cursor:pointer;
+  transition:all 0.2s ease;
+  text-align:left;
+}
+.accordion-header:hover{
+  background:rgba(249,115,22,0.04);
+}
+.accordion-header.active{
+  background:var(--orange);
+  color:#fff;
+}
+.accordion-title{
+  display:flex;
+  align-items:center;
+  gap:.75rem;
+  font-weight:700;
+  font-size:1.05rem;
+}
+.accordion-title i{ color:var(--orange); font-size:1.2rem }
+.accordion-header.active .accordion-title i{
+  color:#fff;
+}
+.accordion-count{
+  background:rgba(249,115,22,0.1);
+  color:var(--orange);
+  padding:.25rem .6rem;
+  border-radius:999px;
+  font-size:.8rem;
+  font-weight:600;
+  margin-left:.5rem;
+}
+.accordion-header.active .accordion-count{
+  background:rgba(255,255,255,0.2);
+  color:#fff;
+}
+.accordion-icon{
+  color:var(--ink);
+  font-size:1rem;
+  transition:transform 0.3s ease;
+}
+.accordion-icon.rotated{
+  transform:rotate(180deg);
+}
+.accordion-header.active .accordion-icon{
+  color:#fff;
+}
+.accordion-content{
+  max-height:0;
+  overflow:hidden;
+  background:#fff;
+  transition:max-height 0.4s ease;
+}
+.accordion-content.active{
+  max-height:2000px;
+  padding:1.5rem;
+}
+.outcome-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:1rem;
+}
+.outcome-grid.grid-2{
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+}
+.outcome-card{
+  background:#f8fafc;
+  border:1px solid var(--border);
+  border-radius:.6rem;
+  padding:1rem;
+  transition:all 0.2s ease;
+}
+.outcome-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+  border-color:var(--orange);
+}
+.outcome-number{
+  background:var(--orange);
+  color:#fff;
+  width:3.5rem;
+  height:3.5rem;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  font-size:.75rem;
+  margin-bottom:.75rem;
+  white-space:nowrap;
+  flex-shrink:0;
+  line-height:1;
+}
+.outcome-content h4{
+  color:var(--ink);
+  font-weight:700;
+  font-size:1rem;
+  margin-bottom:.5rem;
+}
+.outcome-content p{
+  color:#4b5563;
+  font-size:.9rem;
+  line-height:1.5;
+  margin:0;
+}
+
+@media (max-width: 768px){
+  .accordion-header{ padding:1rem 1.2rem }
+  .accordion-title{ font-size:1rem }
+  .accordion-count{ font-size:.75rem; padding:.15rem .5rem }
+  .outcome-grid{ grid-template-columns:1fr }
+  .outcome-grid.grid-2{ grid-template-columns:1fr }
 }
 </style>

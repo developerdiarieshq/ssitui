@@ -103,7 +103,7 @@ const routes = [
     { path: '/ict-facilities', component: IctFacilities },
     { path: '/cse', component: Cse },
     { path: '/cse-ai', component: CseAi },
-    { path: '/cse-aids', component: CseAiDs },
+    { path: '/cse-ai-ds', component: CseAiDs },
     { path: '/ece', component: Ece },
     { path: '/sh', component: Sh },
     { path: '/polytechnic', component: Polytechnic },

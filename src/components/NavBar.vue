@@ -60,7 +60,7 @@
                   <h6 class="fw-bold text-uppercase mb-2">Departments</h6>
                   <router-link to="/cse" class="dropdown-item">CSE</router-link>
                   <router-link to="/cse-ai" class="dropdown-item">CSE (AI & ML)</router-link>
-                  <router-link to="/cse-aids" class="dropdown-item">CSE (AI & DS)</router-link>
+                  <router-link to="/cse-ai-ds" class="dropdown-item">CSE (AI & DS)</router-link>
                   <router-link to="/ece" class="dropdown-item">ECE</router-link>
                   <router-link to="/eee" class="dropdown-item">EEE</router-link>
                   <router-link to="/mech" class="dropdown-item">MECH</router-link>
