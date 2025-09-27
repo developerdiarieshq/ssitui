@@ -13,7 +13,7 @@
           <p class="tagline">Building Foundations for Holistic Engineering Excellence</p>
           <ul class="quickfacts" aria-label="Quick facts">
             <li>
-              <span class="qf-label">Introduced</span>
+              <span class="qf-label">Established</span>
               <span class="qf-value">{{ facts.established }}</span>
             </li>
             <li>
@@ -21,12 +21,12 @@
               <span class="qf-value">{{ facts.intakeUG }}</span>
             </li>
             <li>
-              <span class="qf-label">AI/DS Labs</span>
-              <span class="qf-value">{{ facts.labs }}</span>
+              <span class="qf-label">Total Students</span>
+              <span class="qf-value">{{ facts.totalStudents }}</span>
             </li>
             <li>
-              <span class="qf-label">Top Recruiters</span>
-              <span class="qf-value">Google • Microsoft • AWS</span>
+              <span class="qf-label">Programs</span>
+              <span class="qf-value">Basic Sciences • English</span>
             </li>
           </ul>
         </div>
@@ -65,9 +65,10 @@
         <div class="card">
           <h2 class="section-title"><i class="fa-solid fa-school"></i> About the Department</h2>
           <p class="lead">
-            Launched in {{ facts.established }}, the CSE (AI & DS) department focuses on cutting-edge Artificial Intelligence
-            and Data Science education, research, and real-world applications. Distinctive strengths include an
-            interdisciplinary curriculum, project-based learning, and strong industry collaboration.
+            Studying Engineering degree is exciting enough as it will open the doors to very cool jobs. It is truly amazing to catch the trend with SSIT. Because SSIT takes care to maximize the learning opportunities by keeping up-to-date and continuous with highly qualified and richly experienced faculty to meet the present requirement at global scenario.
+          </p>
+          <p class="lead">
+            Department Offers an intake of 120 with total student strength is about 480.
           </p>
           <div class="stats">
             <div class="stat" v-for="s in aboutStats" :key="s.label">
@@ -84,24 +85,20 @@
           <article class="card">
             <h3 class="h5 text-muted mb-2">Vision</h3>
             <p>
-              To be a premier center for Artificial Intelligence and Data Science, creating intelligent, ethical,
-              and scalable solutions that advance society.
+              To make the students achieve latest knowledge of Basic Science and English skills along with morals and character needed for Engineering Profession
             </p>
             <h3 class="h5 text-muted mt-4 mb-2">Mission</h3>
-            <ul class="bullets">
-              <li>Deliver advanced AI & DS education aligned with global industry trends.</li>
-              <li>Foster research, innovation, and entrepreneurship with societal impact.</li>
-              <li>Build industry-ready graduates with strong fundamentals and hands-on skills.</li>
-              <li>Promote lifelong learning, ethics, and responsible AI practices.</li>
-            </ul>
+            <p>
+              To awaken the students of their hidden potentials and talents and systematically grooming these potentials to build up great career for students.
+            </p>
           </article>
 
           <article class="card">
             <h3 class="section-title-sm"><i class="fa-solid fa-diagram-project"></i> Programs Offered</h3>
             <ul class="bullets">
-              <li><strong>B.Tech in CSE (AI & DS)</strong> — {{ facts.intakeUG }} seats; EAMCET eligibility; capstone projects.</li>
-              <li><strong>Minors / Certifications</strong> — Deep Learning, NLP, Computer Vision, Data Analytics.</li>
-              <li><strong>Industry Modules</strong> — Offered with partners (AWS Academy, Microsoft, CISCO).</li>
+              <li><strong>Basic Sciences</strong> — Mathematics, Physics, Chemistry, Environmental Science.</li>
+              <li><strong>English & Communication</strong> — Technical Communication, Soft Skills, Language Lab.</li>
+              <li><strong>Support Programs</strong> — Foundation courses for all engineering disciplines.</li>
             </ul>
             <div class="row-actions">
               <a class="btn btn-primary" href="#curriculum" @click.prevent="setTab('curriculum')">Download Syllabus</a>
@@ -110,31 +107,9 @@
           </article>
         </div>
 
-        <div class="grid-3">
-          <article class="card">
-            <h3 class="section-title-sm"><i class="fa-solid fa-bullseye"></i> PEOs</h3>
-            <ul class="bullets small">
-              <li>Excel in AI/DS careers and higher studies at premier institutions.</li>
-              <li>Lead multi-disciplinary teams to deliver intelligent solutions.</li>
-              <li>Commit to ethical, sustainable, and impactful technology.</li>
-            </ul>
-          </article>
-          <article class="card">
-            <h3 class="section-title-sm"><i class="fa-solid fa-list-check"></i> POs</h3>
-            <ul class="bullets small">
-              <li>Strong foundation in AI, ML, statistics, and data engineering.</li>
-              <li>Proficiency with modern stacks (TensorFlow, PyTorch, Spark, Cloud).</li>
-              <li>Effective communication, teamwork, and project management.</li>
-            </ul>
-          </article>
-          <article class="card">
-            <h3 class="section-title-sm"><i class="fa-solid fa-code-branch"></i> PSOs</h3>
-            <ul class="bullets small">
-              <li>Design, train, and deploy intelligent models for real-world problems.</li>
-              <li>Analyze and interpret complex datasets to drive decisions.</li>
-            </ul>
-          </article>
-        </div>
+        <!-- Strengths Section -->
+        <Strengths />
+
       </section>
 
       <!-- FACULTY DIRECTORY -->
@@ -191,27 +166,45 @@
 
       <!-- LABS / INFRA -->
       <section class="card-section" v-show="activeTab==='labs'">
-        <h2 class="section-title"><i class="fa-solid fa-flask"></i> Labs & Research Infrastructure</h2>
+        <h2 class="section-title"><i class="fa-solid fa-flask"></i> Laboratories & Infrastructure</h2>
+        <div class="labs-intro">
+          <p class="lead">
+            The Science & Humanities department houses well-equipped laboratories that provide hands-on experience in basic sciences and communication skills. These labs support the foundation courses for all engineering disciplines with modern equipment and experienced faculty guidance.
+          </p>
+        </div>
         <div class="labs-grid">
           <article v-for="lab in labs" :key="lab.title" class="lab-card">
             <img :src="lab.img" :alt="lab.title" />
             <div class="lab-body">
               <h3 class="lab-title">{{ lab.title }}</h3>
               <p class="lab-text">{{ lab.desc }}</p>
-              <ul class="lab-tags"><li v-for="t in lab.tags" :key="t">{{ t }}</li></ul>
+              <ul class="lab-tags">
+                <li v-for="t in lab.tags" :key="t">{{ t }}</li>
+              </ul>
+              <div class="lab-actions">
+                <button 
+                  class="btn btn-primary view-images-btn" 
+                  @click="openImageModal(lab.images)"
+                >
+                  <i class="fa-solid fa-images"></i> View Images
+                </button>
+              </div>
             </div>
           </article>
         </div>
         <div class="muted mt-1">
-          <i class="fa-solid fa-server"></i> GPU servers • <i class="fa-solid fa-cloud"></i> Cloud credits •
-          <i class="fa-solid fa-database"></i> Open datasets • <i class="fa-solid fa-gear"></i> TF • PyTorch • Scikit-learn
+          <i class="fa-solid fa-flask"></i> Modern Equipment • <i class="fa-solid fa-users"></i> Expert Faculty •
+          <i class="fa-solid fa-book"></i> Foundation Courses • <i class="fa-solid fa-microscope"></i> Practical Learning
         </div>
       </section>
 
       <!-- CURRICULUM -->
       <section class="card-section" aria-labelledby="curriculum" v-show="activeTab==='curriculum'">
         <div class="card">
-          <h2 class="section-title" id="curriculum"><i class="fa-solid fa-file-lines"></i> Curriculum & Syllabus</h2>
+          <h2 class="section-title" id="curriculum"><i class="fa-solid fa-file-lines"></i> Course Structure for all Years</h2>
+          <p class="lead">
+            Download the Course Structure and Syllabus of four years of CSE course and other engineering programs. All syllabi follow the R22 regulation scheme.
+          </p>
           <div class="downloads">
             <a v-for="d in syllabus" :key="d.label" :href="d.href" class="download" target="_blank" rel="noopener">
               <i class="fa-solid fa-file-pdf"></i>
@@ -267,15 +260,15 @@
       </section>
 
       <!-- PLACEMENTS -->
-      <section class="card-section" v-show="activeTab==='placements'">
+      <section :id="tabsMap.placements" class="card-section" v-show="activeTab==='placements'">
         <div class="card">
-          <h2 class="section-title"><i class="fa-solid fa-briefcase"></i> Placements & Opportunities</h2>
+          <h2 class="section-title"><i class="fa-solid fa-briefcase"></i> Placements</h2>
           <div class="stats">
             <div class="stat">
               <i class="fa-solid fa-chart-line"></i>
               <div>
                 <div class="num">{{ placements.rate }}%</div>
-                <div class="label">Placement Rate (AI/DS roles)</div>
+                <div class="label">Placement Rate</div>
               </div>
             </div>
             <div class="stat">
@@ -344,6 +337,17 @@
 
     <!-- FOOTER -->
     <Footer />
+
+    <!-- Labs Image Modal -->
+    <ImagePreviewer
+      v-model:show="showImageModal"
+      :images="labImagesForModal"
+      :initial-index="currentImageIndex"
+      title="Laboratory Images"
+      title-icon="fa-solid fa-flask"
+      title-icon-color="var(--orange)"
+      :show-image-info="false"
+    />
   </div>
 </template>
 
@@ -352,16 +356,18 @@ import { ref, computed } from 'vue'
 import Header from '@/components/Header.vue'
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/Footer.vue'
+import Strengths from '@/views/about/Strengths.vue'
+import ImagePreviewer from '@/views/utils/ImagePreviewer.vue'
 
 /* Facts / Quick Stats */
-const facts = { established: '2020', intakeUG: '120', labs: '6+' }
+const facts = { established: '2007', intakeUG: '120', totalStudents: '480', labs: '4' }
 
 /* About stats */
 const aboutStats = [
-  { label: 'Faculty', value: '20+', icon: 'fa-solid fa-user-tie' },
-  { label: 'AI/DS Labs', value: '6', icon: 'fa-solid fa-flask' },
-  { label: 'Projects / Yr', value: '15+', icon: 'fa-solid fa-diagram-project' },
-  { label: 'Placement', value: '85%+', icon: 'fa-solid fa-briefcase' }
+  { label: 'Faculty', value: '15+', icon: 'fa-solid fa-user-tie' },
+  { label: 'Subjects', value: '8+', icon: 'fa-solid fa-book' },
+  { label: 'Labs', value: '4', icon: 'fa-solid fa-flask' },
+  { label: 'Student Strength', value: '480', icon: 'fa-solid fa-users' }
 ]
 
 /* Tabs */
@@ -376,6 +382,7 @@ const tabs = [
   { id: 'alumni',     label: 'Alumni',     icon: 'fa-solid fa-user-graduate' },
   { id: 'contact',    label: 'Contact',    icon: 'fa-solid fa-address-book' }
 ]
+const tabsMap = tabs.reduce((acc, t) => ((acc[t.id] = t.id), acc), {})
 const activeTab = ref(tabs[0].id)
 const setTab = (id) => { activeTab.value = id } // tabbed view, no scroll
 
@@ -430,36 +437,62 @@ const filteredFaculty = computed(() => {
 /* Labs & Infrastructure */
 const labs = [
   {
-    title: 'AI Lab',
-    desc: 'Model training with TensorFlow & PyTorch; MLOps pipelines.',
-    img: 'https://images.unsplash.com/photo-1555255707-c07966088b7b?q=80&w=1200',
-    tags: ['TensorFlow', 'PyTorch', 'MLOps']
+    title: 'AECS LAB',
+    desc: 'Advanced English Communication Skills laboratory equipped with modern audio-visual aids, language learning software, and interactive communication tools for developing professional communication skills.',
+    img: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1200&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1200&auto=format&fit=crop'
+    ],
+    tags: ['Communication Skills', 'Language Lab', 'Audio-Visual Aids']
   },
   {
-    title: 'Data Science Studio',
-    desc: 'Analytics, visualization, and data engineering workflows.',
-    img: 'https://images.unsplash.com/photo-1534759846116-5797a4d0f2c1?q=80&w=1200',
-    tags: ['Pandas', 'Spark', 'Visualization']
+    title: 'ENGLISH LAB',
+    desc: 'Comprehensive English language laboratory featuring digital language learning platforms, pronunciation tools, and interactive sessions for enhancing technical communication and soft skills.',
+    img: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=1200&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=1200&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?q=80&w=1200&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1200&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop'
+    ],
+    tags: ['Digital Learning', 'Pronunciation', 'Technical Communication']
   },
   {
-    title: 'IoT & Robotics Lab',
-    desc: 'Edge AI, sensors, embedded vision & control systems.',
-    img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200',
-    tags: ['Edge AI', 'Arduino', 'Robotics']
+    title: 'ENGINEERING CHEMISTRY LAB',
+    desc: 'Well-equipped chemistry laboratory with modern analytical instruments, safety equipment, and comprehensive experimental setups for understanding chemical principles and applications in engineering.',
+    img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=1200&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=1200&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1554475901-4538ddfbccc2?q=80&w=1200&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1518709268805-4e9042af2176?q=80&w=1200&auto=format&fit=crop'
+    ],
+    tags: ['Analytical Instruments', 'Safety Equipment', 'Chemical Principles']
   },
   {
-    title: 'Cloud AI Lab',
-    desc: 'Cloud credits & GPU instances for scalable model training.',
-    img: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=1200',
-    tags: ['AWS', 'Azure', 'Kubernetes']
+    title: 'ENGINEERING PHYSICS LAB',
+    desc: 'Advanced physics laboratory with precision instruments, measurement devices, and experimental setups for exploring fundamental physics concepts and their engineering applications.',
+    img: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=1200&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=1200&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=1200&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1200&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1518709268805-4e9042af2176?q=80&w=1200&auto=format&fit=crop'
+    ],
+    tags: ['Precision Instruments', 'Measurement Devices', 'Physics Concepts']
   }
 ]
 
 /* Syllabus / Downloads */
 const syllabus = [
-  { label: 'B.Tech CSE (AI & DS) Syllabus (R22)', note: 'Current Scheme', href: '#' },
-  { label: 'Electives & Tracks', note: 'DL • NLP • CV • Data Engg', href: '#' },
-  { label: 'Project-Based Learning Modules', note: 'Capstones & Industry Projects', href: '#' }
+  { label: 'I Btech-AIDS- R22', note: 'AI & Data Science Program', href: '#' },
+  { label: 'I Btech-AIML- R22', note: 'AI & Machine Learning Program', href: '#' },
+  { label: 'I Btech-CSE- R22', note: 'Computer Science & Engineering', href: '#' },
+  { label: 'I Btech-ECE- R22', note: 'Electronics & Communication Engineering', href: '#' },
+  { label: 'I Btech-EEE- R22', note: 'Electrical & Electronics Engineering', href: '#' }
 ]
 
 /* Activities */
@@ -537,6 +570,22 @@ const hod = {
   email: 'hod.aids@ssit.edu.in'
 }
 
+// Image Modal state
+const showImageModal = ref(false)
+const currentImageIndex = ref(0)
+const currentLabImages = ref([])
+
+// Computed properties for ImagePreviewer
+const labImagesForModal = computed(() => {
+  return currentLabImages.value.map(src => ({ src, title: '', desc: '' }))
+})
+
+const openImageModal = (labImages) => {
+  currentLabImages.value = labImages
+  currentImageIndex.value = 0
+  showImageModal.value = true
+}
+
 const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })
 </script>
 
@@ -553,10 +602,10 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 .mb-0{margin-bottom:0} .mt-1{margin-top:1rem} .mt-2{margin-top:1.25rem}
 .mb-2{margin-bottom:.75rem} .h5{font-size:1.1rem} .h6{font-size:1rem}
 .text-muted{color:var(--muted)} .muted{color:var(--muted)}
-.lead{font-size:1.05rem; color:#374151}
+.lead{font-size:1.05rem; color:#000; line-height:1.6}
 
 /* HERO */
-.hero{ position:relative; color:#fff; background:linear-gradient(60deg,var(--navy),var(--navy-2)); }
+.hero{ position:relative; color:#fff; background:var(--ink); }
 .hero .overlay{ position:absolute; inset:0; background:linear-gradient(90deg,rgba(0,0,0,.15),rgba(0,0,0,.2)); }
 .hero-inner{ position:relative; display:grid; grid-template-columns:1.2fr .8fr; gap:2rem; align-items:center; padding:3.2rem 0; }
 .title{ font-size:2.2rem; font-weight:800; line-height:1.2 }
@@ -568,19 +617,70 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 .hero-art .hero-img{ width:100%; border-radius:1rem; box-shadow:0 10px 30px rgba(0,0,0,.25); object-fit:cover }
 
 /* SUBNAV */
-.subnav{ position:sticky; top:0; z-index:20; background:#fff; border-bottom:1px solid var(--border); }
-.subnav-inner{ display:flex; gap:.5rem; padding:.6rem 0; overflow:auto }
-.chip{ border:1px solid var(--border); background:#fff; color:#111; border-radius:999px; padding:.5rem .9rem; font-weight:600; display:flex; align-items:center; gap:.5rem; white-space:nowrap }
-.chip i{ color:var(--navy) }
-.chip.active{ border-color:var(--navy); background:rgba(30,64,175,.08); color:var(--navy) }
+.subnav{ 
+  position:sticky; 
+  top:0; 
+  z-index:20; 
+  background:#fff; 
+  border-bottom:1px solid var(--border);
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+}
+.subnav-inner{ display:flex; gap:.5rem; padding:.6rem 1rem; overflow-x:auto; overflow-y:hidden; justify-content:flex-start; flex-wrap:nowrap; }
+.chip{ 
+  border:1px solid var(--border); 
+  background:#fff; 
+  color:#111; 
+  border-radius:999px; 
+  padding:.5rem .9rem; 
+  font-weight:600; 
+  display:flex; 
+  align-items:center; 
+  gap:.5rem; 
+  white-space:nowrap;
+  transition:all 0.2s ease;
+}
+.chip i{ color:var(--orange) }
+.chip:hover{ 
+  background:var(--orange); 
+  color:#fff; 
+  border-color:var(--orange);
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(249,115,22,0.3);
+}
+.chip:hover i{ color:#fff }
+.chip.active{ 
+  border-color:var(--orange); 
+  background:var(--orange); 
+  color:#fff;
+  box-shadow:0 4px 12px rgba(249,115,22,0.3);
+  transform:translateY(-2px);
+  font-weight:700;
+}
+.chip.active i{ color:#fff }
 
 /* CONTENT */
 .content{ padding:1.8rem 0 2.6rem }
 .card-section{ margin:1.2rem 0 }
 .card{ background:var(--card); border:1px solid var(--border); border-radius:1rem; padding:1.5rem 1.25rem; box-shadow:0 6px 24px rgba(0,0,0,.06) }
-.section-title{ font-size:1.35rem; font-weight:800; color:var(--navy); display:flex; align-items:center; gap:.6rem; margin:0 0 1rem }
+.section-title{ 
+  font-size:1.35rem; 
+  font-weight:800; 
+  color:var(--ink); 
+  display:flex; 
+  align-items:center;
+  gap:.6rem; 
+  margin:0 0 1rem 
+}
 .section-title i{ color:var(--orange) }
-.section-title-sm{ font-weight:800; color:var(--navy); font-size:1.05rem; display:flex; align-items:center; gap:.5rem; margin-bottom:.6rem }
+.section-title-sm{ 
+  font-weight:800; 
+  color:var(--ink); 
+  font-size:1.05rem; 
+  display:flex; 
+  align-items:center; 
+  gap:.5rem; 
+  margin-bottom:.6rem 
+}
 
 /* GRIDS */
 .grid-2{ display:grid; grid-template-columns:repeat(2,1fr); gap:1.2rem; margin-top:1.2rem }
@@ -590,7 +690,7 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 .stats{ display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:.9rem; margin-top:1rem }
 .stat{ border:1px dashed var(--border); border-radius:.9rem; padding:.9rem; display:flex; gap:.7rem; align-items:center; background:#fff }
 .stat i{ color:var(--orange); font-size:1.25rem }
-.num{ font-weight:900; font-size:1.25rem; color:var(--navy) }
+.num{ font-weight:900; font-size:1.25rem; color:var(--ink) }
 .label{ font-size:.85rem; color:var(--muted) }
 
 /* BULLETS */
@@ -613,8 +713,20 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 .badge{ background:rgba(249,115,22,.1); color:var(--orange); padding:.15rem .45rem; border-radius:.4rem; font-size:.78rem; font-weight:700 }
 .fc-tags{ color:#374151; font-size:.92rem }
 .fc-links{ display:flex; gap:.5rem; margin-top:.4rem }
-.icon-link{ width:36px; height:36px; display:grid; place-items:center; border:1px solid var(--border); border-radius:.6rem; color:var(--navy) }
-.icon-link:hover{ background:rgba(30,64,175,.06) }
+.icon-link{ 
+  width:36px; 
+  height:36px; 
+  display:grid; 
+  place-items:center; 
+  border:1px solid var(--border); 
+  border-radius:.6rem; 
+  color:var(--ink);
+  transition:all 0.2s ease;
+}
+.icon-link:hover{ 
+  background:rgba(17,24,39,.06);
+  transform:translateY(-2px);
+}
 
 /* LABS */
 .labs-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem }
@@ -624,7 +736,7 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 .lab-title{ margin:0 0 .25rem; font-weight:800; color:var(--ink) }
 .lab-text{ color:#374151; font-size:.95rem }
 .lab-tags{ display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.5rem; padding:0; list-style:none }
-.lab-tags li{ border:1px solid var(--border); border-radius:999px; padding:.15rem .55rem; font-size:.78rem; color:#334155 }
+.lab-tags li{ border:1px solid var(--border); border-radius:999px; padding:.15rem .55rem; font-size:.78rem; color:#4b5563 }
 
 /* DOWNLOADS */
 .downloads{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:.8rem }
@@ -641,10 +753,38 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 .logo-row img:hover{ filter:none; opacity:1 }
 
 /* BUTTONS */
-.btn{ border-radius:.7rem; padding:.55rem .9rem; font-weight:700; border:1px solid transparent; display:inline-flex; gap:.5rem; align-items:center }
-.btn-primary{ background:var(--navy); color:#fff }
-.btn-soft{ background:#fff; color:var(--navy); border-color:var(--navy) }
-.btn:hover{ filter:brightness(1.02) }
+.btn{ 
+  border-radius:.7rem; 
+  padding:.55rem .9rem; 
+  font-weight:700; 
+  border:1px solid transparent; 
+  display:inline-flex; 
+  gap:.5rem; 
+  align-items:center;
+  transition:all 0.2s ease;
+  text-decoration:none;
+}
+.btn-primary{ 
+  background:var(--orange); 
+  color:#fff;
+  border-color:var(--orange);
+}
+.btn-primary:hover{ 
+  background:#e8590c;
+  transform:translateY(-2px);
+  box-shadow:0 6px 20px rgba(249,115,22,0.4);
+}
+.btn-soft{ 
+  background:#fff; 
+  color:var(--ink); 
+  border-color:var(--ink);
+}
+.btn-soft:hover{ 
+  background:var(--ink); 
+  color:#fff;
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(0,0,0,0.2);
+}
 .row-actions{ display:flex; gap:.6rem; flex-wrap:wrap }
 
 /* ALUMNI */
@@ -660,6 +800,40 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 /* UTIL */
 .grid-2, .grid-3 .card{ background:#fff }
 .mt-3{margin-top:1rem}
+
+/* LABS */
+.labs-intro{ margin-top:1rem }
+.labs-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-top:1.5rem }
+@media (max-width:1200px){ .labs-grid{ grid-template-columns:repeat(2,1fr); gap:1.2rem } }
+@media (max-width:768px){ .labs-grid{ grid-template-columns:1fr; gap:1rem } }
+.lab-card{ 
+  border:1px solid var(--border); 
+  border-radius:1rem; 
+  overflow:hidden; 
+  background:#fff; 
+  display:flex; 
+  flex-direction:column;
+  transition:all 0.3s ease;
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
+}
+.lab-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 8px 25px rgba(0,0,0,.12);
+  border-color:var(--orange);
+}
+.lab-card img{ width:100%; height:200px; object-fit:cover }
+.lab-body{ padding:1.5rem; flex:1; display:flex; flex-direction:column }
+.lab-title{ margin:0 0 .5rem; font-weight:800; color:var(--ink); font-size:1.1rem }
+.lab-text{ color:#000; font-size:.95rem; line-height:1.5; margin-bottom:1rem; flex:1 }
+.lab-tags{ display:flex; flex-wrap:wrap; gap:.4rem; margin:.5rem 0; padding:0; list-style:none }
+.lab-tags li{ border:1px solid var(--border); border-radius:999px; padding:.15rem .55rem; font-size:.78rem; color:var(--ink); background:rgba(249,115,22,0.05) }
+.lab-actions{ margin-top:auto; display:flex; justify-content:center }
+.view-images-btn{ 
+  width:100%; 
+  justify-content:center; 
+  font-size:.9rem;
+  padding:.7rem 1rem;
+}
 
 /* RESPONSIVE */
 @media (max-width: 1024px){

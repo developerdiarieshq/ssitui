@@ -66,7 +66,7 @@
                   <router-link to="/mech" class="dropdown-item">MECH</router-link>
                   <router-link to="/sh" class="dropdown-item">S & H</router-link>
                   <router-link to="/polytechnic" class="dropdown-item">Polytechnic</router-link>
-                  <router-link to="/examination-branch" class="dropdown-item">Examination Branch</router-link>
+                  <router-link to="/mba" class="dropdown-item">MBA</router-link>
                 </div>
                 <div class="col-md-4">
                   <h6 class="fw-bold text-uppercase mb-2">Placements</h6>
