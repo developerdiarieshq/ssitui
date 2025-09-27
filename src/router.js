@@ -52,6 +52,7 @@ import Polytechnic from './views/departments/Polytechnic.vue'
 import Eee from './views/departments/Eee.vue'
 import Mech from './views/departments/Mech.vue'
 import Examination from './views/departments/Examination.vue'
+import Mba from './views/departments/Mba.vue'
 
 
 
@@ -109,7 +110,8 @@ const routes = [
     { path: '/polytechnic', component: Polytechnic },
     { path: '/eee', component: Eee },
     { path: '/mech', component: Mech },
-    { path: '/examination-branch', component: Examination }
+    { path: '/examination-branch', component: Examination },
+    { path: '/mba', component: Mba }
 
 ]
 
