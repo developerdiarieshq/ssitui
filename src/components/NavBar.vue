@@ -115,8 +115,8 @@
                   <h6 class="fw-bold text-uppercase mb-2">Examinations</h6>
                   <router-link to="/coe" class="dropdown-item">COE</router-link>
                   <router-link to="/exam-notices" class="dropdown-item">Notices</router-link>
-                  <router-link to="/exam-regulations" class="dropdown-item">Academic Regulations</router-link>
-                  <router-link to="/exam-calendar" class="dropdown-item">Academic Calendar</router-link>
+                  <router-link to="/academic-regulations" class="dropdown-item">Academic Regulations</router-link>
+                  <router-link to="/academic-calendar" class="dropdown-item">Academic Calendar</router-link>
                   <router-link to="/exam-syllabus" class="dropdown-item">Syllabus</router-link>
                   <router-link to="/exam-timetables" class="dropdown-item">Timetables</router-link>
                   <router-link to="/exam-results" class="dropdown-item">Results</router-link>

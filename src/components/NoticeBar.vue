@@ -4,11 +4,15 @@
       <span>✨ Welcome to Sai Spurthi Institute of Technology ✨</span>
       <span>
         🔔 NEW: Click here to
-        <a href="#">BTECH B- Category Seats Advertisement</a> 🔔
+        <router-link to="/btech-b-category-seats">BTECH B- Category Seats Advertisement</router-link> 🔔
       </span>
       <span>
         📢 NEW: Click here to
-        <a href="#">BTECH B- Category Seats Application Form</a> 📢
+        <router-link to="/btech-b-category-seats">BTECH B- Category Seats Application Form</router-link> 📢
+      </span>
+      <span>
+        🎓 NEW: Click here to
+        <router-link to="/mba-b-category-seats">MBA B- Category Seats Application Form</router-link> 🎓
       </span>
     </div>
   </div>
@@ -32,6 +36,11 @@
 .notice-bar a {
   color: #fff;
   text-decoration: underline;
+}
+
+.notice-bar a:hover {
+  text-decoration: none;
+  color: #FFEB3B;
 }
 
 .scrolling-text {

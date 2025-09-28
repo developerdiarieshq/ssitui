@@ -1,0 +1,112 @@
+{
+    "title": "Controller of Examinations",
+    "faculty": [
+        {
+            "name": "Mr. G. Prabhakara Reddy",
+            "position": "Controller of Examinations",
+            "email": "coe@mlrinstitutions.ac.in"
+        },
+        {
+            "name": "Mr. P. Amerandra Reddy",
+            "position": "Addl. Controller of Examinations",
+            "email": null
+        },
+        {
+            "name": "Mr. O. Ramesh",
+            "position": "Addl. Controller of Examinations",
+            "email": null
+        }
+    ],
+    "about": {
+        "description": "The office of the Controller of Examinations was established in the year 2015 after the conferment of Autonomous status to the institute. The Controller of Examinations is responsible for preparation, scheduling, and conduct of CIE and SEE for all the UG & PG programmes offered by the institute. It also facilitates central valuation of answer scripts and timely publication of Results."
+    },
+    "responsibilities": {
+        "preExamination": {
+            "title": "1. Pre-Examination process:",
+            "items": [
+                "1.1. Conducting the continuous Internal Examinations(CIE)",
+                "1.2. Preparation of consolidate internal marks statement and verification",
+                "1.3. Syllabus/ procurement of question papers for Sem-end examinations",
+                "1.4. Question paper setting",
+                "1.5. Registration of the students",
+                "1.6. Preparation of OMR answer scripts with variable data."
+            ]
+        },
+        "duringExamination": {
+            "title": "2. Process during Examination:",
+            "items": [
+                "2.1. Conduct of semester end lab examinations",
+                "2.2. Conduct of supplementary lab",
+                "2.3. Conduct of semester end theory examinations(SEE)",
+                "2.4. Preparation of D-forms",
+                "2.5. Monitoring of Malpractice cases"
+            ]
+        },
+        "postExamination": {
+            "title": "3. Post-examination process:",
+            "items": [
+                "3.1. Scanning of Booklets & Bundle Generation",
+                "3.2. Spot valuation",
+                "3.3. Scrutinizing",
+                "3.4. Results processing and publishing",
+                "3.5. Recounting/revaluation (RC/RV)of UG/PG examination",
+                "3.6. Supplementary theory Examinations",
+                "3.7. Advanced supplementary Examinations",
+                "3.8. Tabulation and declaration of results",
+                "3.9. Printing and issue of grade sheets, Consolidated Marks Memo(CMM), Provisional Certificate(PC) and Transcripts."
+            ]
+        },
+        "note": "Finally Sending a list of successful candidates with their Cumulative Grade Point Average (CGPA) to the Jawaharlal Nehru Technological University Hyderabad, Hyderabad for issuing Original Degree Certificate."
+    },
+    "hallTickets": {
+        "description": [
+            "Students who enroll for a PG / UG programme shall appear for all the semester end examinations need to register for the semester end examinations through 'On-line' registration system.",
+            "In case of students having supplementary examinations, they need to choose the supplementary courses at the time of online-submission of exam applications. Upon successful completion of the online exam application procedure within the stipulated time period as communicated by the Controller's office, the student may take out his own 'Hall-Ticket' in the printed format from examination portal.",
+            "The student may not be able to apply for the online examination using his registration details if s/he has semester payment dues. If s/he falls short of the required percentage of attendance, s/he may not be able to download the Hall-Ticket."
+        ],
+        "note": "The online application weblink and hall ticket printing facility may be kept open for students' access only for a limited period of time as will be announced during the end of each semester. Beyond this time period, no student may have access to do so. Students who fail to apply through online mode for semester examinations may not be permitted to appear for the exams under any circumstances. Students who fail to print their own hall-ticket within this 'access-period' may not be permitted to appear for the exams under any circumstances."
+    },
+    "evaluation": {
+        "description": "Evaluation of answer books for all examinations (CIE & SEE) shall be done centrally. All the answer scripts are scanned on the day of examination and encoded with auto-generated codes The theory papers of CIE are evaluated by internal faculty and SEE are evaluated by the Internal examiners and external examiner identified from reputed institutions."
+    },
+    "cbtExamination": {
+        "description": "The CBT examination is conducted to benefit the students who missed the CIE in one or more courses due to medical grounds as well as for those who missed the CIE on genuine grounds. Students can register and write CBT examinations by paying a requisite amount."
+    },
+    "revaluation": {
+        "description": "If the examinee is not satisfied with the marks awarded, he/she may apply for revaluation of answer book in prescribed format online within three (3) working days from the date of declaration of result of the examination or issue of the statement of marks, whichever is earlier. The revaluation facility shall be for theory papers only. The revaluation of answer book shall not be permitted in respect of the marks awarded to the scripts of practical examination / project work (including theory part) and in viva voce / oral / comprehensive examinations.",
+        "process": "The re-evaluation will be done by a second independent examiner. The result after re-evaluation shall be as follows:",
+        "criteria": "The revaluation marks are considered only if the difference between the original award and award on reevaluation is more than equal to 15% of 70 marks (11 marks)."
+    },
+    "discipline": {
+        "examTimings": {
+            "title": "Examination Timings:",
+            "duration": "Examinations with 3 hours duration",
+            "sessions": [
+                "FN session – 10.00 AM to 1.00 PM",
+                "AN session – 2.00 PM to 5.00 PM"
+            ]
+        },
+        "guidelines": {
+            "title": "Guidelines for Students:",
+            "description": "For the smooth conduct of the examinations, the candidates are instructed to adhere to the following guidelines:",
+            "subtitle": "The candidates have to:",
+            "items": [
+                "Check the Hall No. and seating plan daily.",
+                "Enter the hall 15 minutes before the commencement of the examination and occupy their seat correctly.",
+                "Carry Admit card and Identity card to the examination hall.",
+                "Check whether the answer book is damaged /contains all the pages. No additional sheets will be issued.",
+                "Check whether the Register Number, Degree/Branch, Course code/ Name and Date of the exams are written correctly in the answer booklet.",
+                "On receipt of question paper, Verify the Course code / Name and ensure that the correct question paper is received, on receipt of question paper.",
+                "Ensure whether they signed in the attendance sheet before leaving the exam hall.",
+                "Maintain silence inside the examination hall.",
+                "Who resort to malpractice of any nature will be consider seriously and necessary disciplinary action will also be taken against them (as given in academic regulations booklet). It may lead to even, cancellation of all the exams written by them during the semester.",
+                "Report any missing data / figure or discrepancy in the question paper to the Invigilator inside the Hall.",
+                "Leave the exam hall only for any emergency like natural calls / illness with the prior permission from the Controller of Examinations / respective invigilator and with the assistance of supporting staff.",
+                "Ensure that they should not be in possession of mobile phone, programmable calculator, pager and any notes or other written / printed matter except as may be specifically permitted by the Controller of Examinations (COE).",
+                "Are prohibited from writing or leaving any distinguished marks so as to identify their paper.",
+                "Make sure that they did not detach any sheets from the answer booklet and answer booklet should not be taken out of the hall.",
+                "Return back any data books / charts / manuals issued to them before leaving the hall."
+            ]
+        }
+    }
+}

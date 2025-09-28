@@ -42,6 +42,13 @@ import Temple from './views/amenities/Temple.vue'
 import DigitalLibrary from './views/amenities/DigitalLibrary.vue'
 import IctFacilities from './views/amenities/IctFacilities.vue'
 
+// EXAMINATIONS
+import Coe from './views/examinations/Coe.vue'
+import ExamNotifications from './views/examinations/ExamNotifications.vue'
+import Syllabus from './views/examinations/Syllabus.vue'
+import Timetables from './views/examinations/Timetables.vue'
+import Results from './views/examinations/Results.vue'
+
 //DEPARTMENTS
 import Cse from './views/departments/CSE.vue'
 import CseAi from './views/departments/CseAi.vue'
@@ -53,6 +60,11 @@ import Eee from './views/departments/Eee.vue'
 import Mech from './views/departments/Mech.vue'
 import Examination from './views/departments/Examination.vue'
 import Mba from './views/departments/Mba.vue'
+
+// B-Category Seats Components
+import MBABCategorySeats from './views/BCategorySeats/MBA.vue'
+import BTECHBCategorySeats from './views/BCategorySeats/BTECH.vue'
+import PolytechnicBCategorySeats from './views/BCategorySeats/Polytechnic.vue'
 
 
 
@@ -102,6 +114,15 @@ const routes = [
     { path: '/temple', component: Temple },
     { path: '/digital-library', component: DigitalLibrary },
     { path: '/ict-facilities', component: IctFacilities },
+
+    // Examinations Routes
+    { path: '/controller-of-examinations', component: Coe },
+    { path: '/coe', component: Coe },
+    { path: '/exam-notices', component: ExamNotifications },
+    { path: '/exam-syllabus', component: Syllabus },
+    { path: '/exam-timetables', component: Timetables },
+    { path: '/exam-results', component: Results },
+
     { path: '/cse', component: Cse },
     { path: '/cse-ai', component: CseAi },
     { path: '/cse-ai-ds', component: CseAiDs },
@@ -111,7 +132,12 @@ const routes = [
     { path: '/eee', component: Eee },
     { path: '/mech', component: Mech },
     { path: '/examination-branch', component: Examination },
-    { path: '/mba', component: Mba }
+    { path: '/mba', component: Mba },
+
+    // B-Category Seats Routes
+    { path: '/mba-b-category-seats', component: MBABCategorySeats },
+    { path: '/btech-b-category-seats', component: BTECHBCategorySeats },
+    { path: '/polytechnic-b-category-seats', component: PolytechnicBCategorySeats }
 
 ]
 
