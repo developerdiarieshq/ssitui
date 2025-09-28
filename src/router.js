@@ -61,6 +61,11 @@ import Mech from './views/departments/Mech.vue'
 import Examination from './views/departments/Examination.vue'
 import Mba from './views/departments/Mba.vue'
 
+// DIPLOMA DEPARTMENTS
+import DME from './views/departments/DME.vue'
+import DEEE from './views/departments/DEEE.vue'
+import DECE from './views/departments/DECE.vue'
+
 // B-Category Seats Components
 import MBABCategorySeats from './views/BCategorySeats/MBA.vue'
 import BTECHBCategorySeats from './views/BCategorySeats/BTECH.vue'
@@ -134,10 +139,18 @@ const routes = [
     { path: '/examination-branch', component: Examination },
     { path: '/mba', component: Mba },
 
+    // Diploma Department Routes
+    { path: '/dme', component: DME },
+    { path: '/deee', component: DEEE },
+    { path: '/dece', component: DECE },
+
     // B-Category Seats Routes
     { path: '/mba-b-category-seats', component: MBABCategorySeats },
     { path: '/btech-b-category-seats', component: BTECHBCategorySeats },
-    { path: '/polytechnic-b-category-seats', component: PolytechnicBCategorySeats }
+    { path: '/polytechnic-b-category-seats', component: PolytechnicBCategorySeats },
+
+    // Redirects for missing routes
+    { path: '/trust', redirect: '/society' }
 
 ]
 
