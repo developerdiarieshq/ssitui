@@ -5,7 +5,7 @@
       <div class="text-center mb-5">
         <h3 class="section-title">Our Achievements in Numbers</h3>
         <div class="underscore"></div>
-        <p class="text-muted mt-3">Excellence in education, innovation, and student success</p>
+        <p class="text-muted mt-3">Quality education in rural setting, nurturing talent and building futures</p>
       </div>
 
       <!-- Statistics Grid -->
@@ -19,7 +19,7 @@
             <h3 class="stat-number fw-bold text-dark mb-1">{{ animatedStats.students }}</h3>
             <h6 class="stat-label text-muted fw-medium">Total Students</h6>
             <p class="stat-description text-muted small mt-1">
-              Enrolled across all programs
+              Dedicated learners from rural communities
             </p>
           </div>
         </div>
@@ -33,21 +33,21 @@
             <h3 class="stat-number fw-bold text-dark mb-1">{{ animatedStats.faculty }}</h3>
             <h6 class="stat-label text-muted fw-medium">Expert Faculty</h6>
             <p class="stat-description text-muted small mt-1">
-              Highly qualified educators
+              Committed faculty members
             </p>
           </div>
         </div>
 
-        <!-- Placements -->
+        <!-- Scholarships -->
         <div class="col-lg-3 col-md-6 mb-3">
           <div class="stat-card text-center p-3 h-100">
             <div class="stat-icon mb-2">
-              <i class="fas fa-briefcase fa-2x text-orange"></i>
+              <i class="fas fa-graduation-cap fa-2x text-orange"></i>
             </div>
-            <h3 class="stat-number fw-bold text-dark mb-1">{{ animatedStats.placements }}%</h3>
-            <h6 class="stat-label text-muted fw-medium">Placement Rate</h6>
+            <h3 class="stat-number fw-bold text-dark mb-1">{{ animatedStats.scholarships }}</h3>
+            <h6 class="stat-label text-muted fw-medium">Scholarships Awarded</h6>
             <p class="stat-description text-muted small mt-1">
-              Successfully placed graduates
+              Supporting deserving students
             </p>
           </div>
         </div>
@@ -61,7 +61,7 @@
             <h3 class="stat-number fw-bold text-dark mb-1">{{ animatedStats.years }}</h3>
             <h6 class="stat-label text-muted fw-medium">Years of Excellence</h6>
             <p class="stat-description text-muted small mt-1">
-              Since establishment in 2001
+              Since establishment in 2009
             </p>
           </div>
         </div>
@@ -70,12 +70,12 @@
         <div class="col-lg-3 col-md-6 mb-3">
           <div class="stat-card text-center p-3 h-100">
             <div class="stat-icon mb-2">
-              <i class="fas fa-graduation-cap fa-2x text-orange"></i>
+              <i class="fas fa-book fa-2x text-orange"></i>
             </div>
             <h3 class="stat-number fw-bold text-dark mb-1">{{ animatedStats.programs }}</h3>
             <h6 class="stat-label text-muted fw-medium">Academic Programs</h6>
             <p class="stat-description text-muted small mt-1">
-              UG, PG & Diploma courses
+              Engineering & Management programs
             </p>
           </div>
         </div>
@@ -89,7 +89,7 @@
             <h3 class="stat-number fw-bold text-dark mb-1">{{ animatedStats.companies }}</h3>
             <h6 class="stat-label text-muted fw-medium">Recruiting Companies</h6>
             <p class="stat-description text-muted small mt-1">
-              Top-tier organizations
+              Partner companies & organizations
             </p>
           </div>
         </div>
@@ -103,7 +103,7 @@
             <h3 class="stat-number fw-bold text-dark mb-1">{{ animatedStats.labs }}</h3>
             <h6 class="stat-label text-muted fw-medium">Modern Laboratories</h6>
             <p class="stat-description text-muted small mt-1">
-              State-of-the-art facilities
+              Well-equipped learning spaces
             </p>
           </div>
         </div>
@@ -117,7 +117,7 @@
             <h3 class="stat-number fw-bold text-dark mb-1">{{ animatedStats.alumni }}</h3>
             <h6 class="stat-label text-muted fw-medium">Successful Alumni</h6>
             <p class="stat-description text-muted small mt-1">
-              Making their mark globally
+              Contributing to society & industry
             </p>
           </div>
         </div>
@@ -132,21 +132,21 @@ import { ref, onMounted } from 'vue'
 
 // Statistics data
 const stats = {
-  students: 2500,
-  faculty: 120,
-  placements: 95,
-  years: 24,
-  programs: 10,
-  companies: 150,
-  labs: 25,
-  alumni: 5000
+  students: 800,
+  faculty: 45,
+  scholarships: 180,
+  years: 15,
+  programs: 8,
+  companies: 25,
+  labs: 12,
+  alumni: 1200
 }
 
 // Animated statistics
 const animatedStats = ref({
   students: 0,
   faculty: 0,
-  placements: 0,
+  scholarships: 0,
   years: 0,
   programs: 0,
   companies: 0,

@@ -4,38 +4,21 @@
       <!-- Campus Placements 2025 Banner -->
       <div class="placement-banner mb-4">
         <div class="banner-content">
-          <h5 class="banner-title">Campus Placements 2025:</h5>
+          <h5 class="banner-title">{{ campusPlacements2025.title }}</h5>
           <div class="marquee-container">
             <div class="marquee-content">
               <div class="company-list">
-                <span class="company-item">Cognizant(154)</span>
-                <span class="company-divider">||</span>
-                <span class="company-item">Infosys(42)</span>
-                <span class="company-divider">||</span>
-                <span class="company-item">Tech Mahindra(28)</span>
-                <span class="company-divider">||</span>
-                <span class="company-item">HCL Tech(27)</span>
-                <span class="company-divider">||</span>
-                <span class="company-item">UST(17)</span>
-                <span class="company-divider">||</span>
-                <span class="company-item">GlobalLogic(38)</span>
-                <span class="company-divider">||</span>
-                <span class="company-item">SLK(18)</span>
+                <!-- First set of companies -->
+                <template v-for="(company, index) in campusPlacements2025.companies" :key="`first-${index}`">
+                  <span class="company-item">{{ company.name }}({{ company.students }})</span>
+                  <span class="company-divider" v-if="index < campusPlacements2025.companies.length - 1">||</span>
+                </template>
                 <!-- Duplicate for seamless loop -->
                 <span class="company-divider">||</span>
-                <span class="company-item">Cognizant(154)</span>
-                <span class="company-divider">||</span>
-                <span class="company-item">Infosys(42)</span>
-                <span class="company-divider">||</span>
-                <span class="company-item">Tech Mahindra(28)</span>
-                <span class="company-divider">||</span>
-                <span class="company-item">HCL Tech(27)</span>
-                <span class="company-divider">||</span>
-                <span class="company-item">UST(17)</span>
-                <span class="company-divider">||</span>
-                <span class="company-item">GlobalLogic(38)</span>
-                <span class="company-divider">||</span>
-                <span class="company-item">SLK(18)</span>
+                <template v-for="(company, index) in campusPlacements2025.companies" :key="`second-${index}`">
+                  <span class="company-item">{{ company.name }}({{ company.students }})</span>
+                  <span class="company-divider" v-if="index < campusPlacements2025.companies.length - 1">||</span>
+                </template>
               </div>
             </div>
           </div>
@@ -95,75 +78,31 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import placementData from '@/data/placement-data.json'
 
-// Top placements data
-const topPlacements = ref([
-  {
-    id: 1,
-    company: 'Capgemini',
-    students: '180',
-    logo: new URL('@/assets/companies/Capgemini.svg', import.meta.url).href
-  },
-  {
-    id: 2,
-    company: 'Hexaware',
-    students: '179',
-    logo: new URL('@/assets/companies/HW.png', import.meta.url).href
-  },
-  {
-    id: 3,
-    company: 'Infosys',
-    students: '64',
-    logo: new URL('@/assets/companies/Infosys.png', import.meta.url).href
-  },
-  {
-    id: 4,
-    company: 'Cybage',
-    students: '30',
-    logo: new URL('@/assets/companies/TechM.png', import.meta.url).href
-  },
-  {
-    id: 5,
-    company: 'Accenture',
-    students: '19',
-    logo: new URL('@/assets/companies/Accenture.png', import.meta.url).href
-  }
-])
+// Reactive data
+const topPlacements = ref([])
+const topRecruiters = ref([])
+const campusPlacements2025 = ref({})
 
-// Top recruiters data
-const topRecruiters = ref([
-  {
-    name: 'Tech Mahindra',
-    logo: new URL('@/assets/companies/TechM.png', import.meta.url).href,
-    info: 'Leading IT Services'
-  },
-  {
-    name: 'Infosys',
-    logo: new URL('@/assets/companies/infosys.png', import.meta.url).href,
-    info: 'Global Technology'
-  },
-  {
-    name: 'Wipro',
-    logo: new URL('@/assets/wipro.png', import.meta.url).href,
-    info: 'IT Solutions'
-  },
-  {
-    name: 'Microsoft',
-    logo: new URL('@/assets/microsoft.png', import.meta.url).href,
-    info: 'Technology Giant'
-  },
-  {
-    name: 'Oracle',
-    logo: new URL('@/assets/oracle.png', import.meta.url).href,
-    info: 'Database Solutions'
-  },
-  {
-    name: 'Cisco',
-    logo: new URL('@/assets/cisco.png', import.meta.url).href,
-    info: 'Networking Leader'
-  }
-])
+// Load data from JSON
+onMounted(() => {
+  // Process top placements data
+  topPlacements.value = placementData.topPlacements.map(placement => ({
+    ...placement,
+    logo: new URL(placement.logo, import.meta.url).href
+  }))
+
+  // Process top recruiters data
+  topRecruiters.value = placementData.topRecruiters.map(recruiter => ({
+    ...recruiter,
+    logo: new URL(recruiter.logo, import.meta.url).href
+  }))
+
+  // Process campus placements 2025 data
+  campusPlacements2025.value = placementData.campusPlacements2025
+})
 
 </script>
 

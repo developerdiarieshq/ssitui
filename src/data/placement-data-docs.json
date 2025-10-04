@@ -1,0 +1,58 @@
+{
+    "description": "Placement Data Structure Documentation",
+    "usage": "This JSON file contains all placement-related data for the PlacementHighlights.vue component",
+    "structure": {
+        "campusPlacements2025": {
+            "description": "Current year placement banner data",
+            "fields": {
+                "title": "Banner title text",
+                "companies": "Array of company objects with name and student count"
+            }
+        },
+        "topPlacements": {
+            "description": "Top placement companies with student counts",
+            "fields": {
+                "id": "Unique identifier",
+                "company": "Company name",
+                "students": "Number of students placed (string format)",
+                "logo": "Path to company logo asset"
+            }
+        },
+        "topRecruiters": {
+            "description": "Top recruiting companies",
+            "fields": {
+                "name": "Company name",
+                "logo": "Path to company logo asset",
+                "info": "Brief description of company"
+            }
+        },
+        "placementStats": {
+            "description": "Overall placement statistics",
+            "fields": {
+                "totalStudents": "Total number of students",
+                "totalCompanies": "Total number of companies",
+                "averagePackage": "Average package offered",
+                "highestPackage": "Highest package offered"
+            }
+        },
+        "placementYears": {
+            "description": "Year-wise placement data for historical tracking",
+            "fields": {
+                "year": {
+                    "totalOffers": "Total offers made",
+                    "totalCompanies": "Number of companies participated",
+                    "averagePackage": "Average package for the year",
+                    "highestPackage": "Highest package for the year"
+                }
+            }
+        }
+    },
+    "extending": {
+        "note": "To add new data, follow the existing structure patterns",
+        "examples": {
+            "addNewCompany": "Add to appropriate array in the JSON structure",
+            "addNewYear": "Add new year object to placementYears",
+            "addNewStats": "Add new fields to placementStats object"
+        }
+    }
+}

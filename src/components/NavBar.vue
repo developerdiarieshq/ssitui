@@ -45,7 +45,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Governance</a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Organogram</a></li>
+              <li><router-link to="/organogram" class="dropdown-item">Organogram</router-link></li>
                <li><router-link to="/trust" class="dropdown-item">Trust</router-link></li>
                <li><router-link to="/governing-body" class="dropdown-item">Governing Body</router-link></li>
                 <li><router-link to="/principal-desk" class="dropdown-item">Principal's Desk</router-link></li>

@@ -23,6 +23,7 @@ import Committees from './views/governance/Committees.vue'
 import GoverningBody from './views/governance/GoverningBody.vue'
 import iqac from './views/governance/iqac.vue'
 import Policies from './views/governance/Policies.vue'
+import Organogram from './views/governance/Organogram.vue'
 import AcademicRegulations from './views/Academics/AcademicRegulations.vue'
 import AcademicCalendar from './views/Academics/AcademicCalendar.vue'
 import Incentives from './views/Academics/Incentives.vue'
@@ -100,6 +101,7 @@ const routes = [
     { path: '/governing-body', component: GoverningBody },
     { path: '/iqac', component: iqac },
     { path: '/policies', component: Policies },
+    { path: '/organogram', component: Organogram },
     { path: '/academic-regulations', component: AcademicRegulations },
     { path: '/academic-calendar', component: AcademicCalendar },
     { path: '/incentives', component: Incentives },
@@ -129,6 +131,7 @@ const routes = [
     { path: '/exam-results', component: Results },
 
     { path: '/cse', component: Cse },
+    { path: '/cse/:tab', component: Cse },
     { path: '/cse-ai', component: CseAi },
     { path: '/cse-ai-ds', component: CseAiDs },
     { path: '/ece', component: Ece },
@@ -170,6 +173,11 @@ const getRouterConfig = () => {
             history: createWebHistory('/ssitui/'),
             routes,
             scrollBehavior(to, from, savedPosition) {
+                // Don't scroll to top for tab navigation within same component
+                if (to.path.includes('/cse/') && from.path.includes('/cse/')) {
+                    return false
+                }
+                // For other navigation, scroll to top
                 return { top: 0 }
             }
         }
@@ -181,6 +189,11 @@ const getRouterConfig = () => {
             history: createWebHistory(),
             routes,
             scrollBehavior(to, from, savedPosition) {
+                // Don't scroll to top for tab navigation within same component
+                if (to.path.includes('/cse/') && from.path.includes('/cse/')) {
+                    return false
+                }
+                // For other navigation, scroll to top
                 return { top: 0 }
             }
         }
@@ -191,6 +204,11 @@ const getRouterConfig = () => {
         history: createWebHashHistory(),
         routes,
         scrollBehavior(to, from, savedPosition) {
+            // Don't scroll to top for tab navigation within same component
+            if (to.path.includes('/cse/') && from.path.includes('/cse/')) {
+                return false
+            }
+            // For other navigation, scroll to top
             return { top: 0 }
         }
     }

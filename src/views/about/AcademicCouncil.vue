@@ -387,7 +387,7 @@ const setMeetingsViewMode = (mode) => {
 const members = [
   { 
     name: "Dr. V S Ratna Kumari", 
-    position: "Chairman & Principal",
+    position: "Principal",
     image: new URL('@/assets/management/principal.jpg', import.meta.url).href
   },
   { 

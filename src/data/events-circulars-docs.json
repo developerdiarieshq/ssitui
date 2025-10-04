@@ -1,0 +1,91 @@
+{
+    "description": "Events & Circulars Data Structure Documentation",
+    "usage": "This JSON file contains all events and circulars data for the EventsCirculars.vue component",
+    "structure": {
+        "events": {
+            "description": "Array of upcoming events",
+            "fields": {
+                "id": "Unique identifier for the event",
+                "day": "Day of the month (string format)",
+                "month": "Month abbreviation (e.g., 'FEB', 'MAR')",
+                "title": "Event title/name",
+                "time": "Event time (e.g., '10:00 AM')",
+                "venue": "Event location/venue",
+                "brochure": "Link to event brochure (optional)",
+                "link": "Link to event website/details (optional)",
+                "description": "Detailed event description",
+                "category": "Event category (Academic, Technical, Sports, Cultural)",
+                "status": "Event status (upcoming, ongoing, completed)"
+            }
+        },
+        "circulars": {
+            "description": "Array of latest circulars/notices",
+            "fields": {
+                "id": "Unique identifier for the circular",
+                "day": "Day of the month (string format)",
+                "month": "Month abbreviation (e.g., 'FEB', 'MAR')",
+                "title": "Circular title",
+                "date": "Full publication date (e.g., '10 Feb 2025')",
+                "link": "Link to circular details (optional)",
+                "description": "Brief description of the circular",
+                "category": "Circular category (Academic, Holiday, Facility, Financial)",
+                "priority": "Priority level (high, medium, low)",
+                "status": "Circular status (active, archived, expired)"
+            }
+        },
+        "eventCategories": {
+            "description": "Available event categories with styling",
+            "fields": {
+                "id": "Category ID",
+                "name": "Category name",
+                "color": "Hex color code for category",
+                "icon": "FontAwesome icon class"
+            }
+        },
+        "circularCategories": {
+            "description": "Available circular categories with styling",
+            "fields": {
+                "id": "Category ID",
+                "name": "Category name",
+                "color": "Hex color code for category",
+                "icon": "FontAwesome icon class"
+            }
+        },
+        "settings": {
+            "description": "Component configuration settings",
+            "fields": {
+                "maxEventsDisplay": "Maximum number of events to display",
+                "maxCircularsDisplay": "Maximum number of circulars to display",
+                "showCategories": "Whether to show category information",
+                "enableFilters": "Whether to enable filtering options",
+                "autoRefresh": "Whether to auto-refresh data",
+                "refreshInterval": "Refresh interval in milliseconds"
+            }
+        },
+        "links": {
+            "description": "Navigation links for the component",
+            "fields": {
+                "viewAllEvents": "Link to view all events page",
+                "viewAllCirculars": "Link to view all circulars page",
+                "eventRegistration": "Link to event registration",
+                "circularArchive": "Link to circular archive"
+            }
+        }
+    },
+    "extending": {
+        "note": "To add new data, follow the existing structure patterns",
+        "examples": {
+            "addNewEvent": "Add new event object to events array with all required fields",
+            "addNewCircular": "Add new circular object to circulars array with all required fields",
+            "addNewCategory": "Add new category to eventCategories or circularCategories arrays",
+            "modifySettings": "Update settings object to change component behavior"
+        }
+    },
+    "bestPractices": {
+        "dataFormat": "Use consistent date formats and naming conventions",
+        "links": "Always provide fallback links (#) if actual links are not available",
+        "categories": "Use predefined categories for consistency",
+        "priorities": "Use standard priority levels (high, medium, low)",
+        "statuses": "Use standard status values (active, upcoming, completed, etc.)"
+    }
+}

@@ -38,7 +38,7 @@
           </ul>
           <!-- View All Events Button -->
           <div class="text-center">
-            <a href="/events" class="btn btn-outline-orange">View All</a>
+            <a :href="links.viewAllEvents" class="btn btn-outline-orange">View All</a>
           </div>
         </div>
 
@@ -71,7 +71,7 @@
           </ul>
           <!-- View All Circulars Button -->
           <div class="text-center">
-            <a href="/circulars" class="btn btn-outline-orange">View All</a>
+            <a :href="links.viewAllCirculars" class="btn btn-outline-orange">View All</a>
           </div>
         </div>
       </div>
@@ -80,17 +80,30 @@
 </template>
 
 <script setup>
-const events = [
-  { day: '15', month: 'FEB', title: 'National Science Day Celebration', time: '10:00 AM', venue: 'Auditorium', brochure: '#', link: '#' },
-  { day: '28', month: 'FEB', title: 'Workshop on AI & ML', time: '2:00 PM', venue: 'Seminar Hall', brochure: '#', link: '#' },
-  { day: '05', month: 'MAR', title: 'Annual Sports Meet', time: '9:00 AM', venue: 'College Grounds', brochure: '#', link: '#' }
-]
+import { ref, onMounted } from 'vue'
+import eventsCircularsData from '@/data/events-circulars-data.json'
 
-const circulars = [
-  { day: '10', month: 'FEB', title: 'Exam Schedule for B.Tech Semester II', date: '10 Feb 2025', link: '#' },
-  { day: '08', month: 'FEB', title: 'Holiday Notice for Maha Shivaratri', date: '8 Feb 2025', link: '#' },
-  { day: '05', month: 'FEB', title: 'Revised Academic Calendar 2025', date: '5 Feb 2025', link: '#' }
-]
+// Reactive data
+const events = ref([])
+const circulars = ref([])
+const settings = ref({})
+const links = ref({})
+
+// Load data from JSON
+onMounted(() => {
+  // Load events data (limit to maxEventsDisplay)
+  const maxEvents = eventsCircularsData.settings.maxEventsDisplay
+  events.value = eventsCircularsData.events.slice(0, maxEvents)
+  
+  // Load circulars data (limit to maxCircularsDisplay)
+  const maxCirculars = eventsCircularsData.settings.maxCircularsDisplay
+  circulars.value = eventsCircularsData.circulars.slice(0, maxCirculars)
+  
+  // Load settings and links
+  settings.value = eventsCircularsData.settings
+  links.value = eventsCircularsData.links
+})
+
 </script>
 
 <style scoped>
