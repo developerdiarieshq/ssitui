@@ -443,8 +443,8 @@
             </div>
           </div>
           <div class="row-actions mt-1">
-            <a class="btn btn-soft" href="/academics/regulations">Academic Regulations</a>
-            <a class="btn btn-soft" href="/academics/calendar">Academic Calendar</a>
+            <a class="btn btn-soft" href="/ssitui/academic-regulations">Academic Regulations</a>
+            <a class="btn btn-soft" href="/ssitui/academic-calendar">Academic Calendar</a>
           </div>
         </div>
       </section>
@@ -573,15 +573,23 @@
               </li>
             </ul>
           </article>
-          <article class="card">
-            <h2 class="section-title"><i class="fa-solid fa-handshake"></i> Industry Connect</h2>
-            <ul class="bullets">
-              <li v-for="m in industry.mous" :key="m">{{ m }}</li>
-            </ul>
-            <div class="logo-row" aria-label="Recruiter logos">
-              <img v-for="l in industry.logos" :key="l.alt" :src="l.src" :alt="l.alt" />
-            </div>
-          </article>
+           <article class="card">
+             <h2 class="section-title"><i class="fa-solid fa-handshake"></i> Industry Connect</h2>
+             <ul class="bullets">
+               <li v-for="m in industry.mous" :key="m">{{ m }}</li>
+             </ul>
+             <div class="industry-partners">
+               <div v-for="partner in industry.partners" :key="partner.name" class="partner-item">
+                 <div class="partner-icon">
+                   <i :class="partner.icon"></i>
+                 </div>
+                 <div class="partner-logo">
+                   <img :src="partner.logo" :alt="partner.name" />
+                 </div>
+                 <div class="partner-name">{{ partner.name }}</div>
+               </div>
+             </div>
+           </article>
         </div>
       </section>
 
@@ -612,8 +620,10 @@
               </div>
             </div>
           </div>
-          <div class="logo-row mt-1">
-            <img v-for="l in placements.recruiters" :key="l.alt" :src="l.src" :alt="l.alt" />
+          <div class="placement-actions mt-2">
+            <a class="btn btn-primary" href="/ssitui/placement-records" target="_blank">
+              <i class="fa-solid fa-chart-bar me-2"></i>View Placement Records
+            </a>
           </div>
         </div>
       </section>
@@ -658,8 +668,10 @@
             </div>
           </article>
         </div>
-        <div class="row-actions mt-1">
-          <a class="btn btn-primary" href="mailto:alumni@ssit.edu.in">Join Alumni Network</a>
+        <div class="alumni-actions mt-2">
+          <a class="btn btn-primary" href="mailto:alumni@ssit.edu.in">
+            <i class="fa-solid fa-user-plus me-2"></i>Join Alumni Network
+          </a>
         </div>
       </section>
 
@@ -714,15 +726,15 @@
 
     <!-- PDF Viewer Modal -->
     <div v-if="showPdfModal" class="pdf-modal-overlay" @click="closePdfModal">
-      <div class="pdf-modal" :class="{ 'fullscreen': isPdfFullscreen }" @click.stop>
+      <div class="pdf-modal" @click.stop>
         <div class="pdf-modal-header">
           <h3 class="pdf-modal-title">
             <i class="fa-solid fa-file-pdf"></i>
             {{ currentPdfTitle }}
           </h3>
           <div class="pdf-modal-actions">
-            <button class="modal-btn" @click="togglePdfFullscreen" :title="isPdfFullscreen ? 'Exit Fullscreen (F)' : 'Enter Fullscreen (F)'">
-              <i :class="isPdfFullscreen ? 'fa-solid fa-compress' : 'fa-solid fa-expand'"></i>
+            <button class="modal-btn" @click="togglePdfFullscreen" title="Toggle Fullscreen (F)">
+              <i class="fa-solid fa-expand"></i>
             </button>
             <button class="modal-btn" @click="downloadPdf" title="Download PDF">
               <i class="fa-solid fa-download"></i>
@@ -873,7 +885,6 @@ const isEventsFullscreen = ref(false)
 const showPdfModal = ref(false)
 const currentPdfUrl = ref('')
 const currentPdfTitle = ref('')
-const isPdfFullscreen = ref(false)
 const isPdfLoading = ref(false)
 
 // Computed properties for ImagePreviewer
@@ -931,7 +942,20 @@ const downloadPdf = () => {
 }
 
 const togglePdfFullscreen = () => {
-  isPdfFullscreen.value = !isPdfFullscreen.value
+  const pdfModal = document.querySelector('.pdf-modal')
+  if (!pdfModal) return
+
+  if (!document.fullscreenElement) {
+    // Enter fullscreen
+    pdfModal.requestFullscreen().catch(err => {
+      console.error('Error attempting to enable fullscreen:', err)
+    })
+  } else {
+    // Exit fullscreen
+    document.exitFullscreen().catch(err => {
+      console.error('Error attempting to exit fullscreen:', err)
+    })
+  }
 }
 
 const onPdfLoad = () => {
@@ -949,7 +973,12 @@ const handlePdfKeydown = (event) => {
   
   switch(event.key) {
     case 'Escape':
-      closePdfModal()
+      // Exit fullscreen first if in fullscreen, then close modal
+      if (document.fullscreenElement) {
+        document.exitFullscreen()
+      } else {
+        closePdfModal()
+      }
       break
     case 'f':
     case 'F':
@@ -964,7 +993,6 @@ watch(showPdfModal, (isOpen) => {
     document.addEventListener('keydown', handlePdfKeydown)
   } else {
     document.removeEventListener('keydown', handlePdfKeydown)
-    isPdfFullscreen.value = false // Reset fullscreen when modal closes
   }
 })
 
@@ -1216,23 +1244,23 @@ const activities = [
 const eventImages = [
   {
     src: new URL('@/assets/departments/cse/activities/cse_acsess_1.jpg', import.meta.url).href,
-    title: 'Project Expo 2023',
-    desc: 'Students presenting their innovative projects'
+    title: 'Access Events',
+    desc: 'Access Events'
   },
   {
     src: new URL('@/assets/departments/cse/activities/cse_acsess_2.jpg', import.meta.url).href,
-    title: 'Cultural Events',
-    desc: 'Annual cultural fest and student activities'
+    title: 'Access Events',
+    desc: 'Access Events'
   },
   {
     src: new URL('@/assets/departments/cse/activities/cse_acsess_3.jpg', import.meta.url).href,
-    title: 'Study Sessions',
-    desc: 'Students collaborating in library sessions'
+    title: 'Access Events',
+    desc: 'Access Events'
   },
   {
     src: new URL('@/assets/departments/cse/activities/cse_acsess_4.jpg', import.meta.url).href,
-    title: 'Paper Presentations',
-    desc: 'Students delivering technical presentations'
+    title: 'Access Events',
+    desc: 'Access Events'
   }
 ]
 
@@ -1318,11 +1346,27 @@ const research = {
 }
 const industry = {
   mous: ['Microsoft • Cisco • Wipro • AWS Academy'],
-  logos: [
-    { src: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg', alt: 'Microsoft' },
-    { src: 'https://upload.wikimedia.org/wikipedia/commons/6/65/Cisco_logo.svg', alt: 'Cisco' },
-    { src: 'https://upload.wikimedia.org/wikipedia/commons/3/3b/Wipro_Primary_Logo_Color_RGB.svg', alt: 'Wipro' },
-    { src: 'https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg', alt: 'AWS' }
+  partners: [
+    { 
+      name: 'Microsoft', 
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg',
+      icon: 'fa-brands fa-microsoft'
+    },
+    { 
+      name: 'Cisco', 
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/6/65/Cisco_logo.svg',
+      icon: 'fa-brands fa-cisco'
+    },
+    { 
+      name: 'Wipro', 
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/3/3b/Wipro_Primary_Logo_Color_RGB.svg',
+      icon: 'fa-solid fa-building'
+    },
+    { 
+      name: 'AWS Academy', 
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg',
+      icon: 'fa-brands fa-aws'
+    }
   ]
 }
 
@@ -1330,13 +1374,7 @@ const industry = {
 const placements = {
   rate: 92,
   highestLPA: 18,
-  medianLPA: 5.6,
-  recruiters: [
-    { src: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Google_2015_logo.svg', alt: 'Google' },
-    { src: 'https://upload.wikimedia.org/wikipedia/commons/4/46/Accenture.svg', alt: 'Accenture' },
-    { src: 'https://upload.wikimedia.org/wikipedia/commons/1/19/Infosys_logo.svg', alt: 'Infosys' },
-    { src: 'https://upload.wikimedia.org/wikipedia/commons/9/99/TCS_Software.svg', alt: 'TCS' }
-  ]
+  medianLPA: 5.6
 }
 
 /* Alumni */
@@ -2193,13 +2231,6 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
   box-shadow:0 20px 60px rgba(0,0,0,0.3);
   transition:all 0.3s ease;
 }
-.pdf-modal.fullscreen{
-  width:100%;
-  height:100%;
-  max-width:none;
-  border-radius:0;
-  box-shadow:none;
-}
 .pdf-modal-header{
   display:flex;
   align-items:center;
@@ -2494,10 +2525,6 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
     width:98%;
     height:95%;
   }
-  .pdf-modal.fullscreen{
-    width:100%;
-    height:100%;
-  }
   .pdf-modal-header{
     padding:.8rem 1rem;
   }
@@ -2530,6 +2557,24 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
   border-radius: 0;
 }
 
+:fullscreen .pdf-modal-overlay,
+:-webkit-full-screen .pdf-modal-overlay,
+:-moz-full-screen .pdf-modal-overlay,
+:-ms-fullscreen .pdf-modal-overlay {
+  padding: 0;
+}
+
+:fullscreen .pdf-modal,
+:-webkit-full-screen .pdf-modal,
+:-moz-full-screen .pdf-modal,
+:-ms-fullscreen .pdf-modal {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
 /* Keyboard navigation hints */
 .modal-header::after {
   content: "Press F for fullscreen, ← → for navigation, ESC to close";
@@ -2554,25 +2599,78 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
   color: var(--orange); 
 }
 
-.image-info { 
-  background: rgba(0, 0, 0, 0.8); 
-  color: #fff; 
-  padding: 1rem; 
-  border-radius: 0.5rem; 
-  margin-top: 1rem;
-  text-align: center;
+/* Image info styles are now handled by ImagePreviewer component */
+
+/* INDUSTRY PARTNERS */
+.industry-partners{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:1rem;
+  margin-top:1rem;
+}
+@media (max-width:768px){ 
+  .industry-partners{ grid-template-columns:1fr; gap:0.75rem } 
+}
+.partner-item{
+  display:flex;
+  align-items:center;
+  gap:0.75rem;
+  padding:1rem;
+  border:1px solid var(--border);
+  border-radius:0.75rem;
+  background:#fff;
+  transition:all 0.3s ease;
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
+}
+.partner-item:hover{
+  transform:translateY(-1px);
+  box-shadow:0 4px 15px rgba(0,0,0,0.1);
+  border-color:var(--primary);
+}
+.partner-icon{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  background:var(--primary);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.2rem;
+  flex-shrink:0;
+}
+.partner-logo{
+  width:40px;
+  height:40px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
+.partner-logo img{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+}
+.partner-name{
+  font-size:0.9rem;
+  font-weight:500;
+  color:var(--ink);
+  flex:1;
 }
 
-.image-title { 
-  font-size: 1.1rem; 
-  font-weight: 600; 
-  margin-bottom: 0.5rem; 
-  color: #fff;
+/* PLACEMENT ACTIONS */
+.placement-actions{
+  text-align:center;
+  padding-top:1rem;
+  border-top:1px solid var(--border);
 }
 
-.image-desc { 
-  font-size: 0.9rem; 
-  opacity: 0.9; 
-  margin: 0; 
+/* ALUMNI ACTIONS */
+.alumni-actions{
+  text-align:center;
+  padding-top:1rem;
+  border-top:1px solid var(--border);
 }
+
 </style>
