@@ -26,7 +26,7 @@
             </li>
             <li>
               <span class="qf-label">Top Recruiters</span>
-              <span class="qf-value">Google • Microsoft • AWS</span>
+              <span class="qf-value">Leading Tech Companies</span>
             </li>
           </ul>
         </div>
@@ -404,21 +404,40 @@
 
       <!-- LABS / INFRA -->
       <section :id="tabsMap.labs" class="card-section" v-show="activeTab==='labs'">
-        <h2 class="section-title"><i class="fa-solid fa-flask"></i> Labs & Research Infrastructure</h2>
+        <div class="card">
+        <h2 class="section-title"><i class="fa-solid fa-laptop-code"></i> Laboratories & Infrastructure</h2>
+          <div class="labs-intro">
+            <p class="lead">
+              We have Fully Equipped AI/DS Laboratories with several Computer Labs equipped with latest AI/DS software's and high-performance workstations. 
+              It is connected to internet through a lease line to facilitate high speed internet access. All the computers 
+              are connected through a structured network. GPU servers and cloud computing facilities are also available in the lab. 
+              Our dedicated faculty and staff are proud of their impressive credentials, which are comparable to those 
+              of the best career instructors in AI/DS domain.
+            </p>
+          </div>
+        </div>
+        
         <div class="labs-grid">
           <article v-for="lab in labs" :key="lab.title" class="lab-card">
             <img :src="lab.img" :alt="lab.title" />
             <div class="lab-body">
               <h3 class="lab-title">{{ lab.title }}</h3>
               <p class="lab-text">{{ lab.desc }}</p>
-              <ul class="lab-tags"><li v-for="t in lab.tags" :key="t">{{ t }}</li></ul>
+              <ul class="lab-tags">
+                <li v-for="t in lab.tags" :key="t">{{ t }}</li>
+              </ul>
+              <div class="lab-actions">
+                <button 
+                  class="btn btn-primary view-images-btn" 
+                  @click="openImageModal(lab.images)"
+                >
+                  <i class="fa-solid fa-images"></i> View Images
+                </button>
+              </div>
             </div>
           </article>
         </div>
-        <div class="muted mt-1">
-          <i class="fa-solid fa-server"></i> GPU servers • <i class="fa-solid fa-cloud"></i> Cloud credits •
-          <i class="fa-solid fa-database"></i> Open datasets • <i class="fa-solid fa-gear"></i> TF • PyTorch • Scikit-learn
-        </div>
+        <div class="muted mt-1"><i class="fa-solid fa-wifi"></i> Wi-Fi campus • Smart Classrooms • Industry MoU Labs</div>
       </section>
 
       <!-- CURRICULUM -->
@@ -426,13 +445,14 @@
         <div class="card">
           <h2 class="section-title" id="curriculum"><i class="fa-solid fa-file-lines"></i> Curriculum & Syllabus</h2>
           <div class="downloads">
-            <a v-for="d in syllabus" :key="d.label" :href="d.href" class="download" target="_blank" rel="noopener">
+            <div v-for="d in syllabus" :key="d.label" class="download" :class="{ 'coming-soon': d.type === 'coming-soon' }" @click="handleSyllabusClick(d)">
               <i class="fa-solid fa-file-pdf"></i>
               <div>
                 <div class="dl-label">{{ d.label }}</div>
                 <div class="dl-sub">{{ d.note }}</div>
+                <div v-if="d.type === 'coming-soon'" class="dl-status">Coming Soon</div>
               </div>
-            </a>
+            </div>
           </div>
           <div class="row-actions mt-1">
             <a class="btn btn-soft" href="/academics/regulations">Academic Regulations</a>
@@ -441,14 +461,118 @@
         </div>
       </section>
 
+      <!-- BOS (Board of Studies) -->
+      <section
+        v-show="activeTab === 'bos'"
+        :id="`panel-bos`"
+        class="card-section"
+        role="tabpanel"
+        aria-labelledby="bos"
+      >
+        <div class="card">
+          <h2 class="section-title"><i class="fa-solid fa-graduation-cap"></i> Board of Studies (BOS)</h2>
+          <div class="bos-intro">
+            <p class="lead">
+              The Board of Studies (BOS) for Computer Science and Engineering (AI & DS) is responsible for the academic planning, 
+              curriculum development, and quality assurance of the CSE AI/DS program. The board ensures that the curriculum 
+              remains current with industry trends and academic standards.
+            </p>
+          </div>
+          
+          <div class="grid-2">
+            <article class="card">
+              <h3 class="section-title-sm"><i class="fa-solid fa-users"></i> BOS Members</h3>
+              <ul class="bullets">
+                <li><strong>Chairman:</strong> Dr. Anitha R (HOD, CSE AI/DS)</li>
+                <li><strong>Industry Expert:</strong> Mr. Rajesh Kumar (AI Lead, Google)</li>
+                <li><strong>Academic Expert:</strong> Dr. Priya Sharma (Professor, IIT Delhi)</li>
+                <li><strong>Alumni Representative:</strong> Mr. Akhil Abothu (Senior AI Engineer, Capgemini)</li>
+                <li><strong>Student Representative:</strong> Ms. Ananya Singh (Final Year CSE AI/DS)</li>
+              </ul>
+            </article>
+            
+            <article class="card">
+              <h3 class="section-title-sm"><i class="fa-solid fa-tasks"></i> BOS Responsibilities</h3>
+              <ul class="bullets">
+                <li>AI/DS curriculum design and periodic review</li>
+                <li>Course content development and updates</li>
+                <li>Academic policy formulation</li>
+                <li>Quality assurance and assessment</li>
+                <li>Industry-academia collaboration</li>
+                <li>Research and development initiatives</li>
+              </ul>
+            </article>
+          </div>
+          
+          <div class="card mt-1">
+            <h3 class="section-title-sm"><i class="fa-solid fa-calendar-alt"></i> Recent BOS Activities</h3>
+            <div class="bos-activities">
+              <div class="activity-item">
+                <div class="activity-date">2024</div>
+                <div class="activity-content">
+                  <h4>AI/DS Curriculum Revision (R22)</h4>
+                  <p>Updated curriculum to include Deep Learning, NLP, Computer Vision, and Data Science specializations</p>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-date">2023</div>
+                <div class="activity-content">
+                  <h4>Industry Partnership Program</h4>
+                  <p>Established partnerships with leading AI/DS companies for curriculum enhancement</p>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-date">2023</div>
+                <div class="activity-content">
+                  <h4>Faculty Development Program</h4>
+                  <p>Conducted workshops on emerging AI/DS technologies and teaching methodologies</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- ACTIVITIES -->
       <section :id="tabsMap.activities" class="card-section" v-show="activeTab==='activities'">
-        <h2 class="section-title"><i class="fa-solid fa-rocket"></i> Student Activities & Achievements</h2>
-        <div class="grid-3">
-          <article class="card" v-for="a in activities" :key="a.title">
-            <h3 class="h6">{{ a.title }}</h3>
-            <p class="muted">{{ a.desc }}</p>
+        <div class="card">
+          <h2 class="section-title"><i class="fa-solid fa-rocket"></i> Student Development Activities</h2>
+          <div class="activities-hero">
+            <p class="lead">
+              The AI/DS Club (Association of Computer Science and Engineering in Sai Spurthi) is started on 15.09.09 (Engineer's Day) 
+              by the Student and Staff of the CSE AI/DS Department to strengthen research and advanced education in AI/DS and allied fields. 
+              It is mainly targeted to adopt new fields of knowledge and communication through co-curricular activities.
+            </p>
+            <p class="lead">
+              It does this by working to influence policy that impacts departmental activities, encouraging the development of human resources, 
+              contributing to the cohesiveness of the professional students community and collecting and disseminating information about the 
+              importance and the state of AI/DS research. Each plays an important role in achieving the AI/DS Club objectives.
+            </p>
+          </div>
+          
+          <div class="activities-grid">
+            <article v-for="activity in activities" :key="activity.title" class="activity-card">
+              <div class="activity-icon">
+                <i :class="activity.icon"></i>
+              </div>
+              <div class="activity-content">
+                <h3 class="activity-title">{{ activity.title }}</h3>
+                <p class="activity-desc">{{ activity.desc }}</p>
+              </div>
           </article>
+          </div>
+          
+          <div class="activities-footer">
+            <div class="text-center">
+              <button class="btn btn-primary" @click="openEventsModal">
+                <i class="fa-solid fa-images me-2"></i>View All Events Images
+              </button>
+              <p class="muted mt-3">
+                <i class="fa-solid fa-calendar-alt"></i> 
+                Explore our gallery of student activities and events
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -550,6 +674,58 @@
 
     <!-- FOOTER -->
     <Footer />
+
+    <!-- Image Preview Modal -->
+    <ImagePreviewer 
+      v-if="showImageModal"
+      :images="currentLabImages"
+      :currentIndex="currentImageIndex"
+      @close="showImageModal = false"
+      @update:currentIndex="currentImageIndex = $event"
+    />
+
+    <!-- Events Images Modal -->
+    <ImagePreviewer 
+      v-if="showEventsModal"
+      :images="eventImages"
+      :currentIndex="currentEventImageIndex"
+      @close="showEventsModal = false"
+      @update:currentIndex="currentEventImageIndex = $event"
+    />
+
+    <!-- PDF Modal -->
+    <div v-if="showPdfModal" class="pdf-modal" @click="closePdfModal">
+      <div class="pdf-modal-content" @click.stop>
+        <div class="pdf-modal-header">
+          <h3 class="pdf-modal-title">{{ currentPdfTitle }}</h3>
+          <div class="pdf-modal-actions">
+            <button class="pdf-modal-btn" @click="downloadPdf" title="Download PDF">
+              <i class="fa-solid fa-download"></i>
+            </button>
+            <button class="pdf-modal-btn" @click="togglePdfFullscreen" title="Toggle Fullscreen">
+              <i class="fa-solid fa-expand"></i>
+            </button>
+            <button class="pdf-modal-btn" @click="closePdfModal" title="Close">
+              <i class="fa-solid fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <div class="pdf-modal-body">
+          <div v-if="isPdfLoading" class="pdf-loading">
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            <p>Loading PDF...</p>
+          </div>
+          <iframe 
+            v-if="currentPdfUrl"
+            :src="currentPdfUrl"
+            @load="onPdfLoad"
+            @error="onPdfError"
+            class="pdf-iframe"
+            title="PDF Document"
+          ></iframe>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -559,6 +735,7 @@ import { useRoute, useRouter } from 'vue-router'
 import Header from '@/components/Header.vue'
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/Footer.vue'
+import ImagePreviewer from '@/views/utils/ImagePreviewer.vue'
 import Strengths from '@/views/about/Strengths.vue'
 
 /* Facts / Quick Stats */
@@ -576,8 +753,9 @@ const aboutStats = [
 const tabs = [
   { id: 'overview',   label: 'Overview',   icon: 'fa-solid fa-circle-dot' },
   { id: 'faculty',    label: 'Faculty',    icon: 'fa-solid fa-users' },
-  { id: 'labs',       label: 'Labs',       icon: 'fa-solid fa-flask' },
+  { id: 'labs',       label: 'Labs',       icon: 'fa-solid fa-laptop-code' },
   { id: 'curriculum', label: 'Curriculum', icon: 'fa-solid fa-file-lines' },
+  { id: 'bos',        label: 'BOS',        icon: 'fa-solid fa-graduation-cap' },
   { id: 'activities', label: 'Activities', icon: 'fa-solid fa-rocket' },
   { id: 'research',   label: 'Research',   icon: 'fa-solid fa-microscope' },
   { id: 'placements', label: 'Placements', icon: 'fa-solid fa-briefcase' },
@@ -594,6 +772,7 @@ const tabsMap = {
   faculty: 'faculty', 
   labs: 'labs',
   curriculum: 'curriculum',
+  bos: 'bos',
   activities: 'activities',
   research: 'research',
   placements: 'placements',
@@ -640,7 +819,7 @@ const faculty = ref([
     qualification: 'M.TECH, (Ph.D)',
     expertise: ['Data Science', 'Big Data Analytics'],
     email: 'hod.aids@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&w=400',
+    photo: new URL('@/assets/departments/cse_ai_ds/faculty/cse_ml_01.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 19
   },
@@ -650,7 +829,7 @@ const faculty = ref([
     qualification: 'M.TECH, (Ph.D)',
     expertise: ['Machine Learning', 'Statistical Analysis'],
     email: 'adinarayana@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400',
+    photo: new URL('@/assets/departments/cse_ai_ds/faculty/cse_ml_02.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 19
   },
@@ -660,7 +839,7 @@ const faculty = ref([
     qualification: 'M.TECH',
     expertise: ['Python Programming', 'Data Visualization'],
     email: 'anjaneyulu@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=400',
+    photo: new URL('@/assets/departments/cse_ai_ds/faculty/cse_ml_04.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 10
   },
@@ -670,7 +849,7 @@ const faculty = ref([
     qualification: 'M.TECH',
     expertise: ['Database Systems', 'SQL'],
     email: 'srinivasa@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=400',
+    photo: new URL('@/assets/departments/cse_ai_ds/faculty/cse_ml_05.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 4
   },
@@ -680,7 +859,7 @@ const faculty = ref([
     qualification: 'M.TECH',
     expertise: ['Data Mining', 'Predictive Analytics'],
     email: 'pragnya@ssit.edu.in',
-    photo: '#',
+    photo: new URL('@/assets/departments/cse_ai_ds/faculty/cse_ml_06.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 4
   },
@@ -741,43 +920,101 @@ const filteredFaculty = computed(() => {
 /* Labs & Infrastructure */
 const labs = [
   {
-    title: 'AI Lab',
-    desc: 'Model training with TensorFlow & PyTorch; MLOps pipelines.',
-    img: 'https://images.unsplash.com/photo-1555255707-c07966088b7b?q=80&w=1200',
-    tags: ['TensorFlow', 'PyTorch', 'MLOps']
+    title: 'Computer Lab 1',
+    desc: 'Programming fundamentals laboratory equipped with C, Java, and Data Structures development environment. Features modern workstations with comprehensive development tools and debugging software.',
+    img: 'https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=800&h=600',
+    images: [
+      new URL('@/assets/departments/cse/labs/cselab1-1.jpg', import.meta.url).href,
+      new URL('@/assets/departments/cse/labs/cselab1-2.jpg', import.meta.url).href,
+      new URL('@/assets/departments/cse/labs/cselab1-3.jpg', import.meta.url).href
+    ],
+    tags: ['C Programming', 'Java', 'DSA']
   },
   {
-    title: 'Data Science Studio',
-    desc: 'Analytics, visualization, and data engineering workflows.',
-    img: 'https://images.unsplash.com/photo-1534759846116-5797a4d0f2c1?q=80&w=1200',
-    tags: ['Pandas', 'Spark', 'Visualization']
+    title: 'Computer Lab 2',
+    desc: 'Advanced AI/ML laboratory featuring cutting-edge artificial intelligence and machine learning tools. Equipped with powerful GPUs, deep learning frameworks, and specialized software for neural network development.',
+    img: 'https://images.pexels.com/photos/325229/pexels-photo-325229.jpeg?auto=compress&cs=tinysrgb&w=800&h=600',
+    images: [
+      new URL('@/assets/departments/cse/labs/cselab2-1.jpg', import.meta.url).href,
+      new URL('@/assets/departments/cse/labs/cselab2-2.jpg', import.meta.url).href,
+      new URL('@/assets/departments/cse/labs/cselab2-3.jpg', import.meta.url).href
+    ],
+    tags: ['AI', 'ML', 'DL']
   },
   {
-    title: 'IoT & Robotics Lab',
-    desc: 'Edge AI, sensors, embedded vision & control systems.',
-    img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200',
-    tags: ['Edge AI', 'Arduino', 'Robotics']
+    title: 'Computer Lab 3',
+    desc: 'Data Science and Visualization laboratory specializing in data analysis, visualization, and statistical computing. Features advanced analytics tools, interactive dashboards, and comprehensive data visualization software.',
+    img: 'https://images.pexels.com/photos/270366/pexels-photo-270366.jpeg?auto=compress&cs=tinysrgb&w=800&h=600',
+    images: [
+      new URL('@/assets/departments/cse/labs/cselab3-1.jpg', import.meta.url).href,
+      new URL('@/assets/departments/cse/labs/cselab3-2.jpg', import.meta.url).href,
+      new URL('@/assets/departments/cse/labs/cselab3-3.jpg', import.meta.url).href
+    ],
+    tags: ['Pandas', 'Visualization']
   },
   {
-    title: 'Cloud AI Lab',
-    desc: 'Cloud credits & GPU instances for scalable model training.',
-    img: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=1200',
-    tags: ['AWS', 'Azure', 'Kubernetes']
+    title: 'Common Internet Center',
+    desc: 'Centralized internet facility providing high-speed connectivity for research and academic activities. Accessible to all students and faculty members with 24/7 availability.',
+    img: 'https://images.pexels.com/photos/1181243/pexels-photo-1181243.jpeg?auto=compress&cs=tinysrgb&w=800&h=600',
+    images: [
+      new URL('@/assets/departments/cse/labs/cselab4-1.jpg', import.meta.url).href,
+      new URL('@/assets/departments/cse/labs/cselab4-2.jpg', import.meta.url).href,
+      new URL('@/assets/departments/cse/labs/cselab4-3.jpg', import.meta.url).href
+    ],
+    tags: ['High-Speed Internet', 'Research Access', 'Faculty Support']
   }
 ]
 
 /* Syllabus / Downloads */
 const syllabus = [
-  { label: 'B.Tech CSE (AI & DS) Syllabus (R22)', note: 'Current Scheme', href: '#' },
-  { label: 'Electives & Tracks', note: 'DL • NLP • CV • Data Engg', href: '#' },
-  { label: 'Project-Based Learning Modules', note: 'Capstones & Industry Projects', href: '#' }
+  { 
+    label: 'B.Tech CSE (AI & DS) Syllabus (R22)', 
+    note: 'Current Scheme', 
+    href: '#',
+    pdfUrl: 'https://drive.google.com/file/d/1vbz4wKP2Nadda3FtZC-DyV16yqXVAkn1/preview',
+    type: 'pdf'
+  },
+  { 
+    label: 'B.Tech CSE (AI & DS) Syllabus (R18)', 
+    note: 'Previous Scheme', 
+    href: '#',
+    pdfUrl: 'https://drive.google.com/file/d/1zYoF3FIQ956g_-zrjSHIYxQR-NXAZXN2/preview',
+    type: 'pdf'
+  }
 ]
 
 /* Activities */
 const activities = [
-  { title: 'AI Hackathon', desc: '24-hour innovation sprint across CV, NLP, RL.' },
-  { title: 'Workshops & Bootcamps', desc: 'Deep Learning, MLOps, Data Engineering.' },
-  { title: 'Clubs & SIGs', desc: 'AI Club, Data Viz Guild, Kaggle Circle.' }
+  {
+    title: 'AI/ML Project Expo',
+    desc: 'Competitive team event that is all about Design, implement and presenting AI/ML Projects with real-world applications.',
+    icon: 'fa-solid fa-laptop-code'
+  },
+  {
+    title: 'Data Science Challenge',
+    desc: 'Competitive event that focuses on data analysis, visualization, and machine learning model development.',
+    icon: 'fa-solid fa-chart-line'
+  },
+  {
+    title: 'Algorithm Debugging',
+    desc: 'Algorithm Debugging is a Competitive Event to test Python programming skills and algorithm optimization.',
+    icon: 'fa-solid fa-bug'
+  },
+  {
+    title: 'Research Paper Presentation',
+    desc: 'Students give demonstrations on Various Latest Trends in AI/ML Industry and research findings.',
+    icon: 'fa-solid fa-file-text'
+  },
+  {
+    title: 'AI Poster Presentation',
+    desc: 'A way to share your knowledge of AI/ML topics in a short format. It usually includes visual representation and brief explanation.',
+    icon: 'fa-solid fa-chart-bar'
+  },
+  {
+    title: 'Tech Quiz',
+    desc: 'A quiz is a game which can also be called a mind sport wherein the players attempt to answer AI/ML related questions correctly.',
+    icon: 'fa-solid fa-question-circle'
+  }
 ]
 
 /* Research & Industry */
@@ -849,6 +1086,128 @@ const hod = {
 }
 
 const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })
+
+// Modal state
+const showImageModal = ref(false)
+const currentImageIndex = ref(0)
+const currentLabImages = ref([])
+const showEventsModal = ref(false)
+const currentEventImageIndex = ref(0)
+const showPdfModal = ref(false)
+const currentPdfUrl = ref('')
+const currentPdfTitle = ref('')
+const isPdfLoading = ref(false)
+
+// Modal functions
+const openImageModal = (images) => {
+  currentLabImages.value = images
+  currentImageIndex.value = 0
+  showImageModal.value = true
+}
+
+const openEventsModal = () => {
+  currentEventImageIndex.value = 0
+  showEventsModal.value = true
+}
+
+const openPdfModal = (pdfUrl, title) => {
+  currentPdfUrl.value = pdfUrl
+  currentPdfTitle.value = title
+  isPdfLoading.value = true
+  showPdfModal.value = true
+}
+
+const closePdfModal = () => {
+  showPdfModal.value = false
+  currentPdfUrl.value = ''
+  currentPdfTitle.value = ''
+}
+
+const downloadPdf = () => {
+  if (currentPdfUrl.value) {
+    const link = document.createElement('a')
+    link.href = currentPdfUrl.value
+    link.download = `${currentPdfTitle.value}.pdf`
+    link.target = '_blank'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+}
+
+const togglePdfFullscreen = () => {
+  const iframe = document.querySelector('.pdf-modal iframe')
+  if (iframe) {
+    if (!document.fullscreenElement) {
+      iframe.requestFullscreen().catch(err => {
+        console.log(`Error attempting to enable fullscreen: ${err.message}`)
+      })
+    } else {
+      document.exitFullscreen()
+    }
+  }
+}
+
+const onPdfLoad = () => {
+  isPdfLoading.value = false
+}
+
+const onPdfError = () => {
+  isPdfLoading.value = false
+  console.error('Failed to load PDF')
+}
+
+const handleSyllabusClick = (item) => {
+  if (item.type === 'pdf' && item.pdfUrl) {
+    openPdfModal(item.pdfUrl, item.label)
+  } else if (item.href && item.href !== '#') {
+    window.open(item.href, '_blank')
+  }
+}
+
+const handlePdfKeydown = (event) => {
+  if (event.key === 'Escape') {
+    closePdfModal()
+  }
+}
+
+// Event images data
+const eventImages = [
+  {
+    src: new URL('@/assets/departments/cse/activities/cse_acsess_1.jpg', import.meta.url).href,
+    title: 'Access Events',
+    desc: 'Access Events'
+  },
+  {
+    src: new URL('@/assets/departments/cse/activities/cse_acsess_2.jpg', import.meta.url).href,
+    title: 'Access Events',
+    desc: 'Access Events'
+  },
+  {
+    src: new URL('@/assets/departments/cse/activities/cse_acsess_3.jpg', import.meta.url).href,
+    title: 'Access Events',
+    desc: 'Access Events'
+  },
+  {
+    src: new URL('@/assets/departments/cse/activities/cse_acsess_4.jpg', import.meta.url).href,
+    title: 'Access Events',
+    desc: 'Access Events'
+  }
+]
+
+// Computed properties
+const labImagesForModal = computed(() => {
+  return labs.flatMap(lab => lab.images || [])
+})
+
+// Watch for PDF modal changes to handle keyboard events
+watch(showPdfModal, (isOpen) => {
+  if (isOpen) {
+    document.addEventListener('keydown', handlePdfKeydown)
+  } else {
+    document.removeEventListener('keydown', handlePdfKeydown)
+  }
+})
 
 // Accordion state
 const activeAccordion = ref('')
@@ -1147,5 +1506,269 @@ const toggleAccordion = (section) => {
   .quickfacts li{ min-width:140px }
   .outcome-grid{ grid-template-columns:1fr }
   .outcome-grid.grid-2{ grid-template-columns:1fr }
+}
+
+/* Labs Section Styles */
+.labs-intro {
+  margin-bottom: 2rem;
+}
+
+.lab-actions {
+  margin-top: 1rem;
+}
+
+.view-images-btn {
+  width: 100%;
+  justify-content: center;
+}
+
+/* Activities Section Styles */
+.activities-hero {
+  margin-bottom: 2rem;
+}
+
+.activities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.activity-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.activity-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.activity-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  background: var(--orange);
+  color: white;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.activity-content {
+  flex: 1;
+}
+
+.activity-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--ink);
+}
+
+.activity-desc {
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.activities-footer {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid #eee;
+}
+
+/* BOS Section Styles */
+.bos-intro {
+  margin-bottom: 2rem;
+}
+
+.bos-activities {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.activity-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.activity-date {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  background: var(--orange);
+  color: white;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.activity-content h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--ink);
+}
+
+.activity-content p {
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* PDF Modal Styles */
+.pdf-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 2rem;
+}
+
+.pdf-modal-content {
+  background: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 1000px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.pdf-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #eee;
+  background: #f8f9fa;
+}
+
+.pdf-modal-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--ink);
+}
+
+.pdf-modal-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.pdf-modal-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: var(--orange);
+  color: white;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pdf-modal-btn:hover {
+  background: #ea580c;
+}
+
+.pdf-modal-body {
+  flex: 1;
+  position: relative;
+  min-height: 500px;
+}
+
+.pdf-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: var(--muted);
+}
+
+.pdf-loading i {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.pdf-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  min-height: 500px;
+}
+
+/* Coming Soon Styles */
+.download.coming-soon {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.dl-status {
+  font-size: 0.8rem;
+  color: var(--orange);
+  font-weight: 500;
+  margin-top: 0.25rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .activities-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .activity-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .activity-icon {
+    align-self: center;
+  }
+  
+  .bos-activities {
+    gap: 1rem;
+  }
+  
+  .activity-item {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .activity-date {
+    align-self: center;
+  }
+  
+  .pdf-modal {
+    padding: 1rem;
+  }
+  
+  .pdf-modal-content {
+    width: 95%;
+  }
 }
 </style>
