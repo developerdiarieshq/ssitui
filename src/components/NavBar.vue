@@ -153,12 +153,8 @@
           </li>
 
           <!-- Placements -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Placements</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Placements Record</a></li>
-              <li><a class="dropdown-item" href="#">Companies</a></li>
-            </ul>
+          <li class="nav-item">
+            <router-link to="/placements" class="nav-link">Placements</router-link>
           </li>
 
           <!-- Careers -->

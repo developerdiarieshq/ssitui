@@ -49,7 +49,7 @@
           <div class="placement-card view-all-card">
             <div class="view-all-content">
               <i class="fas fa-arrow-right fa-2x text-white mb-3"></i>
-              <button class="btn btn-view-all">
+              <button class="btn btn-view-all" @click="navigateToPlacements">
                 VIEW ALL PLACEMENTS
               </button>
             </div>
@@ -79,12 +79,21 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import placementData from '@/data/placement-data.json'
+
+// Router setup
+const router = useRouter()
 
 // Reactive data
 const topPlacements = ref([])
 const topRecruiters = ref([])
 const campusPlacements2025 = ref({})
+
+// Navigation function
+const navigateToPlacements = () => {
+  router.push('/placements')
+}
 
 // Load data from JSON
 onMounted(() => {

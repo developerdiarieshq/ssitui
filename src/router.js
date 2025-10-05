@@ -42,6 +42,7 @@ import StaffQuarters from './views/amenities/StaffQuarters.vue'
 import Temple from './views/amenities/Temple.vue'
 import DigitalLibrary from './views/amenities/DigitalLibrary.vue'
 import IctFacilities from './views/amenities/IctFacilities.vue'
+import Placements from './views/Placements.vue'
 
 // EXAMINATIONS
 import Coe from './views/examinations/Coe.vue'
@@ -108,6 +109,8 @@ const routes = [
     { path: '/awards', component: Awards },
     { path: '/approvals', component: Approvals },
     { path: '/admissions', component: Admissions },
+    { path: '/placements', component: Placements },
+    { path: '/placements/:tab', component: Placements },
     { path: '/anti-ragging', component: AntiRagging },
     { path: '/internet', component: Internet },
     { path: '/english-labs', component: EnglishLabs },
@@ -174,7 +177,8 @@ const getRouterConfig = () => {
             routes,
             scrollBehavior(to, from, savedPosition) {
                 // Don't scroll to top for tab navigation within same component
-                if (to.path.includes('/cse/') && from.path.includes('/cse/')) {
+                if ((to.path.includes('/cse/') && from.path.includes('/cse/')) ||
+                    (to.path.includes('/placements/') && from.path.includes('/placements/'))) {
                     return false
                 }
                 // For other navigation, scroll to top
@@ -190,7 +194,8 @@ const getRouterConfig = () => {
             routes,
             scrollBehavior(to, from, savedPosition) {
                 // Don't scroll to top for tab navigation within same component
-                if (to.path.includes('/cse/') && from.path.includes('/cse/')) {
+                if ((to.path.includes('/cse/') && from.path.includes('/cse/')) ||
+                    (to.path.includes('/placements/') && from.path.includes('/placements/'))) {
                     return false
                 }
                 // For other navigation, scroll to top
@@ -205,7 +210,8 @@ const getRouterConfig = () => {
         routes,
         scrollBehavior(to, from, savedPosition) {
             // Don't scroll to top for tab navigation within same component
-            if (to.path.includes('/cse/') && from.path.includes('/cse/')) {
+            if ((to.path.includes('/cse/') && from.path.includes('/cse/')) ||
+                (to.path.includes('/placements/') && from.path.includes('/placements/'))) {
                 return false
             }
             // For other navigation, scroll to top
