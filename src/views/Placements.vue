@@ -471,6 +471,7 @@ import { useRoute, useRouter } from 'vue-router'
 import Header from '@/components/Header.vue'
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/Footer.vue'
+import { placementService } from '@/data/placementService.js'
 
 /* Tabs */
 const tabs = [
@@ -891,51 +892,8 @@ const branchOptions = computed(() => {
   return ['All', ...Object.keys(recruitersData)]
 })
 
-// Top companies data
-const topCompanies = [
-  {
-    name: 'Google',
-    category: 'Product',
-    offers: 3,
-    avgPackage: 15,
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Google_2015_logo.svg'
-  },
-  {
-    name: 'Microsoft',
-    category: 'Product',
-    offers: 5,
-    avgPackage: 12,
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg'
-  },
-  {
-    name: 'Amazon',
-    category: 'Product',
-    offers: 4,
-    avgPackage: 14,
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg'
-  },
-  {
-    name: 'Accenture',
-    category: 'Consulting',
-    offers: 12,
-    avgPackage: 6.5,
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/4/46/Accenture.svg'
-  },
-  {
-    name: 'Infosys',
-    category: 'IT Services',
-    offers: 18,
-    avgPackage: 5.2,
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/1/19/Infosys_logo.svg'
-  },
-  {
-    name: 'TCS',
-    category: 'IT Services',
-    offers: 15,
-    avgPackage: 4.8,
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/9/99/TCS_Software.svg'
-  }
-]
+// Top companies data from shared service
+const topCompanies = placementService.topCompanies
 
 // Success stories carousel data
 // Success Stories Year Selector
@@ -956,7 +914,7 @@ const yearWiseSuccessStories = {
       companyType: 'Social Media Tech',
       quote: 'Meta provided me with the perfect platform to work on cutting-edge AI technologies!',
       image: null,
-      companyLogo: 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg'
+      companyLogo: new URL('@/assets/microsoft.png', import.meta.url).href
     },
     {
       id: '24R21A6664',
@@ -969,7 +927,7 @@ const yearWiseSuccessStories = {
       companyType: 'Automotive Tech',
       quote: 'Working at Tesla is like being part of the future of transportation!',
       image: null,
-      companyLogo: 'https://upload.wikimedia.org/wikipedia/commons/b/bb/Tesla_T_symbol.svg'
+      companyLogo: new URL('@/assets/microsoft.png', import.meta.url).href
     }
   ],
   '2023-2024': [
@@ -984,7 +942,7 @@ const yearWiseSuccessStories = {
       companyType: 'Entertainment Tech',
       quote: 'Netflix taught me how to build scalable systems that serve millions of users!',
       image: null,
-      companyLogo: 'https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg'
+      companyLogo: new URL('@/assets/microsoft.png', import.meta.url).href
     },
     {
       id: '23R21A6666',
@@ -997,7 +955,7 @@ const yearWiseSuccessStories = {
       companyType: 'Software Solutions',
       quote: 'Adobe helped me combine my passion for technology with creativity!',
       image: null,
-      companyLogo: 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Adobe_Systems_logo_and_wordmark.svg'
+      companyLogo: new URL('@/assets/microsoft.png', import.meta.url).href
     }
   ],
   '2022-2023': [
@@ -1012,7 +970,7 @@ const yearWiseSuccessStories = {
       companyType: 'Transportation Tech',
       quote: 'Uber gave me the opportunity to revolutionize urban transportation!',
       image: null,
-      companyLogo: 'https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png'
+      companyLogo: new URL('@/assets/microsoft.png', import.meta.url).href
     },
     {
       id: '22R21A6668',
@@ -1025,7 +983,7 @@ const yearWiseSuccessStories = {
       companyType: 'CRM Software',
       quote: 'Salesforce empowered me to build customer-centric solutions!',
       image: null,
-      companyLogo: 'https://upload.wikimedia.org/wikipedia/commons/f/f9/Salesforce.com_logo.svg'
+      companyLogo: new URL('@/assets/microsoft.png', import.meta.url).href
     }
   ],
   '2021-2022': [
@@ -1040,7 +998,7 @@ const yearWiseSuccessStories = {
       companyType: 'Professional Social',
       quote: 'LinkedIn helped me understand the power of professional networking!',
       image: null,
-      companyLogo: 'https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png'
+      companyLogo: new URL('@/assets/microsoft.png', import.meta.url).href
     },
     {
       id: '21R21A6670',
@@ -1053,7 +1011,7 @@ const yearWiseSuccessStories = {
       companyType: 'Music Streaming',
       quote: 'Spotify combined my love for music with cutting-edge technology!',
       image: null,
-      companyLogo: 'https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg'
+      companyLogo: new URL('@/assets/microsoft.png', import.meta.url).href
     }
   ],
   '2020-2021': [
@@ -1068,7 +1026,7 @@ const yearWiseSuccessStories = {
       companyType: 'Tech Giant',
       quote: 'Hard work and dedication led me to this amazing opportunity at Google!',
     image: null,
-    companyLogo: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Google_2015_logo.svg'
+    companyLogo: new URL('@/assets/microsoft.png', import.meta.url).href
   },
   {
     id: '20R21A6651',
@@ -1081,7 +1039,7 @@ const yearWiseSuccessStories = {
       companyType: 'Technology Company',
       quote: 'My AI/ML skills helped me secure this dream position at Microsoft!',
     image: null,
-    companyLogo: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg'
+    companyLogo: new URL('@/assets/microsoft.png', import.meta.url).href
   },
   {
     id: '20R21A6652',
@@ -1094,7 +1052,7 @@ const yearWiseSuccessStories = {
       companyType: 'E-commerce Giant',
       quote: 'Amazon provided the perfect platform to showcase my technical expertise!',
     image: null,
-    companyLogo: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg'
+    companyLogo: new URL('@/assets/microsoft.png', import.meta.url).href
   },
   {
     id: '20R21A6653',
@@ -1107,7 +1065,7 @@ const yearWiseSuccessStories = {
       companyType: 'Consulting Firm',
       quote: 'Accenture helped me grow both professionally and personally!',
     image: null,
-    companyLogo: 'https://upload.wikimedia.org/wikipedia/commons/4/46/Accenture.svg'
+    companyLogo: new URL('@/assets/companies/Accenture.png', import.meta.url).href
   }
   ],
   '2019-2020': [
@@ -1122,7 +1080,7 @@ const yearWiseSuccessStories = {
       companyType: 'IT Services',
       quote: 'TCS gave me the foundation to build my career in IT!',
       image: null,
-      companyLogo: 'https://upload.wikimedia.org/wikipedia/commons/b/b5/TCS_logo.svg'
+      companyLogo: new URL('@/assets/companies/TechM.png', import.meta.url).href
     },
     {
       id: '19R21A6655',
@@ -1135,7 +1093,7 @@ const yearWiseSuccessStories = {
       companyType: 'Technology Services',
       quote: 'Infosys transformed my ideas into real-world solutions!',
       image: null,
-      companyLogo: 'https://upload.wikimedia.org/wikipedia/commons/8/87/Infosys_logo.svg'
+      companyLogo: new URL('@/assets/companies/Infosys.png', import.meta.url).href
     },
     {
       id: '19R21A6656',
@@ -1148,7 +1106,7 @@ const yearWiseSuccessStories = {
       companyType: 'IT Consulting',
       quote: 'Wipro helped me develop strong problem-solving skills!',
       image: null,
-      companyLogo: 'https://upload.wikimedia.org/wikipedia/commons/1/15/Wipro.svg'
+      companyLogo: new URL('@/assets/wipro.png', import.meta.url).href
     }
   ],
   '2018-2019': [
@@ -1163,7 +1121,7 @@ const yearWiseSuccessStories = {
       companyType: 'Technology Company',
       quote: 'HCL provided me with excellent learning opportunities!',
       image: null,
-      companyLogo: 'https://upload.wikimedia.org/wikipedia/commons/9/9c/HCL_Technologies_logo.svg'
+      companyLogo: new URL('@/assets/companies/TechM.png', import.meta.url).href
     },
     {
       id: '18R21A6658',
@@ -1176,7 +1134,7 @@ const yearWiseSuccessStories = {
       companyType: 'IT Services',
       quote: 'Tech Mahindra shaped my engineering career perfectly!',
       image: null,
-      companyLogo: 'https://upload.wikimedia.org/wikipedia/commons/8/8b/Tech_Mahindra_New_Logo.svg'
+      companyLogo: new URL('@/assets/companies/TechM.png', import.meta.url).href
     }
   ],
   '2017-2018': [
@@ -1191,7 +1149,7 @@ const yearWiseSuccessStories = {
       companyType: 'Digital Solutions',
       quote: 'Cognizant opened doors to the digital transformation world!',
       image: null,
-      companyLogo: 'https://upload.wikimedia.org/wikipedia/commons/1/1a/Cognizant_logo_2022.svg'
+      companyLogo: new URL('@/assets/companies/Accenture.png', import.meta.url).href
     }
   ],
   '2016-2017': [
@@ -1206,7 +1164,7 @@ const yearWiseSuccessStories = {
       companyType: 'Consulting Services',
       quote: 'Capgemini helped me become a systems thinking expert!',
       image: null,
-      companyLogo: 'https://upload.wikimedia.org/wikipedia/commons/1/1a/Capgemini_logo.svg'
+      companyLogo: new URL('@/assets/companies/Capgemini.svg', import.meta.url).href
     }
   ],
   '2015-2016': [
@@ -1221,7 +1179,7 @@ const yearWiseSuccessStories = {
       companyType: 'Technology Solutions',
       quote: 'IBM gave me the opportunity to work on cutting-edge cloud technologies!',
       image: null,
-      companyLogo: 'https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg'
+      companyLogo: new URL('@/assets/microsoft.png', import.meta.url).href
     }
   ],
   '2014-2015': [
@@ -1236,7 +1194,7 @@ const yearWiseSuccessStories = {
       companyType: 'Enterprise Software',
       quote: 'Oracle helped me master database technologies and enterprise solutions!',
       image: null,
-      companyLogo: 'https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg'
+      companyLogo: new URL('@/assets/oracle.png', import.meta.url).href
     }
   ]
 }

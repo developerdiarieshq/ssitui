@@ -37,7 +37,7 @@
     </header>
 
     <!-- STICKY SUB NAV (nav-pills) -->
-    <nav class="subnav" aria-label="Section navigation">
+    <nav id="subnav" class="subnav" aria-label="Section navigation">
       <div class="container subnav-inner">
         <button
           v-for="tab in tabs"
@@ -82,15 +82,15 @@
 
         <div class="grid-2">
           <article class="card">
-            <h3 class="h5 text-muted mb-2">Vision</h3>
+            <h3 class="h5 mb-2" style="color: var(--ink); font-weight: 800;">Vision</h3>
             <p>
               To develop highly skilled professionals with ethics and human values to produce competent electrical engineers in the field of Electrical and Electronics Engineering
             </p>
-            <h3 class="h5 text-muted mt-4 mb-2">Mission</h3>
+            <h3 class="h5 mt-4 mb-2" style="color: var(--ink); font-weight: 800;">Mission</h3>
             <p>
               To impact quality education with industrial exposure, professional training and also to achieve excellence in teaching - learning, research and development activities.
             </p>
-            <h3 class="h5 text-muted mt-4 mb-2">Goals</h3>
+            <h3 class="h5 mt-4 mb-2" style="color: var(--ink); font-weight: 800;">Goals</h3>
             <ul class="bullets">
               <li><strong>Research & Development:</strong> R&D is focused on applied research for the benefit of power sector along with product/instrumentation development in our department.</li>
               <li><strong>Training Programs:</strong> The program is an amalgam of skill training education that aims at making our students interview ready in every way by development of applied knowledge well thought out integration of technical skills and academic knowledge put into practical use in projects.</li>
@@ -348,7 +348,8 @@
       </section>
 
       <!-- FACULTY DIRECTORY -->
-      <section class="card-section" v-show="activeTab==='faculty'">
+       
+      <section :id="tabsMap.faculty" class="card-section" v-show="activeTab==='faculty'">
         <div class="card">
           <div class="section-header">
             <h2 class="section-title"><i class="fa-solid fa-users-gear"></i> Faculty Directory</h2>
@@ -381,7 +382,7 @@
                   <span class="badge">{{ f.designation }}</span> • {{ f.qualification }}
                 </p>
                 <p class="fc-tags">
-                  <i class="fa-solid fa-brain"></i> {{ f.expertise.join(', ') }}
+                  <i class="fa-solid fa-microchip"></i> {{ f.expertise.join(', ') }}
                 </p>
                 <div class="fc-links">
                   <a :href="`mailto:${f.email}`" class="icon-link" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
@@ -401,7 +402,7 @@
 
       <!-- LABS / INFRA -->
       <section class="card-section" v-show="activeTab==='labs'">
-        <h2 class="section-title"><i class="fa-solid fa-flask"></i> Labs & Research Infrastructure</h2>
+        <h2 class="section-title"><i class="fa-solid fa-bolt"></i> Labs & Research Infrastructure</h2>
         <div class="labs-grid">
           <article v-for="lab in labs" :key="lab.title" class="lab-card">
             <img :src="lab.img" :alt="lab.title" />
@@ -427,21 +428,22 @@
       </section>
 
       <!-- CURRICULUM -->
-      <section class="card-section" aria-labelledby="curriculum" v-show="activeTab==='curriculum'">
+      <section :id="tabsMap.curriculum" class="card-section" aria-labelledby="curriculum" v-show="activeTab==='curriculum'">
         <div class="card">
           <h2 class="section-title" id="curriculum"><i class="fa-solid fa-file-lines"></i> Curriculum & Syllabus</h2>
           <div class="downloads">
-            <a v-for="d in syllabus" :key="d.label" :href="d.href" class="download" target="_blank" rel="noopener">
+            <div v-for="d in syllabus" :key="d.label" class="download" :class="{ 'coming-soon': d.type === 'coming-soon' }" @click="handleSyllabusClick(d)">
               <i class="fa-solid fa-file-pdf"></i>
               <div>
                 <div class="dl-label">{{ d.label }}</div>
                 <div class="dl-sub">{{ d.note }}</div>
+                <div v-if="d.type === 'coming-soon'" class="dl-status">Coming Soon</div>
               </div>
-            </a>
+            </div>
           </div>
           <div class="row-actions mt-1">
-            <a class="btn btn-soft" href="/academics/regulations">Academic Regulations</a>
-            <a class="btn btn-soft" href="/academics/calendar">Academic Calendar</a>
+            <a class="btn btn-soft" href="/ssitui/academic-regulations">Academic Regulations</a>
+            <a class="btn btn-soft" href="/ssitui/academic-calendar">Academic Calendar</a>
           </div>
         </div>
       </section>
@@ -570,11 +572,53 @@
       v-model:isFullscreen="isFullscreen"
       :images="labImagesForModal"
     />
+
+    <!-- PDF Viewer Modal -->
+    <div v-if="showPdfModal" class="pdf-modal-overlay" @click="closePdfModal">
+      <div class="pdf-modal" @click.stop>
+        <div class="pdf-modal-header">
+          <h3 class="pdf-modal-title">
+            <i class="fa-solid fa-file-pdf"></i>
+            {{ currentPdfTitle }}
+          </h3>
+          <div class="pdf-modal-actions">
+            <button class="modal-btn" @click="togglePdfFullscreen" title="Toggle Fullscreen (F)">
+              <i class="fa-solid fa-expand"></i>
+            </button>
+            <button class="modal-btn" @click="downloadPdf" title="Download PDF">
+              <i class="fa-solid fa-download"></i>
+            </button>
+            <button class="modal-btn close-btn" @click="closePdfModal" title="Close (ESC)">
+              <i class="fa-solid fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <div class="pdf-modal-content">
+          <div v-if="isPdfLoading" class="pdf-loading">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Loading PDF...</p>
+          </div>
+          <iframe 
+            :src="currentPdfUrl" 
+            class="pdf-iframe"
+            :class="{ 'loading': isPdfLoading }"
+            title="PDF Viewer"
+            frameborder="0"
+            @load="onPdfLoad"
+            @error="onPdfError"
+          ></iframe>
+        </div>
+        <div class="pdf-modal-footer">
+          <span class="keyboard-hint">Press F for fullscreen, ESC to close</span>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import Header from '@/components/Header.vue'
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/Footer.vue'
@@ -586,7 +630,7 @@ const facts = { established: '2001', intakeUG: '60', programs: 'B.Tech (EEE), Ho
 /* About stats */
 const aboutStats = [
   { label: 'Faculty', value: '28+', icon: 'fa-solid fa-user-tie' },
-  { label: 'Labs', value: '8', icon: 'fa-solid fa-flask' },
+  { label: 'Labs', value: '8', icon: 'fa-solid fa-bolt' },
   { label: 'Projects / Yr', value: '15+', icon: 'fa-solid fa-diagram-project' },
   { label: 'Placement', value: '85%+', icon: 'fa-solid fa-briefcase' }
 ]
@@ -595,7 +639,7 @@ const aboutStats = [
 const tabs = [
   { id: 'overview',   label: 'Overview',   icon: 'fa-solid fa-circle-dot' },
   { id: 'faculty',    label: 'Faculty',    icon: 'fa-solid fa-users' },
-  { id: 'labs',       label: 'Labs',       icon: 'fa-solid fa-flask' },
+  { id: 'labs',       label: 'Labs',       icon: 'fa-solid fa-bolt' },
   { id: 'curriculum', label: 'Curriculum', icon: 'fa-solid fa-file-lines' },
   { id: 'activities', label: 'Activities', icon: 'fa-solid fa-rocket' },
   { id: 'research',   label: 'Research',   icon: 'fa-solid fa-microscope' },
@@ -604,8 +648,49 @@ const tabs = [
   { id: 'contact',    label: 'Contact',    icon: 'fa-solid fa-address-book' }
 ]
 const tabsMap = tabs.reduce((acc, t) => ((acc[t.id] = t.id), acc), {})
+
+// Router setup
+const route = useRoute()
+const router = useRouter()
+
+// Active tab with URL synchronization
 const activeTab = ref(tabs[0].id)
-const setTab = (id) => { activeTab.value = id } // no scroll/jump
+
+const setTab = (id) => {
+  activeTab.value = id
+  // Update URL without page reload
+  if (route.params.tab !== id) {
+    router.push({ path: `/eee/${id}` })
+  }
+  // Smooth scroll to navigation area
+  setTimeout(() => {
+    const subnav = document.getElementById('subnav')
+    if (subnav) {
+      subnav.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, 100)
+}
+
+// URL synchronization on component mount and route changes
+onMounted(() => {
+  const tabFromUrl = route.params.tab
+  if (tabFromUrl && tabs.some(tab => tab.id === tabFromUrl)) {
+    activeTab.value = tabFromUrl
+  } else if (!tabFromUrl) {
+    // Redirect to default tab if no tab specified
+    router.replace({ path: `/eee/${tabs[0].id}` })
+  }
+})
+
+// Watch for route changes
+watch(() => route.params.tab, (newTab) => {
+  if (newTab && tabs.some(tab => tab.id === newTab)) {
+    activeTab.value = newTab
+  } else if (!newTab) {
+    // Redirect to default tab if no tab specified
+    router.replace({ path: `/eee/${tabs[0].id}` })
+  }
+})
 
 /* Faculty */
 const faculty = ref([
@@ -615,7 +700,7 @@ const faculty = ref([
     qualification: 'M.TECH',
     expertise: ['Power Systems', 'Electrical Machines'],
     email: 'ramakrishna@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&w=400',
+    photo: new URL('@/assets/departments/eee/faculty/EEE_01.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 16
   },
@@ -625,7 +710,7 @@ const faculty = ref([
     qualification: 'M.TECH',
     expertise: ['Control Systems', 'Power Electronics'],
     email: 'gopi@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400',
+    photo: new URL('@/assets/departments/eee/faculty/EEE_02.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 15
   },
@@ -635,7 +720,7 @@ const faculty = ref([
     qualification: 'M.TECH',
     expertise: ['Electrical Circuits', 'Electronics'],
     email: 'rambabu@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=400',
+    photo: new URL('@/assets/departments/eee/faculty/EEE_03.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 14
   },
@@ -645,7 +730,7 @@ const faculty = ref([
     qualification: 'M.TECH',
     expertise: ['Digital Electronics', 'Microcontrollers'],
     email: 'kanthaiah@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=400',
+    photo: new URL('@/assets/departments/eee/faculty/EEE_04.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 12
   },
@@ -655,7 +740,7 @@ const faculty = ref([
     qualification: 'M.TECH',
     expertise: ['Power Systems', 'Renewable Energy'],
     email: 'prathima@ssit.edu.in',
-    photo: '#',
+    photo: new URL('@/assets/departments/eee/faculty/EEE_05.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 8
   },
@@ -665,7 +750,7 @@ const faculty = ref([
     qualification: 'M.TECH',
     expertise: ['Control Systems', 'Automation'],
     email: 'venkatakrishna@ssit.edu.in',
-    photo: '#',
+    photo: new URL('@/assets/departments/eee/faculty/EEE_06.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 7
   },
@@ -675,7 +760,7 @@ const faculty = ref([
     qualification: 'M.TECH',
     expertise: ['Power Electronics', 'Drives'],
     email: 'satyavardhan@ssit.edu.in',
-    photo: '#',
+    photo: new URL('@/assets/departments/eee/faculty/EEE_07.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 8
   },
@@ -685,7 +770,7 @@ const faculty = ref([
     qualification: 'M.TECH',
     expertise: ['Electrical Measurements', 'Instrumentation'],
     email: 'nagaseshu@ssit.edu.in',
-    photo: '#',
+    photo: new URL('@/assets/departments/eee/faculty/EEE_08.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 2
   },
@@ -695,9 +780,29 @@ const faculty = ref([
     qualification: 'M.TECH',
     expertise: ['Network Analysis', 'Signals'],
     email: 'saidulu@ssit.edu.in',
-    photo: '#',
+    photo: new URL('@/assets/departments/eee/faculty/EEE_09.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 7
+  },
+  {
+    name: 'FACULTY MEMBER 10', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Power Systems', 'Control Systems'],
+    email: 'faculty10@ssit.edu.in',
+    photo: new URL('@/assets/departments/eee/faculty/EEE_10.jpg', import.meta.url).href,
+    profile: '#', linkedin: '#',
+    experience: 5
+  },
+  {
+    name: 'FACULTY MEMBER 11', 
+    designation: 'ASSISTANT PROFESSOR',
+    qualification: 'M.TECH',
+    expertise: ['Electronics', 'Digital Systems'],
+    email: 'faculty11@ssit.edu.in',
+    photo: new URL('@/assets/departments/eee/faculty/EEE_11.jpg', import.meta.url).href,
+    profile: '#', linkedin: '#',
+    experience: 4
   }
 ])
 const designations = ['Professor & HOD', 'Professor', 'Associate Professor', 'Assistant Professor']
@@ -716,6 +821,12 @@ const currentImageIndex = ref(0)
 const currentLabImages = ref([])
 const isFullscreen = ref(false)
 
+// PDF Modal state
+const showPdfModal = ref(false)
+const currentPdfUrl = ref('')
+const currentPdfTitle = ref('')
+const isPdfLoading = ref(false)
+
 // Computed properties for ImagePreviewer
 const labImagesForModal = computed(() => {
   return currentLabImages.value.map(src => ({ 
@@ -729,6 +840,78 @@ const openImageModal = (labImages) => {
   currentLabImages.value = labImages
   currentImageIndex.value = 0
   showImageModal.value = true
+}
+
+// PDF Modal functions
+const openPdfModal = (pdfUrl, title) => {
+  currentPdfUrl.value = pdfUrl
+  currentPdfTitle.value = title
+  showPdfModal.value = true
+  isPdfLoading.value = true
+}
+
+const closePdfModal = () => {
+  showPdfModal.value = false
+  currentPdfUrl.value = ''
+  currentPdfTitle.value = ''
+  isPdfLoading.value = false
+}
+
+const downloadPdf = () => {
+  if (currentPdfUrl.value) {
+    let downloadUrl = currentPdfUrl.value
+    
+    // Convert Google Drive preview URL to direct download URL
+    if (downloadUrl.includes('drive.google.com/file/d/') && downloadUrl.includes('/preview')) {
+      const fileId = downloadUrl.match(/\/file\/d\/([a-zA-Z0-9_-]+)/)?.[1]
+      if (fileId) {
+        downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`
+      }
+    }
+    
+    const link = document.createElement('a')
+    link.href = downloadUrl
+    link.download = currentPdfTitle.value + '.pdf'
+    link.target = '_blank' // Open in new tab for external URLs
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+}
+
+const togglePdfFullscreen = () => {
+  const pdfModal = document.querySelector('.pdf-modal')
+  if (!pdfModal) return
+
+  if (!document.fullscreenElement) {
+    // Enter fullscreen
+    pdfModal.requestFullscreen().catch(err => {
+      console.error('Error attempting to enable fullscreen:', err)
+    })
+  } else {
+    // Exit fullscreen
+    document.exitFullscreen().catch(err => {
+      console.error('Error attempting to exit fullscreen:', err)
+    })
+  }
+}
+
+const onPdfLoad = () => {
+  isPdfLoading.value = false
+}
+
+const onPdfError = () => {
+  isPdfLoading.value = false
+  console.error('Failed to load PDF')
+}
+
+const handleSyllabusClick = (syllabusItem) => {
+  if (syllabusItem.type === 'pdf' && syllabusItem.pdfUrl) {
+    openPdfModal(syllabusItem.pdfUrl, syllabusItem.label)
+  } else if (syllabusItem.type === 'coming-soon') {
+    // Show a message or do nothing for coming soon items
+    console.log('Coming soon:', syllabusItem.label)
+  }
 }
 const filteredFaculty = computed(() => {
   const q = query.value.trim().toLowerCase()
@@ -745,54 +928,55 @@ const labs = [
   {
     title: 'Electrical Machines Lab',
     desc: 'Advanced electrical machines laboratory with DC motors, AC motors, transformers, and generators for comprehensive hands-on training.',
-    img: '@/assets/engineering-students-lab.png',
+    img: new URL('@/assets/departments/eee/labs/machines_lab_1_1.jpg', import.meta.url).href,
     images: [
-      '@/assets/engineering-students-lab.png',
-      '@/assets/campuslife/engineering-students-lab.png',
-      '@/assets/campuslife/students-in-college-library-studying.jpg'
+      new URL('@/assets/departments/eee/labs/machines_lab_1_1.jpg', import.meta.url).href,
+      new URL('@/assets/departments/eee/labs/machines_lab_1_2.jpg', import.meta.url).href,
+      new URL('@/assets/departments/eee/labs/machines_lab_1_3.jpg', import.meta.url).href
     ],
     tags: ['DC Motors', 'AC Motors', 'Transformers']
   },
   {
     title: 'Electrical Circuits Lab',
     desc: 'Fundamental electrical circuits laboratory with circuit analysis, network theorems, and power electronics experiments.',
-    img: '@/assets/campuslife/engineering-students-lab.png',
+    img: new URL('@/assets/departments/eee/labs/circuits_lab_1_1.jpg', import.meta.url).href,
     images: [
-      '@/assets/campuslife/engineering-students-lab.png',
-      '@/assets/engineering-students-lab.png',
-      '@/assets/campuslife/students-in-college-library-studying.jpg'
+      new URL('@/assets/departments/eee/labs/circuits_lab_1_1.jpg', import.meta.url).href,
+      new URL('@/assets/departments/eee/labs/circuits_lab_1_2.jpg', import.meta.url).href,
+      new URL('@/assets/departments/eee/labs/circuits_lab_1_3.jpg', import.meta.url).href
     ],
     tags: ['Circuit Analysis', 'Network Theorems', 'Power Electronics']
   },
   {
     title: 'Power Systems Lab',
     desc: 'High voltage and power systems laboratory with transmission line models, power flow analysis, and protection systems.',
-    img: '@/assets/campuslife/students-in-college-library-studying.jpg',
+    img: new URL('@/assets/departments/eee/labs/machines_lab_1_1.jpg', import.meta.url).href,
     images: [
-      '@/assets/campuslife/students-in-college-library-studying.jpg',
-      '@/assets/engineering-students-lab.png',
-      '@/assets/campuslife/engineering-students-lab.png'
+      new URL('@/assets/departments/eee/labs/machines_lab_1_1.jpg', import.meta.url).href,
+      new URL('@/assets/departments/eee/labs/machines_lab_1_2.jpg', import.meta.url).href,
+      new URL('@/assets/departments/eee/labs/machines_lab_1_3.jpg', import.meta.url).href
     ],
     tags: ['Power Flow', 'Protection', 'High Voltage']
   },
   {
     title: 'PE and EM Lab',
     desc: 'Power Electronics and Electrical Machines laboratory combining power converters, motor drives, and control systems.',
-    img: '@/assets/engineering-students-lab.png',
+    img: new URL('@/assets/departments/eee/labs/pe_n_em_lab_1_1.jpg', import.meta.url).href,
     images: [
-      '@/assets/engineering-students-lab.png',
-      '@/assets/campuslife/students-in-college-library-studying.jpg',
-      '@/assets/campuslife/engineering-students-lab.png'
+      new URL('@/assets/departments/eee/labs/pe_n_em_lab_1_1.jpg', import.meta.url).href,
+      new URL('@/assets/departments/eee/labs/pe_n_em_lab_1_2.jpg', import.meta.url).href,
+      new URL('@/assets/departments/eee/labs/pe_n_em_lab_1_3.jpg', import.meta.url).href
     ],
     tags: ['Power Converters', 'Motor Drives', 'Control Systems']
   },
   {
     title: 'Simulation Lab',
     desc: 'Computer-aided design and simulation laboratory with MATLAB, Simulink, and specialized electrical engineering software.',
-    img: '@/assets/campuslife/engineering-students-lab.png',
+    img: new URL('@/assets/departments/eee/labs/simulation_lab_1_1.jpg', import.meta.url).href,
     images: [
-      '@/assets/campuslife/engineering-students-lab.png',
-      '@/assets/engineering-students-lab.png'
+      new URL('@/assets/departments/eee/labs/simulation_lab_1_1.jpg', import.meta.url).href,
+      new URL('@/assets/departments/eee/labs/simulation_lab_1_2.jpg', import.meta.url).href,
+      new URL('@/assets/departments/eee/labs/simulation_lab_1_3.jpg', import.meta.url).href
     ],
     tags: ['MATLAB', 'Simulink', 'CAD Tools']
   }
@@ -800,9 +984,20 @@ const labs = [
 
 /* Syllabus / Downloads */
 const syllabus = [
-  { label: 'B.Tech CSE (AI & DS) Syllabus (R22)', note: 'Current Scheme', href: '#' },
-  { label: 'Electives & Tracks', note: 'DL • NLP • CV • Data Engg', href: '#' },
-  { label: 'Project-Based Learning Modules', note: 'Capstones & Industry Projects', href: '#' }
+  { 
+    label: 'B.Tech EEE Syllabus (R22)', 
+    note: 'Current Scheme', 
+    href: '#',
+    pdfUrl: 'https://drive.google.com/file/d/1I90CPz_bKxXiCLLiyIksB8tSl-MJq-hJ/preview',
+    type: 'pdf'
+  },
+  { 
+    label: 'B.Tech EEE Syllabus (R18)', 
+    note: 'Previous Scheme', 
+    href: '#',
+    pdfUrl: 'https://drive.google.com/file/d/1cInc-SqzmsPkRfe1VzYbVCAChjdKKh-Y/preview',
+    type: 'pdf'
+  }
 ]
 
 /* Activities */
@@ -998,9 +1193,22 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 .filters input, .filters select{
   border:1px solid var(--border); border-radius:.6rem; padding:.55rem .8rem; min-width:220px; background:#fff;
 }
-.faculty-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem; margin-top:1rem }
-.faculty-card{ border:1px solid var(--border); border-radius:1rem; overflow:hidden; display:flex; gap:.85rem; padding:.9rem; background:#fff; transition:transform .2s ease, box-shadow .2s ease }
-.faculty-card:focus, .faculty-card:hover{ transform:translateY(-3px); box-shadow:0 12px 30px rgba(0,0,0,.08) }
+.faculty-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(350px,1fr)); gap:1rem; margin-top:1rem }
+.faculty-card{ 
+  border:1px solid var(--border); 
+  border-radius:1rem; 
+  overflow:visible; 
+  display:flex; 
+  gap:.85rem; 
+  padding:1rem; 
+  background:#fff; 
+  transition:all 0.3s ease;
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
+}
+.faculty-card:focus, .faculty-card:hover{ 
+  transform:translateY(-4px); 
+  box-shadow:0 8px 25px rgba(0,0,0,.12);
+}
 .avatar{ width:86px; height:86px; object-fit:cover; border-radius:.75rem }
 .fc-name{ font-size:1.05rem; font-weight:800; color:var(--ink); margin:0 0 .15rem }
 .fc-meta{ color:var(--muted); margin:0 0 .35rem }
@@ -1240,5 +1448,194 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
   .accordion-count{ font-size:.75rem; padding:.15rem .5rem }
   .outcome-grid{ grid-template-columns:1fr }
   .outcome-grid.grid-2{ grid-template-columns:1fr }
+}
+
+/* DOWNLOADS */
+.downloads{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:.8rem }
+.download{
+  border:1px solid var(--border); 
+  border-radius:.9rem; 
+  padding:.8rem; 
+  display:flex; 
+  gap:.7rem; 
+  align-items:flex-start; 
+  text-decoration:none; 
+  color:inherit; 
+  background:#fff;
+  transition:all 0.3s ease;
+  cursor:pointer;
+}
+.download:hover{
+  border-color:var(--orange);
+  background:rgba(249,115,22,0.05);
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(0,0,0,.1);
+}
+.download.coming-soon{
+  opacity:0.6;
+  cursor:not-allowed;
+}
+.download.coming-soon:hover{
+  transform:none;
+  box-shadow:none;
+}
+.dl-status{
+  font-size:0.8rem;
+  color:var(--orange);
+  font-weight:600;
+  margin-top:0.2rem;
+}
+.download i{ color:var(--orange); font-size:1.25rem; margin-top:.15rem }
+.dl-label{ font-weight:800; color:var(--ink) }
+.dl-sub{ font-size:.85rem; color:var(--muted) }
+
+/* PDF Modal Styles */
+.pdf-modal-overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.9);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  padding:1rem;
+}
+.pdf-modal{
+  width:95%;
+  max-width:1200px;
+  height:90%;
+  background:#fff;
+  border-radius:1rem;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,0.3);
+  transition:all 0.3s ease;
+}
+.pdf-modal-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:1rem 1.5rem;
+  background:var(--ink);
+  color:#fff;
+  border-bottom:1px solid var(--border);
+}
+.pdf-modal-title{
+  margin:0;
+  font-size:1.2rem;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  gap:0.5rem;
+}
+.pdf-modal-title i{
+  color:#ff4757;
+}
+.pdf-modal-actions{
+  display:flex;
+  align-items:center;
+  gap:0.5rem;
+}
+.pdf-modal-content{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+}
+.pdf-iframe{
+  width:100%;
+  height:100%;
+  border:none;
+  background:#f8f9fa;
+  transition: opacity 0.3s ease;
+}
+.pdf-iframe.loading{
+  opacity: 0;
+}
+.pdf-loading{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  z-index: 10;
+}
+.loading-spinner{
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid var(--orange);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+.loading-text{
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.pdf-modal-footer{
+  padding:0.5rem 1rem;
+  background:#f8f9fa;
+  border-top:1px solid var(--border);
+  text-align:center;
+}
+.keyboard-hint{
+  font-size:0.75rem;
+  color:var(--muted);
+  font-style:italic;
+}
+
+/* Modal button styles */
+.modal-btn{
+  width:40px;
+  height:40px;
+  border:none;
+  background:rgba(255,255,255,0.1);
+  color:#fff;
+  border-radius:.5rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:all 0.3s ease;
+  font-size:.9rem;
+}
+.modal-btn:hover{
+  background:rgba(255,255,255,0.2);
+  transform:scale(1.05);
+}
+.close-btn:hover{
+  background:#ff4757;
+}
+
+/* Responsive PDF Modal */
+@media (max-width: 768px){
+  .pdf-modal{
+    width:98%;
+    height:95%;
+  }
+  .pdf-modal-header{
+    padding:.8rem 1rem;
+  }
+  .pdf-modal-title{
+    font-size:1rem;
+  }
+  .pdf-modal-footer{
+    padding:.4rem .8rem;
+  }
+  .keyboard-hint{
+    font-size:0.7rem;
+  }
 }
 </style>

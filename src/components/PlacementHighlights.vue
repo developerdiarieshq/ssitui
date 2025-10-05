@@ -80,7 +80,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import placementData from '@/data/placement-data.json'
+import { placementService } from '@/data/placementService.js'
 
 // Router setup
 const router = useRouter()
@@ -95,22 +95,16 @@ const navigateToPlacements = () => {
   router.push('/placements')
 }
 
-// Load data from JSON
+// Load data from shared service
 onMounted(() => {
-  // Process top placements data
-  topPlacements.value = placementData.topPlacements.map(placement => ({
-    ...placement,
-    logo: new URL(placement.logo, import.meta.url).href
-  }))
+  // Get top placements data from shared service
+  topPlacements.value = placementService.getTopPlacements()
 
-  // Process top recruiters data
-  topRecruiters.value = placementData.topRecruiters.map(recruiter => ({
-    ...recruiter,
-    logo: new URL(recruiter.logo, import.meta.url).href
-  }))
+  // Get top recruiters data from shared service
+  topRecruiters.value = placementService.getTopRecruiters()
 
-  // Process campus placements 2025 data
-  campusPlacements2025.value = placementData.campusPlacements2025
+  // Get campus placements 2025 data from shared service
+  campusPlacements2025.value = placementService.getCampusPlacements2025()
 })
 
 </script>

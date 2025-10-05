@@ -80,11 +80,11 @@
 
         <div class="grid-2">
           <article class="card">
-            <h3 class="h5 text-muted mb-2">Vision</h3>
+            <h3 class="h5 mb-2" style="color: var(--ink); font-weight: 800;">Vision</h3>
             <p>
               To be recognized as the center for excellence in polytechnic education, producing skilled technicians and engineers who contribute to the technological advancement of society.
             </p>
-            <h3 class="h5 text-muted mt-4 mb-2">Mission</h3>
+            <h3 class="h5 mt-4 mb-2" style="color: var(--ink); font-weight: 800;">Mission</h3>
             <ul class="bullets">
               <li>Offer technical courses that prepare students to develop into quality professionals.</li>
               <li>Provide practical skills and hands-on training in mechanical, electrical, and computer engineering.</li>
@@ -759,9 +759,22 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 .filters input, .filters select{
   border:1px solid var(--border); border-radius:.6rem; padding:.55rem .8rem; min-width:220px; background:#fff;
 }
-.faculty-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem; margin-top:1rem }
-.faculty-card{ border:1px solid var(--border); border-radius:1rem; overflow:hidden; display:flex; gap:.85rem; padding:.9rem; background:#fff; transition:transform .2s ease, box-shadow .2s ease }
-.faculty-card:focus, .faculty-card:hover{ transform:translateY(-3px); box-shadow:0 12px 30px rgba(0,0,0,.08) }
+.faculty-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(350px,1fr)); gap:1rem; margin-top:1rem }
+.faculty-card{ 
+  border:1px solid var(--border); 
+  border-radius:1rem; 
+  overflow:visible; 
+  display:flex; 
+  gap:.85rem; 
+  padding:1rem; 
+  background:#fff; 
+  transition:all 0.3s ease;
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
+}
+.faculty-card:focus, .faculty-card:hover{ 
+  transform:translateY(-4px); 
+  box-shadow:0 8px 25px rgba(0,0,0,.12);
+}
 .avatar{ width:86px; height:86px; object-fit:cover; border-radius:.75rem }
 .fc-name{ font-size:1.05rem; font-weight:800; color:var(--ink); margin:0 0 .15rem }
 .fc-meta{ color:var(--muted); margin:0 0 .35rem }

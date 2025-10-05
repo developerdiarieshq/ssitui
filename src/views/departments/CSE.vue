@@ -1612,7 +1612,7 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
   background:#FF7701;
   color:#fff;
 }
-.faculty-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1rem; margin-top:1rem }
+.faculty-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(350px,1fr)); gap:1rem; margin-top:1rem }
 .faculty-card{ 
   border:1px solid var(--border); 
   border-radius:1rem; 

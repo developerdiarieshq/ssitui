@@ -141,6 +141,7 @@ const routes = [
     { path: '/sh', component: Sh },
     { path: '/polytechnic', component: Polytechnic },
     { path: '/eee', component: Eee },
+    { path: '/eee/:tab', component: Eee },
     { path: '/mech', component: Mech },
     { path: '/examination-branch', component: Examination },
     { path: '/mba', component: Mba },
@@ -178,7 +179,8 @@ const getRouterConfig = () => {
             scrollBehavior(to, from, savedPosition) {
                 // Don't scroll to top for tab navigation within same component
                 if ((to.path.includes('/cse/') && from.path.includes('/cse/')) ||
-                    (to.path.includes('/placements/') && from.path.includes('/placements/'))) {
+                    (to.path.includes('/placements/') && from.path.includes('/placements/')) ||
+                    (to.path.includes('/eee/') && from.path.includes('/eee/'))) {
                     return false
                 }
                 // For other navigation, scroll to top
@@ -195,7 +197,8 @@ const getRouterConfig = () => {
             scrollBehavior(to, from, savedPosition) {
                 // Don't scroll to top for tab navigation within same component
                 if ((to.path.includes('/cse/') && from.path.includes('/cse/')) ||
-                    (to.path.includes('/placements/') && from.path.includes('/placements/'))) {
+                    (to.path.includes('/placements/') && from.path.includes('/placements/')) ||
+                    (to.path.includes('/eee/') && from.path.includes('/eee/'))) {
                     return false
                 }
                 // For other navigation, scroll to top
