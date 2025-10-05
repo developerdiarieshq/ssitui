@@ -41,7 +41,7 @@
     </header>
 
     <!-- STICKY SUB NAV (nav-pills) -->
-    <nav class="subnav" aria-label="Section navigation">
+    <nav id="subnav" class="subnav" aria-label="Section navigation">
       <div class="container subnav-inner">
         <button
           v-for="tab in tabs"
@@ -61,7 +61,7 @@
     <!-- CONTENT (tab panes) -->
     <main class="container content" id="content">
       <!-- ABOUT -->
-      <section class="card-section" v-show="activeTab==='overview'">
+      <section :id="tabsMap.overview" class="card-section" v-show="activeTab==='overview'">
         <div class="card">
           <h2 class="section-title"><i class="fa-solid fa-school"></i> About the Department</h2>
           <p class="lead">
@@ -114,7 +114,7 @@
       </section>
 
       <!-- FACULTY DIRECTORY -->
-      <section class="card-section" v-show="activeTab==='faculty'">
+      <section :id="tabsMap.faculty" class="card-section" v-show="activeTab==='faculty'">
         <div class="card">
           <div class="section-header">
             <h2 class="section-title"><i class="fa-solid fa-users-gear"></i> Faculty Directory</h2>
@@ -166,7 +166,7 @@
       </section>
 
       <!-- LABS / INFRA -->
-      <section class="card-section" v-show="activeTab==='labs'">
+      <section :id="tabsMap.labs" class="card-section" v-show="activeTab==='labs'">
         <h2 class="section-title"><i class="fa-solid fa-flask"></i> Labs & Research Infrastructure</h2>
         <div class="labs-grid">
           <article v-for="lab in labs" :key="lab.title" class="lab-card">
@@ -185,7 +185,7 @@
       </section>
 
       <!-- CURRICULUM -->
-      <section class="card-section" aria-labelledby="curriculum" v-show="activeTab==='curriculum'">
+      <section :id="tabsMap.curriculum" class="card-section" aria-labelledby="curriculum" v-show="activeTab==='curriculum'">
         <div class="card">
           <h2 class="section-title" id="curriculum"><i class="fa-solid fa-file-lines"></i> Course Structure for all Years</h2>
           <p class="lead">
@@ -265,7 +265,7 @@
       </section>
 
       <!-- ACTIVITIES -->
-      <section class="card-section" v-show="activeTab==='activities'">
+      <section :id="tabsMap.activities" class="card-section" v-show="activeTab==='activities'">
         <h2 class="section-title"><i class="fa-solid fa-rocket"></i> Student Activities & Achievements</h2>
         <div class="grid-3">
           <article class="card" v-for="a in activities" :key="a.title">
@@ -276,7 +276,7 @@
       </section>
 
       <!-- RESEARCH & INDUSTRY -->
-      <section class="card-section" v-show="activeTab==='research'">
+      <section :id="tabsMap.research" class="card-section" v-show="activeTab==='research'">
         <div class="grid-2">
           <article class="card">
             <h2 class="section-title"><i class="fa-solid fa-microscope"></i> Research Highlights</h2>
@@ -303,7 +303,7 @@
       </section>
 
       <!-- PLACEMENTS -->
-      <section class="card-section" v-show="activeTab==='placements'">
+      <section :id="tabsMap.placements" class="card-section" v-show="activeTab==='placements'">
         <div class="card">
           <h2 class="section-title"><i class="fa-solid fa-briefcase"></i> Placements & Opportunities</h2>
           <div class="stats">
@@ -336,7 +336,7 @@
       </section>
 
       <!-- ALUMNI -->
-      <section class="card-section" v-show="activeTab==='alumni'">
+      <section :id="tabsMap.alumni" class="card-section" v-show="activeTab==='alumni'">
         <h2 class="section-title"><i class="fa-solid fa-user-graduate"></i> Alumni Network</h2>
         <div class="under-construction">
           <div class="construction-content">
@@ -349,7 +349,7 @@
       </section>
 
       <!-- CONTACT -->
-      <section class="card-section" v-show="activeTab==='contact'">
+      <section :id="tabsMap.contact" class="card-section" v-show="activeTab==='contact'">
         <div class="card contact-card">
           <h2 class="section-title"><i class="fa-solid fa-address-book"></i> Contact Us</h2>
           <div class="contact-grid">
@@ -363,7 +363,7 @@
             </div>
             <aside class="note">
               <p class="mb-0"><i class="fa-solid fa-circle-info"></i> Follow our LinkedIn page for news, internships, and events.</p>
-              <a class="btn btn-soft mt-1" href="#" aria-label="AI & DS LinkedIn">AI & DS LinkedIn</a>
+              <a class="btn btn-soft mt-1" href="#" aria-label="Polytechnic LinkedIn">Polytechnic LinkedIn</a>
             </aside>
           </div>
         </div>
@@ -377,7 +377,8 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import Header from '@/components/Header.vue'
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/Footer.vue'
@@ -405,8 +406,53 @@ const tabs = [
   { id: 'alumni',     label: 'Alumni',     icon: 'fa-solid fa-user-graduate' },
   { id: 'contact',    label: 'Contact',    icon: 'fa-solid fa-address-book' }
 ]
+// Router setup
+const route = useRoute()
+const router = useRouter()
+
+// Tab mapping for URL synchronization
+const tabsMap = {
+  overview: 'overview',
+  faculty: 'faculty', 
+  labs: 'labs',
+  curriculum: 'curriculum',
+  activities: 'activities',
+  research: 'research',
+  placements: 'placements',
+  alumni: 'alumni',
+  contact: 'contact'
+}
+
 const activeTab = ref(tabs[0].id)
-const setTab = (id) => { activeTab.value = id } // tabbed view, no scroll
+
+// Enhanced setTab function with router navigation
+const setTab = (id) => {
+  activeTab.value = id
+  router.push(`/polytechnic/${id}`)
+  
+  // Smooth scroll to section
+  setTimeout(() => {
+    const element = document.getElementById(tabsMap[id])
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, 100)
+}
+
+// Initialize tab from URL on mount
+onMounted(() => {
+  const tabFromUrl = route.params.tab
+  if (tabFromUrl && tabs.some(tab => tab.id === tabFromUrl)) {
+    activeTab.value = tabFromUrl
+  }
+})
+
+// Watch for route changes
+watch(() => route.params.tab, (newTab) => {
+  if (newTab && tabs.some(tab => tab.id === newTab)) {
+    activeTab.value = newTab
+  }
+})
 
 /* Faculty */
 const faculty = ref([

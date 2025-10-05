@@ -28,8 +28,8 @@
         </div>
         <picture class="hero-art" aria-hidden="true">
           <img
-            src="@/assets/engineering-students-lab.png"
-            alt="EEE Department - Students in Electrical Lab"
+            src="@/assets/departments/eee/labs/circuits_lab_1_1.jpg"
+            alt="EEE Department - Electrical Circuits Laboratory"
             class="hero-img"
           />
         </picture>

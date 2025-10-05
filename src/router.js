@@ -136,20 +136,31 @@ const routes = [
     { path: '/cse', component: Cse },
     { path: '/cse/:tab', component: Cse },
     { path: '/cse-ai', component: CseAi },
+    { path: '/cse-ai/:tab', component: CseAi },
     { path: '/cse-ai-ds', component: CseAiDs },
+    { path: '/cse-ai-ds/:tab', component: CseAiDs },
     { path: '/ece', component: Ece },
+    { path: '/ece/:tab', component: Ece },
     { path: '/sh', component: Sh },
+    { path: '/sh/:tab', component: Sh },
     { path: '/polytechnic', component: Polytechnic },
+    { path: '/polytechnic/:tab', component: Polytechnic },
     { path: '/eee', component: Eee },
     { path: '/eee/:tab', component: Eee },
     { path: '/mech', component: Mech },
+    { path: '/mech/:tab', component: Mech },
     { path: '/examination-branch', component: Examination },
+    { path: '/examination-branch/:tab', component: Examination },
     { path: '/mba', component: Mba },
+    { path: '/mba/:tab', component: Mba },
 
     // Diploma Department Routes
     { path: '/dme', component: DME },
+    { path: '/dme/:tab', component: DME },
     { path: '/deee', component: DEEE },
+    { path: '/deee/:tab', component: DEEE },
     { path: '/dece', component: DECE },
+    { path: '/dece/:tab', component: DECE },
 
     // B-Category Seats Routes
     { path: '/mba-b-category-seats', component: MBABCategorySeats },
@@ -179,8 +190,19 @@ const getRouterConfig = () => {
             scrollBehavior(to, from, savedPosition) {
                 // Don't scroll to top for tab navigation within same component
                 if ((to.path.includes('/cse/') && from.path.includes('/cse/')) ||
-                    (to.path.includes('/placements/') && from.path.includes('/placements/')) ||
-                    (to.path.includes('/eee/') && from.path.includes('/eee/'))) {
+                    (to.path.includes('/cse-ai/') && from.path.includes('/cse-ai/')) ||
+                    (to.path.includes('/cse-ai-ds/') && from.path.includes('/cse-ai-ds/')) ||
+                    (to.path.includes('/ece/') && from.path.includes('/ece/')) ||
+                    (to.path.includes('/eee/') && from.path.includes('/eee/')) ||
+                    (to.path.includes('/mech/') && from.path.includes('/mech/')) ||
+                    (to.path.includes('/mba/') && from.path.includes('/mba/')) ||
+                    (to.path.includes('/sh/') && from.path.includes('/sh/')) ||
+                    (to.path.includes('/polytechnic/') && from.path.includes('/polytechnic/')) ||
+                    (to.path.includes('/dme/') && from.path.includes('/dme/')) ||
+                    (to.path.includes('/deee/') && from.path.includes('/deee/')) ||
+                    (to.path.includes('/dece/') && from.path.includes('/dece/')) ||
+                    (to.path.includes('/examination-branch/') && from.path.includes('/examination-branch/')) ||
+                    (to.path.includes('/placements/') && from.path.includes('/placements/'))) {
                     return false
                 }
                 // For other navigation, scroll to top
@@ -197,8 +219,19 @@ const getRouterConfig = () => {
             scrollBehavior(to, from, savedPosition) {
                 // Don't scroll to top for tab navigation within same component
                 if ((to.path.includes('/cse/') && from.path.includes('/cse/')) ||
-                    (to.path.includes('/placements/') && from.path.includes('/placements/')) ||
-                    (to.path.includes('/eee/') && from.path.includes('/eee/'))) {
+                    (to.path.includes('/cse-ai/') && from.path.includes('/cse-ai/')) ||
+                    (to.path.includes('/cse-ai-ds/') && from.path.includes('/cse-ai-ds/')) ||
+                    (to.path.includes('/ece/') && from.path.includes('/ece/')) ||
+                    (to.path.includes('/eee/') && from.path.includes('/eee/')) ||
+                    (to.path.includes('/mech/') && from.path.includes('/mech/')) ||
+                    (to.path.includes('/mba/') && from.path.includes('/mba/')) ||
+                    (to.path.includes('/sh/') && from.path.includes('/sh/')) ||
+                    (to.path.includes('/polytechnic/') && from.path.includes('/polytechnic/')) ||
+                    (to.path.includes('/dme/') && from.path.includes('/dme/')) ||
+                    (to.path.includes('/deee/') && from.path.includes('/deee/')) ||
+                    (to.path.includes('/dece/') && from.path.includes('/dece/')) ||
+                    (to.path.includes('/examination-branch/') && from.path.includes('/examination-branch/')) ||
+                    (to.path.includes('/placements/') && from.path.includes('/placements/'))) {
                     return false
                 }
                 // For other navigation, scroll to top
@@ -214,7 +247,9 @@ const getRouterConfig = () => {
         scrollBehavior(to, from, savedPosition) {
             // Don't scroll to top for tab navigation within same component
             if ((to.path.includes('/cse/') && from.path.includes('/cse/')) ||
-                (to.path.includes('/placements/') && from.path.includes('/placements/'))) {
+                (to.path.includes('/placements/') && from.path.includes('/placements/')) ||
+                (to.path.includes('/eee/') && from.path.includes('/eee/')) ||
+                (to.path.includes('/ece/') && from.path.includes('/ece/'))) {
                 return false
             }
             // For other navigation, scroll to top
