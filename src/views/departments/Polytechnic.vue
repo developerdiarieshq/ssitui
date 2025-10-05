@@ -337,46 +337,14 @@
 
       <!-- ALUMNI -->
       <section class="card-section" v-show="activeTab==='alumni'">
-        <div class="alumni-header">
-          <h2 class="section-title"><i class="fa-solid fa-user-graduate"></i> Alumni Network</h2>
-          <div class="year-filter">
-            <label for="yearSelect" class="filter-label">Filter by Year:</label>
-            <select 
-              id="yearSelect" 
-              v-model="selectedYear" 
-              class="year-select"
-              aria-label="Filter alumni by graduation year"
-            >
-              <option 
-                v-for="year in availableYears" 
-                :key="year" 
-                :value="year"
-              >
-                {{ year === 'ALL' ? 'All Years' : year }}
-              </option>
-            </select>
+        <h2 class="section-title"><i class="fa-solid fa-user-graduate"></i> Alumni Network</h2>
+        <div class="under-construction">
+          <div class="construction-content">
+            <i class="fa-solid fa-hammer"></i>
+            <h3>Under Construction</h3>
+            <p>Our alumni network section is currently being updated with the latest information about our Polytechnic graduates and their achievements.</p>
+            <p>Please check back soon for inspiring stories from our alumni community.</p>
           </div>
-        </div>
-        <div class="alumni-grid">
-          <article v-for="al in filteredAlumni" :key="al.name" class="alumni-card">
-            <img :src="al.photo" :alt="al.name" class="avatar" />
-            <div class="alumni-info">
-              <h3 class="h6">{{ al.name }}</h3>
-              <p class="muted">{{ al.role }} — {{ al.company }}</p>
-              <p class="yop" v-if="al.yop"><strong>YOP:</strong> {{ al.yop }}</p>
-              <div class="social-links">
-                <a v-if="al.linkedin" :href="al.linkedin" target="_blank" rel="noopener" class="social-link" title="LinkedIn">
-                  <i class="fa-brands fa-linkedin"></i>
-                </a>
-                <a v-if="al.github" :href="al.github" target="_blank" rel="noopener" class="social-link" title="GitHub">
-                  <i class="fa-brands fa-github"></i>
-                </a>
-              </div>
-            </div>
-          </article>
-        </div>
-        <div class="row-actions mt-1">
-          <a class="btn btn-primary" href="mailto:alumni@ssit.edu.in">Join Alumni Network</a>
         </div>
       </section>
 
@@ -1028,6 +996,39 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
   border-color:var(--orange);
   background:rgba(249,115,22,0.05);
   transform:translateY(-1px);
+}
+
+/* UNDER CONSTRUCTION */
+.under-construction{ 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  min-height: 300px; 
+  background: linear-gradient(135deg, #f8fafc 0%, #eef4ff 100%); 
+  border: 2px dashed var(--border); 
+  border-radius: 1rem; 
+  margin: 1rem 0 
+}
+.construction-content{ 
+  text-align: center; 
+  max-width: 400px; 
+  padding: 2rem 
+}
+.construction-content i{ 
+  font-size: 3rem; 
+  color: var(--primary); 
+  margin-bottom: 1rem; 
+  opacity: 0.7 
+}
+.construction-content h3{ 
+  color: var(--ink); 
+  margin-bottom: 1rem; 
+  font-size: 1.5rem 
+}
+.construction-content p{ 
+  color: var(--muted); 
+  line-height: 1.6; 
+  margin-bottom: 0.8rem 
 }
 
 /* Responsive Alumni Header */

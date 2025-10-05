@@ -395,6 +395,72 @@
         </div>
       </section>
 
+      <!-- BOS (Board of Studies) -->
+      <section class="card-section" v-show="activeTab==='bos'">
+        <div class="card">
+          <h2 class="section-title"><i class="fa-solid fa-graduation-cap"></i> Board of Studies (BOS)</h2>
+          <div class="bos-intro">
+            <p class="lead">
+              The Board of Studies (BOS) for Mechanical Engineering is responsible for the academic planning, 
+              curriculum development, and quality assurance of the MECH program. The board ensures that the curriculum 
+              remains current with industry trends and academic standards in mechanical engineering.
+            </p>
+          </div>
+          
+          <div class="grid-2">
+            <article class="card">
+              <h3 class="section-title-sm"><i class="fa-solid fa-users"></i> BOS Members</h3>
+              <ul class="bullets">
+                <li><strong>Chairman:</strong> Dr. [HOD Name] (HOD, MECH)</li>
+                <li><strong>Industry Expert:</strong> Mr. [Industry Expert] (Senior Engineer, Manufacturing Sector)</li>
+                <li><strong>Academic Expert:</strong> Dr. [Academic Expert] (Professor, IIT/NIT)</li>
+                <li><strong>Alumni Representative:</strong> Mr. [Alumni Name] (Senior Engineer, Mechanical Industry)</li>
+                <li><strong>Student Representative:</strong> Ms. [Student Name] (Final Year MECH)</li>
+              </ul>
+            </article>
+            
+            <article class="card">
+              <h3 class="section-title-sm"><i class="fa-solid fa-tasks"></i> BOS Responsibilities</h3>
+              <ul class="bullets">
+                <li>Curriculum design and periodic review</li>
+                <li>Course content development and updates</li>
+                <li>Academic policy formulation</li>
+                <li>Quality assurance and assessment</li>
+                <li>Industry-academia collaboration</li>
+                <li>Research and development initiatives</li>
+              </ul>
+            </article>
+          </div>
+          
+          <div class="card mt-1">
+            <h3 class="section-title-sm"><i class="fa-solid fa-calendar-alt"></i> Recent BOS Activities</h3>
+            <div class="bos-activities">
+              <div class="activity-item">
+                <div class="activity-date">2024</div>
+                <div class="activity-content">
+                  <h4>Curriculum Revision (R22)</h4>
+                  <p>Updated curriculum to include Industry 4.0, automation, and sustainable manufacturing specializations</p>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-date">2023</div>
+                <div class="activity-content">
+                  <h4>Industry Partnership Program</h4>
+                  <p>Established partnerships with leading manufacturing and automotive companies for curriculum enhancement</p>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-date">2023</div>
+                <div class="activity-content">
+                  <h4>Faculty Development Program</h4>
+                  <p>Conducted workshops on emerging mechanical technologies and teaching methodologies</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- ACTIVITIES -->
       <section class="card-section" v-show="activeTab==='activities'">
         <div class="card">
@@ -483,20 +549,13 @@
       <!-- ALUMNI -->
       <section class="card-section" v-show="activeTab==='alumni'">
         <h2 class="section-title"><i class="fa-solid fa-user-graduate"></i> Alumni Network</h2>
-        <div class="alumni-grid">
-          <article v-for="al in alumni" :key="al.name" class="alumni-card">
-            <img :src="al.photo" :alt="al.name" class="avatar" />
-            <div>
-              <h3 class="h6">{{ al.name }}</h3>
-              <p class="muted">{{ al.role }} — {{ al.company }}</p>
-              <a v-if="al.linkedin" :href="al.linkedin" target="_blank" rel="noopener" class="icon-link">
-                <i class="fa-brands fa-linkedin"></i> Connect
-              </a>
-            </div>
-          </article>
-        </div>
-        <div class="row-actions mt-1">
-          <a class="btn btn-primary" href="mailto:alumni@ssit.edu.in">Join Alumni Mentoring</a>
+        <div class="under-construction">
+          <div class="construction-content">
+            <i class="fa-solid fa-hammer"></i>
+            <h3>Under Construction</h3>
+            <p>Our alumni network section is currently being updated with the latest information about our MECH graduates and their achievements.</p>
+            <p>Please check back soon for inspiring stories from our alumni community.</p>
+          </div>
         </div>
       </section>
 
@@ -560,6 +619,7 @@ const tabs = [
   { id: 'faculty',    label: 'Faculty',    icon: 'fa-solid fa-users' },
   { id: 'labs',       label: 'Labs',       icon: 'fa-solid fa-flask' },
   { id: 'curriculum', label: 'Curriculum', icon: 'fa-solid fa-file-lines' },
+  { id: 'bos',        label: 'BOS',        icon: 'fa-solid fa-graduation-cap' },
   { id: 'activities', label: 'Activities', icon: 'fa-solid fa-rocket' },
   { id: 'research',   label: 'Research',   icon: 'fa-solid fa-microscope' },
   { id: 'placements', label: 'Placements', icon: 'fa-solid fa-briefcase' },
@@ -852,11 +912,11 @@ const alumni = [
 
 /* Contact */
 const hod = {
-  name: 'Dr. R. Anitha',
-  designation: 'Professor & Head, CSE (AI & DS)',
-  location: 'AI & DS Block, Room 301',
-  phone: '+91-98765-43210',
-  email: 'hod.aids@ssit.edu.in'
+  name: 'Dr. P. Srinivasa Rao',
+  designation: 'Professor & Head, MECH',
+  location: 'MECH Block, Room 401',
+  phone: '+91-98765-43213',
+  email: 'hod.mech@ssit.edu.in'
 }
 
 const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })
@@ -1005,6 +1065,49 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 /* LABS */
 .labs-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem }
 .lab-card{ border:1px solid var(--border); border-radius:1rem; overflow:hidden; background:#fff; display:flex; flex-direction:column }
+
+/* BOS */
+.bos-intro{ margin:1.5rem 0 }
+.bos-activities{ margin-top:1rem }
+.activity-item{ 
+  display:flex; 
+  gap:1rem; 
+  align-items:flex-start; 
+  padding:1rem 0; 
+  border-bottom:1px solid var(--border);
+  transition:all 0.3s ease;
+}
+.activity-item:last-child{ border-bottom:none }
+.activity-item:hover{ 
+  background:rgba(249,115,22,0.02); 
+  border-radius:.5rem; 
+  padding:1rem; 
+  margin:0 -1rem;
+}
+.activity-date{ 
+  background:var(--orange); 
+  color:#fff; 
+  border-radius:.5rem; 
+  padding:.4rem .8rem; 
+  font-weight:700; 
+  font-size:.85rem; 
+  min-width:60px; 
+  text-align:center;
+  flex-shrink:0;
+}
+.activity-content h4{ 
+  font-size:1rem; 
+  font-weight:700; 
+  color:var(--ink); 
+  margin:0 0 .3rem;
+  line-height:1.3;
+}
+.activity-content p{ 
+  color:#000; 
+  font-size:.9rem; 
+  line-height:1.5; 
+  margin:0;
+}
 .lab-card img{ width:100%; height:160px; object-fit:cover }
 .lab-body{ padding:1rem }
 .lab-title{ margin:0 0 .25rem; font-weight:800; color:var(--ink) }
@@ -1215,6 +1318,39 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 .alumni-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem }
 .alumni-card{ border:1px solid var(--border); border-radius:1rem; background:#fff; padding:.9rem; display:flex; gap:.8rem; align-items:center }
 .alumni-card .avatar{ width:70px; height:70px; border-radius:.7rem }
+
+/* UNDER CONSTRUCTION */
+.under-construction{ 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  min-height: 300px; 
+  background: linear-gradient(135deg, #f8fafc 0%, #eef4ff 100%); 
+  border: 2px dashed var(--border); 
+  border-radius: 1rem; 
+  margin: 1rem 0 
+}
+.construction-content{ 
+  text-align: center; 
+  max-width: 400px; 
+  padding: 2rem 
+}
+.construction-content i{ 
+  font-size: 3rem; 
+  color: var(--primary); 
+  margin-bottom: 1rem; 
+  opacity: 0.7 
+}
+.construction-content h3{ 
+  color: var(--ink); 
+  margin-bottom: 1rem; 
+  font-size: 1.5rem 
+}
+.construction-content p{ 
+  color: var(--muted); 
+  line-height: 1.6; 
+  margin-bottom: 0.8rem 
+}
 
 /* CONTACT */
 .contact-card .contact-grid{ display:grid; grid-template-columns:2fr 1fr; gap:1rem; align-items:start }

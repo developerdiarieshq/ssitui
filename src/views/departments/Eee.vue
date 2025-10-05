@@ -448,14 +448,109 @@
         </div>
       </section>
 
+      <!-- BOS (Board of Studies) -->
+      <section :id="tabsMap.bos" class="card-section" v-show="activeTab==='bos'">
+        <div class="card">
+          <h2 class="section-title"><i class="fa-solid fa-graduation-cap"></i> Board of Studies (BOS)</h2>
+          <div class="bos-intro">
+            <p class="lead">
+              The Board of Studies (BOS) for Electrical and Electronics Engineering is responsible for the academic planning, 
+              curriculum development, and quality assurance of the EEE program. The board ensures that the curriculum 
+              remains current with industry trends and academic standards in electrical and electronics engineering.
+            </p>
+          </div>
+          
+          <div class="grid-2">
+            <article class="card">
+              <h3 class="section-title-sm"><i class="fa-solid fa-users"></i> BOS Members</h3>
+              <ul class="bullets">
+                <li><strong>Chairman:</strong> Dr. [HOD Name] (HOD, EEE)</li>
+                <li><strong>Industry Expert:</strong> Mr. [Industry Expert] (Senior Engineer, Power Sector)</li>
+                <li><strong>Academic Expert:</strong> Dr. [Academic Expert] (Professor, IIT/NIT)</li>
+                <li><strong>Alumni Representative:</strong> Mr. [Alumni Name] (Senior Engineer, Electrical Industry)</li>
+                <li><strong>Student Representative:</strong> Ms. [Student Name] (Final Year EEE)</li>
+              </ul>
+            </article>
+            
+            <article class="card">
+              <h3 class="section-title-sm"><i class="fa-solid fa-tasks"></i> BOS Responsibilities</h3>
+              <ul class="bullets">
+                <li>Curriculum design and periodic review</li>
+                <li>Course content development and updates</li>
+                <li>Academic policy formulation</li>
+                <li>Quality assurance and assessment</li>
+                <li>Industry-academia collaboration</li>
+                <li>Research and development initiatives</li>
+              </ul>
+            </article>
+          </div>
+          
+          <div class="card mt-1">
+            <h3 class="section-title-sm"><i class="fa-solid fa-calendar-alt"></i> Recent BOS Activities</h3>
+            <div class="bos-activities">
+              <div class="activity-item">
+                <div class="activity-date">2024</div>
+                <div class="activity-content">
+                  <h4>Curriculum Revision (R22)</h4>
+                  <p>Updated curriculum to include renewable energy, smart grids, and power electronics specializations</p>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-date">2023</div>
+                <div class="activity-content">
+                  <h4>Industry Partnership Program</h4>
+                  <p>Established partnerships with leading electrical and power companies for curriculum enhancement</p>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-date">2023</div>
+                <div class="activity-content">
+                  <h4>Faculty Development Program</h4>
+                  <p>Conducted workshops on emerging electrical technologies and teaching methodologies</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- ACTIVITIES -->
-      <section class="card-section" v-show="activeTab==='activities'">
-        <h2 class="section-title"><i class="fa-solid fa-rocket"></i> Student Activities & Achievements</h2>
-        <div class="grid-3">
-          <article class="card" v-for="a in activities" :key="a.title">
-            <h3 class="h6">{{ a.title }}</h3>
-            <p class="muted">{{ a.desc }}</p>
-          </article>
+      <section :id="tabsMap.activities" class="card-section" v-show="activeTab==='activities'">
+        <div class="card">
+          <h2 class="section-title"><i class="fa-solid fa-rocket"></i> Student Development Activities</h2>
+          <div class="activities-hero">
+            <p class="lead">
+              VYDHUSHYA is a NATIONAL LEVEL TECHNICAL SYMPOSIUM, entitled and organized by the department of EEE. 
+              Most of us are aware of the common Paper Presentation conferences and competitions where students present 
+              their research or review papers, but with a twist, i.e. the students have to present their research work 
+              in the form of a PowerPoint presentation consisting of just 5 slides! And the slides should contain the 
+              basic concept of the technology, methodology, calculations/assessment, conclusions and references.
+            </p>
+          </div>
+          
+          <div class="activities-grid">
+            <article v-for="activity in activities" :key="activity.title" class="activity-card">
+              <div class="activity-icon">
+                <i :class="activity.icon"></i>
+              </div>
+              <div class="activity-content">
+                <h3 class="activity-title">{{ activity.title }}</h3>
+                <p class="activity-desc">{{ activity.desc }}</p>
+              </div>
+            </article>
+          </div>
+          
+          <div class="activities-footer">
+            <div class="text-center">
+              <button class="btn btn-primary" @click="openEventsModal">
+                <i class="fa-solid fa-images me-2"></i>View All Events Images
+              </button>
+              <p class="muted mt-3">
+                <i class="fa-solid fa-calendar-alt"></i> 
+                Explore our gallery of student activities and events
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -463,7 +558,7 @@
       <section class="card-section" v-show="activeTab==='research'">
         <div class="grid-2">
           <article class="card">
-            <h2 class="section-title"><i class="fa-solid fa-microscope"></i> Research Highlights</h2>
+            <h2 class="section-title"><i class="fa-solid fa-microscope"></i> Research & Development</h2>
             <ul class="bullets">
               <li v-for="p in research.projects" :key="p">{{ p }}</li>
             </ul>
@@ -475,7 +570,7 @@
             </ul>
           </article>
           <article class="card">
-            <h2 class="section-title"><i class="fa-solid fa-handshake"></i> Industry Connect</h2>
+            <h2 class="section-title"><i class="fa-solid fa-handshake"></i> Industry Partnerships</h2>
             <ul class="bullets">
               <li v-for="m in industry.mous" :key="m">{{ m }}</li>
             </ul>
@@ -489,13 +584,13 @@
       <!-- PLACEMENTS -->
       <section class="card-section" v-show="activeTab==='placements'">
         <div class="card">
-          <h2 class="section-title"><i class="fa-solid fa-briefcase"></i> Placements & Opportunities</h2>
+          <h2 class="section-title"><i class="fa-solid fa-briefcase"></i> Placements & Career Opportunities</h2>
           <div class="stats">
             <div class="stat">
               <i class="fa-solid fa-chart-line"></i>
               <div>
                 <div class="num">{{ placements.rate }}%</div>
-                <div class="label">Placement Rate (AI/DS roles)</div>
+                <div class="label">Placement Rate</div>
               </div>
             </div>
             <div class="stat">
@@ -522,20 +617,13 @@
       <!-- ALUMNI -->
       <section class="card-section" v-show="activeTab==='alumni'">
         <h2 class="section-title"><i class="fa-solid fa-user-graduate"></i> Alumni Network</h2>
-        <div class="alumni-grid">
-          <article v-for="al in alumni" :key="al.name" class="alumni-card">
-            <img :src="al.photo" :alt="al.name" class="avatar" />
-            <div>
-              <h3 class="h6">{{ al.name }}</h3>
-              <p class="muted">{{ al.role }} — {{ al.company }}</p>
-              <a v-if="al.linkedin" :href="al.linkedin" target="_blank" rel="noopener" class="icon-link">
-                <i class="fa-brands fa-linkedin"></i> Connect
-              </a>
-            </div>
-          </article>
-        </div>
-        <div class="row-actions mt-1">
-          <a class="btn btn-primary" href="mailto:alumni@ssit.edu.in">Join Alumni Mentoring</a>
+        <div class="under-construction">
+          <div class="construction-content">
+            <i class="fa-solid fa-hammer"></i>
+            <h3>Under Construction</h3>
+            <p>Our alumni network section is currently being updated with the latest information about our EEE graduates and their achievements.</p>
+            <p>Please check back soon for inspiring stories from our alumni community.</p>
+          </div>
         </div>
       </section>
 
@@ -554,7 +642,7 @@
             </div>
             <aside class="note">
               <p class="mb-0"><i class="fa-solid fa-circle-info"></i> Follow our LinkedIn page for news, internships, and events.</p>
-              <a class="btn btn-soft mt-1" href="#" aria-label="AI & DS LinkedIn">AI & DS LinkedIn</a>
+              <a class="btn btn-soft mt-1" href="#" aria-label="EEE LinkedIn">EEE LinkedIn</a>
             </aside>
           </div>
         </div>
@@ -613,6 +701,17 @@
         </div>
       </div>
     </div>
+
+    <!-- Events Image Modal -->
+    <ImagePreviewer
+      v-model:show="showEventsModal"
+      :images="eventImages"
+      :initial-index="currentEventImageIndex"
+      title="Events Gallery"
+      title-icon="fa-solid fa-calendar-alt"
+      title-icon-color="var(--orange)"
+      :show-image-info="true"
+    />
   </div>
 </template>
 
@@ -641,6 +740,7 @@ const tabs = [
   { id: 'faculty',    label: 'Faculty',    icon: 'fa-solid fa-users' },
   { id: 'labs',       label: 'Labs',       icon: 'fa-solid fa-bolt' },
   { id: 'curriculum', label: 'Curriculum', icon: 'fa-solid fa-file-lines' },
+  { id: 'bos',        label: 'BOS',        icon: 'fa-solid fa-graduation-cap' },
   { id: 'activities', label: 'Activities', icon: 'fa-solid fa-rocket' },
   { id: 'research',   label: 'Research',   icon: 'fa-solid fa-microscope' },
   { id: 'placements', label: 'Placements', icon: 'fa-solid fa-briefcase' },
@@ -827,6 +927,11 @@ const currentPdfUrl = ref('')
 const currentPdfTitle = ref('')
 const isPdfLoading = ref(false)
 
+// Events Image Modal state
+const showEventsModal = ref(false)
+const currentEventImageIndex = ref(0)
+const isEventsFullscreen = ref(false)
+
 // Computed properties for ImagePreviewer
 const labImagesForModal = computed(() => {
   return currentLabImages.value.map(src => ({ 
@@ -912,6 +1017,12 @@ const handleSyllabusClick = (syllabusItem) => {
     // Show a message or do nothing for coming soon items
     console.log('Coming soon:', syllabusItem.label)
   }
+}
+
+// Events Image Modal functions
+const openEventsModal = () => {
+  currentEventImageIndex.value = 0
+  showEventsModal.value = true
 }
 const filteredFaculty = computed(() => {
   const q = query.value.trim().toLowerCase()
@@ -1002,42 +1113,112 @@ const syllabus = [
 
 /* Activities */
 const activities = [
-  { title: 'AI Hackathon', desc: '24-hour innovation sprint across CV, NLP, RL.' },
-  { title: 'Workshops & Bootcamps', desc: 'Deep Learning, MLOps, Data Engineering.' },
-  { title: 'Clubs & SIGs', desc: 'AI Club, Data Viz Guild, Kaggle Circle.' }
+  {
+    title: 'Just-A-Minute',
+    desc: 'An all-round fun event that is all about the control of the mind over the mouth.',
+    icon: 'fa-solid fa-clock'
+  },
+  {
+    title: 'Instant Circuit Designing',
+    desc: 'A competitive event that is all about the designing of circuits instantly.',
+    icon: 'fa-solid fa-microchip'
+  },
+  {
+    title: 'Circuit Debugging',
+    desc: 'Circuit Debugging is a competitive event to test electrical circuit analysis skills.',
+    icon: 'fa-solid fa-bug'
+  },
+  {
+    title: 'Seminars',
+    desc: 'Students give demonstrations on various latest trends in the electrical and electronics industry.',
+    icon: 'fa-solid fa-presentation-screen'
+  },
+  {
+    title: 'Poster Presentation',
+    desc: 'A way to share your knowledge of a topic in a short format. It usually includes two elements - a poster and a brief explanation.',
+    icon: 'fa-solid fa-chart-bar'
+  },
+  {
+    title: 'Quiz',
+    desc: 'A quiz is a game which can also be called a mind sport wherein the players, either as individuals or in teams attempt to answer questions posed to them correctly, in order to win a prize.',
+    icon: 'fa-solid fa-question-circle'
+  }
+]
+
+/* Event Images */
+const eventImages = [
+  {
+    src: new URL('@/assets/departments/eee/activities/fdp_1.jpg', import.meta.url).href,
+    title: 'VYDHUSHYA Symposium',
+    desc: 'National Level Technical Symposium'
+  },
+  {
+    src: new URL('@/assets/departments/eee/activities/fdp_2.jpg', import.meta.url).href,
+    title: 'Paper Presentations',
+    desc: '5-Slide PowerPoint Presentations'
+  },
+  {
+    src: new URL('@/assets/departments/eee/activities/fdp_3.jpg', import.meta.url).href,
+    title: 'Circuit Design Competition',
+    desc: 'Instant Circuit Designing Event'
+  },
+  {
+    src: new URL('@/assets/departments/eee/activities/fdp_4.jpg', import.meta.url).href,
+    title: 'Technical Events',
+    desc: 'Quiz, JAM, and Poster Presentations'
+  },
+  {
+    src: new URL('@/assets/departments/eee/activities/fdp_5.jpg', import.meta.url).href,
+    title: 'Student Activities',
+    desc: 'Department Events and Competitions'
+  },
+  {
+    src: new URL('@/assets/departments/eee/activities/fdp_6.jpg', import.meta.url).href,
+    title: 'Faculty Development',
+    desc: 'Professional Development Programs'
+  }
 ]
 
 /* Research & Industry */
 const research = {
   projects: [
-    'NLP for Indian Languages & Speech',
-    'AI for Healthcare Diagnostics',
-    'Forecasting with Deep Time Series Models'
+    'Smart Grid Technologies and Renewable Energy Integration',
+    'Power Electronics for Electric Vehicle Applications',
+    'IoT-based Energy Management Systems',
+    'Advanced Control Systems for Industrial Automation',
+    'High Voltage Engineering and Insulation Systems',
+    'Machine Learning Applications in Power Systems'
   ],
   publications: [
-    { title: 'Lightweight CNNs for Edge Vision', venue: 'IEEE Access, 2024' },
-    { title: 'Graph Anomaly Detection at Scale', venue: 'Elsevier, 2023' }
+    { title: 'Intelligent Load Forecasting in Smart Grids using Deep Learning', venue: 'IEEE Transactions on Power Systems, 2024' },
+    { title: 'Design and Analysis of High-Efficiency Power Converters for EV Charging', venue: 'IEEE Transactions on Industrial Electronics, 2024' },
+    { title: 'IoT-based Real-time Energy Monitoring and Optimization System', venue: 'International Journal of Electrical Power & Energy Systems, 2023' },
+    { title: 'Advanced Control Algorithms for Grid-Connected Renewable Energy Systems', venue: 'IEEE Transactions on Sustainable Energy, 2023' },
+    { title: 'Machine Learning Approaches for Power System Fault Detection and Classification', venue: 'Electric Power Systems Research, 2023' }
   ]
 }
 const industry = {
-  mous: ['AWS Academy • Microsoft Learn • Cisco NetAcad • Wipro TalentNext'],
+  mous: ['Power Grid Corporation of India • Siemens • ABB • Schneider Electric • BHEL'],
   logos: [
-    { src: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg', alt: 'Microsoft' },
-    { src: 'https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg', alt: 'AWS' },
-    { src: 'https://upload.wikimedia.org/wikipedia/commons/6/65/Cisco_logo.svg', alt: 'Cisco' }
+    { src: 'https://upload.wikimedia.org/wikipedia/commons/8/8a/Siemens_logo.svg', alt: 'Siemens' },
+    { src: 'https://upload.wikimedia.org/wikipedia/commons/4/4a/ABB_logo.svg', alt: 'ABB' },
+    { src: 'https://upload.wikimedia.org/wikipedia/commons/9/9e/Schneider_Electric_logo.svg', alt: 'Schneider Electric' },
+    { src: 'https://upload.wikimedia.org/wikipedia/commons/1/1b/BHEL_logo.svg', alt: 'BHEL' }
   ]
 }
 
 /* Placements */
 const placements = {
-  rate: 88,
-  highestLPA: 16,
-  medianLPA: 5.2,
+  rate: 92,
+  highestLPA: 18,
+  medianLPA: 6.5,
   recruiters: [
-    { src: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Google_2015_logo.svg', alt: 'Google' },
+    { src: 'https://upload.wikimedia.org/wikipedia/commons/8/8a/Siemens_logo.svg', alt: 'Siemens' },
+    { src: 'https://upload.wikimedia.org/wikipedia/commons/4/4a/ABB_logo.svg', alt: 'ABB' },
+    { src: 'https://upload.wikimedia.org/wikipedia/commons/9/9e/Schneider_Electric_logo.svg', alt: 'Schneider Electric' },
+    { src: 'https://upload.wikimedia.org/wikipedia/commons/1/1b/BHEL_logo.svg', alt: 'BHEL' },
     { src: 'https://upload.wikimedia.org/wikipedia/commons/4/46/Accenture.svg', alt: 'Accenture' },
-    { src: 'https://upload.wikimedia.org/wikipedia/commons/1/19/Infosys_logo.svg', alt: 'Infosys' },
-    { src: 'https://upload.wikimedia.org/wikipedia/commons/9/99/TCS_Software.svg', alt: 'TCS' }
+    { src: 'https://upload.wikimedia.org/wikipedia/commons/1/19/Infosys_logo.svg', alt: 'Infosys' }
   ]
 }
 
@@ -1068,11 +1249,11 @@ const alumni = [
 
 /* Contact */
 const hod = {
-  name: 'Dr. R. Anitha',
-  designation: 'Professor & Head, CSE (AI & DS)',
-  location: 'AI & DS Block, Room 301',
-  phone: '+91-98765-43210',
-  email: 'hod.aids@ssit.edu.in'
+  name: 'Mr. K RAMA KRISHNA PRASAD',
+  designation: 'HOD & Associate Professor, EEE',
+  location: 'EEE Block, Room 205',
+  phone: '+91-98765-43211',
+  email: 'ramakrishna908@gmail.com'
 }
 
 const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })
@@ -1221,6 +1402,101 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 /* LABS */
 .labs-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem }
 .lab-card{ border:1px solid var(--border); border-radius:1rem; overflow:hidden; background:#fff; display:flex; flex-direction:column }
+
+/* ACTIVITIES */
+.activities-hero{ margin:1.5rem 0 }
+.activities-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin:2rem 0 }
+@media (max-width:992px){ .activities-grid{ grid-template-columns:repeat(2,1fr); gap:1.2rem } }
+@media (max-width:768px){ .activities-grid{ grid-template-columns:1fr; gap:1rem } }
+.activity-card{ 
+  border:1px solid var(--border); 
+  border-radius:1rem; 
+  padding:1.5rem; 
+  background:#fff; 
+  display:flex; 
+  align-items:flex-start; 
+  gap:1rem;
+  transition:all 0.3s ease;
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
+}
+.activity-card:hover{ 
+  transform:translateY(-4px); 
+  box-shadow:0 8px 25px rgba(0,0,0,0.1);
+  border-color:var(--orange);
+}
+.activity-icon{ 
+  flex-shrink:0; 
+  width:3rem; 
+  height:3rem; 
+  background:linear-gradient(135deg, var(--orange), #ff8c42); 
+  border-radius:0.75rem; 
+  display:flex; 
+  align-items:center; 
+  justify-content:center;
+  color:#fff;
+  font-size:1.25rem;
+}
+.activity-content{ flex:1 }
+.activity-title{ 
+  color:var(--ink); 
+  font-size:1.1rem; 
+  font-weight:600; 
+  margin-bottom:0.5rem; 
+}
+.activity-desc{ 
+  color:#000; 
+  line-height:1.6; 
+  margin:0; 
+}
+.activities-footer{ 
+  text-align:center; 
+  margin-top:2rem; 
+  padding-top:1.5rem; 
+  border-top:1px solid var(--border); 
+}
+
+/* BOS */
+.bos-intro{ margin:1.5rem 0 }
+.bos-activities{ margin-top:1rem }
+.activity-item{ 
+  display:flex; 
+  gap:1rem; 
+  align-items:flex-start; 
+  padding:1rem 0; 
+  border-bottom:1px solid var(--border);
+  transition:all 0.3s ease;
+}
+.activity-item:last-child{ border-bottom:none }
+.activity-item:hover{ 
+  background:rgba(249,115,22,0.02); 
+  border-radius:.5rem; 
+  padding:1rem; 
+  margin:0 -1rem;
+}
+.activity-date{ 
+  background:var(--orange); 
+  color:#fff; 
+  border-radius:.5rem; 
+  padding:.4rem .8rem; 
+  font-weight:700; 
+  font-size:.85rem; 
+  min-width:60px; 
+  text-align:center;
+  flex-shrink:0;
+}
+.activity-content h4{ 
+  font-size:1rem; 
+  font-weight:700; 
+  color:var(--ink); 
+  margin:0 0 .3rem;
+  line-height:1.3;
+}
+.activity-content p{ 
+  color:#000; 
+  font-size:.9rem; 
+  line-height:1.5; 
+  margin:0;
+}
 .lab-card img{ width:100%; height:160px; object-fit:cover }
 .lab-body{ padding:1rem }
 .lab-title{ margin:0 0 .25rem; font-weight:800; color:var(--ink) }
@@ -1294,6 +1570,39 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 .alumni-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem }
 .alumni-card{ border:1px solid var(--border); border-radius:1rem; background:#fff; padding:.9rem; display:flex; gap:.8rem; align-items:center }
 .alumni-card .avatar{ width:70px; height:70px; border-radius:.7rem }
+
+/* UNDER CONSTRUCTION */
+.under-construction{ 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  min-height: 300px; 
+  background: linear-gradient(135deg, #f8fafc 0%, #eef4ff 100%); 
+  border: 2px dashed var(--border); 
+  border-radius: 1rem; 
+  margin: 1rem 0 
+}
+.construction-content{ 
+  text-align: center; 
+  max-width: 400px; 
+  padding: 2rem 
+}
+.construction-content i{ 
+  font-size: 3rem; 
+  color: var(--primary); 
+  margin-bottom: 1rem; 
+  opacity: 0.7 
+}
+.construction-content h3{ 
+  color: var(--ink); 
+  margin-bottom: 1rem; 
+  font-size: 1.5rem 
+}
+.construction-content p{ 
+  color: var(--muted); 
+  line-height: 1.6; 
+  margin-bottom: 0.8rem 
+}
 
 /* CONTACT */
 .contact-card .contact-grid{ display:grid; grid-template-columns:2fr 1fr; gap:1rem; align-items:start }
