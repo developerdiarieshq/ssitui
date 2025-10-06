@@ -24,10 +24,6 @@
               <span class="qf-label">AI/DS Labs</span>
               <span class="qf-value">{{ facts.labs }}</span>
             </li>
-            <li>
-              <span class="qf-label">Top Recruiters</span>
-              <span class="qf-value">Leading Tech Companies</span>
-            </li>
           </ul>
         </div>
         <picture class="hero-art" aria-hidden="true">
@@ -677,55 +673,29 @@
 
     <!-- Image Preview Modal -->
     <ImagePreviewer 
-      v-if="showImageModal"
+      :show="showImageModal"
       :images="currentLabImages"
-      :currentIndex="currentImageIndex"
+      :initialIndex="currentImageIndex"
       @close="showImageModal = false"
       @update:currentIndex="currentImageIndex = $event"
     />
 
     <!-- Events Images Modal -->
     <ImagePreviewer 
-      v-if="showEventsModal"
+      :show="showEventsModal"
       :images="eventImages"
-      :currentIndex="currentEventImageIndex"
+      :initialIndex="currentEventImageIndex"
       @close="showEventsModal = false"
       @update:currentIndex="currentEventImageIndex = $event"
     />
 
-    <!-- PDF Modal -->
-    <div v-if="showPdfModal" class="pdf-modal" @click="closePdfModal">
-      <div class="pdf-modal-content" @click.stop>
-        <div class="pdf-modal-header">
-          <h3 class="pdf-modal-title">{{ currentPdfTitle }}</h3>
-          <div class="pdf-modal-actions">
-            <button class="pdf-modal-btn" @click="downloadPdf" title="Download PDF">
-              <i class="fa-solid fa-download"></i>
-            </button>
-            <button class="pdf-modal-btn" @click="togglePdfFullscreen" title="Toggle Fullscreen">
-              <i class="fa-solid fa-expand"></i>
-            </button>
-            <button class="pdf-modal-btn" @click="closePdfModal" title="Close">
-              <i class="fa-solid fa-times"></i>
-            </button>
-          </div>
-        </div>
-        <div class="pdf-modal-body">
-          <div v-if="isPdfLoading" class="pdf-loading">
-            <i class="fa-solid fa-spinner fa-spin"></i>
-            <p>Loading PDF...</p>
-          </div>
-          <iframe 
-            v-if="currentPdfUrl"
-            :src="currentPdfUrl"
-            @load="onPdfLoad"
-            @error="onPdfError"
-            class="pdf-iframe"
-            title="PDF Document"
-          ></iframe>
-        </div>
-      </div>
-    </div>
+    <!-- PDF Viewer Modal -->
+    <PdfViewer 
+      :show="showPdfModal"
+      :url="currentPdfUrl"
+      :title="currentPdfTitle"
+      @close="closePdfModal"
+    />
   </div>
 </template>
 
@@ -736,6 +706,7 @@ import Header from '@/components/Header.vue'
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/Footer.vue'
 import ImagePreviewer from '@/views/utils/ImagePreviewer.vue'
+import PdfViewer from '@/views/utils/PdfViewer.vue'
 import Strengths from '@/views/about/Strengths.vue'
 
 /* Facts / Quick Stats */
@@ -986,34 +957,34 @@ const syllabus = [
 /* Activities */
 const activities = [
   {
-    title: 'AI/ML Project Expo',
-    desc: 'Competitive team event that is all about Design, implement and presenting AI/ML Projects with real-world applications.',
+    title: 'Access Events',
+    desc: 'Annual technical symposium showcasing student projects and innovations in computer science and engineering.',
+    icon: 'fa-solid fa-calendar-check'
+  },
+  {
+    title: 'Technical Workshops',
+    desc: 'Hands-on workshops covering latest technologies, programming languages, and development frameworks.',
     icon: 'fa-solid fa-laptop-code'
   },
   {
-    title: 'Data Science Challenge',
-    desc: 'Competitive event that focuses on data analysis, visualization, and machine learning model development.',
-    icon: 'fa-solid fa-chart-line'
+    title: 'Hackathons',
+    desc: 'Intensive coding competitions where students collaborate to solve real-world problems using technology.',
+    icon: 'fa-solid fa-code'
   },
   {
-    title: 'Algorithm Debugging',
-    desc: 'Algorithm Debugging is a Competitive Event to test Python programming skills and algorithm optimization.',
-    icon: 'fa-solid fa-bug'
+    title: 'Industry Seminars',
+    desc: 'Expert talks and seminars by industry professionals on emerging technologies and career opportunities.',
+    icon: 'fa-solid fa-chalkboard-teacher'
   },
   {
-    title: 'Research Paper Presentation',
-    desc: 'Students give demonstrations on Various Latest Trends in AI/ML Industry and research findings.',
-    icon: 'fa-solid fa-file-text'
+    title: 'Project Exhibitions',
+    desc: 'Showcase of innovative student projects demonstrating practical applications of computer science concepts.',
+    icon: 'fa-solid fa-project-diagram'
   },
   {
-    title: 'AI Poster Presentation',
-    desc: 'A way to share your knowledge of AI/ML topics in a short format. It usually includes visual representation and brief explanation.',
-    icon: 'fa-solid fa-chart-bar'
-  },
-  {
-    title: 'Tech Quiz',
-    desc: 'A quiz is a game which can also be called a mind sport wherein the players attempt to answer AI/ML related questions correctly.',
-    icon: 'fa-solid fa-question-circle'
+    title: 'Tech Competitions',
+    desc: 'Competitive events testing students skills in programming, problem-solving, and technical knowledge.',
+    icon: 'fa-solid fa-trophy'
   }
 ]
 
@@ -1113,7 +1084,6 @@ const openEventsModal = () => {
 const openPdfModal = (pdfUrl, title) => {
   currentPdfUrl.value = pdfUrl
   currentPdfTitle.value = title
-  isPdfLoading.value = true
   showPdfModal.value = true
 }
 
@@ -1121,40 +1091,6 @@ const closePdfModal = () => {
   showPdfModal.value = false
   currentPdfUrl.value = ''
   currentPdfTitle.value = ''
-}
-
-const downloadPdf = () => {
-  if (currentPdfUrl.value) {
-    const link = document.createElement('a')
-    link.href = currentPdfUrl.value
-    link.download = `${currentPdfTitle.value}.pdf`
-    link.target = '_blank'
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-  }
-}
-
-const togglePdfFullscreen = () => {
-  const iframe = document.querySelector('.pdf-modal iframe')
-  if (iframe) {
-    if (!document.fullscreenElement) {
-      iframe.requestFullscreen().catch(err => {
-        console.log(`Error attempting to enable fullscreen: ${err.message}`)
-      })
-    } else {
-      document.exitFullscreen()
-    }
-  }
-}
-
-const onPdfLoad = () => {
-  isPdfLoading.value = false
-}
-
-const onPdfError = () => {
-  isPdfLoading.value = false
-  console.error('Failed to load PDF')
 }
 
 const handleSyllabusClick = (item) => {
@@ -1165,33 +1101,27 @@ const handleSyllabusClick = (item) => {
   }
 }
 
-const handlePdfKeydown = (event) => {
-  if (event.key === 'Escape') {
-    closePdfModal()
-  }
-}
-
 // Event images data
 const eventImages = [
   {
     src: new URL('@/assets/departments/cse/activities/cse_acsess_1.jpg', import.meta.url).href,
-    title: 'Access Events',
-    desc: 'Access Events'
+    title: 'CSE Access Events - Technical Symposium',
+    desc: 'Annual technical symposium showcasing student projects and innovations'
   },
   {
     src: new URL('@/assets/departments/cse/activities/cse_acsess_2.jpg', import.meta.url).href,
-    title: 'Access Events',
-    desc: 'Access Events'
+    title: 'CSE Access Events - Workshops',
+    desc: 'Hands-on technical workshops and training sessions'
   },
   {
     src: new URL('@/assets/departments/cse/activities/cse_acsess_3.jpg', import.meta.url).href,
-    title: 'Access Events',
-    desc: 'Access Events'
+    title: 'CSE Access Events - Competitions',
+    desc: 'Technical competitions and hackathons for students'
   },
   {
     src: new URL('@/assets/departments/cse/activities/cse_acsess_4.jpg', import.meta.url).href,
-    title: 'Access Events',
-    desc: 'Access Events'
+    title: 'CSE Access Events - Seminars',
+    desc: 'Industry seminars and expert talks on emerging technologies'
   }
 ]
 
@@ -1200,14 +1130,7 @@ const labImagesForModal = computed(() => {
   return labs.flatMap(lab => lab.images || [])
 })
 
-// Watch for PDF modal changes to handle keyboard events
-watch(showPdfModal, (isOpen) => {
-  if (isOpen) {
-    document.addEventListener('keydown', handlePdfKeydown)
-  } else {
-    document.removeEventListener('keydown', handlePdfKeydown)
-  }
-})
+// PDF modal keyboard events now handled by PdfViewer component
 
 // Accordion state
 const activeAccordion = ref('')
@@ -1245,7 +1168,7 @@ const toggleAccordion = (section) => {
 /* SUBNAV */
 .subnav{ position:sticky; top:0; z-index:20; background:#fff; border-bottom:1px solid var(--border); box-shadow:0 2px 8px rgba(0,0,0,0.06); }
 .subnav-inner{ display:flex; gap:.5rem; padding:.6rem 1rem; overflow-x:auto; overflow-y:hidden; justify-content:flex-start; flex-wrap:nowrap; }
-.chip{ border:1px solid var(--border); background:#fff; color:#111; border-radius:999px; padding:.6rem 1rem; font-weight:600; display:flex; align-items:center; gap:.6rem; white-space:nowrap; font-size:.9rem; box-shadow:0 2px 4px rgba(0,0,0,0.04); transition:all 0.2s ease; }
+.chip{ border:1px solid var(--border); background:#fff; color:#111; border-radius:999px; padding:.6rem 1rem; font-weight:600; display:flex; align-items:center; gap:.6rem; white-space:nowrap; font-size:.9rem; box-shadow:0 2px 4px rgba(0,0,0,0.04); transition:all 0.2s ease; cursor:pointer; }
 .chip i{ color:var(--ink); }
 .chip.active{ border-color:var(--orange); background:var(--orange); color:#fff; box-shadow:0 4px 12px rgba(249,115,22,0.3); transform:translateY(-2px); font-weight:700; }
 .chip:not(.active):hover{ border-color:var(--ink); background:rgba(17,24,39,.04); box-shadow:0 2px 8px rgba(0,0,0,0.08); }
@@ -1308,7 +1231,8 @@ const toggleAccordion = (section) => {
 
 /* LABS */
 .labs-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem }
-.lab-card{ border:1px solid var(--border); border-radius:1rem; overflow:hidden; background:#fff; display:flex; flex-direction:column }
+.lab-card{ border:1px solid var(--border); border-radius:1rem; overflow:hidden; background:#fff; display:flex; flex-direction:column; transition:all 0.3s ease; }
+.lab-card:hover{ border-color:var(--orange); box-shadow:0 8px 25px rgba(249,115,22,0.15); transform:translateY(-4px); }
 .lab-card img{ width:100%; height:160px; object-fit:cover }
 .lab-body{ padding:1rem }
 .lab-title{ margin:0 0 .25rem; font-weight:800; color:var(--ink) }
@@ -1319,9 +1243,10 @@ const toggleAccordion = (section) => {
 /* DOWNLOADS */
 .downloads{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:.8rem }
 .download{
-  border:1px solid var(--border); border-radius:.9rem; padding:.8rem; display:flex; gap:.7rem; align-items:flex-start; text-decoration:none; color:inherit; background:#fff;
+  border:1px solid var(--border); border-radius:.9rem; padding:.8rem; display:flex; gap:.7rem; align-items:flex-start; text-decoration:none; color:inherit; background:#fff; cursor:pointer; transition:all 0.3s ease;
 }
 .download i{ color:var(--orange); font-size:1.25rem; margin-top:.15rem }
+.download:hover{ border-color:var(--orange); background:rgba(249,115,22,0.02); transform:translateY(-2px); box-shadow:0 4px 12px rgba(249,115,22,0.15); }
 .dl-label{ font-weight:800; color:var(--ink) }
 .dl-sub{ font-size:.85rem; color:var(--muted) }
 
@@ -1331,10 +1256,12 @@ const toggleAccordion = (section) => {
 .logo-row img:hover{ filter:none; opacity:1 }
 
 /* BUTTONS */
-.btn{ border-radius:.7rem; padding:.55rem .9rem; font-weight:700; border:1px solid transparent; display:inline-flex; gap:.5rem; align-items:center }
+.btn{ border-radius:.7rem; padding:.55rem .9rem; font-weight:700; border:1px solid transparent; display:inline-flex; gap:.5rem; align-items:center; cursor:pointer; transition:all 0.3s ease; }
 .btn-primary{ background:var(--orange); color:#fff }
 .btn-soft{ background:#fff; color:var(--ink); border-color:var(--ink) }
-.btn:hover{ filter:brightness(1.02) }
+.btn:hover{ filter:brightness(1.02); transform:translateY(-1px); box-shadow:0 4px 8px rgba(0,0,0,0.1); }
+.btn-primary:hover{ background:#ea580c; }
+.btn-soft:hover{ background:#f8f9fa; border-color:var(--orange); color:var(--orange); }
 .row-actions{ display:flex; gap:.6rem; flex-wrap:wrap }
 
 /* ALUMNI */
@@ -1520,6 +1447,7 @@ const toggleAccordion = (section) => {
 .view-images-btn {
   width: 100%;
   justify-content: center;
+  cursor: pointer;
 }
 
 /* Activities Section Styles */
@@ -1543,6 +1471,7 @@ const toggleAccordion = (section) => {
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
 .activity-card:hover {
@@ -1630,97 +1559,7 @@ const toggleAccordion = (section) => {
   line-height: 1.5;
 }
 
-/* PDF Modal Styles */
-.pdf-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: 2rem;
-}
-
-.pdf-modal-content {
-  background: white;
-  border-radius: 12px;
-  width: 90%;
-  max-width: 1000px;
-  max-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.pdf-modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid #eee;
-  background: #f8f9fa;
-}
-
-.pdf-modal-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin: 0;
-  color: var(--ink);
-}
-
-.pdf-modal-actions {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.pdf-modal-btn {
-  width: 36px;
-  height: 36px;
-  border: none;
-  background: var(--orange);
-  color: white;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.pdf-modal-btn:hover {
-  background: #ea580c;
-}
-
-.pdf-modal-body {
-  flex: 1;
-  position: relative;
-  min-height: 500px;
-}
-
-.pdf-loading {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: var(--muted);
-}
-
-.pdf-loading i {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-
-.pdf-iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  min-height: 500px;
-}
+/* PDF Modal Styles now handled by PdfViewer component */
 
 /* Coming Soon Styles */
 .download.coming-soon {
@@ -1763,12 +1602,6 @@ const toggleAccordion = (section) => {
     align-self: center;
   }
   
-  .pdf-modal {
-    padding: 1rem;
-  }
-  
-  .pdf-modal-content {
-    width: 95%;
-  }
+  /* PDF Modal responsive styles now handled by PdfViewer component */
 }
 </style>

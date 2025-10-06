@@ -725,45 +725,12 @@
     />
 
     <!-- PDF Viewer Modal -->
-    <div v-if="showPdfModal" class="pdf-modal-overlay" @click="closePdfModal">
-      <div class="pdf-modal" @click.stop>
-        <div class="pdf-modal-header">
-          <h3 class="pdf-modal-title">
-            <i class="fa-solid fa-file-pdf"></i>
-            {{ currentPdfTitle }}
-          </h3>
-          <div class="pdf-modal-actions">
-            <button class="modal-btn" @click="togglePdfFullscreen" title="Toggle Fullscreen (F)">
-              <i class="fa-solid fa-expand"></i>
-            </button>
-            <button class="modal-btn" @click="downloadPdf" title="Download PDF">
-              <i class="fa-solid fa-download"></i>
-            </button>
-            <button class="modal-btn close-btn" @click="closePdfModal" title="Close (ESC)">
-              <i class="fa-solid fa-times"></i>
-            </button>
-          </div>
-        </div>
-        <div class="pdf-modal-content">
-          <div v-if="isPdfLoading" class="pdf-loading">
-            <div class="loading-spinner"></div>
-            <p class="loading-text">Loading PDF...</p>
-          </div>
-          <iframe 
-            :src="currentPdfUrl" 
-            class="pdf-iframe"
-            :class="{ 'loading': isPdfLoading }"
-            title="PDF Viewer"
-            frameborder="0"
-            @load="onPdfLoad"
-            @error="onPdfError"
-          ></iframe>
-        </div>
-        <div class="pdf-modal-footer">
-          <span class="keyboard-hint">Press F for fullscreen, ESC to close</span>
-        </div>
-      </div>
-    </div>
+    <PdfViewer 
+      :show="showPdfModal"
+      :url="currentPdfUrl"
+      :title="currentPdfTitle"
+      @close="closePdfModal"
+    />
 </template>
 
 <script setup>
@@ -772,6 +739,7 @@ import { computed, ref, watch, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import Header from '@/components/Header.vue'
 import ImagePreviewer from '@/views/utils/ImagePreviewer.vue'
+import PdfViewer from '@/views/utils/PdfViewer.vue'
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/Footer.vue'
 import Strengths from '@/views/about/Strengths.vue'
@@ -909,92 +877,13 @@ const openPdfModal = (pdfUrl, title) => {
   currentPdfUrl.value = pdfUrl
   currentPdfTitle.value = title
   showPdfModal.value = true
-  isPdfLoading.value = true
 }
 
 const closePdfModal = () => {
   showPdfModal.value = false
   currentPdfUrl.value = ''
   currentPdfTitle.value = ''
-  isPdfLoading.value = false
 }
-
-const downloadPdf = () => {
-  if (currentPdfUrl.value) {
-    let downloadUrl = currentPdfUrl.value
-    
-    // Convert Google Drive preview URL to direct download URL
-    if (downloadUrl.includes('drive.google.com/file/d/') && downloadUrl.includes('/preview')) {
-      const fileId = downloadUrl.match(/\/file\/d\/([a-zA-Z0-9_-]+)/)?.[1]
-      if (fileId) {
-        downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`
-      }
-    }
-    
-    const link = document.createElement('a')
-    link.href = downloadUrl
-    link.download = currentPdfTitle.value + '.pdf'
-    link.target = '_blank' // Open in new tab for external URLs
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-  }
-}
-
-const togglePdfFullscreen = () => {
-  const pdfModal = document.querySelector('.pdf-modal')
-  if (!pdfModal) return
-
-  if (!document.fullscreenElement) {
-    // Enter fullscreen
-    pdfModal.requestFullscreen().catch(err => {
-      console.error('Error attempting to enable fullscreen:', err)
-    })
-  } else {
-    // Exit fullscreen
-    document.exitFullscreen().catch(err => {
-      console.error('Error attempting to exit fullscreen:', err)
-    })
-  }
-}
-
-const onPdfLoad = () => {
-  isPdfLoading.value = false
-}
-
-const onPdfError = () => {
-  isPdfLoading.value = false
-  console.error('Failed to load PDF')
-}
-
-// Keyboard shortcuts for PDF modal
-const handlePdfKeydown = (event) => {
-  if (!showPdfModal.value) return
-  
-  switch(event.key) {
-    case 'Escape':
-      // Exit fullscreen first if in fullscreen, then close modal
-      if (document.fullscreenElement) {
-        document.exitFullscreen()
-      } else {
-        closePdfModal()
-      }
-      break
-    case 'f':
-    case 'F':
-      togglePdfFullscreen()
-      break
-  }
-}
-
-// Add keyboard event listener when PDF modal opens
-watch(showPdfModal, (isOpen) => {
-  if (isOpen) {
-    document.addEventListener('keydown', handlePdfKeydown)
-  } else {
-    document.removeEventListener('keydown', handlePdfKeydown)
-  }
-})
 
 const handleSyllabusClick = (syllabusItem) => {
   if (syllabusItem.type === 'pdf' && syllabusItem.pdfUrl) {
@@ -2205,112 +2094,7 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
   .accordion-count{ font-size:.75rem; padding:.15rem .5rem }
 }
 
-/* PDF Modal Styles */
-.pdf-modal-overlay{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.9);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:9999;
-  padding:1rem;
-}
-.pdf-modal{
-  width:95%;
-  max-width:1200px;
-  height:90%;
-  background:#fff;
-  border-radius:1rem;
-  display:flex;
-  flex-direction:column;
-  overflow:hidden;
-  box-shadow:0 20px 60px rgba(0,0,0,0.3);
-  transition:all 0.3s ease;
-}
-.pdf-modal-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:1rem 1.5rem;
-  background:var(--ink);
-  color:#fff;
-  border-bottom:1px solid var(--border);
-}
-.pdf-modal-title{
-  margin:0;
-  font-size:1.2rem;
-  font-weight:700;
-  display:flex;
-  align-items:center;
-  gap:0.5rem;
-}
-.pdf-modal-title i{
-  color:#ff4757;
-}
-.pdf-modal-actions{
-  display:flex;
-  align-items:center;
-  gap:0.5rem;
-}
-.pdf-modal-content{
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  overflow:hidden;
-}
-.pdf-iframe{
-  width:100%;
-  height:100%;
-  border:none;
-  background:#f8f9fa;
-  transition: opacity 0.3s ease;
-}
-.pdf-iframe.loading{
-  opacity: 0;
-}
-.pdf-loading{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  z-index: 10;
-}
-.loading-spinner{
-  width: 40px;
-  height: 40px;
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid var(--primary);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-.loading-text{
-  color: var(--muted);
-  font-size: 0.9rem;
-  margin: 0;
-}
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-.pdf-modal-footer{
-  padding:0.5rem 1rem;
-  background:#f8f9fa;
-  border-top:1px solid var(--border);
-  text-align:center;
-}
-.keyboard-hint{
-  font-size:0.75rem;
-  color:var(--muted);
-  font-style:italic;
-}
+/* PDF Modal Styles now handled by PdfViewer component */
 
 /* Image modal styles now handled by ImagePreviewer component */
 .image-modal-overlay{
@@ -2520,23 +2304,7 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
     height:50px;
   }
   
-  /* PDF Modal Responsive */
-  .pdf-modal{
-    width:98%;
-    height:95%;
-  }
-  .pdf-modal-header{
-    padding:.8rem 1rem;
-  }
-  .pdf-modal-title{
-    font-size:1rem;
-  }
-  .pdf-modal-footer{
-    padding:.4rem .8rem;
-  }
-  .keyboard-hint{
-    font-size:0.7rem;
-  }
+  /* PDF Modal Responsive styles now handled by PdfViewer component */
 }
 
 /* Fullscreen mode enhancements */
@@ -2557,23 +2325,7 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
   border-radius: 0;
 }
 
-:fullscreen .pdf-modal-overlay,
-:-webkit-full-screen .pdf-modal-overlay,
-:-moz-full-screen .pdf-modal-overlay,
-:-ms-fullscreen .pdf-modal-overlay {
-  padding: 0;
-}
-
-:fullscreen .pdf-modal,
-:-webkit-full-screen .pdf-modal,
-:-moz-full-screen .pdf-modal,
-:-ms-fullscreen .pdf-modal {
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  border-radius: 0;
-  box-shadow: none;
-}
+/* PDF Modal fullscreen styles now handled by PdfViewer component */
 
 /* Keyboard navigation hints */
 .modal-header::after {
