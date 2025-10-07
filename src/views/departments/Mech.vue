@@ -735,11 +735,11 @@ const getPODescription = (poNumber) => {
 /* Faculty */
 const faculty = ref([
   {
-    name: 'Dr. K BHASKARMUTYALU', 
-    designation: 'ASSOCIATE PROFESSOR',
+    name: 'Dr. K. BHASKARAMUTYALU', 
+    designation: 'HOD & ASSOCIATE PROFESSOR',
     qualification: 'Ph.D',
     expertise: ['Thermodynamics', 'Heat Transfer'],
-    email: 'bhaskarmutyalu@ssit.edu.in',
+    email: 'kbmutyalu@gmail.com',
     photo: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&w=400',
     profile: '#', linkedin: '#',
     experience: 25
@@ -959,11 +959,11 @@ const alumni = [
 
 /* Contact */
 const hod = {
-  name: 'Dr. P. Srinivasa Rao',
-  designation: 'Professor & Head, MECH',
+  name: 'Dr. K. BHASKARAMUTYALU',
+  designation: 'HOD & Associate Professor',
   location: 'MECH Block, Room 401',
   phone: '+91-98765-43213',
-  email: 'hod.mech@ssit.edu.in'
+  email: 'kbmutyalu@gmail.com'
 }
 
 const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })
