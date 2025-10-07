@@ -381,7 +381,7 @@ const partners = [
 
 /* Hero */
 .hero{
-  background:linear-gradient(180deg,rgba(26,34,56,.96),rgba(26,34,56,.92)),url('https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+  background: var(--ink);
   color:#fff;
   padding:3rem 0;
   margin-bottom:18px;
@@ -430,7 +430,7 @@ const partners = [
 }
 
 /* Tabs */
-.tabs{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 6px}
+.tabs{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 6px;justify-content:center}
 .tab{background:#fff;border:1px solid #e9e9f4;border-radius:999px;padding:8px 14px;font-weight:700;letter-spacing:.2px;color:var(--ink);transition:.25s;outline:0}
 .tab.active{background:var(--orange);border-color:var(--orange);color:#fff;box-shadow:0 6px 18px rgba(255,119,1,.25)}
 

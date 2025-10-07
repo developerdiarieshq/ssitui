@@ -669,20 +669,39 @@ const meetings = {
   gap: .5rem;
   white-space: nowrap;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   min-height: 40px;
   min-width: fit-content;
   flex-shrink: 0;
 }
 
 .chip i {
-  color: var(--navy);
+  color: var(--orange);
+}
+
+.chip:hover {
+  background: var(--orange);
+  color: #fff;
+  border-color: var(--orange);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+}
+
+.chip:hover i {
+  color: #fff;
 }
 
 .chip.active {
-  border-color: var(--navy);
-  background: rgba(30, 64, 175, 0.08);
-  color: var(--navy);
+  border-color: var(--orange);
+  background: var(--orange);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+  transform: translateY(-2px);
+  font-weight: 700;
+}
+
+.chip.active i {
+  color: #fff;
 }
 
 /* Orange Accent */

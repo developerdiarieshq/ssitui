@@ -145,12 +145,32 @@
       <!-- DOCUMENTS -->
       <section class="mb-5">
         <h2 class="section-title">Reports & Documentation</h2>
-        <ul class="list-unstyled">
-          <li><a href="#" class="btn btn-outline-primary me-2 mb-2">AQAR 2023-24 (PDF)</a></li>
-          <li><a href="#" class="btn btn-outline-primary me-2 mb-2">Previous AQAR Reports</a></li>
-          <li><a href="#" class="btn btn-outline-primary me-2 mb-2">NAAC Self Study Report</a></li>
-          <li><a href="#" class="btn btn-outline-primary me-2 mb-2">Departmental Reports</a></li>
-        </ul>
+        <div class="row g-4 mt-2">
+          <div class="col-md-6 col-lg-3">
+            <a href="#" class="document-card">
+              <i class="fa-solid fa-file-pdf"></i>
+              <span>AQAR 2023-24</span>
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <a href="#" class="document-card">
+              <i class="fa-solid fa-folder-open"></i>
+              <span>Previous AQAR Reports</span>
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <a href="#" class="document-card">
+              <i class="fa-solid fa-file-alt"></i>
+              <span>NAAC Self Study Report</span>
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <a href="#" class="document-card">
+              <i class="fa-solid fa-chart-bar"></i>
+              <span>Departmental Reports</span>
+            </a>
+          </div>
+        </div>
       </section>
 
       <!-- CONTACT -->
@@ -212,22 +232,220 @@ export default {
 </script>
 
 <style scoped>
-.page-bg { background: #f7f9fc; }
-.hero { background: linear-gradient(60deg, #1e40af, #143f8c); }
+/* Theme Variables */
+:root {
+  --orange: #FF7701;
+  --ink: #1a2238;
+  --muted: #6b7280;
+}
+
+.page-bg { 
+  background: linear-gradient(180deg, #fff 0%, #f7f9fc 100%); 
+}
+
+.hero { 
+  background: var(--ink);
+  padding: 3rem 0;
+}
+
+.hero h1 {
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.hero .lead {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
 .stat-card {
-  background: #fff; border-radius: 12px; padding: 1rem 1.5rem;
-  box-shadow: 0 4px 16px rgba(0,0,0,.1); min-width: 160px;
+  background: #fff; 
+  border-radius: 12px; 
+  padding: 1rem 1.5rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,.1); 
+  min-width: 160px;
+  border: 1px solid rgba(255, 119, 1, 0.1);
+  transition: all 0.3s ease;
 }
-.stat-number { font-size: 1.5rem; font-weight: bold; color: #1e40af; }
-.stat-label { font-size: 0.85rem; color: #555; }
-.section-title { font-weight: 700; color: #1e40af; margin-bottom: 1rem; }
-.elev-card { background: #fff; border-radius: 10px; box-shadow: 0 6px 20px rgba(0,0,0,.08); }
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(255, 119, 1, 0.2);
+  border-color: var(--orange);
+}
+
+.stat-number { 
+  font-size: 1.5rem; 
+  font-weight: bold; 
+  color: var(--orange); 
+}
+
+.stat-label { 
+  font-size: 0.85rem; 
+  color: #555; 
+}
+
+.section-title { 
+  font-weight: 700; 
+  color: var(--ink); 
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.section-title::before {
+  content: '';
+  width: 4px;
+  height: 24px;
+  background: var(--orange);
+  border-radius: 2px;
+}
+
+.elev-card { 
+  background: #fff; 
+  border-radius: 10px; 
+  box-shadow: 0 6px 20px rgba(0,0,0,.08);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 119, 1, 0.1);
+}
+
+.elev-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,0,0,.12);
+  border-color: var(--orange);
+}
+
+.elev-card h5 {
+  color: var(--orange) !important;
+}
+
+.text-primary {
+  color: var(--orange) !important;
+}
+
 .metric-card {
-  background: #fff; border-radius: 10px; padding: 1.5rem; min-width: 180px;
-  box-shadow: 0 4px 16px rgba(0,0,0,.08); transition: transform 0.2s;
+  background: #fff; 
+  border-radius: 10px; 
+  padding: 1.5rem; 
+  min-width: 180px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.08); 
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 119, 1, 0.15);
 }
-.metric-card:hover { transform: translateY(-4px); }
-.metric-value { font-size: 1.75rem; font-weight: bold; color: #ff6f00; }
-.metric-label { font-size: 0.9rem; color: #555; }
-a.btn { font-weight: 600; }
+
+.metric-card:hover { 
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(255, 119, 1, 0.25);
+  border-color: var(--orange);
+}
+
+.metric-value { 
+  font-size: 1.75rem; 
+  font-weight: bold; 
+  color: var(--orange); 
+}
+
+.metric-label { 
+  font-size: 0.9rem; 
+  color: #555; 
+}
+
+a.btn { 
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-primary {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+.btn-outline-primary:hover {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 119, 1, 0.3);
+}
+
+.btn-primary {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #e55a00;
+  border-color: #e55a00;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 119, 1, 0.3);
+}
+
+/* Document Cards */
+.document-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  background: #fff;
+  border: 2px solid rgba(255, 119, 1, 0.2);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  height: 100%;
+  min-height: 140px;
+}
+
+.document-card:hover {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: #fff;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(255, 119, 1, 0.3);
+}
+
+.document-card i {
+  font-size: 2.5rem;
+  color: var(--orange);
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.document-card:hover i {
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.document-card span {
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* Icon Colors */
+.text-success {
+  color: #22c55e !important;
+}
+
+.text-danger {
+  color: #ef4444 !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero {
+    padding: 2rem 0;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+  }
+}
 </style>

@@ -37,7 +37,7 @@
               <li><router-link to="/strength" class="dropdown-item">Strengths</router-link></li>
               <!-- <li><a class="dropdown-item" href="#">Quality Policy</a></li> -->
               <li><router-link to="/mandatory-disclosure" class="dropdown-item">Mandatory Disclosure</router-link></li>
-              <li><a class="dropdown-item" href="#">ICT Facilities</a></li>
+              <li><router-link to="/ict-facilities" class="dropdown-item">ICT Facilities</router-link></li>
             </ul>
           </li>
 
@@ -46,8 +46,10 @@
             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Governance</a>
             <ul class="dropdown-menu">
               <li><router-link to="/organogram" class="dropdown-item">Organogram</router-link></li>
-               <li><router-link to="/trust" class="dropdown-item">Trust</router-link></li>
+               <li><router-link to="/trust" class="dropdown-item">Society</router-link></li>
+               <li><router-link to="/management" class="dropdown-item">Management</router-link></li>
                <li><router-link to="/governing-body" class="dropdown-item">Governing Body</router-link></li>
+               <li><router-link to="/administrative" class="dropdown-item">Administrative Office</router-link></li>
                 <li><router-link to="/principal-desk" class="dropdown-item">Principal's Desk</router-link></li>
               <li><a class="dropdown-item" href="#">Strategic Plan</a></li>
               <li><a class="dropdown-item" href="#">Academic Council</a></li>

@@ -454,7 +454,7 @@ export default {
   position: relative;
   color: #fff;
   background: var(--ink);
-  padding: 80px 0;
+  padding: 50px 0;
   overflow: hidden;
 }
 
@@ -471,7 +471,7 @@ export default {
   grid-template-columns: 1.2fr .8fr;
   gap: 2rem;
   align-items: center;
-  padding: 3.2rem 0;
+  padding: 0;
 }
 
 .hero-copy .title {
@@ -527,6 +527,7 @@ export default {
 
 .hero-img {
   width: 100%;
+  max-height: 300px;
   border-radius: 1rem;
   box-shadow: 0 10px 30px rgba(0,0,0,.25);
   object-fit: cover;
@@ -900,7 +901,7 @@ export default {
 
 @media (max-width: 768px) {
   .hero {
-    padding: 60px 0;
+    padding: 30px 0;
   }
   .hero-copy .title {
     font-size: 1.8rem;
