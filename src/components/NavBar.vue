@@ -55,7 +55,7 @@
               <li><a class="dropdown-item" href="#">Academic Council</a></li>
               <li><router-link to="/policies" class="dropdown-item">Policies</router-link></li>
               <li><router-link to="/committees" class="dropdown-item">Committees</router-link></li>
-              <li><a class="dropdown-item" href="#">R&amp;D</a></li>
+              <li><router-link to="/r-and-d" class="dropdown-item">R&amp;D</router-link></li>
               <li><router-link to="/iqac" class="dropdown-item">IQAC</router-link></li>
               
             </ul>

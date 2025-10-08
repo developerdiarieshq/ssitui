@@ -1,6 +1,8 @@
 <template>
-  <footer class="footer pt-5 pb-3">
-    <div class="container">
+  <footer class="footer">
+    <!-- Main Footer Content -->
+    <div class="footer-content pt-5 pb-3">
+      <div class="container">
       <div class="row g-4">
         <!-- Logo & About -->
         <div class="col-lg-4 col-md-6">
@@ -156,6 +158,7 @@
           Designed & Developed by CSE Department
         </small>
       </div>
+      </div>
     </div>
 
     <!-- Scroll to Top Button -->
@@ -197,7 +200,12 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll))
   overflow: hidden;
 }
 
-.footer::before {
+/* Footer Content */
+.footer-content {
+  position: relative;
+}
+
+.footer-content::before {
   content: '';
   position: absolute;
   top: 0;
@@ -222,8 +230,9 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll))
 }
 
 .text-light-muted {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.92);
   font-size: 0.9rem;
+  line-height: 1.6;
 }
 
 /* Accreditation Badges */
@@ -292,7 +301,7 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll))
 }
 
 .footer-links a {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.95);
   text-decoration: none;
   transition: all 0.3s ease;
   display: inline-flex;
@@ -336,21 +345,21 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll))
 }
 
 .contact-item strong {
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.95);
   font-size: 0.9rem;
   display: block;
   margin-bottom: 0.25rem;
 }
 
 .contact-item p {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.92);
   font-size: 0.9rem;
   margin: 0;
   line-height: 1.5;
 }
 
 .contact-item a {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.95);
   text-decoration: none;
   transition: color 0.3s ease;
 }
@@ -406,10 +415,10 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll))
   display: inline-flex;
   align-items: center;
   padding: 0.5rem 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 8px;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.98);
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 600;
@@ -504,10 +513,6 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll))
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .footer {
-    padding-top: 3rem;
-  }
-
   .footer-logo {
     height: 50px;
     width: 50px;

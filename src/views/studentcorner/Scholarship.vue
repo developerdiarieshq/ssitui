@@ -36,10 +36,6 @@
             <a class="btn btn--primary" :href="links.registration" target="_blank" rel="noopener" @click="$emit('register')">
               <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Register Online
             </a>
-            <button class="btn" @click="printDoc"><i class="fa-solid fa-print" aria-hidden="true"></i> Print</button>
-            <button class="btn" :disabled="!canShare" @click="share">
-              <i class="fa-solid fa-share-nodes" aria-hidden="true"></i> Share
-            </button>
           </div>
         </div>
 
@@ -238,10 +234,6 @@
           <div class="bar"><span :style="{width: (s._count/s.total*100)+'%'}"></span></div>
         </div>
       </div>
-
-      <div class="companies">
-        <img v-for="c in companies" :key="c.name" :src="c.logo" :alt="c.name" />
-      </div>
     </section>
 
     <!-- PROCESS -->
@@ -296,9 +288,6 @@
           <a class="btn" :href="whatsAppLink" target="_blank" rel="noopener">
             <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp
           </a>
-          <button class="btn" @click="share" :disabled="!canShare">
-            <i class="fa-solid fa-share-nodes" aria-hidden="true"></i> Share
-          </button>
         </div>
       </section>
     </section>
@@ -363,13 +352,6 @@ const links = reactive({
   registration: 'https://www.saispurthi.ac.in/sspreg.php'
 })
 
-const companies = [
-  { name: 'TCS', logo: 'https://upload.wikimedia.org/wikipedia/commons/3/3e/Tata_Consultancy_Services_Logo.svg' },
-  { name: 'Infosys', logo: 'https://upload.wikimedia.org/wikipedia/commons/8/85/Infosys_logo.svg' },
-  { name: 'Capgemini', logo: 'https://upload.wikimedia.org/wikipedia/commons/3/3b/Capgemini_201x_logo.svg' },
-  { name: 'Wipro', logo: 'https://upload.wikimedia.org/wikipedia/commons/8/82/Wipro_Primary_Logo_Color_RGB.svg' }
-]
-
 const stats = reactive([
   { branch: 'MECH', placed: 5, total: 31, _count: 0 },
   { branch: 'EEE', placed: 25, total: 40, _count: 0 },
@@ -403,7 +385,6 @@ const i18n = {
   ariaLabel: 'Hetero Student Sponsorship Program',
   countdown: 'Countdown to Exam'
 }
-const canShare = computed(() => !!navigator?.share)
 const whatsAppLink = computed(() => `https://wa.me/${contacts.phones[0]}?text=I%20am%20interested%20in%20the%20Hetero%20Sponsorship%20Program`)
 
 function formatDate(d) {
@@ -456,16 +437,6 @@ const eligibleProgram = computed(() => {
 const totalCovered = computed(() => 4 * (calc.annualTuition + calc.annualMisc))
 const totalWithIncentive = computed(() => totalCovered.value + 30000)
 
-/* ---------- SHARE/PRINT ---------- */
-function share() {
-  if (!canShare.value) return
-  navigator.share({
-    title: 'Hetero Student Sponsorship Program — SSIT',
-    text: 'Sponsor for 100 bright students. Join now!',
-    url: links.registration
-  }).catch(() => {})
-}
-function printDoc(){ window.print() }
 
 /* ---------- STATS ANIMATION ---------- */
 const statsRef = ref(null)
@@ -513,36 +484,51 @@ const branchLabel = computed(() => branches.find(b => b.code === selectedBranch.
 :root{
   --navy:#0b3d91;          /* corporate blue */
   --blue:#1e40af;          /* deep */
+  --orange:#f97316;        /* primary orange */
   --teal:#0ea5a6;          /* accent greenish */
   --gold:#f59e0b;          /* gold accent */
   --sky:#3b82f6;           /* bright blue */
-  --ink:#0f172a;           /* text */
-  --muted:#475569;         /* muted text */
+  --ink:#1a2238;           /* text */
+  --muted:#6b7280;         /* muted text */
   --bg:#f5f7fb;
   --card:#ffffff;
-  --ring: rgba(62,140,255,.35);
+  --ring: rgba(249,115,22,.35);
   --radius: 16px;
   --shadow: 0 12px 36px rgba(2,6,23,.10);
 }
 
 * { box-sizing: border-box; }
-.h6{ font-size:.95rem; margin:0 0 6px; letter-spacing:.2px; }
+.h6{ font-size:.95rem; margin:0 0 6px; letter-spacing:.2px; color: var(--ink); font-weight: 700; }
 .muted{ color:var(--muted); }
 .container{ max-width: 1120px; margin-inline:auto; padding: 20px; }
 .card{
-  background: var(--card); border:1px solid #e5e9f2; border-radius: var(--radius);
-  box-shadow: var(--shadow); padding: 18px;
+  background: var(--card); 
+  border:1px solid #e5e9f2; 
+  border-radius: var(--radius);
+  box-shadow: var(--shadow); 
+  padding: 18px;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(249, 115, 22, 0.15);
+  border-color: rgba(249, 115, 22, 0.3);
 }
 .section-title{
   display:flex; align-items:center; gap:10px; margin:0 0 10px;
-  font-size:1.15rem; color: var(--blue); font-weight:800;
+  font-size:1.15rem; color: var(--ink); font-weight:800;
+}
+
+.section-title i {
+  color: var(--orange);
 }
 
 /* -------- HERO -------- */
 .hero{
-  background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
+  background: var(--ink);
   color:#fff;
-  padding: 4rem 0;
+  padding: 3rem 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -557,8 +543,8 @@ const branchLabel = computed(() => branches.find(b => b.code === selectedBranch.
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at 30% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-              radial-gradient(circle at 70% 80%, rgba(249, 115, 22, 0.1) 0%, transparent 50%);
+  background: radial-gradient(circle at 30% 20%, rgba(249, 115, 22, 0.08) 0%, transparent 50%),
+              radial-gradient(circle at 70% 80%, rgba(249, 115, 22, 0.05) 0%, transparent 50%);
   pointer-events: none;
 }
 .hero__grid{
@@ -595,7 +581,7 @@ const branchLabel = computed(() => branches.find(b => b.code === selectedBranch.
   font-size:.9rem; 
   letter-spacing:.2em; 
   opacity:.95; 
-  color:#60a5fa; 
+  color: var(--orange); 
   margin-bottom: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -603,7 +589,7 @@ const branchLabel = computed(() => branches.find(b => b.code === selectedBranch.
 .subtitle{ 
   margin:0 0 24px; 
   font-size:1.2rem; 
-  color:#f8fafc; 
+  color: rgba(255, 255, 255, 0.95); 
   font-weight:500;
   line-height: 1.6;
   text-shadow: 0 1px 2px rgba(0,0,0,0.2);
@@ -612,6 +598,11 @@ const branchLabel = computed(() => branches.find(b => b.code === selectedBranch.
   color:#fff; 
   font-weight:800;
   text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero__brand .subtitle {
+  color: rgba(255, 255, 255, 0.95);
+  text-align: left;
 }
 .hero__meta{ 
   list-style:none; 
@@ -635,7 +626,7 @@ const branchLabel = computed(() => branches.find(b => b.code === selectedBranch.
   border-bottom: none;
 }
 .hero__meta i{ 
-  color:#60a5fa; 
+  color: var(--orange); 
   margin-right: 12px;
   width: 18px;
   font-size: 1.1rem;
@@ -721,10 +712,11 @@ const branchLabel = computed(() => branches.find(b => b.code === selectedBranch.
   margin-bottom: 32px;
 }
 .hero__right .h6{ 
-  color: #fff; 
+  color: rgba(255, 255, 255, 0.95); 
   font-weight: 700; 
   margin-bottom: 16px; 
   font-size: 1.1rem;
+  text-align: center;
 }
 .hero__right .countdown{ 
   display:flex; 
@@ -734,8 +726,8 @@ const branchLabel = computed(() => branches.find(b => b.code === selectedBranch.
 .hero__right .cell{ 
   display:grid; 
   place-items:center; 
-  background: rgba(59, 130, 246, 0.2); 
-  border:1px solid rgba(59, 130, 246, 0.3); 
+  background: rgba(249, 115, 22, 0.2); 
+  border:1px solid rgba(249, 115, 22, 0.3); 
   border-radius: 12px; 
   padding:12px 14px; 
   min-width:70px; 
@@ -783,7 +775,7 @@ const branchLabel = computed(() => branches.find(b => b.code === selectedBranch.
   min-width: 140px;
 }
 .num-card i{ 
-  color:#60a5fa; 
+  color: var(--orange); 
   font-size: 1.2rem;
 }
 .num-card b{ 
@@ -804,22 +796,79 @@ const branchLabel = computed(() => branches.find(b => b.code === selectedBranch.
 /* Branch chips */
 .chips{ display:flex; flex-wrap:wrap; gap:10px; }
 .chip{
-  background:#f0f6ff; border:1px solid #d7e3ff; padding:8px 12px; border-radius: 999px; font-weight:700;
+  background:#fff; 
+  border:1px solid var(--border); 
+  padding:8px 12px; 
+  border-radius: 999px; 
+  font-weight:700;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
-.chip.active{ background:#e0f7f7; border-color:#b8ecec; box-shadow: 0 0 0 4px rgba(14,165,166,.2); }
+.chip:hover {
+  background: rgba(249, 115, 22, 0.1);
+  border-color: var(--orange);
+}
+.chip.active{ 
+  background: var(--orange); 
+  color: #fff;
+  border-color: var(--orange); 
+  box-shadow: 0 0 0 4px rgba(249,115,22,.2); 
+}
+.chip.active i {
+  color: #fff;
+}
 
 /* Criteria */
 .criteria{ display:grid; gap:12px; }
 .check{ padding-left: 20px; }
 .check li{ margin:.35rem 0; }
 
+/* Benefits List */
+.benefits {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.benefits li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  background: rgba(249, 115, 22, 0.05);
+  border-left: 3px solid var(--orange);
+  border-radius: 0 8px 8px 0;
+  transition: all 0.3s ease;
+}
+
+.benefits li:hover {
+  background: rgba(249, 115, 22, 0.1);
+  transform: translateX(5px);
+}
+
+.benefits li i {
+  color: var(--orange);
+  font-size: 1.2rem;
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+}
+
+.benefits li b {
+  color: var(--orange);
+}
+
 /* Form / calc */
 .form{ display:grid; gap:10px; }
 .form__row{ display:grid; gap:6px; }
 .form__row input, .form__row select{
   border:1px solid #dbe2ee; border-radius:10px; padding:10px; outline:none; font:inherit;
+  transition: all 0.3s ease;
 }
-.form__row input:focus, .form__row select:focus{ box-shadow: 0 0 0 4px var(--ring); border-color: transparent; }
+.form__row input:focus, .form__row select:focus{ 
+  box-shadow: 0 0 0 4px var(--ring); 
+  border-color: var(--orange); 
+}
 .form__checkbox{ display:flex; align-items:flex-start; gap:10px; }
 .form__actions{ display:flex; gap:10px; margin-top: 6px; }
 .results{ display:grid; gap:10px; margin-top:6px; }
@@ -833,40 +882,99 @@ const branchLabel = computed(() => branches.find(b => b.code === selectedBranch.
 .totals strong{ font-size:1.05rem; }
 
 /* Achievements */
-.congrats{ font-weight:900; color:var(--blue); margin: 2px 0 6px; }
+.congrats{ font-weight:900; color: var(--orange); margin: 2px 0 6px; }
 .stats{ display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:12px; }
 .stat__label{ font-weight:800; color:#334155; }
 .stat__value{ font-weight:800; font-size:1.1rem; }
-.stat__value .big{ font-size:1.6rem; color:var(--navy); }
-.bar{ height:8px; background:#eef2ff; border-radius: 999px; overflow:hidden; margin-top:6px; }
-.bar span{ display:block; height:100%; background: linear-gradient(90deg, var(--sky), var(--teal)); }
-
-.companies{ display:flex; flex-wrap:wrap; gap:16px; align-items:center; margin-top: 14px; }
-.companies img{ height:28px; filter: grayscale(100%); opacity:.85; }
+.stat__value .big{ font-size:1.6rem; color: var(--orange); }
+.bar{ height:8px; background:#fff3e0; border-radius: 999px; overflow:hidden; margin-top:6px; }
+.bar span{ display:block; height:100%; background: linear-gradient(90deg, var(--orange), #ff8c32); }
 
 /* Timeline */
 .timeline{ list-style:none; padding:0; margin:0; display:grid; gap:12px; }
 .timeline li{ display:flex; gap:10px; align-items:flex-start; }
-.dot{ width:10px; height:10px; border-radius:50%; background:var(--gold); margin-top:7px; box-shadow:0 0 0 3px rgba(245,158,11,.25); }
-.txt strong{ display:block; }
+.dot{ width:10px; height:10px; border-radius:50%; background: var(--orange); margin-top:7px; box-shadow:0 0 0 3px rgba(249,115,22,.25); }
+.txt strong{ display:block; color: var(--ink); }
 
 /* Contacts */
 .contacts{ display:flex; flex-wrap:wrap; gap:10px; }
-.contact{ display:inline-flex; align-items:center; gap:8px; background:#f8fafc; border:1px dashed #e5e9f2; border-radius: 12px; padding:8px 12px; text-decoration:none; color:var(--ink); }
-.contact:hover{ box-shadow:0 0 0 4px var(--ring); }
+.contact{ display:inline-flex; align-items:center; gap:8px; background:#f8fafc; border:1px dashed #e5e9f2; border-radius: 12px; padding:8px 12px; text-decoration:none; color:var(--ink); transition: all 0.3s ease; }
+.contact:hover{ box-shadow:0 0 0 4px var(--ring); border-color: var(--orange); }
+.contact i { color: var(--orange); }
 .chip{ display:inline-flex; gap:8px; align-items:center; border:1px solid #e5e9f2; border-radius:999px; padding:6px 10px; background:#fff; }
 
+/* Quick Actions */
+.quick {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.link {
+  color: var(--orange);
+  text-decoration: none;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.link:hover {
+  color: #e55a00;
+  text-decoration: underline;
+}
+
 /* CTA footer */
-.cta-footer{ background: linear-gradient(135deg, var(--navy), #0e3aa0); color:#fff; margin-top: 16px; }
-.cta-footer__grid{ display:grid; grid-template-columns: 1fr auto; gap:12px; align-items:center; }
-@media (max-width: 820px){ .cta-footer__grid{ grid-template-columns: 1fr; } }
-.cta-footer .actions{ display:flex; gap:10px; flex-wrap:wrap; }
+.cta-footer{ 
+  background: linear-gradient(135deg, var(--ink), #0d1625); 
+  color:#fff; 
+  margin-top: 16px; 
+  padding: 2rem 0;
+}
+
+.cta-footer__grid{ 
+  display:grid; 
+  grid-template-columns: 1fr auto; 
+  gap:24px; 
+  align-items:center; 
+}
+
+.cta-footer .info h3 {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+.cta-footer .info p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  margin: 0;
+  line-height: 1.6;
+}
+
+@media (max-width: 820px){ 
+  .cta-footer__grid{ 
+    grid-template-columns: 1fr; 
+    text-align: center;
+  }
+  
+  .cta-footer .actions {
+    justify-content: center;
+  }
+}
+
+.cta-footer .actions{ 
+  display:flex; 
+  gap:10px; 
+  flex-wrap:wrap; 
+}
+
 .btn--gold:hover{ filter: brightness(1.05); }
 
 /* Scholarship Page Styling */
 .scholarship-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f8f9fc 0%, #e8f2ff 100%);
+  background: linear-gradient(180deg, #fff 0%, #f7f9fc 100%);
 }
 
 /* Ensure all text is visible */

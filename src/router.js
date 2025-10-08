@@ -25,6 +25,7 @@ import iqac from './views/governance/iqac.vue'
 import Policies from './views/governance/Policies.vue'
 import Organogram from './views/governance/Organogram.vue'
 import Administrative from './views/governance/Administrative.vue'
+import RandD from './views/governance/RandD.vue'
 import AcademicRegulations from './views/Academics/AcademicRegulations.vue'
 import AcademicCalendar from './views/Academics/AcademicCalendar.vue'
 import Incentives from './views/Academics/Incentives.vue'
@@ -105,6 +106,7 @@ const routes = [
     { path: '/policies', component: Policies },
     { path: '/organogram', component: Organogram },
     { path: '/administrative', component: Administrative },
+    { path: '/r-and-d', component: RandD },
     { path: '/academic-regulations', component: AcademicRegulations },
     { path: '/academic-calendar', component: AcademicCalendar },
     { path: '/incentives', component: Incentives },

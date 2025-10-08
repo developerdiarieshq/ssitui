@@ -56,35 +56,146 @@ export default {
 </script>
 
 <style scoped>
+/* Theme Variables */
+:root {
+  --orange: #FF7701;
+  --ink: #1a2238;
+  --muted: #6b7280;
+}
+
 .page-bg {
-  background: #f7f9fc;
+  background: linear-gradient(180deg, #fff 0%, #f7f9fc 100%);
 }
 
 /* HERO */
 .hero {
-  background: linear-gradient(60deg, #1e40af, #143f8c);
+  background: var(--ink);
+  padding: 3rem 0;
 }
+
 .hero h1,
 .hero p {
   color: #fff;
 }
 
+.hero h1 {
+  margin-bottom: 1rem;
+}
+
+.hero .lead {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
 /* SECTION TITLE */
 .section-title {
-  color: #1e40af;
+  color: var(--ink);
   font-weight: 700;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: var(--orange);
+  border-radius: 2px;
+  animation: underscorePulse 2s ease-in-out infinite;
+}
+
+@keyframes underscorePulse {
+  0%, 100% {
+    width: 60px;
+    opacity: 1;
+  }
+  50% {
+    width: 80px;
+    opacity: 0.8;
+  }
+}
+
+/* ELEVATED CARD */
+.elev-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.08);
+  border: 2px solid rgba(255, 119, 1, 0.1);
+  transition: all 0.3s ease;
+}
+
+.elev-card:hover {
+  border-color: var(--orange);
+  box-shadow: 0 10px 30px rgba(255, 119, 1, 0.2);
 }
 
 /* POLICY CARDS */
 .policy-card {
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
+
 .policy-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  transform: translateY(-8px);
+  box-shadow: 0 12px 35px rgba(255, 119, 1, 0.25);
+  border-color: var(--orange);
+  background: linear-gradient(135deg, #fff 0%, rgba(255, 119, 1, 0.03) 100%);
 }
+
 .policy-icon {
-  font-size: 2rem;
-  color: #ff6f00;
+  font-size: 2.5rem;
+  color: var(--orange);
+  transition: all 0.3s ease;
+}
+
+.policy-card:hover .policy-icon {
+  transform: scale(1.15) rotate(5deg);
+  color: #e55a00;
+}
+
+.policy-card h5 {
+  color: var(--ink);
+  font-size: 1.05rem;
+  transition: color 0.3s ease;
+}
+
+.policy-card:hover h5 {
+  color: var(--orange);
+}
+
+/* BUTTONS */
+.btn-outline-primary {
+  border-color: var(--orange);
+  color: var(--orange);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 119, 1, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero {
+    padding: 2rem 0;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+  }
+  
+  .policy-icon {
+    font-size: 2rem;
+  }
 }
 </style>

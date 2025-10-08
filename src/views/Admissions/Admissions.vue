@@ -159,6 +159,7 @@ const eligibility = [
 :root {
   --navy: #1e40af;
   --orange: #f97316;
+  --ink: #1a2238;
   --bg: #f7f9fc;
   --card: #fff;
   --border: #e5e7eb;
@@ -176,37 +177,53 @@ const eligibility = [
 
 /* HERO */
 .hero {
-  background: linear-gradient(60deg, var(--navy), #153a9c);
+  background: var(--ink);
   color: #fff;
   padding: 3rem 1rem;
 }
-.title {
+
+.hero .title {
   font-size: 2.2rem;
   font-weight: 800;
+  color: #fff;
+  margin-bottom: 1rem;
 }
-.subtitle {
+
+.hero .subtitle {
   font-size: 1.1rem;
-  color: #dbeafe;
+  color: rgba(255, 255, 255, 0.9);
   margin-top: 0.5rem;
+  font-weight: 500;
 }
 
 /* CARD */
 .card {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 0.75rem;
+  border-radius: 1rem;
   padding: 2rem;
   margin: 2rem 0;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(249, 115, 22, 0.15);
+  border-color: rgba(249, 115, 22, 0.3);
 }
 .section-title {
   font-size: 1.4rem;
   font-weight: 700;
-  color: var(--navy);
+  color: var(--ink);
   margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
   gap: 0.6rem;
+}
+
+.section-title i {
+  color: var(--orange);
 }
 p {
   color: #374151;
