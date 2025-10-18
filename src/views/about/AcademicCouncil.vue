@@ -1,7 +1,8 @@
 <template>
+  <div class="academic-council-wrapper">
     <Header/>
     <NavBar/>
-  <section class="academic-council-page">
+    <section class="academic-council-page">
     <!-- Hero Section -->
     <header class="hero text-center text-white">
       <div class="container">
@@ -339,15 +340,20 @@
         </div>
       </section>
     </main>
-  </section>
-  <Footer/>
+    </section>
+    <Footer/>
+  </div>
 </template>
 
 <script setup>
 import Header from '../../components/Header.vue';
 import NavBar from '../../components/NavBar.vue';
 import Footer from '../../components/Footer.vue';
-import { ref, computed } from "vue"
+import { ref, computed, onMounted, watch } from "vue"
+import { useRouter, useRoute } from 'vue-router'
+
+const router = useRouter()
+const route = useRoute()
 
 const activeTab = ref("members")
 const searchQuery = ref('')
@@ -360,8 +366,8 @@ const meetingsViewMode = ref('grid') // 'grid' or 'list'
 
 // Tabs configuration
 const tabs = [
-  { id: 'members', label: 'Current Members', icon: 'fa-solid fa-users' },
-  { id: 'meetings', label: 'Meeting Schedule & Records', icon: 'fa-solid fa-calendar-days' }
+  { id: 'members', label: 'Current Members', icon: 'fa-solid fa-users', path: '/academic-council/members' },
+  { id: 'meetings', label: 'Meeting Schedule & Records', icon: 'fa-solid fa-calendar-days', path: '/academic-council/meetings' }
 ]
 
 const tabsMap = {
@@ -372,7 +378,32 @@ const tabsMap = {
 // Tab navigation method
 const setTab = (id) => {
   activeTab.value = id
+  const tab = tabs.find(t => t.id === id)
+  if (tab && tab.path) {
+    router.push(tab.path)
+  }
+  // Keep the user at the same scroll position - no auto-scroll
 }
+
+// Initialize active tab based on current route
+onMounted(() => {
+  const currentTab = tabs.find(t => t.path === route.path)
+  if (currentTab) {
+    activeTab.value = currentTab.id
+  } else if (route.path === '/academic-council') {
+    activeTab.value = 'members'
+  }
+})
+
+// Watch for route changes and update active tab
+watch(() => route.path, (newPath) => {
+  const tab = tabs.find(t => t.path === newPath)
+  if (tab) {
+    activeTab.value = tab.id
+  } else if (newPath === '/academic-council') {
+    activeTab.value = 'members'
+  }
+})
 
 // View mode methods
 const setViewMode = (mode) => {
@@ -388,57 +419,57 @@ const members = [
   { 
     name: "Dr. V S Ratna Kumari", 
     position: "Principal",
-    image: new URL('@/assets/management/principal.jpg', import.meta.url).href
+    image: new URL('@/assets/academic_council/1.jpg', import.meta.url).href
   },
   { 
     name: "Sri. D. Prabhakar Reddy", 
     position: "Management Member",
-    image: new URL('@/assets/management/secretary.jpg', import.meta.url).href
+    image: new URL('@/assets/academic_council/2.jpg', import.meta.url).href
   },
   { 
     name: "Sri. K. Ramakrishna Prasad", 
     position: "HOD - EEE",
-    image: new URL('@/assets/faculty/cse/CS04.jpg', import.meta.url).href
+    image: new URL('@/assets/academic_council/3.jpg', import.meta.url).href
   },
   { 
     name: "Dr. K. Bhaskar Mutyalu", 
     position: "HOD - MECH",
-    image: new URL('@/assets/faculty/cse/CS07.jpg', import.meta.url).href
+    image: new URL('@/assets/academic_council/4.jpg', import.meta.url).href
   },
   { 
     name: "Dr. P. Sekhar Babu", 
     position: "HOD - ECE",
-    image: new URL('@/assets/faculty/cse/CS10.jpg', import.meta.url).href
+    image: new URL('@/assets/academic_council/5.jpg', import.meta.url).href
   },
   { 
     name: "Dr. Sk. Yakoob", 
     position: "HOD - CSE",
-    image: new URL('@/assets/faculty/cse/CS11.jpg', import.meta.url).href
+    image: new URL('@/assets/academic_council/6.jpg', import.meta.url).href
   },
   { 
     name: "Dr. Sk. MeeraSaheb", 
     position: "HOD - H&S",
-    image: new URL('@/assets/faculty/cse/CS18.jpg', import.meta.url).href
+    image: new URL('@/assets/academic_council/7.jpg', import.meta.url).href
   },
   { 
     name: "Dr. D. N. V. Krishna Reddy", 
     position: "HOD - MBA",
-    image: new URL('@/assets/faculty/cse/CS22.jpg', import.meta.url).href
+    image: new URL('@/assets/academic_council/8.jpg', import.meta.url).href
   },
   { 
     name: "Sri. G. Upendra", 
     position: "Librarian",
-    image: new URL('@/assets/faculty/cse/CS04.jpg', import.meta.url).href
+    image: new URL('@/assets/academic_council/9.jpg', import.meta.url).href
   },
   { 
     name: "Dr. CH. Vijaya Kumar", 
     position: "NAAC Coordinator",
-    image: new URL('@/assets/faculty/cse/CS07.jpg', import.meta.url).href
+    image: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
   },
   { 
     name: "Sri. K. Ramakrishna Prasad", 
     position: "IQAC Coordinator",
-    image: new URL('@/assets/faculty/cse/CS10.jpg', import.meta.url).href
+    image: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
   },
 ]
 
@@ -503,6 +534,10 @@ const meetings = {
 </script>
 
 <style scoped>
+.academic-council-wrapper {
+  min-height: 100vh;
+}
+
 .academic-council-page {
   --orange: #FF7701;
   --ink: #1a2238;

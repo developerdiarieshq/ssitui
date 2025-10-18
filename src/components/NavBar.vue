@@ -73,12 +73,15 @@
 
           <!-- Admissions -->
           <li class="nav-item dropdown">
-            <!-- <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Admissions</a> -->
-            <router-link to="/admissions" class="nav-link">Admissions</router-link>
-            <!-- <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Admission Procedure</a></li>
-              <li><a class="dropdown-item" href="#">Fee Structure</a></li>
-            </ul> -->
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Admissions</a>
+            <ul class="dropdown-menu">
+              <li><router-link to="/admissions" class="dropdown-item">Admission Procedure</router-link></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><h6 class="dropdown-header">B-Category Seats</h6></li>
+              <li><router-link to="/btech-b-category-seats" class="dropdown-item">B.Tech B-Category</router-link></li>
+              <li><router-link to="/mba-b-category-seats" class="dropdown-item">MBA B-Category</router-link></li>
+              <li><router-link to="/polytechnic-b-category-seats" class="dropdown-item">Polytechnic B-Category</router-link></li>
+            </ul>
           </li>
 
           <!-- Student Corner -->

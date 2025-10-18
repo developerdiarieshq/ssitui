@@ -420,39 +420,57 @@ watch(() => route.params.tab, (newTab) => {
 /* Faculty */
 const faculty = ref([
   {
-    name: 'Dr. Rajesh Kumar',
+    name: 'DESIREDDY N.V. KRISHNAREDDY',
     designation: 'Professor & HOD',
     qualification: 'Ph.D., MBA',
     expertise: ['Strategic Management', 'Leadership', 'Organizational Behavior'],
-    email: 'hod.mba@ssit.edu.in',
+    email: 'krishnareddy.desireddy@ssit.edu.in',
     photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400',
     profile: '#', linkedin: '#'
   },
   {
-    name: 'Dr. Priya Sharma',
+    name: 'GOGINENI NARENDRA BABU',
     designation: 'Associate Professor',
-    qualification: 'Ph.D., Finance',
+    qualification: 'Ph.D., MBA',
     expertise: ['Financial Management', 'Investment Analysis', 'Risk Management'],
-    email: 'priya.sharma@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?q=80&w=400',
-    profile: '#', linkedin: '#'
-  },
-  {
-    name: 'Prof. Amit Patel',
-    designation: 'Assistant Professor',
-    qualification: 'MBA, M.Phil',
-    expertise: ['Marketing Management', 'Digital Marketing', 'Consumer Behavior'],
-    email: 'amit.patel@ssit.edu.in',
+    email: 'narendra.gogineni@ssit.edu.in',
     photo: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=400',
     profile: '#', linkedin: '#'
   },
   {
-    name: 'Dr. Sunita Reddy',
+    name: 'VEERNALA SURESH KUMAR',
     designation: 'Assistant Professor',
-    qualification: 'Ph.D., HR',
+    qualification: 'MBA, M.Phil',
+    expertise: ['Marketing Management', 'Digital Marketing', 'Consumer Behavior'],
+    email: 'suresh.veernala@ssit.edu.in',
+    photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400',
+    profile: '#', linkedin: '#'
+  },
+  {
+    name: 'VANTLA RAMBABU',
+    designation: 'Assistant Professor',
+    qualification: 'MBA, Ph.D.',
     expertise: ['Human Resource Management', 'Training & Development', 'Performance Management'],
-    email: 'sunita.reddy@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=400',
+    email: 'rambabu.vantla@ssit.edu.in',
+    photo: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=400',
+    profile: '#', linkedin: '#'
+  },
+  {
+    name: 'DASARI NAGA TEJA',
+    designation: 'Assistant Professor',
+    qualification: 'MBA, M.Phil',
+    expertise: ['Operations Management', 'Supply Chain', 'Project Management'],
+    email: 'nagateja.dasari@ssit.edu.in',
+    photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400',
+    profile: '#', linkedin: '#'
+  },
+  {
+    name: 'TALLAPENTA NAGALAKSHMI',
+    designation: 'Assistant Professor',
+    qualification: 'MBA, Ph.D.',
+    expertise: ['Information Technology Management', 'Business Analytics', 'Digital Business'],
+    email: 'nagalakshmi.tallapenta@ssit.edu.in',
+    photo: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?q=80&w=400',
     profile: '#', linkedin: '#'
   }
 ])

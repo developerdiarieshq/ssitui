@@ -24,16 +24,12 @@
               <span class="qf-label">Total Students</span>
               <span class="qf-value">{{ facts.totalStudents }}</span>
             </li>
-            <li>
-              <span class="qf-label">Programs</span>
-              <span class="qf-value">Basic Sciences • English</span>
-            </li>
           </ul>
         </div>
         <picture class="hero-art" aria-hidden="true">
           <img
-            src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1600&auto=format&fit=crop"
-            alt="AI & Data Science themed visual"
+            src="https://images.unsplash.com/photo-1509228468518-180dd4864904?q=80&w=1600&auto=format&fit=crop"
+            alt="Science & Humanities Department"
             class="hero-img"
           />
         </picture>
@@ -203,20 +199,21 @@
         <div class="card">
           <h2 class="section-title" id="curriculum"><i class="fa-solid fa-file-lines"></i> Course Structure for all Years</h2>
           <p class="lead">
-            Download the Course Structure and Syllabus of four years of CSE course and other engineering programs. All syllabi follow the R22 regulation scheme.
+            Download the Course Structure and Syllabus for all engineering programs. The Science & Humanities department provides foundational courses in Mathematics, Physics, Chemistry, and English Communication for all B.Tech programs following the R22 regulation scheme.
           </p>
           <div class="downloads">
-            <a v-for="d in syllabus" :key="d.label" :href="d.href" class="download" target="_blank" rel="noopener">
+            <div v-for="d in syllabus" :key="d.label" class="download" :class="{ 'coming-soon': d.type === 'coming-soon' }" @click="handleSyllabusClick(d)">
               <i class="fa-solid fa-file-pdf"></i>
               <div>
                 <div class="dl-label">{{ d.label }}</div>
                 <div class="dl-sub">{{ d.note }}</div>
+                <div v-if="d.type === 'coming-soon'" class="dl-status">Coming Soon</div>
               </div>
-            </a>
+            </div>
           </div>
           <div class="row-actions mt-1">
-            <a class="btn btn-soft" href="/academics/regulations">Academic Regulations</a>
-            <a class="btn btn-soft" href="/academics/calendar">Academic Calendar</a>
+            <a class="btn btn-soft" href="/academics/academic-regulations">Academic Regulations</a>
+            <a class="btn btn-soft" href="/academics/academic-calendar">Academic Calendar</a>
           </div>
         </div>
       </section>
@@ -341,6 +338,14 @@
       title-icon-color="var(--orange)"
       :show-image-info="false"
     />
+
+    <!-- PDF Viewer Modal -->
+    <PdfViewer 
+      :show="showPdfModal"
+      :url="currentPdfUrl"
+      :title="currentPdfTitle"
+      @close="closePdfModal"
+    />
   </div>
 </template>
 
@@ -352,6 +357,7 @@ import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/Footer.vue'
 import Strengths from '@/views/about/Strengths.vue'
 import ImagePreviewer from '@/views/utils/ImagePreviewer.vue'
+import PdfViewer from '@/views/utils/PdfViewer.vue'
 
 /* Facts / Quick Stats */
 const facts = { established: '2007', intakeUG: '120', totalStudents: '480', labs: '4' }
@@ -426,40 +432,126 @@ watch(() => route.params.tab, (newTab) => {
 
 /* Faculty */
 const faculty = ref([
+  // Head of Department
   {
-    name: 'Dr. R. Anitha', designation: 'Professor & HOD',
-    qualification: 'Ph.D., AI',
-    expertise: ['AI', 'NLP', 'Responsible AI'],
-    email: 'hod.aids@ssit.edu.in',
+    name: 'Dr. SK MEERA SHAHEB', designation: 'PROFESSOR & HOD',
+    qualification: 'Ph.D',
+    expertise: ['Physics', 'Research', 'Advanced Physics', 'Department Leadership'],
+    email: 'hod.sh@ssit.edu.in',
+    photo: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=400',
+    profile: '#', linkedin: '#'
+  },
+  // BSH(MATHS) Department
+  {
+    name: 'Dr. A SINDHUJA', designation: 'ASST.PROF',
+    qualification: 'Ph.D',
+    expertise: ['Mathematics', 'Applied Mathematics', 'Research'],
+    email: 'a.sindhuja@ssit.edu.in',
     photo: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&w=400',
     profile: '#', linkedin: '#'
   },
   {
-    name: 'Mr. K. Manoj', designation: 'Assistant Professor',
-    qualification: 'M.Tech (Data Science)',
-    expertise: ['Data Science', 'Big Data', 'Python'],
-    email: 'manoj@ssit.edu.in',
+    name: 'CHILUKURI LEELAVATHI', designation: 'ASST.PROF',
+    qualification: 'M.Sc',
+    expertise: ['Mathematics', 'Statistics', 'Applied Mathematics'],
+    email: 'chilukuri.leelavathi@ssit.edu.in',
     photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400',
     profile: '#', linkedin: '#'
   },
   {
-    name: 'Ms. Neha Varma', designation: 'Assistant Professor',
-    qualification: 'M.Tech (AI)',
-    expertise: ['Computer Vision', 'Deep Learning'],
-    email: 'neha.varma@ssit.edu.in',
+    name: 'DOSAPATI SRIDEVI', designation: 'ASST.PROF',
+    qualification: 'M.Sc',
+    expertise: ['Mathematics', 'Algebra', 'Geometry'],
+    email: 'dosapati.sridevi@ssit.edu.in',
     photo: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=400',
     profile: '#', linkedin: '#'
   },
   {
-    name: 'Dr. T. Raghav', designation: 'Associate Professor',
-    qualification: 'Ph.D., ML',
-    expertise: ['Time Series', 'Reinforcement Learning'],
-    email: 'raghav@ssit.edu.in',
+    name: 'KOTHA VASAVI', designation: 'ASST.PROF',
+    qualification: 'M.Sc',
+    expertise: ['Mathematics', 'Calculus', 'Differential Equations'],
+    email: 'kotha.vasavi@ssit.edu.in',
     photo: 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=400',
+    profile: '#', linkedin: '#'
+  },
+  // BSH(ENG) Department
+  {
+    name: 'VEMULA SURESH KUMAR', designation: 'ASST.PROF',
+    qualification: 'M.A (ENG)',
+    expertise: ['English Literature', 'Communication Skills', 'Language Teaching'],
+    email: 'vemula.suresh@ssit.edu.in',
+    photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400',
+    profile: '#', linkedin: '#'
+  },
+  {
+    name: 'VAJJA VENKATESWARLU', designation: 'ASST.PROF',
+    qualification: 'M.A (ENG)',
+    expertise: ['English Language', 'Technical Communication', 'Soft Skills'],
+    email: 'vajja.venkateswarlu@ssit.edu.in',
+    photo: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=400',
+    profile: '#', linkedin: '#'
+  },
+  {
+    name: 'KONGA KRISHNA KUMAR', designation: 'ASST.PROF',
+    qualification: 'M.A (ENG)',
+    expertise: ['English Literature', 'Communication', 'Language Lab'],
+    email: 'konga.krishna@ssit.edu.in',
+    photo: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400',
+    profile: '#', linkedin: '#'
+  },
+  // BSH(CHE) Department
+  {
+    name: 'BOLLA RAMA KRISHNA', designation: 'ASSOC.PROF',
+    qualification: 'M.Sc',
+    expertise: ['Chemistry', 'Organic Chemistry', 'Research'],
+    email: 'bolla.ramakrishna@ssit.edu.in',
+    photo: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=400',
+    profile: '#', linkedin: '#'
+  },
+  {
+    name: 'BALUSUPATI SEETHARAMULU', designation: 'ASST.PROF',
+    qualification: 'M.Sc',
+    expertise: ['Chemistry', 'Inorganic Chemistry', 'Analytical Chemistry'],
+    email: 'balusupati.seetharamulu@ssit.edu.in',
+    photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400',
+    profile: '#', linkedin: '#'
+  },
+  {
+    name: 'MADAMSETTI N. V.SATYAVENI', designation: 'ASST.PROF',
+    qualification: 'M.Sc',
+    expertise: ['Chemistry', 'Physical Chemistry', 'Laboratory Techniques'],
+    email: 'madamsetti.satyaveni@ssit.edu.in',
+    photo: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?q=80&w=400',
+    profile: '#', linkedin: '#'
+  },
+  // BSH(PHY) Department
+  {
+    name: 'CHINTALA. SAILAJA', designation: 'ASST.PROF',
+    qualification: 'M.Sc',
+    expertise: ['Physics', 'Applied Physics', 'Laboratory Physics'],
+    email: 'chintala.sailaja@ssit.edu.in',
+    photo: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=400',
+    profile: '#', linkedin: '#'
+  },
+  {
+    name: 'YERNAM VIJAYA', designation: 'ASST.PROF',
+    qualification: 'M.Sc',
+    expertise: ['Physics', 'Modern Physics', 'Experimental Physics'],
+    email: 'yernam.vijaya@ssit.edu.in',
+    photo: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?q=80&w=400',
+    profile: '#', linkedin: '#'
+  },
+  // MBA Department
+  {
+    name: 'PUNNAM SIRESHA', designation: 'ASST.PROF',
+    qualification: 'MBA',
+    expertise: ['Management', 'Business Administration', 'Management Studies'],
+    email: 'punnam.siresha@ssit.edu.in',
+    photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400',
     profile: '#', linkedin: '#'
   }
 ])
-const designations = ['Professor & HOD', 'Professor', 'Associate Professor', 'Assistant Professor']
+const designations = ['PROFESSOR & HOD', 'PROFESSOR', 'ASSOC.PROF', 'ASST.PROF']
 const query = ref('')
 const designation = ref('ALL')
 const filteredFaculty = computed(() => {
@@ -526,11 +618,41 @@ const labs = [
 
 /* Syllabus / Downloads */
 const syllabus = [
-  { label: 'I Btech-AIDS- R22', note: 'AI & Data Science Program', href: '#' },
-  { label: 'I Btech-AIML- R22', note: 'AI & Machine Learning Program', href: '#' },
-  { label: 'I Btech-CSE- R22', note: 'Computer Science & Engineering', href: '#' },
-  { label: 'I Btech-ECE- R22', note: 'Electronics & Communication Engineering', href: '#' },
-  { label: 'I Btech-EEE- R22', note: 'Electrical & Electronics Engineering', href: '#' }
+  { 
+    label: 'I Btech-AIDS- R22', 
+    note: 'AI & Data Science Program', 
+    href: 'https://drive.google.com/file/d/1F9thRq3PAhLzsbJ2Hbg0hEICUOs9OXrh/view?usp=sharing',
+    pdfUrl: 'https://drive.google.com/file/d/1F9thRq3PAhLzsbJ2Hbg0hEICUOs9OXrh/preview',
+    type: 'pdf'
+  },
+  { 
+    label: 'I Btech-AIML- R22', 
+    note: 'AI & Machine Learning Program', 
+    href: 'https://drive.google.com/file/d/14pzfcpk4OYvXowFPsnYVw86qCIHfBCWU/view?usp=drive_link',
+    pdfUrl: 'https://drive.google.com/file/d/14pzfcpk4OYvXowFPsnYVw86qCIHfBCWU/preview',
+    type: 'pdf'
+  },
+  { 
+    label: 'I Btech-CSE- R22', 
+    note: 'Computer Science & Engineering', 
+    href: 'https://drive.google.com/file/d/1nUjgOH4_qsgCdig-utG6pbr6FYxpxQ_T/view?usp=drive_link',
+    pdfUrl: 'https://drive.google.com/file/d/1nUjgOH4_qsgCdig-utG6pbr6FYxpxQ_T/preview',
+    type: 'pdf'
+  },
+  { 
+    label: 'I Btech-ECE- R22', 
+    note: 'Electronics & Communication Engineering', 
+    href: 'https://drive.google.com/file/d/1uuJl4ZJt3lJAsSuME0bbk4OSRz7FhbP8/view?usp=drive_link',
+    pdfUrl: 'https://drive.google.com/file/d/1uuJl4ZJt3lJAsSuME0bbk4OSRz7FhbP8/preview',
+    type: 'pdf'
+  },
+  { 
+    label: 'I Btech-EEE- R22', 
+    note: 'Electrical & Electronics Engineering', 
+    href: 'https://drive.google.com/file/d/1bo6vv2QXEjNWTtCR8JKv_McByfHmGd1H/view?usp=drive_link',
+    pdfUrl: 'https://drive.google.com/file/d/1bo6vv2QXEjNWTtCR8JKv_McByfHmGd1H/preview',
+    type: 'pdf'
+  }
 ]
 
 /* Activities */
@@ -601,17 +723,23 @@ const alumni = [
 
 /* Contact */
 const hod = {
-  name: 'Dr. V. Lakshmi',
-  designation: 'Professor & Head, Science & Humanities',
+  name: 'Dr. SK Meera Saheb',
+  designation: 'HOD & Associate Professor',
   location: 'SH Block, Room 101',
   phone: '+91-98765-43214',
-  email: 'hod.sh@ssit.edu.in'
+  email: 'shaikmeerasaheb7@gmail.com'
 }
 
 // Image Modal state
 const showImageModal = ref(false)
 const currentImageIndex = ref(0)
 const currentLabImages = ref([])
+
+// PDF Modal state
+const showPdfModal = ref(false)
+const currentPdfUrl = ref('')
+const currentPdfTitle = ref('')
+const isPdfLoading = ref(false)
 
 // Computed properties for ImagePreviewer
 const labImagesForModal = computed(() => {
@@ -622,6 +750,28 @@ const openImageModal = (labImages) => {
   currentLabImages.value = labImages
   currentImageIndex.value = 0
   showImageModal.value = true
+}
+
+// PDF Modal functions
+const openPdfModal = (pdfUrl, title) => {
+  currentPdfUrl.value = pdfUrl
+  currentPdfTitle.value = title
+  showPdfModal.value = true
+}
+
+const closePdfModal = () => {
+  showPdfModal.value = false
+  currentPdfUrl.value = ''
+  currentPdfTitle.value = ''
+}
+
+const handleSyllabusClick = (syllabusItem) => {
+  if (syllabusItem.type === 'pdf' && syllabusItem.pdfUrl) {
+    openPdfModal(syllabusItem.pdfUrl, syllabusItem.label)
+  } else if (syllabusItem.type === 'coming-soon') {
+    // Show a message or do nothing for coming soon items
+    console.log('Coming soon:', syllabusItem.label)
+  }
 }
 
 const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })
@@ -917,6 +1067,41 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
   justify-content:center; 
   font-size:.9rem;
   padding:.7rem 1rem;
+}
+
+/* PDF Modal Styles */
+.download{
+  border:1px solid var(--border); 
+  border-radius:.9rem; 
+  padding:.8rem; 
+  display:flex; 
+  gap:.7rem; 
+  align-items:flex-start; 
+  text-decoration:none; 
+  color:inherit; 
+  background:#fff;
+  transition:all 0.3s ease;
+  cursor:pointer;
+}
+.download:hover{
+  border-color:var(--orange);
+  background:rgba(249,115,22,0.05);
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(0,0,0,.1);
+}
+.download.coming-soon{
+  opacity:0.6;
+  cursor:not-allowed;
+}
+.download.coming-soon:hover{
+  transform:none;
+  box-shadow:none;
+}
+.dl-status{
+  font-size:0.8rem;
+  color:var(--orange);
+  font-weight:600;
+  margin-top:0.2rem;
 }
 
 /* RESPONSIVE */

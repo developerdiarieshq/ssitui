@@ -72,7 +72,7 @@ import DECE from './views/departments/DECE.vue'
 
 // B-Category Seats Components
 import MBABCategorySeats from './views/BCategorySeats/MBA.vue'
-import BTECHBCategorySeats from './views/BCategorySeats/BTECH.vue'
+import BTECHBCategorySeats from './views/BCategorySeats/BTech.vue'
 import PolytechnicBCategorySeats from './views/BCategorySeats/Polytechnic.vue'
 
 
@@ -87,6 +87,8 @@ const routes = [
     { path: '/about-us', component: AboutUs },
     { path: '/principal-desk', component: PrincipalDesk },
     { path: '/academic-council', component: AcademicCouncil },
+    { path: '/academic-council/members', component: AcademicCouncil },
+    { path: '/academic-council/meetings', component: AcademicCouncil },
     { path: '/management', component: Management },
     { path: '/vision-mission', component: VisionMission },
     { path: '/quality-policy', component: Quality },
@@ -206,6 +208,7 @@ const getRouterConfig = () => {
                     (to.path.includes('/deee/') && from.path.includes('/deee/')) ||
                     (to.path.includes('/dece/') && from.path.includes('/dece/')) ||
                     (to.path.includes('/examination-branch/') && from.path.includes('/examination-branch/')) ||
+                    ((to.path.startsWith('/academic-council') && from.path.startsWith('/academic-council'))) ||
                     (to.path.includes('/placements/') && from.path.includes('/placements/'))) {
                     return false
                 }
@@ -235,6 +238,7 @@ const getRouterConfig = () => {
                     (to.path.includes('/deee/') && from.path.includes('/deee/')) ||
                     (to.path.includes('/dece/') && from.path.includes('/dece/')) ||
                     (to.path.includes('/examination-branch/') && from.path.includes('/examination-branch/')) ||
+                    ((to.path.startsWith('/academic-council') && from.path.startsWith('/academic-council'))) ||
                     (to.path.includes('/placements/') && from.path.includes('/placements/'))) {
                     return false
                 }
@@ -252,6 +256,7 @@ const getRouterConfig = () => {
             // Don't scroll to top for tab navigation within same component
             if ((to.path.includes('/cse/') && from.path.includes('/cse/')) ||
                 (to.path.includes('/placements/') && from.path.includes('/placements/')) ||
+                ((to.path.startsWith('/academic-council') && from.path.startsWith('/academic-council'))) ||
                 (to.path.includes('/eee/') && from.path.includes('/eee/')) ||
                 (to.path.includes('/ece/') && from.path.includes('/ece/'))) {
                 return false
