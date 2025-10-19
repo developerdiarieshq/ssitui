@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:github": "vite build --base=/ssitui/",
+    "build:netlify": "vite build --base=/",
+    "build:vercel": "vite build --base=/",
     "preview": "vite preview",
+    "serve": "node server.js",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
