@@ -144,6 +144,16 @@ watch(() => props.show, (isOpen) => {
   if (isOpen) {
     isLoading.value = true
     document.addEventListener('keydown', handleKeydown)
+    
+    // Automatically enter fullscreen when modal opens
+    setTimeout(() => {
+      const pdfModal = document.querySelector('.pdf-modal')
+      if (pdfModal && !document.fullscreenElement) {
+        pdfModal.requestFullscreen().catch(err => {
+          console.error('Error attempting to enable fullscreen:', err)
+        })
+      }
+    }, 100) // Small delay to ensure modal is rendered
   } else {
     document.removeEventListener('keydown', handleKeydown)
   }

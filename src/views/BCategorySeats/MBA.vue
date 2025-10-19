@@ -121,11 +121,7 @@ export default {
 </script>
 
 <style scoped>
-.mba-page {
-  min-height: 100vh;
-  background: var(--bg);
-  padding: 2rem 0;
-}
+
 
 /* HERO */
 .hero {

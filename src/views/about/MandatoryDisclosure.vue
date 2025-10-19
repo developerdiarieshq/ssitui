@@ -202,20 +202,25 @@
             <!-- Right: PDF Viewer -->
             <div class="col-md-8">
               <div v-if="currentDoc" class="pdf-viewer shadow-sm">
+                <div class="pdf-controls mb-3">
+                  <button @click="openPdfViewer" class="btn btn-sm btn-orange me-2">
+                    <i class="fas fa-expand me-1"></i> View Fullscreen
+                  </button>
+                  <a :href="currentDoc.href" target="_blank" class="btn btn-sm btn-outline-primary">
+                    <i class="fas fa-download me-1"></i> Download
+                  </a>
+                </div>
                 <h6 class="fw-bold mb-2">
                   <i class="fas fa-file-pdf text-danger me-2"></i>
                   {{ currentDoc.title }} - {{ currentDoc.year }}
                 </h6>
-                <iframe
-                  :src="currentDoc.href"
-                  width="100%"
-                  height="600px"
-                  style="border:1px solid #ddd; border-radius:6px;"
-                ></iframe>
-                <div class="mt-2">
-                  <a :href="currentDoc.href" target="_blank" class="btn btn-sm btn-orange">
-                    <i class="fas fa-download me-1"></i> Download
-                  </a>
+                <div class="pdf-preview">
+                  <iframe
+                    :src="currentDoc.href"
+                    width="100%"
+                    height="400px"
+                    style="border:1px solid #ddd; border-radius:6px;"
+                  ></iframe>
                 </div>
               </div>
               <div v-else class="alert alert-info text-center">
@@ -272,6 +277,15 @@
       </section>
     </div>
     </section>
+    
+    <!-- PDF Viewer Modal -->
+    <PdfViewer 
+      :show="showPdfModal" 
+      :url="currentPdfUrl" 
+      :title="currentPdfTitle"
+      @close="closePdfModal"
+    />
+    
     <Footer/>
   </div>
 </template>
@@ -280,6 +294,7 @@
 import Header from '../../components/Header.vue'
 import NavBar from '../../components/NavBar.vue'
 import Footer from '../../components/Footer.vue'
+import PdfViewer from '../utils/PdfViewer.vue'
 import { ref, computed } from 'vue'
 
 const today = new Date().toLocaleDateString('en-IN', {
@@ -331,17 +346,32 @@ const feeRows = ref([
 
 /* Documents */
 const docs = ref([
-  { title: 'AICTE Extension of Approval', year: '2023-24', href: '/docs/AICTE_EOA_2023_24.pdf' },
-  { title: 'AICTE Extension of Approval', year: '2022-23', href: '/docs/AICTE_EOA_2022_23.pdf' },
-  { title: 'AICTE Extension of Approval', year: '2021-22', href: '/docs/AICTE_EOA_2021_22.pdf' },
+  { title: 'AICTE Extension of Approval', year: '2023-24', href: new URL('@/assets/docs/mandatory_disclosure/EOAReport2023-24.pdf', import.meta.url).href },
+  { title: 'AICTE Extension of Approval', year: '2022-23', href: new URL('@/assets/docs/mandatory_disclosure/EOAReport2022-23.pdf', import.meta.url).href },
+  { title: 'AICTE Extension of Approval', year: '2021-22', href: new URL('@/assets/docs/mandatory_disclosure/EOAReport2021-22.pdf', import.meta.url).href },
+  { title: 'AICTE Extension of Approval', year: '2020-21', href: new URL('@/assets/docs/mandatory_disclosure/EOAReport2020-21.pdf', import.meta.url).href },
+  { title: 'AICTE Extension of Approval', year: '2019-20', href: new URL('@/assets/docs/mandatory_disclosure/EOAReport2019-20.pdf', import.meta.url).href },
+  { title: 'AICTE Extension of Approval', year: '2018-19', href: new URL('@/assets/docs/mandatory_disclosure/EOAReport2018-19.pdf', import.meta.url).href },
+  { title: 'AICTE Extension of Approval', year: '2017-18', href: new URL('@/assets/docs/mandatory_disclosure/EOAReport2017-18.pdf', import.meta.url).href },
+  { title: 'AICTE Extension of Approval', year: '2016-17', href: new URL('@/assets/docs/mandatory_disclosure/EOAReport2016-17.pdf', import.meta.url).href },
+  { title: 'AICTE Extension of Approval', year: '2015-16', href: new URL('@/assets/docs/mandatory_disclosure/EOAReport2015-16.pdf', import.meta.url).href },
+  { title: 'AICTE Extension of Approval', year: '2014-15', href: new URL('@/assets/docs/mandatory_disclosure/EOAReport2014-15.pdf', import.meta.url).href },
+  { title: 'AICTE Extension of Approval', year: '2013-14', href: new URL('@/assets/docs/mandatory_disclosure/EOAReport2013-14.pdf', import.meta.url).href },
+  { title: 'AICTE Extension of Approval', year: '2001-2012', href: new URL('@/assets/docs/mandatory_disclosure/EOAReportfrom2001-2012.pdf', import.meta.url).href },
   { title: 'University Affiliation', year: 'JNTUH', href: '/docs/JNTUH_Affiliation.pdf' },
   { title: 'NAAC Assessment Report', year: 'Grade B', href: '/docs/NAAC_Report.pdf' },
-  { title: 'ISO 9001:2008 Certificate', year: 'ISO', href: '/docs/ISO_9001_2008.pdf' },
+  { title: 'ISO 9001:2015 Certificate', year: 'ISO', href: '/docs/ISO_9001_2015.pdf' },
   { title: 'Fire Safety Certificate', year: 'Latest', href: '/docs/Fire_Safety.pdf' },
   { title: 'Building Approval Certificate', year: 'Latest', href: '/docs/Building_Approval.pdf' },
+  { title: 'Environmental Clearance', year: 'Latest', href: '/docs/Environmental_Clearance.pdf' },
 ])
 const docSearch = ref('')
 const currentDoc = ref(null)
+
+// PDF Viewer state
+const showPdfModal = ref(false)
+const currentPdfUrl = ref('')
+const currentPdfTitle = ref('')
 const filteredDocs = computed(() => {
   const q = docSearch.value.trim().toLowerCase()
   if (!q) return docs.value
@@ -351,6 +381,20 @@ const filteredDocs = computed(() => {
 })
 const viewDoc = (doc) => {
   currentDoc.value = doc
+}
+
+const openPdfViewer = () => {
+  if (currentDoc.value) {
+    showPdfModal.value = true
+    currentPdfUrl.value = currentDoc.value.href
+    currentPdfTitle.value = `${currentDoc.value.title} - ${currentDoc.value.year}`
+  }
+}
+
+const closePdfModal = () => {
+  showPdfModal.value = false
+  currentPdfUrl.value = ''
+  currentPdfTitle.value = ''
 }
 
 /* Governance */
@@ -469,6 +513,8 @@ const partners = [
 .doc-sub{display:block;color:var(--muted);font-size:.9rem}
 .doc-cta{margin-left:auto;font-weight:800;color:var(--orange)}
 .pdf-viewer{background:#fff;padding:15px;border-radius:10px}
+.pdf-preview{background:#f8f9fa;border-radius:6px;overflow:hidden}
+.pdf-controls{display:flex;gap:0.5rem;align-items:center}
 
 /* Chips */
 .chips{display:flex;flex-wrap:wrap;gap:10px}
