@@ -104,10 +104,10 @@ export default {
       
       if (type === 'admission') {
         this.currentPdfTitle = 'Polytechnic B-Category Seats Advertisement';
-        this.currentPdfUrl = new URL('@/assets/departments/bcategory/polytechnic/admission.pdf', import.meta.url).href;
+        this.currentPdfUrl = new URL('@/assets/departments/bcategory/polytechnic/admission.pdf', import.meta.url).href; /* @vite-ignore */
       } else if (type === 'application') {
         this.currentPdfTitle = 'Polytechnic Application Form';
-        this.currentPdfUrl = new URL('@/assets/departments/bcategory/polytechnic/application.pdf', import.meta.url).href;
+        this.currentPdfUrl = new URL('@/assets/departments/bcategory/polytechnic/application.pdf', import.meta.url).href; /* @vite-ignore */
       }
     },
     
