@@ -10,7 +10,6 @@
     "build:netlify": "vite build --base=/",
     "build:vercel": "vite build --base=/",
     "preview": "vite preview",
-    "serve": "node server.js",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
