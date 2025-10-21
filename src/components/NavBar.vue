@@ -49,10 +49,10 @@
                <li><router-link to="/trust" class="dropdown-item">Society</router-link></li>
                <li><router-link to="/management" class="dropdown-item">Management</router-link></li>
                <li><router-link to="/governing-body" class="dropdown-item">Governing Body</router-link></li>
+               <li><router-link to="/principal-desk" class="dropdown-item">Principal's Desk</router-link></li>
                <li><router-link to="/administrative" class="dropdown-item">Administrative Office</router-link></li>
-                <li><router-link to="/principal-desk" class="dropdown-item">Principal's Desk</router-link></li>
-              <li><a class="dropdown-item" href="#">Strategic Plan</a></li>
-              <li><a class="dropdown-item" href="#">Academic Council</a></li>
+              <!-- <li><a class="dropdown-item" href="#">Strategic Plan</a></li> -->
+              <!-- <li><a class="dropdown-item" href="#">Academic Council</a></li> -->
               <li><router-link to="/policies" class="dropdown-item">Policies</router-link></li>
               <li><router-link to="/committees" class="dropdown-item">Committees</router-link></li>
               <li><router-link to="/r-and-d" class="dropdown-item">R&amp;D</router-link></li>
@@ -83,19 +83,7 @@
               <li><router-link to="/polytechnic-b-category-seats" class="dropdown-item">Polytechnic B-Category</router-link></li>
             </ul>
           </li>
-
-          <!-- Student Corner -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Student Corner</a>
-            <ul class="dropdown-menu">
-              <li><router-link to="/scholarship" class="dropdown-item">Scholarship</router-link></li>
-              <li><router-link to="/anti-ragging" class="dropdown-item">Anti Ragging</router-link></li>
-               <router-link to="/sports" class="dropdown-item">Sports</router-link>
-              <li><router-link to="/cafeteria" class="dropdown-item">Cafeteria</router-link></li>
-              <li><router-link to="/social-services" class="dropdown-item">Social Services</router-link></li>
-            </ul>
-          </li>
-
+          
           <!-- Departments -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Departments</a>
@@ -131,11 +119,24 @@
               
               <!-- Other Departments -->
               <li><h6 class="dropdown-header">Other Departments</h6></li>
-              <li><router-link to="/polytechnic" class="dropdown-item">POLYTECHNIC</router-link></li>
+              <!-- <li><router-link to="/polytechnic" class="dropdown-item">POLYTECHNIC</router-link></li> -->
               <li><router-link to="/examination-branch" class="dropdown-item">Examination Branch</router-link></li>
-              <li><router-link to="/administrative-office" class="dropdown-item">Administrative Office</router-link></li>
+              <!-- <li><router-link to="/administrative-office" class="dropdown-item">Administrative Office</router-link></li> -->
             </ul>
           </li>
+
+          <!-- Student Corner -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Student Corner</a>
+            <ul class="dropdown-menu">
+              <li><router-link to="/scholarship" class="dropdown-item">Scholarship</router-link></li>
+              <li><router-link to="/anti-ragging" class="dropdown-item">Anti Ragging</router-link></li>
+               <router-link to="/sports" class="dropdown-item">Sports</router-link>
+              <li><router-link to="/cafeteria" class="dropdown-item">Cafeteria</router-link></li>
+              <li><router-link to="/social-services" class="dropdown-item">Social Services</router-link></li>
+            </ul>
+          </li>
+
 
           <!-- Amenities -->
           <li class="nav-item dropdown">

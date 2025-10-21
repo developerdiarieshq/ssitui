@@ -26,6 +26,18 @@ import Policies from './views/governance/Policies.vue'
 import Organogram from './views/governance/Organogram.vue'
 import Administrative from './views/governance/Administrative.vue'
 import RandD from './views/governance/RandD.vue'
+import AntiRaggingCell from './views/governance/cells/AntiRaggingCell.vue'
+import RdCell from './views/governance/cells/RdCell.vue'
+import ScStCell from './views/governance/cells/ScStCell.vue'
+import WomenEmpowermentCell from './views/governance/cells/WomenEmpowermentCell.vue'
+import EntrepreneurshipCell from './views/governance/cells/EntrepreneurshipCell.vue'
+import GrievanceCell from './views/governance/cells/GrievanceCell.vue'
+import MinorityCell from './views/governance/cells/MinorityCell.vue'
+import NssCell from './views/governance/cells/NssCell.vue'
+import ObcCell from './views/governance/cells/ObcCell.vue'
+import IndustryInteractionCell from './views/governance/cells/IndustryInteractionCell.vue'
+import InnovationCell from './views/governance/cells/InnovationCell.vue'
+import IqacCell from './views/governance/cells/IqacCell.vue'
 import AcademicRegulations from './views/Academics/AcademicRegulations.vue'
 import AcademicCalendar from './views/Academics/AcademicCalendar.vue'
 import Incentives from './views/Academics/Incentives.vue'
@@ -103,6 +115,19 @@ const routes = [
     { path: '/cafeteria', component: Cafeteria },
     { path: '/social-services', component: SocialServices },
     { path: '/committees', component: Committees },
+    { path: '/anti-ragging-cell', component: AntiRaggingCell },
+    { path: '/rd-cell', component: RdCell },
+    { path: '/scst-cell', component: ScStCell },
+    { path: '/women-empowerment-cell', component: WomenEmpowermentCell },
+    { path: '/entrepreneurship-cell', component: EntrepreneurshipCell },
+    { path: '/grievance-cell', component: GrievanceCell },
+    { path: '/minority-cell', component: MinorityCell },
+    { path: '/nss-cell', component: NssCell },
+    { path: '/obc-cell', component: ObcCell },
+    { path: '/industry-institute-interaction-cell', component: IndustryInteractionCell },
+    { path: '/institution-innovation-cell', component: InnovationCell },
+    { path: '/iqac-cell', component: IqacCell },
+    { path: '/committee/anti-ragging-cell', redirect: '/anti-ragging-cell' },
     { path: '/governing-body', component: GoverningBody },
     { path: '/iqac', component: iqac },
     { path: '/policies', component: Policies },

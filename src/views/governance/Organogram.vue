@@ -10,7 +10,7 @@
       <div class="container hero-inner">
         <div class="hero-copy">
           <h1 class="title">Organizational Structure</h1>
-          <p class="tagline">Interactive organizational chart - Click on any item to expand and explore the hierarchy.</p>
+          <p class="tagline">Complete institutional hierarchy and management structure</p>
           <ul class="quickfacts" aria-label="Quick facts">
             <li>
               <span class="qf-label">Levels</span>
@@ -19,10 +19,6 @@
             <li>
               <span class="qf-label">Departments</span>
               <span class="qf-value">7</span>
-            </li>
-            <li>
-              <span class="qf-label">Interactive</span>
-              <span class="qf-value">Yes</span>
             </li>
           </ul>
         </div>
@@ -41,356 +37,21 @@
       <!-- ORGANIZATIONAL CHART -->
       <section class="card-section">
         <div class="card">
-          <h2 class="section-title"><i class="fa-solid fa-sitemap"></i> Interactive Organizational Chart</h2>
+          <h2 class="section-title"><i class="fa-solid fa-sitemap"></i> Organizational Chart</h2>
           <p class="lead">
-            Click on any organizational level to expand and explore the hierarchy. Only one level expands at a time to maintain clarity.
+            View our comprehensive organizational chart showing the complete institutional hierarchy.
           </p>
         </div>
 
-        <!-- MICROSOFT TEAMS STYLE ORGANIZATIONAL CHART -->
+        <!-- ORGANIZATIONAL CHART IMAGE -->
         <div class="card">
-          <h3 class="section-title-sm"><i class="fa-solid fa-sitemap"></i> Organizational Hierarchy</h3>
-          <div class="teams-org-chart">
-            <!-- TOP LEVEL - TRUST -->
-            <div class="org-level top-level">
-              <div class="org-card trust-card" @click="toggleLevel('level1')">
-                <div class="card-header">
-                  <div class="avatar trust-avatar">
-                    <i class="fa-solid fa-building-columns"></i>
-                  </div>
-                  <div class="expand-toggle" v-if="!expandedLevels.level1">
-                    <i class="fa-solid fa-chevron-down"></i>
-                  </div>
-                  <div class="expand-toggle" v-else>
-                    <i class="fa-solid fa-chevron-up"></i>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <h4 class="card-title">VIPASSANA EDUCATIONAL TRUST</h4>
-                  <p class="card-subtitle">Governing Body</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- MANAGEMENT LEVEL -->
-            <template v-if="expandedLevels.level1">
-              <div class="org-level management-level">
-                <div class="org-card management-card" @click="toggleLevel('level2')">
-                  <div class="card-header">
-                    <div class="avatar management-avatar">
-                      <i class="fa-solid fa-user-tie"></i>
-                    </div>
-                    <div class="expand-toggle" v-if="!expandedLevels.level2">
-                      <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                    <div class="expand-toggle" v-else>
-                      <i class="fa-solid fa-chevron-up"></i>
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <h4 class="card-title">CHAIRMAN</h4>
-                    <p class="card-subtitle">Dr. S. Venkateswara Rao</p>
-                  </div>
-                </div>
-
-                <div class="org-card management-card" @click="toggleLevel('level2')">
-                  <div class="card-header">
-                    <div class="avatar management-avatar">
-                      <i class="fa-solid fa-file-contract"></i>
-                    </div>
-                    <div class="expand-toggle" v-if="!expandedLevels.level2">
-                      <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                    <div class="expand-toggle" v-else>
-                      <i class="fa-solid fa-chevron-up"></i>
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <h4 class="card-title">SECRETARY & CORRESPONDENT</h4>
-                    <p class="card-subtitle">Mr. K. Ramesh</p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- PRINCIPAL LEVEL -->
-              <template v-if="expandedLevels.level2">
-                <div class="org-level principal-level">
-                  <div class="org-card principal-card" @click="toggleLevel('level3')">
-                    <div class="card-header">
-                      <div class="avatar principal-avatar">
-                        <i class="fa-solid fa-graduation-cap"></i>
-                      </div>
-                      <div class="expand-toggle" v-if="!expandedLevels.level3">
-                        <i class="fa-solid fa-chevron-down"></i>
-                      </div>
-                      <div class="expand-toggle" v-else>
-                        <i class="fa-solid fa-chevron-up"></i>
-                      </div>
-                    </div>
-                    <div class="card-body">
-                      <h4 class="card-title">PRINCIPAL</h4>
-                      <p class="card-subtitle">Dr. P. Sekhar Babu</p>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- DEPARTMENTS LEVEL -->
-                <template v-if="expandedLevels.level3">
-                  <div class="org-level departments-level">
-                    <div class="org-card department-card" @click="toggleLevel('level4')">
-                      <div class="card-header">
-                        <div class="avatar department-avatar">
-                          <i class="fa-solid fa-building"></i>
-                        </div>
-                        <div class="expand-toggle" v-if="!expandedLevels.level4">
-                          <i class="fa-solid fa-chevron-down"></i>
-                        </div>
-                        <div class="expand-toggle" v-else>
-                          <i class="fa-solid fa-chevron-up"></i>
-                        </div>
-                      </div>
-                      <div class="card-body">
-                        <h4 class="card-title">OFFICE</h4>
-                        <p class="card-subtitle">Administration</p>
-                      </div>
-                    </div>
-
-                    <div class="org-card department-card" @click="toggleLevel('level4')">
-                      <div class="card-header">
-                        <div class="avatar department-avatar">
-                          <i class="fa-solid fa-users"></i>
-                        </div>
-                        <div class="expand-toggle" v-if="!expandedLevels.level4">
-                          <i class="fa-solid fa-chevron-down"></i>
-                        </div>
-                        <div class="expand-toggle" v-else>
-                          <i class="fa-solid fa-chevron-up"></i>
-                        </div>
-                      </div>
-                      <div class="card-body">
-                        <h4 class="card-title">DEPARTMENTS</h4>
-                        <p class="card-subtitle">Academic Units</p>
-                      </div>
-                    </div>
-
-                    <div class="org-card department-card" @click="toggleLevel('level4')">
-                      <div class="card-header">
-                        <div class="avatar department-avatar">
-                          <i class="fa-solid fa-clipboard-list"></i>
-                        </div>
-                        <div class="expand-toggle" v-if="!expandedLevels.level4">
-                          <i class="fa-solid fa-chevron-down"></i>
-                        </div>
-                        <div class="expand-toggle" v-else>
-                          <i class="fa-solid fa-chevron-up"></i>
-                        </div>
-                      </div>
-                      <div class="card-body">
-                        <h4 class="card-title">COMMITTEES</h4>
-                        <p class="card-subtitle">Governing Bodies</p>
-                      </div>
-                    </div>
-
-                    <div class="org-card department-card" @click="toggleLevel('level4')">
-                      <div class="card-header">
-                        <div class="avatar department-avatar">
-                          <i class="fa-solid fa-book"></i>
-                        </div>
-                        <div class="expand-toggle" v-if="!expandedLevels.level4">
-                          <i class="fa-solid fa-chevron-down"></i>
-                        </div>
-                        <div class="expand-toggle" v-else>
-                          <i class="fa-solid fa-chevron-up"></i>
-                        </div>
-                      </div>
-                      <div class="card-body">
-                        <h4 class="card-title">LIBRARY</h4>
-                        <p class="card-subtitle">Information Center</p>
-                      </div>
-                    </div>
-
-                    <div class="org-card department-card" @click="toggleLevel('level4')">
-                      <div class="card-header">
-                        <div class="avatar department-avatar">
-                          <i class="fa-solid fa-tools"></i>
-                        </div>
-                        <div class="expand-toggle" v-if="!expandedLevels.level4">
-                          <i class="fa-solid fa-chevron-down"></i>
-                        </div>
-                        <div class="expand-toggle" v-else>
-                          <i class="fa-solid fa-chevron-up"></i>
-                        </div>
-                      </div>
-                      <div class="card-body">
-                        <h4 class="card-title">ESTATE MANAGEMENT</h4>
-                        <p class="card-subtitle">Facilities</p>
-                      </div>
-                    </div>
-
-                    <div class="org-card department-card" @click="toggleLevel('level4')">
-                      <div class="card-header">
-                        <div class="avatar department-avatar">
-                          <i class="fa-solid fa-futbol"></i>
-                        </div>
-                        <div class="expand-toggle" v-if="!expandedLevels.level4">
-                          <i class="fa-solid fa-chevron-down"></i>
-                        </div>
-                        <div class="expand-toggle" v-else>
-                          <i class="fa-solid fa-chevron-up"></i>
-                        </div>
-                      </div>
-                      <div class="card-body">
-                        <h4 class="card-title">SPORTS</h4>
-                        <p class="card-subtitle">Athletics</p>
-                      </div>
-                    </div>
-
-                    <div class="org-card department-card" @click="toggleLevel('level4')">
-                      <div class="card-header">
-                        <div class="avatar department-avatar">
-                          <i class="fa-solid fa-bed"></i>
-                        </div>
-                        <div class="expand-toggle" v-if="!expandedLevels.level4">
-                          <i class="fa-solid fa-chevron-down"></i>
-                        </div>
-                        <div class="expand-toggle" v-else>
-                          <i class="fa-solid fa-chevron-up"></i>
-                        </div>
-                      </div>
-                      <div class="card-body">
-                        <h4 class="card-title">HOSTELS</h4>
-                        <p class="card-subtitle">Residential</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- STAFF LEVEL -->
-                  <template v-if="expandedLevels.level4">
-                    <div class="org-level staff-level">
-                      <div class="org-card staff-card">
-                        <div class="card-header">
-                          <div class="avatar staff-avatar">
-                            <i class="fa-solid fa-user-cog"></i>
-                          </div>
-                        </div>
-                        <div class="card-body">
-                          <h4 class="card-title">OFFICE SUPERINTENDENT</h4>
-                          <p class="card-subtitle">Administrative Head</p>
-                        </div>
-                      </div>
-
-                      <div class="org-card staff-card">
-                        <div class="card-header">
-                          <div class="avatar staff-avatar">
-                            <i class="fa-solid fa-chalkboard-teacher"></i>
-                          </div>
-                        </div>
-                        <div class="card-body">
-                          <h4 class="card-title">HOD</h4>
-                          <p class="card-subtitle">Department Head</p>
-                        </div>
-                      </div>
-
-                      <div class="org-card staff-card">
-                        <div class="card-header">
-                          <div class="avatar staff-avatar">
-                            <i class="fa-solid fa-users-cog"></i>
-                          </div>
-                        </div>
-                        <div class="card-body">
-                          <h4 class="card-title">COMMITTEE MEMBERS</h4>
-                          <p class="card-subtitle">Various Committees</p>
-                        </div>
-                      </div>
-
-                      <div class="org-card staff-card">
-                        <div class="card-header">
-                          <div class="avatar staff-avatar">
-                            <i class="fa-solid fa-book-reader"></i>
-                          </div>
-                        </div>
-                        <div class="card-body">
-                          <h4 class="card-title">LIBRARIAN</h4>
-                          <p class="card-subtitle">Library Head</p>
-                        </div>
-                      </div>
-
-                      <div class="org-card staff-card">
-                        <div class="card-header">
-                          <div class="avatar staff-avatar">
-                            <i class="fa-solid fa-cogs"></i>
-                          </div>
-                        </div>
-                        <div class="card-body">
-                          <h4 class="card-title">MANAGER</h4>
-                          <p class="card-subtitle">Estate Manager</p>
-                        </div>
-                      </div>
-
-                      <div class="org-card staff-card">
-                        <div class="card-header">
-                          <div class="avatar staff-avatar">
-                            <i class="fa-solid fa-running"></i>
-                          </div>
-                        </div>
-                        <div class="card-body">
-                          <h4 class="card-title">PHYSICAL DIRECTOR</h4>
-                          <p class="card-subtitle">Sports Head</p>
-                        </div>
-                      </div>
-
-                      <div class="org-card staff-card">
-                        <div class="card-header">
-                          <div class="avatar staff-avatar">
-                            <i class="fa-solid fa-home"></i>
-                          </div>
-                        </div>
-                        <div class="card-body">
-                          <h4 class="card-title">WARDEN</h4>
-                          <p class="card-subtitle">Hostel Head</p>
-                        </div>
-                      </div>
-                    </div>
-                  </template>
-                </template>
-              </template>
-            </template>
-          </div>
-        </div>
-      </section>
-
-      <!-- INSTRUCTIONS -->
-      <section class="card-section">
-        <div class="card">
-          <h2 class="section-title"><i class="fa-solid fa-info-circle"></i> How to Use</h2>
-          <div class="instructions">
-            <div class="instruction-item">
-              <div class="instruction-icon">
-                <i class="fa-solid fa-mouse-pointer"></i>
-              </div>
-              <div class="instruction-content">
-                <h4>Click to Expand</h4>
-                <p>Click on any organizational level to expand and see its sub-levels. Only one level expands at a time.</p>
-              </div>
-            </div>
-            <div class="instruction-item">
-              <div class="instruction-icon">
-                <i class="fa-solid fa-chevron-down"></i>
-              </div>
-              <div class="instruction-content">
-                <h4>Visual Indicators</h4>
-                <p>Look for the chevron icons (▼/▲) to see which levels can be expanded or are currently expanded.</p>
-              </div>
-            </div>
-            <div class="instruction-item">
-              <div class="instruction-icon">
-                <i class="fa-solid fa-sync"></i>
-              </div>
-              <div class="instruction-content">
-                <h4>Auto-Collapse</h4>
-                <p>When you expand a new level, all other levels automatically collapse to maintain clarity.</p>
-              </div>
-            </div>
+          <h3 class="section-title-sm"><i class="fa-solid fa-sitemap"></i> Organizational Structure</h3>
+          <div class="org-chart-image">
+            <img 
+              src="@/assets/management/org.png" 
+              alt="Organizational Structure Chart" 
+              class="org-image"
+            />
           </div>
         </div>
       </section>
@@ -415,27 +76,8 @@ export default {
     Footer
   },
   setup() {
-    const expandedLevels = ref({
-      level1: false,
-      level2: false,
-      level3: false,
-      level4: false
-    })
-
-    const toggleLevel = (level) => {
-      // Close all other levels
-      Object.keys(expandedLevels.value).forEach(key => {
-        if (key !== level) {
-          expandedLevels.value[key] = false
-        }
-      })
-      // Toggle current level
-      expandedLevels.value[level] = !expandedLevels.value[level]
-    }
-
     return {
-      expandedLevels,
-      toggleLevel
+      // Simple setup for future organizational chart implementation
     }
   }
 }
@@ -591,136 +233,38 @@ export default {
   margin-bottom: 1.5rem;
 }
 
-/* MICROSOFT TEAMS STYLE ORGANIZATIONAL CHART */
-.teams-org-chart {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-  padding: 2rem 0;
-  position: relative;
-}
-
-.org-level {
+/* ORGANIZATIONAL CHART IMAGE */
+.org-chart-image {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-  position: relative;
+  padding: 2rem;
+  background: #f8f9fa;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
 }
 
-/* ORGANIZATIONAL CARDS */
-.org-card {
-  background: #fff;
-  border: 1px solid #e1e5e9;
-  border-radius: 12px;
-  padding: 1.5rem;
-  min-width: 200px;
-  max-width: 250px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: all 0.3s ease;
-  cursor: pointer;
-  position: relative;
+.org-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
 }
 
-.org-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-  border-color: var(--orange);
+.org-image:hover {
+  transform: scale(1.02);
 }
 
-/* CARD HEADER */
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.avatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  color: #fff;
-  font-weight: 600;
-}
-
-/* AVATAR COLORS */
-.trust-avatar {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.management-avatar {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-}
-
-.principal-avatar {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-}
-
-.department-avatar {
-  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-}
-
-.staff-avatar {
-  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-}
-
-/* EXPAND TOGGLE */
-.expand-toggle {
-  color: var(--orange);
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.expand-toggle:hover {
-  transform: scale(1.2);
-}
-
-/* CARD BODY */
-.card-body {
-  text-align: center;
-}
-
-.card-title {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--ink);
-  margin: 0 0 0.5rem 0;
-  line-height: 1.3;
-}
-
-.card-subtitle {
-  font-size: 0.85rem;
-  color: var(--muted);
-  margin: 0;
-  line-height: 1.4;
-}
-
-/* LEVEL SPECIFIC STYLING */
-.top-level {
-  margin-bottom: 1rem;
-}
-
-.top-level .org-card {
-  min-width: 300px;
-  max-width: 400px;
-}
-
-.top-level .avatar {
-  width: 60px;
-  height: 60px;
-  font-size: 1.8rem;
-}
-
-.top-level .card-title {
-  font-size: 1.2rem;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .org-chart-image {
+    padding: 1rem;
+  }
+  
+  .org-image {
+    max-width: 100%;
+  }
 }
 
 .management-level {
