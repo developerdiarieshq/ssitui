@@ -50,6 +50,16 @@ import NavBar from "../../components/NavBar.vue";
 import Footer from "../../components/Footer.vue";
 import PdfViewer from '../utils/PdfViewer.vue';
 
+// Import PDF files to ensure they're included in the build
+import performanceAppraisal from '@/assets/docs/policies/1.PerformanceAppraisalpolicy.pdf'
+import codeConduct from '@/assets/docs/policies/codeandconductpolicy.pdf'
+import eGovernance from '@/assets/docs/policies/EGovernancepolicy.pdf'
+import incentive from '@/assets/docs/policies/IncentivePolicy.pdf'
+import promotion from '@/assets/docs/policies/PromotionPolicy.pdf'
+import recruitment from '@/assets/docs/policies/RecruitmentPolicy.pdf'
+import research from '@/assets/docs/policies/research_policy.pdf'
+import serviceRules from '@/assets/docs/policies/ServiceRules.pdf'
+
 export default {
   name: "Policies",
   components: { Header, NavBar, Footer, PdfViewer },
@@ -110,9 +120,19 @@ export default {
         return '';
       }
       
-      // Use a simpler approach - direct asset path
-      const url = `/src/assets/docs/policies/${filename}`;
-      return url;
+      // Use imported PDF URLs for reliable asset loading
+      const pdfMap = {
+        '1.PerformanceAppraisalpolicy.pdf': performanceAppraisal,
+        'codeandconductpolicy.pdf': codeConduct,
+        'EGovernancepolicy.pdf': eGovernance,
+        'IncentivePolicy.pdf': incentive,
+        'PromotionPolicy.pdf': promotion,
+        'RecruitmentPolicy.pdf': recruitment,
+        'research_policy.pdf': research,
+        'ServiceRules.pdf': serviceRules
+      };
+      
+      return pdfMap[filename] || '';
     },
     openPdfModal(policy) {
       if (!policy.filename) {

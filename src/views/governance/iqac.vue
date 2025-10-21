@@ -514,6 +514,19 @@ import NavBar from "../../components/NavBar.vue";
 import Footer from "../../components/Footer.vue";
 import PdfViewer from '../utils/PdfViewer.vue';
 
+// Import PDF files to ensure they're included in the build
+import isoPdf from '@/assets/docs/iqac/iso.pdf'
+import naacPdf from '@/assets/docs/iqac/naac_cer.pdf'
+import aqar2021 from '@/assets/docs/aqar/AQAR20-21.pdf'
+import aqar2020 from '@/assets/docs/aqar/AQAR19-20.pdf'
+import aqar2019 from '@/assets/docs/aqar/AQAR18-19.pdf'
+import aqar2018 from '@/assets/docs/aqar/AQAR17-18.pdf'
+import meeting2023 from '@/assets/docs/iqac/2022-2023.pdf'
+import meeting2022 from '@/assets/docs/iqac/2021-2022.pdf'
+import meeting2021 from '@/assets/docs/iqac/2020-2021.pdf'
+import meeting2020 from '@/assets/docs/iqac/2019-2020.pdf'
+import meeting2019 from '@/assets/docs/iqac/2018-2019.pdf'
+
 export default {
   name: "Iqac",
   components: { Header, NavBar, Footer, PdfViewer },
@@ -627,15 +640,22 @@ export default {
         return '';
       }
       
-      // Determine the correct path based on filename
-      let path = '';
-      if (filename.startsWith('AQAR')) {
-        path = `/src/assets/docs/aqar/${filename}`;
-      } else {
-        path = `/src/assets/docs/iqac/${filename}`;
-      }
+      // Use imported PDF URLs for reliable asset loading
+      const pdfMap = {
+        'iso.pdf': isoPdf,
+        'naac_cer.pdf': naacPdf,
+        'AQAR20-21.pdf': aqar2021,
+        'AQAR19-20.pdf': aqar2020,
+        'AQAR18-19.pdf': aqar2019,
+        'AQAR17-18.pdf': aqar2018,
+        '2022-2023.pdf': meeting2023,
+        '2021-2022.pdf': meeting2022,
+        '2020-2021.pdf': meeting2021,
+        '2019-2020.pdf': meeting2020,
+        '2018-2019.pdf': meeting2019
+      };
       
-      return path;
+      return pdfMap[filename] || '';
     },
     openPdfModal(item) {
       if (!item.filename) {
