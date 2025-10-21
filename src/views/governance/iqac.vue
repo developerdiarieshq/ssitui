@@ -28,12 +28,31 @@
 
     <!-- MAIN CONTENT -->
     <main class="container py-5">
+      <!-- NAVIGATION TABS -->
+      <nav class="subnav" aria-label="Section navigation">
+        <div class="container subnav-inner">
+          <button
+            v-for="tab in tabs"
+            :key="tab.id"
+            class="chip"
+            :class="{ active: activeTab === tab.id }"
+            @click="setTab(tab.id)"
+            :aria-controls="tab.id"
+            role="tab"
+            :aria-selected="activeTab === tab.id"
+          >
+            <i :class="tab.icon" aria-hidden="true"></i> {{ tab.label }}
+          </button>
+        </div>
+      </nav>
+      <!-- IQAC HOME TAB -->
+      <section v-show="activeTab === 'home'" class="card-section">
       <!-- ABOUT -->
-      <section class="mb-5">
+        <div class="card mb-4">
+          <div class="card-body">
         <h2 class="section-title">About IQAC</h2>
         <p>
-          The IQAC of SSIT functions as per NAAC guidelines to ensure continuous
-          quality improvement across academic and administrative domains.
+              The college has established the Internal Quality Assurance Cell (IQAC) as per the NAAC guidelines with the following functions:
         </p>
         <div class="row g-4 mt-3">
           <div class="col-md-6">
@@ -56,40 +75,238 @@
             </div>
           </div>
         </div>
-      </section>
+          </div>
+        </div>
 
-      <!-- OBJECTIVES -->
-      <section class="mb-5">
-        <h2 class="section-title">Objectives & Functions</h2>
-        <div class="row g-4 mt-2">
+        <!-- FUNCTIONS -->
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="section-title">IQAC Functions</h2>
+            <p class="mb-4">Some of the functions expected of the IQAC are:</p>
+            <div class="row g-4">
+              <div class="col-md-6 col-lg-4">
+                <div class="elev-card p-4 h-100">
+                  <h6 class="fw-bold text-primary mb-3">
+                    <i class="fa-solid fa-chart-line me-2"></i>Quality Benchmarks
+                  </h6>
+                  <p class="small mb-0">Development and application of quality benchmarks/parameters for various academic and administrative activities of the institution</p>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <div class="elev-card p-4 h-100">
+                  <h6 class="fw-bold text-primary mb-3">
+                    <i class="fa-solid fa-graduation-cap me-2"></i>Learner-Centric Environment
+                  </h6>
+                  <p class="small mb-0">Facilitating the creation of a learner-centric environment conducive to quality education and faculty maturation to adopt the required knowledge and technology for participatory teaching and learning process</p>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <div class="elev-card p-4 h-100">
+                  <h6 class="fw-bold text-primary mb-3">
+                    <i class="fa-solid fa-comments me-2"></i>Feedback Response
+                  </h6>
+                  <p class="small mb-0">Arrangement for feedback response from students, parents and other stakeholders on quality-related institutional processes</p>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <div class="elev-card p-4 h-100">
+                  <h6 class="fw-bold text-primary mb-3">
+                    <i class="fa-solid fa-bullhorn me-2"></i>Information Dissemination
+                  </h6>
+                  <p class="small mb-0">Dissemination of information on various quality parameters of higher education</p>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <div class="elev-card p-4 h-100">
+                  <h6 class="fw-bold text-primary mb-3">
+                    <i class="fa-solid fa-users me-2"></i>Workshops & Seminars
+                  </h6>
+                  <p class="small mb-0">Organization of inter and intra institutional workshops, seminars on quality related themes and promotion of quality circles</p>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <div class="elev-card p-4 h-100">
+                  <h6 class="fw-bold text-primary mb-3">
+                    <i class="fa-solid fa-file-alt me-2"></i>Documentation
+                  </h6>
+                  <p class="small mb-0">Documentation of the various programmes/activities leading to quality improvement</p>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <div class="elev-card p-4 h-100">
+                  <h6 class="fw-bold text-primary mb-3">
+                    <i class="fa-solid fa-network-wired me-2"></i>Nodal Agency
+                  </h6>
+                  <p class="small mb-0">Acting as a nodal agency of the Institution for coordinating quality-related activities, including adoption and dissemination of best practices</p>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <div class="elev-card p-4 h-100">
+                  <h6 class="fw-bold text-primary mb-3">
+                    <i class="fa-solid fa-database me-2"></i>Institutional Database
+                  </h6>
+                  <p class="small mb-0">Development and maintenance of institutional database through MIS for the purpose of maintaining/enhancing the institutional quality</p>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <div class="elev-card p-4 h-100">
+                  <h6 class="fw-bold text-primary mb-3">
+                    <i class="fa-solid fa-star me-2"></i>Quality Culture
+                  </h6>
+                  <p class="small mb-0">Development of Quality Culture in the institution</p>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <div class="elev-card p-4 h-100">
+                  <h6 class="fw-bold text-primary mb-3">
+                    <i class="fa-solid fa-clipboard-list me-2"></i>AQAR Preparation
+                  </h6>
+                  <p class="small mb-0">Preparation of the Annual Quality Assurance Report (AQAR) as per guidelines and parameters of NAAC, to be submitted to NAAC</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STRATEGIES -->
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="section-title">IQAC Strategies</h2>
+            <p class="mb-4">IQAC shall evolve mechanisms and procedures for:</p>
+            <div class="row g-4">
+              <div class="col-md-6">
+                <div class="elev-card p-4 h-100">
+                  <h6 class="fw-bold text-primary mb-3">
+                    <i class="fa-solid fa-tasks me-2"></i>Performance Enhancement
+                  </h6>
+                  <p class="small mb-0">Ensuring timely, efficient and progressive performance of academic, administrative and financial tasks</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="elev-card p-4 h-100">
+                  <h6 class="fw-bold text-primary mb-3">
+                    <i class="fa-solid fa-microscope me-2"></i>Academic Quality
+                  </h6>
+                  <p class="small mb-0">The relevance and quality of academic and research programmes</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="elev-card p-4 h-100">
+                  <h6 class="fw-bold text-primary mb-3">
+                    <i class="fa-solid fa-balance-scale me-2"></i>Equitable Access
+                  </h6>
+                  <p class="small mb-0">Equitable access to and affordability of academic programmes for various sections of society</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="elev-card p-4 h-100">
+                  <h6 class="fw-bold text-primary mb-3">
+                    <i class="fa-solid fa-laptop me-2"></i>Modern Teaching Methods
+                  </h6>
+                  <p class="small mb-0">Optimization and integration of modern methods of teaching and learning</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="elev-card p-4 h-100">
+                  <h6 class="fw-bold text-primary mb-3">
+                    <i class="fa-solid fa-check-circle me-2"></i>Evaluation Credibility
+                  </h6>
+                  <p class="small mb-0">The credibility of evaluation procedures</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="elev-card p-4 h-100">
+                  <h6 class="fw-bold text-primary mb-3">
+                    <i class="fa-solid fa-cogs me-2"></i>Support Structure
+                  </h6>
+                  <p class="small mb-0">Ensuring the adequacy, maintenance and functioning of the support structure and services</p>
+                </div>
+              </div>
           <div class="col-md-6">
             <div class="elev-card p-4 h-100">
-              <h5 class="fw-bold">Primary Objectives</h5>
-              <ul>
-                <li>Develop quality benchmarks for academic/administrative activities</li>
-                <li>Promote institutional functioning towards quality enhancement</li>
-                <li>Ensure internalization of best practices</li>
-                <li>Act as catalyst for continuous improvement</li>
-              </ul>
+                  <h6 class="fw-bold text-primary mb-3">
+                    <i class="fa-solid fa-handshake me-2"></i>Research Sharing
+                  </h6>
+                  <p class="small mb-0">Research sharing and networking with other institutions in India and abroad</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- METRICS -->
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <h2 class="section-title">Quality Metrics Dashboard</h2>
+            <div class="d-flex flex-wrap justify-content-center gap-4 mt-4">
+              <div class="metric-card">
+                <div class="metric-value">87%</div>
+                <div class="metric-label">Student Satisfaction</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-value">60+</div>
+                <div class="metric-label">Faculty Development Programs</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-value">75%</div>
+                <div class="metric-label">Placement Rate</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CERTIFICATIONS -->
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="section-title">Certifications & Accreditations</h2>
+            <div class="row g-4 mt-2">
+              <div class="col-md-6">
+                <div class="elev-card p-4 h-100 text-center">
+                  <div class="certification-icon mb-3">
+                    <i class="fa-solid fa-certificate text-primary" style="font-size: 3rem;"></i>
+                  </div>
+                  <h5 class="fw-bold text-primary mb-3">ISO Certification Letter</h5>
+                  <p class="text-muted mb-3">Our institution maintains ISO certification standards ensuring quality management systems across all operations.</p>
+                  <button class="btn btn-outline-primary">
+                    <i class="fa-solid fa-download me-2"></i>Download Certificate
+                  </button>
             </div>
           </div>
           <div class="col-md-6">
-            <div class="elev-card p-4 h-100">
-              <h5 class="fw-bold">Key Functions</h5>
-              <ul>
-                <li>Apply quality parameters and collect feedback</li>
-                <li>Document quality initiatives and reports</li>
-                <li>Conduct workshops and seminars</li>
-                <li>Perform Academic & Administrative Audits</li>
-                <li>Prepare Annual Quality Assurance Report (AQAR)</li>
-              </ul>
+                <div class="elev-card p-4 h-100 text-center">
+                  <div class="certification-icon mb-3">
+                    <i class="fa-solid fa-award text-primary" style="font-size: 3rem;"></i>
+                  </div>
+                  <h5 class="fw-bold text-primary mb-3">NAAC Accreditation Letter</h5>
+                  <p class="text-muted mb-3">Accredited by NAAC with B Grade, demonstrating our commitment to quality education and institutional excellence.</p>
+                  <button class="btn btn-outline-primary">
+                    <i class="fa-solid fa-download me-2"></i>Download Certificate
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONTACT -->
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="section-title">Contact IQAC</h2>
+            <div class="elev-card p-4">
+              <p><strong>Coordinator:</strong> Mr. K Rama Krishna Prasad</p>
+              <p><strong>Co-Coordinator:</strong> Mr. Ch.Balakrishna</p>
+              <p><i class="fa-solid fa-envelope text-primary"></i> ramakrishna.pe@gmail.com</p>
+              <p><i class="fa-solid fa-phone text-success"></i> 9154645060</p>
+              <a href="#" class="btn btn-primary mt-2">Submit Feedback</a>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- COMPOSITION -->
-      <section class="mb-5">
+      <!-- IQAC MEMBERS TAB -->
+      <section v-show="activeTab === 'members'" class="card-section">
+        <div class="card mb-4">
+          <div class="card-body">
         <h2 class="section-title">IQAC Composition</h2>
         <div class="row g-4 mt-3">
           <div v-for="m in team" :key="m.name" class="col-6 col-md-4 col-lg-3">
@@ -102,91 +319,182 @@
               <div v-if="m.email" class="small">
                 <i class="fa-solid fa-envelope text-danger"></i>
                 <a :href="'mailto:' + m.email">{{ m.email }}</a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- INITIATIVES -->
-      <section class="mb-5">
-        <h2 class="section-title">Quality Initiatives & Best Practices</h2>
-        <div class="row g-4 mt-2">
-          <div v-for="i in initiatives" :key="i.title" class="col-md-4">
+      <!-- IQAC MEETINGS TAB -->
+      <section v-show="activeTab === 'meetings'" class="card-section">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="section-title">IQAC Meeting Minutes & Records</h2>
+            <p class="text-muted mb-4">Access meeting minutes and records of IQAC sessions by academic year</p>
+            
+            <div class="row g-4">
+              <div v-for="meeting in meetings" :key="meeting.year" class="col-md-6 col-lg-4">
             <div class="elev-card p-4 h-100">
-              <h5 class="fw-bold">{{ i.title }}</h5>
-              <ul class="small">
-                <li v-for="point in i.points" :key="point">{{ point }}</li>
-              </ul>
+                  <div class="d-flex align-items-center mb-3">
+                    <i class="fa-solid fa-calendar-alt text-primary me-3" style="font-size: 1.5rem;"></i>
+                    <div>
+                      <h6 class="fw-bold mb-0">{{ meeting.year }}</h6>
+                      <small class="text-muted">Academic Year</small>
+                    </div>
+                  </div>
+                  <p class="text-muted mb-3">IQAC meeting minutes and decisions for {{ meeting.year }}</p>
+                  <div class="d-flex gap-2">
+                    <button @click="openPdfModal(meeting)" class="btn btn-outline-primary flex-fill">
+                      <i class="fa-solid fa-eye me-2"></i>View
+                    </button>
+                    <a :href="getPdfUrl(meeting.filename)" target="_blank" class="btn btn-outline-primary flex-fill">
+                      <i class="fa-solid fa-download me-2"></i>Download
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- METRICS -->
-      <section class="mb-5 text-center">
-        <h2 class="section-title">Quality Metrics Dashboard</h2>
-        <div class="d-flex flex-wrap justify-content-center gap-4 mt-4">
-          <div class="metric-card">
-            <div class="metric-value">87%</div>
-            <div class="metric-label">Student Satisfaction</div>
+      <!-- INITIATIVES TAB -->
+      <section v-show="activeTab === 'initiatives'" class="card-section">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="section-title">Quality Initiatives & Best Practices</h2>
+            <p class="text-muted mb-4">IQAC initiatives for promoting Quality Culture by academic year</p>
+            
+            <div class="row g-4">
+              <div v-for="initiative in initiatives" :key="initiative.year" class="col-md-6 col-lg-4">
+                <div class="elev-card p-4 h-100">
+                  <div class="d-flex align-items-center mb-3">
+                    <i class="fa-solid fa-lightbulb text-primary me-3" style="font-size: 1.5rem;"></i>
+                    <div>
+                      <h6 class="fw-bold mb-0">{{ initiative.year }}</h6>
+                      <small class="text-muted">Academic Year</small>
+                    </div>
+                  </div>
+                  <h6 class="fw-bold text-primary mb-3">{{ initiative.title }}</h6>
+                  <ul class="small mb-0">
+                    <li v-for="point in initiative.points" :key="point" class="mb-1">{{ point }}</li>
+                  </ul>
+                </div>
           </div>
-          <div class="metric-card">
-            <div class="metric-value">60+</div>
-            <div class="metric-label">Faculty Development Programs</div>
           </div>
-          <div class="metric-card">
-            <div class="metric-value">75%</div>
-            <div class="metric-label">Placement Rate</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- DOCUMENTS -->
-      <section class="mb-5">
-        <h2 class="section-title">Reports & Documentation</h2>
-        <div class="row g-4 mt-2">
-          <div class="col-md-6 col-lg-3">
-            <a href="#" class="document-card">
-              <i class="fa-solid fa-file-pdf"></i>
-              <span>AQAR 2023-24</span>
-            </a>
-          </div>
-          <div class="col-md-6 col-lg-3">
-            <a href="#" class="document-card">
-              <i class="fa-solid fa-folder-open"></i>
-              <span>Previous AQAR Reports</span>
-            </a>
-          </div>
-          <div class="col-md-6 col-lg-3">
-            <a href="#" class="document-card">
-              <i class="fa-solid fa-file-alt"></i>
-              <span>NAAC Self Study Report</span>
-            </a>
-          </div>
-          <div class="col-md-6 col-lg-3">
-            <a href="#" class="document-card">
-              <i class="fa-solid fa-chart-bar"></i>
-              <span>Departmental Reports</span>
-            </a>
           </div>
         </div>
       </section>
 
-      <!-- CONTACT -->
-      <section class="mb-5">
-        <h2 class="section-title">Contact IQAC</h2>
-        <div class="elev-card p-4">
-          <p><strong>Coordinator:</strong> Mr. K. Rama Krishna Prasad</p>
-          <p><i class="fa-solid fa-envelope text-primary"></i> ramakrishna.pe@gmail.com</p>
-          <p><i class="fa-solid fa-phone text-success"></i> 9154645060</p>
-          <a href="#" class="btn btn-primary mt-2">Submit Feedback</a>
+      <!-- ANNUAL REPORTS TAB -->
+      <section v-show="activeTab === 'reports'" class="card-section">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="section-title">Annual Reports of AQAR</h2>
+            <p class="text-muted mb-4">Annual Quality Assurance Reports detailing institutional progress and achievements</p>
+            
+            <!-- AQAR Information -->
+            <div class="elev-card p-4 mb-4">
+              <h5 class="fw-bold text-primary mb-3">
+                <i class="fa-solid fa-info-circle me-2"></i>About AQAR
+              </h5>
+              <p class="mb-3">
+                The Annual Quality Assurance Report (AQAR) is a self-reviewed progress report on the following criteria:
+              </p>
+              <div class="row g-3">
+                <div class="col-md-6 col-lg-4">
+                  <div class="criteria-item">
+                    <h6 class="fw-bold text-primary">Criterion – I</h6>
+                    <p class="small mb-0">Curricular Aspects</p>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                  <div class="criteria-item">
+                    <h6 class="fw-bold text-primary">Criterion – II</h6>
+                    <p class="small mb-0">Teaching, Learning and Evaluation</p>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                  <div class="criteria-item">
+                    <h6 class="fw-bold text-primary">Criterion – III</h6>
+                    <p class="small mb-0">Research, Consultancy and Extension</p>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                  <div class="criteria-item">
+                    <h6 class="fw-bold text-primary">Criterion – IV</h6>
+                    <p class="small mb-0">Infrastructure and Learning Resources</p>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                  <div class="criteria-item">
+                    <h6 class="fw-bold text-primary">Criterion – V</h6>
+                    <p class="small mb-0">Student Support and Progression</p>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                  <div class="criteria-item">
+                    <h6 class="fw-bold text-primary">Criterion – VI</h6>
+                    <p class="small mb-0">Governance, Leadership and Management</p>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                  <div class="criteria-item">
+                    <h6 class="fw-bold text-primary">Criterion – VII</h6>
+                    <p class="small mb-0">Innovations and Best Practices</p>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-3 p-3 bg-light rounded">
+                <p class="small mb-0">
+                  <strong>Purpose:</strong> The report details tangible results achieved in key areas, specifically identified by the institutional IQAC at the beginning of the academic year. The AQAR details the results of the perspective plan worked out by the IQAC.
+                </p>
+              </div>
+            </div>
+
+            <!-- Available AQAR Reports -->
+            <h5 class="fw-bold mb-3">
+              <i class="fa-solid fa-file-alt me-2"></i>Available AQAR Reports
+            </h5>
+            <div class="row g-4">
+              <div v-for="report in aqarReports" :key="report.year" class="col-md-6 col-lg-4">
+                <div class="elev-card p-4 h-100">
+                  <div class="d-flex align-items-center mb-3">
+                    <i class="fa-solid fa-file-pdf text-primary me-3" style="font-size: 1.5rem;"></i>
+                    <div>
+                      <h6 class="fw-bold mb-0">{{ report.year }}</h6>
+                      <small class="text-muted">Academic Year</small>
+                    </div>
+                  </div>
+                  <p class="text-muted mb-3">Annual Quality Assurance Report for {{ report.year }}</p>
+                  <div class="d-flex gap-2">
+                    <button @click="openPdfModal(report)" class="btn btn-outline-primary flex-fill">
+                      <i class="fa-solid fa-eye me-2"></i>View
+                    </button>
+                    <a :href="getPdfUrl(report.filename)" target="_blank" class="btn btn-outline-primary flex-fill">
+                      <i class="fa-solid fa-download me-2"></i>Download
+            </a>
+          </div>
+                </div>
+          </div>
+          </div>
+          </div>
         </div>
       </section>
     </main>
 
     <!-- FOOTER -->
     <Footer />
+    
+    <!-- PDF Viewer Modal -->
+    <PdfViewer 
+      :show="showPdfModal" 
+      :url="currentPdfUrl" 
+      :title="currentPdfTitle"
+      @close="closePdfModal"
+    />
   </section>
 </template>
 
@@ -194,48 +502,163 @@
 import Header from "../../components/Header.vue";
 import NavBar from "../../components/NavBar.vue";
 import Footer from "../../components/Footer.vue";
+import PdfViewer from '../utils/PdfViewer.vue';
 
 export default {
   name: "Iqac",
-  components: { Header, NavBar, Footer },
+  components: { Header, NavBar, Footer, PdfViewer },
   data() {
     return {
-      team: [
-        { name: "Dr. Ch. Vijaya Kumar", role: "Chairperson (Principal)", contact: "08761-288278" },
-        { name: "Mr. K. Rama Krishna Prasad", role: "IQAC Coordinator", email: "ramakrishna.pe@gmail.com", contact: "9154645060" },
-        { name: "Dr. Shaik Yakoob", role: "Faculty Rep (CSE HOD)" },
-        { name: "Dr. P. Sekharbabu", role: "Faculty Rep (ECE HOD)" },
-        { name: "VIPASSANA Society Nominee", role: "Management Rep" },
-        { name: "Alumni Representative", role: "External Member" },
-        { name: "Industry Expert", role: "External Member" },
-        { name: "Community Representative", role: "External Member" },
-        { name: "Student Representative", role: "External Member" },
-        { name: "G. Rajendra Prasad Reddy", role: "Office Superintendent" },
+      activeTab: 'home',
+      tabs: [
+        { id: 'home', label: 'IQAC Home', icon: 'fa-solid fa-home' },
+        { id: 'members', label: 'IQAC Members', icon: 'fa-solid fa-users' },
+        { id: 'meetings', label: 'IQAC Meetings', icon: 'fa-solid fa-calendar-alt' },
+        { id: 'initiatives', label: 'Initiatives', icon: 'fa-solid fa-lightbulb' },
+        { id: 'reports', label: 'Annual Reports of AQAR', icon: 'fa-solid fa-file-alt' }
       ],
+      team: [
+        { name: "Dr.V.S.R Kumari", role: "Chair Person" },
+        { name: "Mr. K Rama Krishna Prasad", role: "Coordinator", email: "ramakrishna.pe@gmail.com", contact: "9154645060" },
+        { name: "Mr. Ch.Balakrishna", role: "Co-Coordinator" },
+        { name: "Mr. K. V. Jawahar", role: "Member" },
+        { name: "Dr. K. Bhaskar Muthyalu", role: "Member" },
+        { name: "Dr. P. Sekhar Babu", role: "Member" },
+        { name: "Dr.Sk. Yakoob", role: "Member" },
+        { name: "Dr. Sk. Meera saheb", role: "Member" },
+        { name: "Dr. D.N.V.Krishna Reddy", role: "Member" },
+        { name: "Mr. G. Upendra", role: "Member" },
+        { name: "Mr. G. Rajendar Reddy", role: "Member" }
+      ],
+      meetings: [
+        { year: "2022-2023", filename: "2022-2023.pdf" },
+        { year: "2021-2022", filename: "2021-2022.pdf" },
+        { year: "2020-2021", filename: "2020-2021.pdf" },
+        { year: "2019-2020", filename: "2019-2020.pdf" },
+        { year: "2018-2019", filename: "2018-2019.pdf" }
+      ],
+      aqarReports: [
+        { year: "2020-21", filename: "AQAR20-21.pdf" },
+        { year: "2019-20", filename: "AQAR19-20.pdf" },
+        { year: "2018-19", filename: "AQAR18-19.pdf" },
+        { year: "2017-18", filename: "AQAR17-18.pdf" }
+      ],
+      // PDF Viewer state
+      showPdfModal: false,
+      currentPdfUrl: '',
+      currentPdfTitle: '',
       initiatives: [
         {
-          title: "Academic Quality",
-          points: ["Faculty development & certifications", "Curriculum industry alignment", "Research & innovation promotion", "Industry partnerships (Microsoft, CISCO, Wipro)"],
+          year: "2020-21",
+          title: "Quality Initiatives 2020-21",
+          points: [
+            "Preparation of Annual Report (AQAR)",
+            "Conducting Academic Audit Review to improve quality",
+            "Collecting Feedback from students and analysed to improve standards",
+            "Review of PBAS"
+          ]
         },
         {
-          title: "Infrastructure Quality",
-          points: ["Digital library modernization", "Laboratory upgrades", "Technology-enabled classrooms"],
+          year: "2019-20",
+          title: "Quality Initiatives 2019-20",
+          points: [
+            "Preparation of Annual Report (AQAR)",
+            "NPTEL programs for staff & students",
+            "MOU with Code Tantra for online classes during COVID-19",
+            "Training program on soft skills and Technical skills by TASK",
+            "Participation in National Integrity Program of EBSB",
+            "Alumni Identification and their diplomatic involvement for social activities"
+          ]
         },
         {
-          title: "Student Support",
-          points: ["Scholarships & sponsorships", "Placement & career guidance", "Counseling & mentoring", "Anti-ragging & safety measures"],
+          year: "2018-19",
+          title: "Quality Initiatives 2018-19",
+          points: [
+            "Conducting Academic Audit Review to improve quality",
+            "Preparation of Annual Report (AQAR)",
+            "Encouraging faculty to register for Ph.D.",
+            "Establishment of ELITE club to improve communication skills",
+            "Best practices implementation"
+          ]
         },
+        {
+          year: "2017-18",
+          title: "Quality Initiatives 2017-18",
+          points: [
+            "Focused on CRT to improve placements",
+            "Collecting Feedback from students and analysed to improve standards",
+            "Conducting Academic Audit Review to improve quality",
+            "Review of PBAS",
+            "Preparation of Annual Report (AQAR)"
+          ]
+        },
+        {
+          year: "2016-17",
+          title: "Quality Initiatives 2016-17",
+          points: [
+            "Conducting Academic Audit Review to improve quality",
+            "Best practices implementation",
+            "Conducting Academic Audit Review to improve quality",
+            "Collecting Feedback from students and analysed to improve standards",
+            "Instructed TPO to conduct training program to get better placements",
+            "Preparation of Annual Report (AQAR)"
+          ]
+        }
       ],
     };
   },
+  methods: {
+    setTab(tab) {
+      this.activeTab = tab;
+    },
+    getPdfUrl(filename) {
+      if (!filename) {
+        console.error('Filename is undefined or empty');
+        return '';
+      }
+      
+      // Determine the correct path based on filename
+      let path = '';
+      if (filename.startsWith('AQAR')) {
+        path = `/src/assets/docs/aqar/${filename}`;
+      } else {
+        path = `/src/assets/docs/iqac/${filename}`;
+      }
+      
+      return path;
+    },
+    openPdfModal(item) {
+      if (!item.filename) {
+        console.error('Item filename is missing:', item);
+        return;
+      }
+      
+      this.showPdfModal = true;
+      this.currentPdfUrl = this.getPdfUrl(item.filename);
+      
+      // Determine title based on item type
+      if (item.year && item.filename.startsWith('AQAR')) {
+        this.currentPdfTitle = `AQAR Report - ${item.year}`;
+      } else if (item.year) {
+        this.currentPdfTitle = `IQAC Meeting Minutes - ${item.year}`;
+      } else {
+        this.currentPdfTitle = item.title || 'Document';
+      }
+    },
+    closePdfModal() {
+      this.showPdfModal = false;
+      this.currentPdfUrl = '';
+      this.currentPdfTitle = '';
+    }
+  }
 };
 </script>
 
 <style scoped>
 /* Theme Variables */
 :root {
-  --orange: #FF7701;
-  --ink: #1a2238;
+  --orange: #f97316;
+  --ink: #111827;
   --muted: #6b7280;
 }
 
@@ -266,13 +689,13 @@ export default {
   padding: 1rem 1.5rem;
   box-shadow: 0 4px 16px rgba(0,0,0,.1); 
   min-width: 160px;
-  border: 1px solid rgba(255, 119, 1, 0.1);
+  border: 1px solid rgba(249, 115, 22, 0.1);
   transition: all 0.3s ease;
 }
 
 .stat-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(255, 119, 1, 0.2);
+  box-shadow: 0 8px 24px rgba(249, 115, 22, 0.2);
   border-color: var(--orange);
 }
 
@@ -309,7 +732,7 @@ export default {
   border-radius: 10px; 
   box-shadow: 0 6px 20px rgba(0,0,0,.08);
   transition: all 0.3s ease;
-  border: 1px solid rgba(255, 119, 1, 0.1);
+  border: 1px solid rgba(249, 115, 22, 0.1);
 }
 
 .elev-card:hover {
@@ -333,12 +756,12 @@ export default {
   min-width: 180px;
   box-shadow: 0 4px 16px rgba(0,0,0,.08); 
   transition: all 0.3s ease;
-  border: 1px solid rgba(255, 119, 1, 0.15);
+  border: 1px solid rgba(249, 115, 22, 0.15);
 }
 
 .metric-card:hover { 
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(255, 119, 1, 0.25);
+  box-shadow: 0 10px 30px rgba(249, 115, 22, 0.25);
   border-color: var(--orange);
 }
 
@@ -368,7 +791,7 @@ a.btn {
   border-color: var(--orange);
   color: #fff;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 119, 1, 0.3);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
 }
 
 .btn-primary {
@@ -381,7 +804,7 @@ a.btn {
   background: #e55a00;
   border-color: #e55a00;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 119, 1, 0.3);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
 }
 
 /* Document Cards */
@@ -392,7 +815,7 @@ a.btn {
   justify-content: center;
   padding: 2rem 1.5rem;
   background: #fff;
-  border: 2px solid rgba(255, 119, 1, 0.2);
+  border: 2px solid rgba(249, 115, 22, 0.2);
   border-radius: 12px;
   text-decoration: none;
   color: var(--ink);
@@ -407,7 +830,7 @@ a.btn {
   border-color: var(--orange);
   color: #fff;
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(255, 119, 1, 0.3);
+  box-shadow: 0 10px 30px rgba(249, 115, 22, 0.3);
 }
 
 .document-card i {
@@ -438,6 +861,98 @@ a.btn {
   color: #ef4444 !important;
 }
 
+/* STICKY SUB NAV */
+.subnav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  margin-bottom: 2rem;
+}
+
+.subnav-inner {
+  display: flex;
+  gap: .5rem;
+  padding: .6rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.subnav-inner::-webkit-scrollbar {
+  display: none;
+}
+
+.chip {
+  border: 1px solid var(--border);
+  background: #fff;
+  color: #111;
+  border-radius: 999px;
+  padding: .5rem .9rem;
+  font-size: .9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-color: #e5e7eb;
+}
+
+.chip i {
+  color: var(--orange);
+}
+
+.chip:hover {
+  background: var(--orange);
+  color: #fff;
+  border-color: var(--orange);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+}
+
+.chip:hover i {
+  color: #fff;
+}
+
+.chip.active {
+  border-color: var(--orange);
+  background: var(--orange);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+  transform: translateY(-2px);
+}
+
+.chip.active i {
+  color: #fff;
+}
+
+.card-section {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Criteria Items */
+.criteria-item {
+  padding: 0.75rem;
+  background: rgba(249, 115, 22, 0.05);
+  border-left: 4px solid var(--orange);
+  border-radius: 0.25rem;
+  transition: all 0.3s ease;
+}
+
+.criteria-item:hover {
+  background: rgba(249, 115, 22, 0.1);
+  transform: translateX(4px);
+}
+
+.criteria-item h6 {
+  margin-bottom: 0.25rem;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .hero {
@@ -446,6 +961,16 @@ a.btn {
   
   .section-title {
     font-size: 1.5rem;
+  }
+  
+  .subnav-inner {
+    padding: .5rem 0;
+    gap: .3rem;
+  }
+  
+  .chip {
+    padding: .4rem .7rem;
+    font-size: .85rem;
   }
 }
 </style>

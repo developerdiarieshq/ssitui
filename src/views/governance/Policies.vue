@@ -20,11 +20,24 @@
           <div class="policy-card elev-card text-center p-4 h-100">
             <i :class="p.icon" class="policy-icon mb-3"></i>
             <h5 class="fw-bold mb-2">{{ p.title }}</h5>
-            <a href="#" class="btn btn-sm btn-outline-primary">View Document</a>
+            <button @click="openPdfModal(p)" class="btn btn-sm btn-outline-primary me-2">
+              <i class="fa-solid fa-eye me-1"></i>View
+            </button>
+            <a :href="getPdfUrl(p.filename)" target="_blank" class="btn btn-sm btn-outline-primary">
+              <i class="fa-solid fa-download me-1"></i>Download
+            </a>
           </div>
         </div>
       </div>
     </main>
+
+    <!-- PDF Viewer Modal -->
+    <PdfViewer 
+      :show="showPdfModal" 
+      :url="currentPdfUrl" 
+      :title="currentPdfTitle"
+      @close="closePdfModal"
+    />
 
     <!-- FOOTER -->
     <Footer />
@@ -35,31 +48,96 @@
 import Header from "../../components/Header.vue";
 import NavBar from "../../components/NavBar.vue";
 import Footer from "../../components/Footer.vue";
+import PdfViewer from '../utils/PdfViewer.vue';
 
 export default {
   name: "Policies",
-  components: { Header, NavBar, Footer },
+  components: { Header, NavBar, Footer, PdfViewer },
   data() {
     return {
       policies: [
-        { title: "Research Policy", icon: "fa-solid fa-flask" },
-        { title: "Incentive Policy", icon: "fa-solid fa-coins" },
-        { title: "E-Governance Policy", icon: "fa-solid fa-globe" },
-        { title: "Recruitment Policy", icon: "fa-solid fa-user-plus" },
-        { title: "Promotion Policy", icon: "fa-solid fa-chart-line" },
-        { title: "Service Rules", icon: "fa-solid fa-clipboard-list" },
-        { title: "Code of Conduct", icon: "fa-solid fa-scale-balanced" },
+        { 
+          title: "Research Policy", 
+          icon: "fa-solid fa-flask",
+          filename: "research_policy.pdf"
+        },
+        { 
+          title: "Incentive Policy", 
+          icon: "fa-solid fa-coins",
+          filename: "IncentivePolicy.pdf"
+        },
+        { 
+          title: "E-Governance Policy", 
+          icon: "fa-solid fa-globe",
+          filename: "EGovernancepolicy.pdf"
+        },
+        { 
+          title: "Recruitment Policy", 
+          icon: "fa-solid fa-user-plus",
+          filename: "RecruitmentPolicy.pdf"
+        },
+        { 
+          title: "Promotion Policy", 
+          icon: "fa-solid fa-chart-line",
+          filename: "PromotionPolicy.pdf"
+        },
+        { 
+          title: "Service Rules", 
+          icon: "fa-solid fa-clipboard-list",
+          filename: "ServiceRules.pdf"
+        },
+        { 
+          title: "Code of Conduct", 
+          icon: "fa-solid fa-scale-balanced",
+          filename: "codeandconductpolicy.pdf"
+        },
+        { 
+          title: "Performance Appraisal Policy", 
+          icon: "fa-solid fa-star",
+          filename: "1.PerformanceAppraisalpolicy.pdf"
+        },
       ],
+      // PDF Viewer state
+      showPdfModal: false,
+      currentPdfUrl: '',
+      currentPdfTitle: '',
     };
   },
+  methods: {
+    getPdfUrl(filename) {
+      if (!filename) {
+        console.error('Filename is undefined or empty');
+        return '';
+      }
+      
+      // Use a simpler approach - direct asset path
+      const url = `/src/assets/docs/policies/${filename}`;
+      return url;
+    },
+    openPdfModal(policy) {
+      if (!policy.filename) {
+        console.error('Policy filename is missing:', policy);
+        return;
+      }
+      
+      this.showPdfModal = true;
+      this.currentPdfUrl = this.getPdfUrl(policy.filename);
+      this.currentPdfTitle = policy.title;
+    },
+    closePdfModal() {
+      this.showPdfModal = false;
+      this.currentPdfUrl = '';
+      this.currentPdfTitle = '';
+    }
+  }
 };
 </script>
 
 <style scoped>
 /* Theme Variables */
 :root {
-  --orange: #FF7701;
-  --ink: #1a2238;
+  --orange: #f97316;
+  --ink: #111827;
   --muted: #6b7280;
 }
 
@@ -125,13 +203,13 @@ export default {
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0,0,0,.08);
-  border: 2px solid rgba(255, 119, 1, 0.1);
+  border: 2px solid rgba(249, 115, 22, 0.1);
   transition: all 0.3s ease;
 }
 
 .elev-card:hover {
   border-color: var(--orange);
-  box-shadow: 0 10px 30px rgba(255, 119, 1, 0.2);
+  box-shadow: 0 10px 30px rgba(249, 115, 22, 0.2);
 }
 
 /* POLICY CARDS */
@@ -142,9 +220,9 @@ export default {
 
 .policy-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 12px 35px rgba(255, 119, 1, 0.25);
+  box-shadow: 0 12px 35px rgba(249, 115, 22, 0.25);
   border-color: var(--orange);
-  background: linear-gradient(135deg, #fff 0%, rgba(255, 119, 1, 0.03) 100%);
+  background: linear-gradient(135deg, #fff 0%, rgba(249, 115, 22, 0.03) 100%);
 }
 
 .policy-icon {
@@ -181,7 +259,7 @@ export default {
   border-color: var(--orange);
   color: #fff;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 119, 1, 0.3);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
 }
 
 /* Responsive */
