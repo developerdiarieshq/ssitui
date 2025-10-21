@@ -38,6 +38,12 @@ import ObcCell from './views/governance/cells/ObcCell.vue'
 import IndustryInteractionCell from './views/governance/cells/IndustryInteractionCell.vue'
 import InnovationCell from './views/governance/cells/InnovationCell.vue'
 import IqacCell from './views/governance/cells/IqacCell.vue'
+// Club imports
+import EliteClub from './views/clubs/EliteClub.vue'
+import CulturalClub from './views/clubs/CulturalClub.vue'
+import PhotographyClub from './views/clubs/PhotographyClub.vue'
+import TechnicalClub from './views/clubs/TechnicalClub.vue'
+import EnvironmentalClub from './views/clubs/EnvironmentalClub.vue'
 import AcademicRegulations from './views/Academics/AcademicRegulations.vue'
 import AcademicCalendar from './views/Academics/AcademicCalendar.vue'
 import Incentives from './views/Academics/Incentives.vue'
@@ -114,6 +120,12 @@ const routes = [
     { path: '/scholarship', component: Scholarship },
     { path: '/cafeteria', component: Cafeteria },
     { path: '/social-services', component: SocialServices },
+    // Club routes
+    { path: '/elite-club', component: EliteClub },
+    { path: '/cultural-club', component: CulturalClub },
+    { path: '/photography-club', component: PhotographyClub },
+    { path: '/technical-club', component: TechnicalClub },
+    { path: '/environmental-club', component: EnvironmentalClub },
     { path: '/committees', component: Committees },
     { path: '/anti-ragging-cell', component: AntiRaggingCell },
     { path: '/rd-cell', component: RdCell },

@@ -460,10 +460,10 @@ export default {
         { service: "Reference Section", days: "Monday–Saturday", hours: "8:00 A.M to 8:00 P.M" },
       ],
       team: [
-        { name: "G. UPENDRA RAO", degree: "MA, B.Ed., MLISc, PGDCA", role: "LIBRARIAN", photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" },
-        { name: "V. VENKATESWER RAO", degree: "BA, B.LISc", role: "Library Assistant", photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" },
-        { name: "O. VENKATA KRISHNA", degree: "BSc Computers", role: "Book Keeper", photo: "https://images.unsplash.com/photo-1560250097-0b93528c311a" },
-        { name: "M. MAHA LAKSHMI", degree: "SSC", role: "Attender", photo: "https://images.unsplash.com/photo-1494790108755-2616b612b786" },
+        { name: "G. UPENDRA RAO", degree: "MA, B.Ed., MLISc, PGDCA", role: "LIBRARIAN", photo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNmOTczMTYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiAxNkMxOC4yMDkxIDE2IDIwIDE0LjIwOTEgMjAgMTJDMjAgOS43OTA5MSAxOC4yMDkxIDggMTYgOEMxMy43OTA5IDggMTIgOS43OTA5MSAxMiAxMkMxMiAxNC4yMDkxIDEzLjc5MDkgMTYgMTYgMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTYgMTlDMTEuNTgxNyAxOSA4IDIyLjU4MTcgOCAyN1YyOUgyNFYyN0MyNCAyMi41ODE3IDIwLjQxODMgMTkgMTYgMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+" },
+        { name: "V. VENKATESWER RAO", degree: "BA, B.LISc", role: "Library Assistant", photo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNmOTczMTYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiAxNkMxOC4yMDkxIDE2IDIwIDE0LjIwOTEgMjAgMTJDMjAgOS43OTA5MSAxOC4yMDkxIDggMTYgOEMxMy43OTA5IDggMTIgOS43OTA5MSAxMiAxMkMxMiAxNC4yMDkxIDEzLjc5MDkgMTYgMTYgMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTYgMTlDMTEuNTgxNyAxOSA4IDIyLjU4MTcgOCAyN1YyOUgyNFYyN0MyNCAyMi41ODE3IDIwLjQxODMgMTkgMTYgMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+" },
+        { name: "O. VENKATA KRISHNA", degree: "BSc Computers", role: "Book Keeper", photo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNmOTczMTYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiAxNkMxOC4yMDkxIDE2IDIwIDE0LjIwOTEgMjAgMTJDMjAgOS43OTA5MSAxOC4yMDkxIDggMTYgOEMxMy43OTA5IDggMTIgOS43OTA5MSAxMiAxMkMxMiAxNC4yMDkxIDEzLjc5MDkgMTYgMTYgMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTYgMTlDMTEuNTgxNyAxOSA4IDIyLjU4MTcgOCAyN1YyOUgyNFYyN0MyNCAyMi41ODE3IDIwLjQxODMgMTkgMTYgMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+" },
+        { name: "M. MAHA LAKSHMI", degree: "SSC", role: "Attender", photo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNmOTczMTYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiAxNkMxOC4yMDkxIDE2IDIwIDE0LjIwOTEgMjAgMTJDMjAgOS43OTA5MSAxOC4yMDkxIDggMTYgOEMxMy43OTA5IDggMTIgOS43OTA5MSAxMiAxMkMxMiAxNC4yMDkxIDEzLjc5MDkgMTYgMTYgMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTYgMTlDMTEuNTgxNyAxOSA4IDIyLjU4MTcgOCAyN1YyOUgyNFYyN0MyNCAyMi41ODE3IDIwLjQxODMgMTkgMTYgMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+" },
       ],
       downloads: [
         { label: "Membership Form", icon: "fa-solid fa-file-pdf" },
@@ -520,13 +520,50 @@ export default {
 .stat-number { font-weight:800; color:#0b3d91; }
 
 /* SUBNAV */
-.subnav{ position:sticky; top:0; z-index:20; background:#fff; border-bottom:1px solid var(--border); }
+.subnav{ 
+  position:sticky; 
+  top:0; 
+  z-index:20; 
+  background:#fff; 
+  border-bottom:1px solid var(--border);
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+}
 .subnav-inner{ display:flex; gap:.5rem; padding:.6rem 1rem; overflow-x:auto; overflow-y:hidden; justify-content:flex-start; flex-wrap:nowrap; }
-.chip{ border:1px solid var(--border); background:#fff; color:#111; border-radius:999px; padding:.5rem .9rem; font-weight:600; display:flex; align-items:center; gap:.5rem; white-space:nowrap; cursor:pointer; transition:all 0.3s ease; flex-shrink:0; }
+.chip{ 
+  border:1px solid var(--border); 
+  background:#fff; 
+  color:var(--ink); 
+  border-radius:999px; 
+  padding:.6rem 1rem; 
+  font-weight:600; 
+  display:flex; 
+  align-items:center; 
+  gap:.6rem; 
+  white-space:nowrap;
+  transition:all 0.3s ease;
+  cursor:pointer;
+  flex-shrink:0;
+  box-shadow:0 2px 4px rgba(0,0,0,0.05);
+  font-size:0.95rem;
+}
 .chip i{ color:var(--orange) }
-.chip.active{ border-color:var(--orange); background:var(--orange); color:#fff }
-.chip:hover{ border-color:var(--orange); background:var(--orange); color:#fff; }
+.chip:hover{ 
+  background:var(--orange); 
+  color:#fff; 
+  border-color:var(--orange);
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(249,115,22,0.3);
+}
 .chip:hover i{ color:#fff }
+.chip.active{ 
+  border-color:var(--orange); 
+  background:var(--orange); 
+  color:#fff;
+  box-shadow:0 4px 12px rgba(249,115,22,0.3);
+  transform:translateY(-2px);
+  font-weight:700;
+}
+.chip.active i{ color:#fff }
 
 /* CONTENT */
 .content{ padding:1rem 0 2.6rem }

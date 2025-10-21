@@ -230,6 +230,34 @@
           </div>
         </div>
 
+        <!-- Hostel Gallery -->
+        <div class="elev-card p-4 p-md-5 mb-4">
+          <h2 class="section-title h4">Hostel Gallery</h2>
+          <p class="section-subtitle">Capturing moments of comfortable living and modern facilities</p>
+          
+          <div class="row g-3 mt-3">
+            <div v-for="(image, index) in hostelImages" :key="index" class="col-md-4 col-lg-3">
+              <div class="gallery-item" @click="openImageModal(index)">
+                <img :src="image.src" :alt="image.title" class="img-fluid rounded shadow-sm" />
+                <div class="gallery-overlay">
+                  <i class="fa-solid fa-expand"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image Previewer -->
+        <ImagePreviewer 
+          :show="showImageModal" 
+          :images="hostelImages"
+          :initial-index="currentImageIndex"
+          title="Hostel Facilities Gallery"
+          title-icon="fa-solid fa-bed"
+          title-icon-color="var(--orange)"
+          @close="closeImageModal"
+        />
+
         <!-- Contact -->
         <section class="my-5">
           <div class="elev-card p-4 p-md-5 contact-card">
@@ -253,12 +281,15 @@
 import Header from '../../components/Header.vue';
 import NavBar from '../../components/NavBar.vue';
 import Footer from '../../components/Footer.vue';
+import ImagePreviewer from '../utils/ImagePreviewer.vue';
+
 export default {
   name: "Hostels",
   components: {
     Header,
     NavBar,
-    Footer
+    Footer,
+    ImagePreviewer
   },
   data() {
     return {
@@ -268,7 +299,60 @@ export default {
         { value: "24/7", label: "Security", icon: "fa-solid fa-shield-halved fa-lg text-warning" },
         { value: "Study Hours", label: "8:30pm-10:30pm", icon: "fa-solid fa-clock fa-lg text-danger" },
       ],
+      hostelImages: [
+        { 
+          src: new URL('@/assets/images/hostels/boys.jpg', import.meta.url).href,
+          title: 'Boys Hostel',
+          desc: 'Modern boys hostel accommodation with 3-bedded rooms'
+        },
+        { 
+          src: new URL('@/assets/images/hostels/boys1.jpg', import.meta.url).href,
+          title: 'Boys Hostel Room',
+          desc: 'Comfortable boys hostel room with modern amenities'
+        },
+        { 
+          src: new URL('@/assets/images/hostels/boys2.jpg', import.meta.url).href,
+          title: 'Boys Hostel Facility',
+          desc: 'Boys hostel common area and facilities'
+        },
+        { 
+          src: new URL('@/assets/images/hostels/girls.jpg', import.meta.url).href,
+          title: 'Girls Hostel',
+          desc: 'Modern girls hostel with 3 blocks and 362 capacity'
+        },
+        { 
+          src: new URL('@/assets/images/hostels/girls1.jpg', import.meta.url).href,
+          title: 'Girls Hostel Room',
+          desc: 'Comfortable girls hostel room with study facilities'
+        },
+        { 
+          src: new URL('@/assets/images/hostels/girls2.jpg', import.meta.url).href,
+          title: 'Girls Hostel Block',
+          desc: 'Girls hostel block with modern infrastructure'
+        },
+        { 
+          src: new URL('@/assets/images/hostels/girls3.jpg', import.meta.url).href,
+          title: 'Girls Hostel Facility',
+          desc: 'Girls hostel common area and recreational facilities'
+        },
+        { 
+          src: new URL('@/assets/images/hostels/girls4.jpg', import.meta.url).href,
+          title: 'Girls Hostel Interior',
+          desc: 'Girls hostel interior with modern amenities'
+        },
+      ],
+      showImageModal: false,
+      currentImageIndex: 0,
     };
+  },
+  methods: {
+    openImageModal(index) {
+      this.currentImageIndex = index;
+      this.showImageModal = true;
+    },
+    closeImageModal() {
+      this.showImageModal = false;
+    },
   },
 };
 </script>
@@ -380,5 +464,53 @@ export default {
 
 .stat-icon i {
   font-size: 1.5rem;
+}
+
+/* Gallery Styles */
+.gallery-item {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+.gallery-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+  opacity: 1;
+}
+
+.gallery-overlay i {
+  color: white;
+  font-size: 2rem;
 }
 </style>

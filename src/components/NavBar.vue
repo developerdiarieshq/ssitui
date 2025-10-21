@@ -137,6 +137,18 @@
             </ul>
           </li>
 
+          <!-- Clubs -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Clubs</a>
+            <ul class="dropdown-menu">
+              <li><router-link to="/elite-club" class="dropdown-item">Elite Club</router-link></li>
+              <li><router-link to="/cultural-club" class="dropdown-item">Cultural Club</router-link></li>
+              <li><router-link to="/photography-club" class="dropdown-item">Photography Club</router-link></li>
+              <li><router-link to="/technical-club" class="dropdown-item">Technical Club</router-link></li>
+              <li><router-link to="/environmental-club" class="dropdown-item">Environmental Club</router-link></li>
+            </ul>
+          </li>
+
 
           <!-- Amenities -->
           <li class="nav-item dropdown">

@@ -91,27 +91,22 @@
       </div>
 
       <!-- Gallery -->
-      <div class="sports-gallery-marquee">
+      <div class="sports-gallery">
         <h3 class="section-title text-center mb-4">
           <i class="fa-solid fa-images me-2"></i>
           Sports Gallery
         </h3>
         <div class="underscore mb-5"></div>
+        <p class="text-center text-muted mb-4">
+          Capturing moments of athletic excellence and team spirit in action
+        </p>
         
-        <div class="gallery-marquee-container">
-          <div class="gallery-marquee-track">
-            <!-- First set of images -->
-            <div v-for="(sport, index) in sports" :key="`gallery-first-${index}`" class="gallery-marquee-item">
-              <img :src="sport.img" :alt="sport.title" />
+        <div class="row g-3">
+          <div v-for="(sport, index) in sports" :key="index" class="col-md-4 col-lg-3">
+            <div class="gallery-item" @click="openImageModal(index)">
+              <img :src="sport.src" :alt="sport.title" class="img-fluid rounded shadow-sm" />
               <div class="gallery-overlay">
-                <h5>{{ sport.title }}</h5>
-              </div>
-            </div>
-            <!-- Duplicate set for seamless loop -->
-            <div v-for="(sport, index) in sports" :key="`gallery-second-${index}`" class="gallery-marquee-item">
-              <img :src="sport.img" :alt="sport.title" />
-              <div class="gallery-overlay">
-                <h5>{{ sport.title }}</h5>
+                <i class="fa-solid fa-expand"></i>
               </div>
             </div>
           </div>
@@ -119,6 +114,18 @@
       </div>
     </div>
     </section>
+    
+    <!-- Image Previewer -->
+    <ImagePreviewer 
+      :show="showImageModal" 
+      :images="sports"
+      :initial-index="currentImageIndex"
+      title="Sports & Games Gallery"
+      title-icon="fa-solid fa-trophy"
+      title-icon-color="#FF7701"
+      @close="closeImageModal"
+    />
+    
     <Footer/>
   </div>
 </template>
@@ -127,32 +134,58 @@
 import Header from '@/components/Header.vue'
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/Footer.vue'
+import ImagePreviewer from '../utils/ImagePreviewer.vue'
+import { ref } from 'vue'
+
+const showImageModal = ref(false)
+const currentImageIndex = ref(0)
+
 const sports = [
   { 
-    img: new URL('@/assets/campuslife/college-campus-sports-activities.jpg', import.meta.url).href,
-    title: 'Cricket'
+    src: new URL('@/assets/images/sports/DSC00944.JPG', import.meta.url).href,
+    title: 'Sports Activity',
+    desc: 'Students participating in sports activities'
   },
   { 
-    img: new URL('@/assets/campuslife/college-campus-sports-activities.jpg', import.meta.url).href,
-    title: 'Football'
+    src: new URL('@/assets/images/sports/sg1.jpg', import.meta.url).href,
+    title: 'Cricket Match',
+    desc: 'Students playing cricket on the field'
   },
   { 
-    img: new URL('@/assets/campuslife/college-campus-sports-activities.jpg', import.meta.url).href,
-    title: 'Volleyball'
+    src: new URL('@/assets/images/sports/sg2.jpg', import.meta.url).href,
+    title: 'Volleyball Game',
+    desc: 'Volleyball match in progress'
   },
   { 
-    img: new URL('@/assets/campuslife/college-campus-sports-activities.jpg', import.meta.url).href,
-    title: 'Basketball'
+    src: new URL('@/assets/images/sports/sg3.jpg', import.meta.url).href,
+    title: 'Basketball Court',
+    desc: 'Students playing basketball'
   },
   { 
-    img: new URL('@/assets/campuslife/college-campus-sports-activities.jpg', import.meta.url).href,
-    title: 'Badminton'
+    src: new URL('@/assets/images/sports/sg4.jpg', import.meta.url).href,
+    title: 'Badminton Tournament',
+    desc: 'Badminton competition underway'
   },
   { 
-    img: new URL('@/assets/campuslife/modern-college-hostel-rooms.jpg', import.meta.url).href,
-    title: 'Cafeteria'
+    src: new URL('@/assets/images/sports/sg5.jpg', import.meta.url).href,
+    title: 'Table Tennis',
+    desc: 'Table tennis match in action'
+  },
+  { 
+    src: new URL('@/assets/images/sports/sg6.jpg', import.meta.url).href,
+    title: 'Sports Event',
+    desc: 'College sports event celebration'
   }
 ]
+
+const openImageModal = (index) => {
+  currentImageIndex.value = index
+  showImageModal.value = true
+}
+
+const closeImageModal = () => {
+  showImageModal.value = false
+}
 </script>
 
 <style scoped>
@@ -183,89 +216,34 @@ const sports = [
   min-height: 120px;
 }
 
-/* Sports Gallery Marquee */
-.sports-gallery-marquee {
+/* Sports Gallery */
+.sports-gallery {
   margin-top: 4rem;
   padding-top: 3rem;
 }
 
-.gallery-marquee-container {
-  width: 100%;
-  overflow: hidden;
-  padding: 2rem 0;
+.gallery-item {
   position: relative;
-  background: linear-gradient(135deg, rgba(255, 119, 1, 0.05), rgba(255, 119, 1, 0.02));
-  border-radius: 12px;
-  border: 2px solid rgba(255, 119, 1, 0.2);
-}
-
-.gallery-marquee-container::before,
-.gallery-marquee-container::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  width: 120px;
-  height: 100%;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.gallery-marquee-container::before {
-  left: 0;
-  background: linear-gradient(90deg, rgba(255, 119, 1, 0.05) 0%, transparent 100%);
-}
-
-.gallery-marquee-container::after {
-  right: 0;
-  background: linear-gradient(270deg, rgba(255, 119, 1, 0.05) 0%, transparent 100%);
-}
-
-.gallery-marquee-track {
-  display: flex;
-  gap: 2rem;
-  animation: gallery-scroll 35s linear infinite;
-  will-change: transform;
-}
-
-.gallery-marquee-track:hover {
-  animation-play-state: paused;
-}
-
-@keyframes gallery-scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-.gallery-marquee-item {
-  flex-shrink: 0;
-  width: 350px;
-  position: relative;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-  transition: all 0.4s ease;
   cursor: pointer;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
 }
 
-.gallery-marquee-item:hover {
-  transform: translateY(-12px) scale(1.03);
-  box-shadow: 0 15px 40px rgba(255, 119, 1, 0.3);
+.gallery-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
-.gallery-marquee-item img {
+.gallery-item img {
   width: 100%;
-  height: 280px;
+  height: 200px;
   object-fit: cover;
-  display: block;
-  transition: transform 0.4s ease;
+  transition: transform 0.3s ease;
 }
 
-.gallery-marquee-item:hover img {
-  transform: scale(1.12);
+.gallery-item:hover img {
+  transform: scale(1.05);
 }
 
 .gallery-overlay {
@@ -274,28 +252,21 @@ const sports = [
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(26, 34, 56, 0.92), rgba(255, 119, 1, 0.88));
+  background: rgba(0,0,0,0.5);
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.3s ease;
 }
 
-.gallery-marquee-item:hover .gallery-overlay {
+.gallery-item:hover .gallery-overlay {
   opacity: 1;
 }
 
-.gallery-overlay h5 {
-  color: #fff;
-  font-size: 1.5rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-  margin: 0;
-  padding: 1rem;
-  text-align: center;
+.gallery-overlay i {
+  color: white;
+  font-size: 2rem;
 }
 
 /* Hero Section */
