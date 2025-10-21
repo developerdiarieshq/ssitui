@@ -265,23 +265,33 @@
                   <div class="certification-icon mb-3">
                     <i class="fa-solid fa-certificate text-primary" style="font-size: 3rem;"></i>
                   </div>
-                  <h5 class="fw-bold text-primary mb-3">ISO Certification Letter</h5>
+                  <h5 class="fw-bold text-primary mb-3">ISO Certification</h5>
                   <p class="text-muted mb-3">Our institution maintains ISO certification standards ensuring quality management systems across all operations.</p>
-                  <button class="btn btn-outline-primary">
-                    <i class="fa-solid fa-download me-2"></i>Download Certificate
-                  </button>
-            </div>
-          </div>
-          <div class="col-md-6">
+                  <div class="d-flex gap-2">
+                    <button @click="openPdfModal({filename: 'iso.pdf', title: 'ISO Certification'})" class="btn btn-outline-primary flex-fill">
+                      <i class="fa-solid fa-eye me-2"></i>View
+                    </button>
+                    <a :href="getPdfUrl('iso.pdf')" target="_blank" class="btn btn-outline-primary flex-fill">
+                      <i class="fa-solid fa-download me-2"></i>Download
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
                 <div class="elev-card p-4 h-100 text-center">
                   <div class="certification-icon mb-3">
                     <i class="fa-solid fa-award text-primary" style="font-size: 3rem;"></i>
                   </div>
-                  <h5 class="fw-bold text-primary mb-3">NAAC Accreditation Letter</h5>
+                  <h5 class="fw-bold text-primary mb-3">NAAC Accreditation</h5>
                   <p class="text-muted mb-3">Accredited by NAAC with B Grade, demonstrating our commitment to quality education and institutional excellence.</p>
-                  <button class="btn btn-outline-primary">
-                    <i class="fa-solid fa-download me-2"></i>Download Certificate
-                  </button>
+                  <div class="d-flex gap-2">
+                    <button @click="openPdfModal({filename: 'naac_cer.pdf', title: 'NAAC Accreditation Certificate'})" class="btn btn-outline-primary flex-fill">
+                      <i class="fa-solid fa-eye me-2"></i>View
+                    </button>
+                    <a :href="getPdfUrl('naac_cer.pdf')" target="_blank" class="btn btn-outline-primary flex-fill">
+                      <i class="fa-solid fa-download me-2"></i>Download
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -637,12 +647,14 @@ export default {
       this.currentPdfUrl = this.getPdfUrl(item.filename);
       
       // Determine title based on item type
-      if (item.year && item.filename.startsWith('AQAR')) {
+      if (item.title) {
+        this.currentPdfTitle = item.title;
+      } else if (item.year && item.filename.startsWith('AQAR')) {
         this.currentPdfTitle = `AQAR Report - ${item.year}`;
       } else if (item.year) {
         this.currentPdfTitle = `IQAC Meeting Minutes - ${item.year}`;
       } else {
-        this.currentPdfTitle = item.title || 'Document';
+        this.currentPdfTitle = 'Document';
       }
     },
     closePdfModal() {
