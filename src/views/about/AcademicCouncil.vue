@@ -278,8 +278,8 @@ const meetingsViewMode = ref('grid') // 'grid' or 'list'
 
 // Tabs configuration
 const tabs = [
-  { id: 'members', label: 'Current Members', icon: 'fa-solid fa-users', path: '/academic-council/members' },
-  { id: 'meetings', label: 'Meeting Schedule & Records', icon: 'fa-solid fa-calendar-days', path: '/academic-council/meetings' }
+  { id: 'members', label: 'Current Members', icon: 'fa-solid fa-users', path: '/academic-council/current_members' },
+  { id: 'meetings', label: 'Meeting Schedule & Records', icon: 'fa-solid fa-calendar-days', path: '/academic-council/Meeting-schedule_records' }
 ]
 
 const tabsMap = {
@@ -304,6 +304,10 @@ onMounted(() => {
     activeTab.value = currentTab.id
   } else if (route.path === '/academic-council') {
     activeTab.value = 'members'
+  } else if (route.path === '/academic-council/current_members') {
+    activeTab.value = 'members'
+  } else if (route.path === '/academic-council/Meeting-schedule_records') {
+    activeTab.value = 'meetings'
   }
 })
 
@@ -314,6 +318,10 @@ watch(() => route.path, (newPath) => {
     activeTab.value = tab.id
   } else if (newPath === '/academic-council') {
     activeTab.value = 'members'
+  } else if (newPath === '/academic-council/current_members') {
+    activeTab.value = 'members'
+  } else if (newPath === '/academic-council/Meeting-schedule_records') {
+    activeTab.value = 'meetings'
   }
 })
 
@@ -422,12 +430,12 @@ const members = [
   { 
     name: "Dr. CH. Vijaya Kumar", 
     position: "NAAC Coordinator",
-    image: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+    image: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNmOTczMTYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiAxNkMxOC4yMDkxIDE2IDIwIDE0LjIwOTEgMjAgMTJDMjAgOS43OTA5MSAxOC4yMDkxIDggMTYgOEMxMy43OTA5IDggMTIgOS43OTA5MSAxMiAxMkMxMiAxNC4yMDkxIDEzLjc5MDkgMTYgMTYgMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTYgMTlDMTEuNTgxNyAxOSA4IDIyLjU4MTcgOCAyN1YyOUgyNFYyN0MyNCAyMi41ODE3IDIwLjQxODMgMTkgMTYgMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+"
   },
   { 
     name: "Sri. K. Ramakrishna Prasad", 
     position: "IQAC Coordinator",
-    image: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+    image: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNmOTczMTYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiAxNkMxOC4yMDkxIDE2IDIwIDE0LjIwOTEgMjAgMTJDMjAgOS43OTA5MSAxOC4yMDkxIDggMTYgOEMxMy43OTA5IDggMTIgOS43OTA5MSAxMiAxMkMxMiAxNC4yMDkxIDEzLjc5MDkgMTYgMTYgMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTYgMTlDMTEuNTgxNyAxOSA4IDIyLjU4MTcgOCAyN1YyOUgyNFYyN0MyNCAyMi41ODE3IDIwLjQxODMgMTkgMTYgMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+"
   },
 ]
 

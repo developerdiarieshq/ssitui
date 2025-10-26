@@ -315,7 +315,7 @@
 
       <!-- LABS / INFRA -->
       <section :id="tabsMap.labs" class="card-section" v-show="activeTab==='labs'">
-        <h2 class="section-title"><i class="fa-solid fa-flask"></i> Labs & Research Infrastructure</h2>
+        <h2 class="section-title"><i class="fa-solid fa-cogs"></i> Labs & Research Infrastructure</h2>
         <div class="labs-grid">
           <article v-for="lab in labs" :key="lab.title" class="lab-card">
             <img :src="lab.img" :alt="lab.title" />
@@ -345,13 +345,13 @@
         <div class="card">
           <h2 class="section-title" id="curriculum"><i class="fa-solid fa-file-lines"></i> Curriculum & Syllabus</h2>
           <div class="downloads">
-            <a v-for="d in syllabus" :key="d.label" :href="d.href" class="download" target="_blank" rel="noopener">
+            <button v-for="d in syllabus" :key="d.label" @click="openPdfModal(d.href, d.label)" class="download">
               <i class="fa-solid fa-file-pdf"></i>
               <div>
                 <div class="dl-label">{{ d.label }}</div>
                 <div class="dl-sub">{{ d.note }}</div>
               </div>
-            </a>
+            </button>
           </div>
           <div class="row-actions mt-1">
             <a class="btn btn-soft" href="/academics/regulations">Academic Regulations</a>
@@ -491,10 +491,11 @@
         <div class="grid-2">
           <article class="card">
             <h2 class="section-title"><i class="fa-solid fa-microscope"></i> Research Highlights</h2>
+            <h3 class="h6 mb-2">Research Projects</h3>
             <ul class="bullets">
               <li v-for="p in research.projects" :key="p">{{ p }}</li>
             </ul>
-            <h3 class="h6 mt-2">Recent Publications</h3>
+            <h3 class="h6 mt-3 mb-2">Recent Publications</h3>
             <ul class="bullets small">
               <li v-for="pub in research.publications" :key="pub.title">
                 {{ pub.title }} <span class="muted">— {{ pub.venue }}</span>
@@ -592,6 +593,14 @@
       v-model:isFullscreen="isFullscreen"
       :images="labImagesForModal"
     />
+
+    <!-- PDF Viewer Modal -->
+    <PdfViewer 
+      :show="showPdfModal" 
+      :url="currentPdfUrl" 
+      :title="currentPdfTitle"
+      @close="closePdfModal"
+    />
   </div>
 </template>
 
@@ -602,6 +611,7 @@ import Header from '@/components/Header.vue'
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/Footer.vue'
 import ImagePreviewer from '@/views/utils/ImagePreviewer.vue'
+import PdfViewer from '@/views/utils/PdfViewer.vue'
 
 /* Facts / Quick Stats */
 const facts = { established: '2004', intakeUG: '30', programs: 'B.Tech (MECH), Honors/Minors', labs: '8+' }
@@ -609,7 +619,7 @@ const facts = { established: '2004', intakeUG: '30', programs: 'B.Tech (MECH), H
 /* About stats */
 const aboutStats = [
   { label: 'Faculty', value: '25+', icon: 'fa-solid fa-user-tie' },
-  { label: 'Mech Labs', value: '8+', icon: 'fa-solid fa-flask' },
+  { label: 'Mech Labs', value: '8+', icon: 'fa-solid fa-cogs' },
   { label: 'Projects / Yr', value: '15+', icon: 'fa-solid fa-diagram-project' },
   { label: 'Placement', value: '90%+', icon: 'fa-solid fa-briefcase' }
 ]
@@ -618,7 +628,7 @@ const aboutStats = [
 const tabs = [
   { id: 'overview',   label: 'Overview',   icon: 'fa-solid fa-circle-dot' },
   { id: 'faculty',    label: 'Faculty',    icon: 'fa-solid fa-users' },
-  { id: 'labs',       label: 'Labs',       icon: 'fa-solid fa-flask' },
+  { id: 'labs',       label: 'Labs',       icon: 'fa-solid fa-cogs' },
   { id: 'curriculum', label: 'Curriculum', icon: 'fa-solid fa-file-lines' },
   { id: 'bos',        label: 'BOS',        icon: 'fa-solid fa-graduation-cap' },
   { id: 'activities', label: 'Activities', icon: 'fa-solid fa-rocket' },
@@ -688,6 +698,11 @@ const currentImageIndex = ref(0)
 const currentLabImages = ref([])
 const isFullscreen = ref(false)
 
+// PDF Viewer state
+const showPdfModal = ref(false)
+const currentPdfUrl = ref('')
+const currentPdfTitle = ref('')
+
 // Computed properties for ImagePreviewer
 const labImagesForModal = computed(() => {
   return currentLabImages.value.map(src => ({ 
@@ -701,6 +716,23 @@ const openImageModal = (labImages) => {
   currentLabImages.value = labImages
   currentImageIndex.value = 0
   showImageModal.value = true
+}
+
+const closeImageModal = () => {
+  showImageModal.value = false
+}
+
+// PDF Viewer methods
+const openPdfModal = (pdfUrl, pdfTitle) => {
+  showPdfModal.value = true
+  currentPdfUrl.value = pdfUrl
+  currentPdfTitle.value = pdfTitle
+}
+
+const closePdfModal = () => {
+  showPdfModal.value = false
+  currentPdfUrl.value = ''
+  currentPdfTitle.value = ''
 }
 
 // Helper functions for PO titles and descriptions
@@ -740,7 +772,7 @@ const faculty = ref([
     qualification: 'Ph.D',
     expertise: ['Thermodynamics', 'Heat Transfer'],
     email: 'kbmutyalu@gmail.com',
-    photo: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&w=400',
+    photo: new URL('@/assets/departments/mech/faculty/MECH_01.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 25
   },
@@ -750,7 +782,7 @@ const faculty = ref([
     qualification: 'M.TECH, (Ph.D)',
     expertise: ['Machine Design', 'CAD/CAM'],
     email: 'venkatrami@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400',
+    photo: new URL('@/assets/departments/mech/faculty/MECH_02.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 13
   },
@@ -760,7 +792,7 @@ const faculty = ref([
     qualification: 'M.TECH',
     expertise: ['Manufacturing', 'Production'],
     email: 'srinivasarao@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=400',
+    photo: new URL('@/assets/departments/mech/faculty/MECH_03.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 9
   },
@@ -770,7 +802,7 @@ const faculty = ref([
     qualification: 'M.TECH',
     expertise: ['Fluid Mechanics', 'Hydraulics'],
     email: 'naresh@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=400',
+    photo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNmOTczMTYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiAxNkMxOC4yMDkxIDE2IDIwIDE0LjIwOTEgMjAgMTJDMjAgOS43OTA5MSAxOC4yMDkxIDggMTYgOEMxMy43OTA5IDggMTIgOS43OTA5MSAxMiAxMkMxMiAxNC4yMDkxIDEzLjc5MDkgMTYgMTYgMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTYgMTlDMTEuNTgxNyAxOSA4IDIyLjU4MTcgOCAyN1YyOUgyNFYyN0MyNCAyMi41ODE3IDIwLjQxODMgMTkgMTYgMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+",
     profile: '#', linkedin: '#',
     experience: 11
   },
@@ -780,7 +812,7 @@ const faculty = ref([
     qualification: 'M.TECH',
     expertise: ['Strength of Materials', 'Mechanics'],
     email: 'polaiah@ssit.edu.in',
-    photo: '#',
+    photo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNmOTczMTYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiAxNkMxOC4yMDkxIDE2IDIwIDE0LjIwOTEgMjAgMTJDMjAgOS43OTA5MSAxOC4yMDkxIDggMTYgOEMxMy43OTA5IDggMTIgOS43OTA5MSAxMiAxMkMxMiAxNC4yMDkxIDEzLjc5MDkgMTYgMTYgMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTYgMTlDMTEuNTgxNyAxOSA4IDIyLjU4MTcgOCAyN1YyOUgyNFYyN0MyNCAyMi41ODE3IDIwLjQxODMgMTkgMTYgMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+",
     profile: '#', linkedin: '#',
     experience: 9
   }
@@ -803,97 +835,102 @@ const labs = [
   {
     title: 'CAD/CAM Lab',
     desc: 'Computer-aided design and manufacturing laboratory with advanced CAD software, CAM programming, and CNC machine integration for precision manufacturing.',
-    img: '@/assets/engineering-students-lab.png',
+    img: new URL('@/assets/departments/mech/labs/mechlab1-1.jpg', import.meta.url).href,
     images: [
-      '@/assets/engineering-students-lab.png',
-      '@/assets/campuslife/engineering-students-lab.png',
-      '@/assets/campuslife/students-in-college-library-studying.jpg'
+      new URL('@/assets/departments/mech/labs/mechlab1-1.jpg', import.meta.url).href,
+      new URL('@/assets/departments/mech/labs/mechlab1-2.JPG', import.meta.url).href,
+      new URL('@/assets/departments/mech/labs/mechlab1-3.jpg', import.meta.url).href
     ],
     tags: ['CAD Software', 'CAM Programming', 'CNC Machines']
   },
   {
     title: 'Heat Transfer Lab',
     desc: 'Advanced heat transfer laboratory with conduction, convection, and radiation experiments, thermal analysis equipment, and heat exchanger systems.',
-    img: '@/assets/campuslife/engineering-students-lab.png',
+    img: new URL('@/assets/departments/mech/labs/mechlab2-1.jpg', import.meta.url).href,
     images: [
-      '@/assets/campuslife/engineering-students-lab.png',
-      '@/assets/engineering-students-lab.png',
-      '@/assets/campuslife/students-in-college-library-studying.jpg'
+      new URL('@/assets/departments/mech/labs/mechlab2-1.jpg', import.meta.url).href,
+      new URL('@/assets/departments/mech/labs/mechlab2-2.JPG', import.meta.url).href,
+      new URL('@/assets/departments/mech/labs/mechlab2-3.JPG', import.meta.url).href
     ],
     tags: ['Conduction', 'Convection', 'Radiation']
   },
   {
     title: 'Thermal Engineering Lab',
     desc: 'Thermodynamics and thermal engineering laboratory with steam tables, refrigeration systems, and power plant simulation equipment.',
-    img: '@/assets/campuslife/students-in-college-library-studying.jpg',
+    img: new URL('@/assets/departments/mech/labs/mechlab3-1.jpg', import.meta.url).href,
     images: [
-      '@/assets/campuslife/students-in-college-library-studying.jpg',
-      '@/assets/engineering-students-lab.png',
-      '@/assets/campuslife/engineering-students-lab.png'
+      new URL('@/assets/departments/mech/labs/mechlab3-1.jpg', import.meta.url).href,
+      new URL('@/assets/departments/mech/labs/mechlab3-2.jpg', import.meta.url).href,
+      new URL('@/assets/departments/mech/labs/mechlab3-3.jpg', import.meta.url).href
     ],
     tags: ['Thermodynamics', 'Steam Tables', 'Refrigeration']
   },
   {
     title: 'Machine Tools Lab',
     desc: 'Manufacturing and machine tools laboratory with lathes, milling machines, drilling machines, and precision measurement instruments.',
-    img: '@/assets/engineering-students-lab.png',
+    img: new URL('@/assets/departments/mech/labs/mechlab4-1.jpg', import.meta.url).href,
     images: [
-      '@/assets/engineering-students-lab.png',
-      '@/assets/campuslife/students-in-college-library-studying.jpg'
+      new URL('@/assets/departments/mech/labs/mechlab4-1.jpg', import.meta.url).href,
+      new URL('@/assets/departments/mech/labs/mechlab4-2.jpg', import.meta.url).href,
+      new URL('@/assets/departments/mech/labs/mechlab4-3.jpg', import.meta.url).href,
+      new URL('@/assets/departments/mech/labs/mechlabs3-1.jpg', import.meta.url).href,
+      new URL('@/assets/departments/mech/labs/mechlabs3-2.jpg', import.meta.url).href,
+      new URL('@/assets/departments/mech/labs/mechlabs3-3.jpg', import.meta.url).href
     ],
-    tags: ['Lathes', 'Milling', 'Drilling']
+    tags: ['Lathes', 'Milling', 'Drilling', 'CNC Machines']
   }
 ]
 
 /* Syllabus / Downloads */
 const syllabus = [
-  { label: 'B.Tech CSE (AI & DS) Syllabus (R22)', note: 'Current Scheme', href: '#' },
-  { label: 'Electives & Tracks', note: 'DL • NLP • CV • Data Engg', href: '#' },
-  { label: 'Project-Based Learning Modules', note: 'Capstones & Industry Projects', href: '#' }
+  { label: 'B.Tech Mechanical Engineering Syllabus (R22)', note: 'Current Scheme', href: 'https://drive.google.com/file/d/1WtHeSBcDcdlQTcUIY1aF6gld0CkqseBp/view?usp=sharing' },
+  { label: 'B.Tech Mechanical Engineering Syllabus (R18) - Part I', note: 'Previous Scheme', href: 'https://drive.google.com/file/d/1hWBxZWcqd9FKKOcEsTfxRM3J-MnsEXJf/view?usp=sharing' },
+  { label: 'B.Tech Mechanical Engineering Syllabus (R18) - Part II', note: 'Previous Scheme', href: 'https://drive.google.com/file/d/1B09aZ077a5anU5bWOkyEf1KtENE_gBFL/view?usp=sharing' },
+  { label: 'B.Tech Mechanical Engineering Syllabus (R18) - Part III', note: 'Previous Scheme', href: 'https://drive.google.com/file/d/1ihWibsqelzxIIalUeij6NVlp6yAWQ-Yr/view?usp=sharing' }
 ]
 
 /* Activities */
 const activities = [
   { 
-    title: 'Just-A-Minute', 
-    desc: 'Is an all round-fun event that is all about the control of the mind over the mouth.',
-    icon: 'fa-solid fa-microphone',
-    image: '@/assets/campuslife/college-campus-sports-activities.jpg',
+    title: 'Student Orientation Program', 
+    desc: 'Freshman orientation program to help new students meet peers, become familiar with campus services, and integrate into college life.',
+    icon: 'fa-solid fa-users',
+    image: new URL('@/assets/departments/mech/activities/sh_orientation_1.jpg', import.meta.url).href,
     color: '#e74c3c'
   },
   { 
-    title: 'Machine Designing', 
-    desc: 'Is a Competitive event that all about the designing of machines.',
-    icon: 'fa-solid fa-cogs',
-    image: '@/assets/engineering-students-lab.png',
+    title: 'Department Introduction', 
+    desc: 'Comprehensive introduction to Mechanical Engineering department, faculty, facilities, and academic programs.',
+    icon: 'fa-solid fa-graduation-cap',
+    image: new URL('@/assets/departments/mech/activities/sh_orientation_2.jpg', import.meta.url).href,
     color: '#3498db'
   },
   { 
-    title: 'Machine Debugging', 
-    desc: 'Machine Debugging is a Competitive Event for students to showcase their problem-solving skills.',
-    icon: 'fa-solid fa-wrench',
-    image: '@/assets/campuslife/engineering-students-lab.png',
+    title: 'Campus Tour & Facilities', 
+    desc: 'Guided tour of campus facilities including labs, library, hostels, and other important infrastructure.',
+    icon: 'fa-solid fa-building',
+    image: new URL('@/assets/departments/mech/activities/sh_orientation_3.jpg', import.meta.url).href,
     color: '#9b59b6'
   },
   { 
-    title: 'Seminars', 
-    desc: 'Students give the demonstration on Various Latest Trends in Industry.',
-    icon: 'fa-solid fa-chalkboard-teacher',
-    image: '@/assets/campuslife/students-in-college-library-studying.jpg',
+    title: 'Machine Designing Competition', 
+    desc: 'Competitive event focused on designing innovative machines and mechanical systems.',
+    icon: 'fa-solid fa-cogs',
+    image: '@/assets/engineering-students-lab.png',
     color: '#2ecc71'
   },
   { 
-    title: 'Poster Presentation', 
-    desc: 'Is a way to share your knowledge of topic in a short format. It usually includes two elements - a poster and a brief explanation.',
-    icon: 'fa-solid fa-palette',
-    image: '@/assets/campuslife/college-cultural-fest-and-events.jpg',
+    title: 'Machine Debugging Challenge', 
+    desc: 'Competitive event for students to showcase their problem-solving skills in mechanical systems.',
+    icon: 'fa-solid fa-wrench',
+    image: '@/assets/campuslife/engineering-students-lab.png',
     color: '#f39c12'
   },
   { 
-    title: 'Quiz', 
-    desc: 'A quiz is a game which can also be called a mind sport wherein the players, either as individuals or in teams attempt to answer questions posed to them correctly, in order to win a prize.',
-    icon: 'fa-solid fa-brain',
-    image: '@/assets/campuslife/college-campus-sports-activities.jpg',
+    title: 'Technical Seminars', 
+    desc: 'Students present demonstrations on various latest trends and technologies in mechanical engineering industry.',
+    icon: 'fa-solid fa-chalkboard-teacher',
+    image: '@/assets/campuslife/students-in-college-library-studying.jpg',
     color: '#1abc9c'
   }
 ]
@@ -901,21 +938,27 @@ const activities = [
 /* Research & Industry */
 const research = {
   projects: [
-    'NLP for Indian Languages & Speech',
-    'AI for Healthcare Diagnostics',
-    'Forecasting with Deep Time Series Models'
+    'Advanced Manufacturing & Industry 4.0',
+    'Thermal Engineering & Heat Transfer',
+    'CAD/CAM & CNC Programming',
+    'Automotive Engineering'
   ],
   publications: [
-    { title: 'Lightweight CNNs for Edge Vision', venue: 'IEEE Access, 2024' },
-    { title: 'Graph Anomaly Detection at Scale', venue: 'Elsevier, 2023' }
+    { title: 'Heat Transfer Optimization in Automotive Systems', venue: 'International Journal of Thermal Sciences, 2024' },
+    { title: 'CNC Machining for Aerospace Components', venue: 'Journal of Manufacturing Processes, 2023' },
+    { title: 'Automotive Engine Performance Enhancement', venue: 'SAE Technical Papers, 2022' }
   ]
 }
 const industry = {
-  mous: ['AWS Academy • Microsoft Learn • Cisco NetAcad • Wipro TalentNext'],
+  mous: [
+    'TATA Motors • Mahindra & Mahindra • Bajaj Auto',
+    'Bosch • Cummins • HAL • DRDO'
+  ],
   logos: [
-    { src: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg', alt: 'Microsoft' },
-    { src: 'https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg', alt: 'AWS' },
-    { src: 'https://upload.wikimedia.org/wikipedia/commons/6/65/Cisco_logo.svg', alt: 'Cisco' }
+    { src: 'https://upload.wikimedia.org/wikipedia/commons/4/4a/Tata_Motors_logo.svg', alt: 'TATA Motors' },
+    { src: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Mahindra_Logo.svg', alt: 'Mahindra' },
+    { src: 'https://upload.wikimedia.org/wikipedia/commons/4/4a/Bosch_logo.svg', alt: 'Bosch' },
+    { src: 'https://upload.wikimedia.org/wikipedia/commons/8/8a/Cummins_logo.svg', alt: 'Cummins' }
   ]
 }
 
@@ -1322,7 +1365,10 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 /* DOWNLOADS */
 .downloads{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:.8rem }
 .download{
-  border:1px solid var(--border); border-radius:.9rem; padding:.8rem; display:flex; gap:.7rem; align-items:flex-start; text-decoration:none; color:inherit; background:#fff;
+  border:1px solid var(--border); border-radius:.9rem; padding:.8rem; display:flex; gap:.7rem; align-items:flex-start; text-decoration:none; color:inherit; background:#fff; cursor:pointer; transition:all 0.3s ease; width:100%;
+}
+.download:hover{
+  border-color:var(--orange); background:rgba(249,115,22,0.05); transform:translateY(-2px); box-shadow:0 4px 12px rgba(249,115,22,0.15);
 }
 .download i{ color:var(--orange); font-size:1.25rem; margin-top:.15rem }
 .dl-label{ font-weight:800; color:var(--ink) }
@@ -1332,6 +1378,7 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 .logo-row{ display:flex; gap:1rem; flex-wrap:wrap; align-items:center }
 .logo-row img{ height:26px; filter:grayscale(1); opacity:.8 }
 .logo-row img:hover{ filter:none; opacity:1 }
+
 
 /* BUTTONS */
 .btn{ 

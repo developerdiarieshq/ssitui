@@ -220,18 +220,22 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, watch } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import Header from '@/components/Header.vue'
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/Footer.vue'
 
+const router = useRouter()
+const route = useRoute()
+
 // Tabs configuration
 const tabs = [
-  { id: 'overview', label: 'Overview', icon: 'fa-solid fa-building' },
-  { id: 'staff', label: 'Staff', icon: 'fa-solid fa-users-gear' },
-  { id: 'departments', label: 'Departments', icon: 'fa-solid fa-building-columns' },
-  { id: 'processes', label: 'Processes', icon: 'fa-solid fa-list-check' },
-  { id: 'contact', label: 'Contact', icon: 'fa-solid fa-address-book' }
+  { id: 'overview', label: 'Overview', icon: 'fa-solid fa-building', path: '/administrative/overview' },
+  { id: 'staff', label: 'Staff', icon: 'fa-solid fa-users-gear', path: '/administrative/staff' },
+  { id: 'departments', label: 'Departments', icon: 'fa-solid fa-building-columns', path: '/administrative/departments' },
+  { id: 'processes', label: 'Processes', icon: 'fa-solid fa-list-check', path: '/administrative/processes' },
+  { id: 'contact', label: 'Contact', icon: 'fa-solid fa-address-book', path: '/administrative/contact' }
 ]
 
 const tabsMap = {
@@ -247,7 +251,41 @@ const activeAccordion = ref('')
 
 const setTab = (id) => {
   activeTab.value = id
+  const tab = tabs.find(t => t.id === id)
+  if (tab && tab.path) {
+    router.push(tab.path)
+  }
 }
+
+// Initialize active tab based on route
+onMounted(() => {
+  const pathToKey = {
+    '/administrative/overview': 'overview',
+    '/administrative/staff': 'staff',
+    '/administrative/departments': 'departments',
+    '/administrative/processes': 'processes',
+    '/administrative/contact': 'contact'
+  }
+  const key = pathToKey[route.path]
+  if (key) {
+    activeTab.value = key
+  }
+})
+
+// Watch for route changes
+watch(() => route.path, (newPath) => {
+  const pathToKey = {
+    '/administrative/overview': 'overview',
+    '/administrative/staff': 'staff',
+    '/administrative/departments': 'departments',
+    '/administrative/processes': 'processes',
+    '/administrative/contact': 'contact'
+  }
+  const key = pathToKey[newPath]
+  if (key) {
+    activeTab.value = key
+  }
+})
 
 const toggleAccordion = (id) => {
   activeAccordion.value = activeAccordion.value === id ? '' : id

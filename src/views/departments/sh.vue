@@ -438,7 +438,7 @@ const faculty = ref([
     qualification: 'Ph.D',
     expertise: ['Physics', 'Research', 'Advanced Physics', 'Department Leadership'],
     email: 'hod.sh@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=400',
+    photo: new URL('@/assets/departments/sh/faculty/SH_01.jpg', import.meta.url).href,
     profile: '#', linkedin: '#'
   },
   // BSH(MATHS) Department
@@ -447,7 +447,7 @@ const faculty = ref([
     qualification: 'Ph.D',
     expertise: ['Mathematics', 'Applied Mathematics', 'Research'],
     email: 'a.sindhuja@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&w=400',
+    photo: new URL('@/assets/departments/sh/faculty/SH_02.jpg', import.meta.url).href,
     profile: '#', linkedin: '#'
   },
   {
@@ -455,7 +455,7 @@ const faculty = ref([
     qualification: 'M.Sc',
     expertise: ['Mathematics', 'Statistics', 'Applied Mathematics'],
     email: 'chilukuri.leelavathi@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400',
+    photo: new URL('@/assets/departments/sh/faculty/SH_03.jpg', import.meta.url).href,
     profile: '#', linkedin: '#'
   },
   {
@@ -463,7 +463,7 @@ const faculty = ref([
     qualification: 'M.Sc',
     expertise: ['Mathematics', 'Algebra', 'Geometry'],
     email: 'dosapati.sridevi@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=400',
+    photo: new URL('@/assets/departments/sh/faculty/SH_04.jpg', import.meta.url).href,
     profile: '#', linkedin: '#'
   },
   {
@@ -471,7 +471,7 @@ const faculty = ref([
     qualification: 'M.Sc',
     expertise: ['Mathematics', 'Calculus', 'Differential Equations'],
     email: 'kotha.vasavi@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=400',
+    photo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNmOTczMTYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiAxNkMxOC4yMDkxIDE2IDIwIDE0LjIwOTEgMjAgMTJDMjAgOS43OTA5MSAxOC4yMDkxIDggMTYgOEMxMy43OTA5IDggMTIgOS43OTA5MSAxMiAxMkMxMiAxNC4yMDkxIDEzLjc5MDkgMTYgMTYgMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTYgMTlDMTEuNTgxNyAxOSA4IDIyLjU4MTcgOCAyN1YyOUgyNFYyN0MyNCAyMi41ODE3IDIwLjQxODMgMTkgMTYgMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+",
     profile: '#', linkedin: '#'
   },
   // BSH(ENG) Department
@@ -480,7 +480,7 @@ const faculty = ref([
     qualification: 'M.A (ENG)',
     expertise: ['English Literature', 'Communication Skills', 'Language Teaching'],
     email: 'vemula.suresh@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400',
+    photo: new URL('@/assets/departments/sh/faculty/SH_05.jpg', import.meta.url).href,
     profile: '#', linkedin: '#'
   },
   {
@@ -488,7 +488,7 @@ const faculty = ref([
     qualification: 'M.A (ENG)',
     expertise: ['English Language', 'Technical Communication', 'Soft Skills'],
     email: 'vajja.venkateswarlu@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=400',
+    photo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNmOTczMTYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiAxNkMxOC4yMDkxIDE2IDIwIDE0LjIwOTEgMjAgMTJDMjAgOS43OTA5MSAxOC4yMDkxIDggMTYgOEMxMy43OTA5IDggMTIgOS43OTA5MSAxMiAxMkMxMiAxNC4yMDkxIDEzLjc5MDkgMTYgMTYgMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTYgMTlDMTEuNTgxNyAxOSA4IDIyLjU4MTcgOCAyN1YyOUgyNFYyN0MyNCAyMi41ODE3IDIwLjQxODMgMTkgMTYgMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+",
     profile: '#', linkedin: '#'
   },
   {
@@ -496,7 +496,7 @@ const faculty = ref([
     qualification: 'M.A (ENG)',
     expertise: ['English Literature', 'Communication', 'Language Lab'],
     email: 'konga.krishna@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400',
+    photo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNmOTczMTYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiAxNkMxOC4yMDkxIDE2IDIwIDE0LjIwOTEgMjAgMTJDMjAgOS43OTA5MSAxOC4yMDkxIDggMTYgOEMxMy43OTA5IDggMTIgOS43OTA5MSAxMiAxMkMxMiAxNC4yMDkxIDEzLjc5MDkgMTYgMTYgMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTYgMTlDMTEuNTgxNyAxOSA4IDIyLjU4MTcgOCAyN1YyOUgyNFYyN0MyNCAyMi41ODE3IDIwLjQxODMgMTkgMTYgMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+",
     profile: '#', linkedin: '#'
   },
   // BSH(CHE) Department
@@ -505,7 +505,7 @@ const faculty = ref([
     qualification: 'M.Sc',
     expertise: ['Chemistry', 'Organic Chemistry', 'Research'],
     email: 'bolla.ramakrishna@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=400',
+    photo: new URL('@/assets/departments/sh/faculty/SH_09.jpg', import.meta.url).href,
     profile: '#', linkedin: '#'
   },
   {
@@ -513,7 +513,7 @@ const faculty = ref([
     qualification: 'M.Sc',
     expertise: ['Chemistry', 'Inorganic Chemistry', 'Analytical Chemistry'],
     email: 'balusupati.seetharamulu@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400',
+    photo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNmOTczMTYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiAxNkMxOC4yMDkxIDE2IDIwIDE0LjIwOTEgMjAgMTJDMjAgOS43OTA5MSAxOC4yMDkxIDggMTYgOEMxMy43OTA5IDggMTIgOS43OTA5MSAxMiAxMkMxMiAxNC4yMDkxIDEzLjc5MDkgMTYgMTYgMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTYgMTlDMTEuNTgxNyAxOSA4IDIyLjU4MTcgOCAyN1YyOUgyNFYyN0MyNCAyMi41ODE3IDIwLjQxODMgMTkgMTYgMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+",
     profile: '#', linkedin: '#'
   },
   {
@@ -521,7 +521,7 @@ const faculty = ref([
     qualification: 'M.Sc',
     expertise: ['Chemistry', 'Physical Chemistry', 'Laboratory Techniques'],
     email: 'madamsetti.satyaveni@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?q=80&w=400',
+    photo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNmOTczMTYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiAxNkMxOC4yMDkxIDE2IDIwIDE0LjIwOTEgMjAgMTJDMjAgOS43OTA5MSAxOC4yMDkxIDggMTYgOEMxMy43OTA5IDggMTIgOS43OTA5MSAxMiAxMkMxMiAxNC4yMDkxIDEzLjc5MDkgMTYgMTYgMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTYgMTlDMTEuNTgxNyAxOSA4IDIyLjU4MTcgOCAyN1YyOUgyNFYyN0MyNCAyMi41ODE3IDIwLjQxODMgMTkgMTYgMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+",
     profile: '#', linkedin: '#'
   },
   // BSH(PHY) Department
@@ -530,7 +530,7 @@ const faculty = ref([
     qualification: 'M.Sc',
     expertise: ['Physics', 'Applied Physics', 'Laboratory Physics'],
     email: 'chintala.sailaja@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=400',
+    photo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNmOTczMTYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiAxNkMxOC4yMDkxIDE2IDIwIDE0LjIwOTEgMjAgMTJDMjAgOS43OTA5MSAxOC4yMDkxIDggMTYgOEMxMy43OTA5IDggMTIgOS43OTA5MSAxMiAxMkMxMiAxNC4yMDkxIDEzLjc5MDkgMTYgMTYgMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTYgMTlDMTEuNTgxNyAxOSA4IDIyLjU4MTcgOCAyN1YyOUgyNFYyN0MyNCAyMi41ODE3IDIwLjQxODMgMTkgMTYgMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+",
     profile: '#', linkedin: '#'
   },
   {
@@ -538,7 +538,7 @@ const faculty = ref([
     qualification: 'M.Sc',
     expertise: ['Physics', 'Modern Physics', 'Experimental Physics'],
     email: 'yernam.vijaya@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?q=80&w=400',
+    photo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNmOTczMTYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiAxNkMxOC4yMDkxIDE2IDIwIDE0LjIwOTEgMjAgMTJDMjAgOS43OTA5MSAxOC4yMDkxIDggMTYgOEMxMy43OTA5IDggMTIgOS43OTA5MSAxMiAxMkMxMiAxNC4yMDkxIDEzLjc5MDkgMTYgMTYgMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTYgMTlDMTEuNTgxNyAxOSA4IDIyLjU4MTcgOCAyN1YyOUgyNFYyN0MyNCAyMi41ODE3IDIwLjQxODMgMTkgMTYgMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+",
     profile: '#', linkedin: '#'
   },
   // MBA Department
@@ -547,7 +547,7 @@ const faculty = ref([
     qualification: 'MBA',
     expertise: ['Management', 'Business Administration', 'Management Studies'],
     email: 'punnam.siresha@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400',
+    photo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNmOTczMTYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiAxNkMxOC4yMDkxIDE2IDIwIDE0LjIwOTEgMjAgMTJDMjAgOS43OTA5MSAxOC4yMDkxIDggMTYgOEMxMy43OTA5IDggMTIgOS43OTA5MSAxMiAxMkMxMiAxNC4yMDkxIDEzLjc5MDkgMTYgMTYgMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTYgMTlDMTEuNTgxNyAxOSA4IDIyLjU4MTcgOCAyN1YyOUgyNFYyN0MyNCAyMi41ODE3IDIwLjQxODMgMTkgMTYgMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+",
     profile: '#', linkedin: '#'
   }
 ])

@@ -76,16 +76,38 @@
     />
 
     <!-- Footer Contact -->
-    <footer class="contact-section py-5">
-      <div class="container text-center">
+    <section class="py-5 bg-light">
+      <div class="container">
         <h2 class="section-title">Get Involved</h2>
-        <p>Join us in making a difference through volunteering, donations, or partnerships.</p>
-        <p>
-          Email: <a href="mailto:socialservices@ssit.edu.in">socialservices@ssit.edu.in</a>
+        <p class="text-center text-muted mb-4">
+          Join us in making a difference through volunteering, donations, or partnerships.
         </p>
-        <p>Phone: +91-98765-43210</p>
+        
+        <div class="row g-4">
+          <div class="col-md-6">
+            <div class="card h-100 shadow-sm contact-card">
+              <div class="card-body text-center">
+                <i class="fa-solid fa-envelope fa-2x contact-icon mb-3" style="color: var(--brand-orange);"></i>
+                <h5 class="mb-2">Email</h5>
+                <p class="text-muted mb-0">
+                  <a href="mailto:socialservices@ssit.edu.in" class="text-decoration-none">socialservices@ssit.edu.in</a>
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            <div class="card h-100 shadow-sm contact-card">
+              <div class="card-body text-center">
+                <i class="fa-solid fa-phone fa-2x contact-icon mb-3" style="color: var(--brand-orange);"></i>
+                <h5 class="mb-2">Phone</h5>
+                <p class="text-muted mb-0">+91-98765-43210</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </footer>
+    </section>
 
     <!-- Global Footer -->
     <Footer />
@@ -220,32 +242,48 @@ export default {
 
 /* Section Titles */
 .section-title {
-  color: var(--brand-blue);
+  color: var(--brand-orange);
   font-weight: 700;
   margin-bottom: 1rem;
   text-align: center;
 }
 
 /* Service Cards */
-.service-card i { font-size: 2rem; color: var(--brand-orange); }
+.service-card {
+  transition: all 0.3s ease;
+  border: 1px solid #e5e7eb;
+}
 
-/* Contact */
-.contact-section {
-  background: var(--brand-blue);
-  color: #fff !important;
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+  border-color: var(--brand-orange);
 }
-.contact-section h2 {
-  color: #fff !important;
+
+.service-card i { 
+  font-size: 2rem; 
+  color: var(--brand-orange); 
 }
-.contact-section p {
-  color: #fff !important;
+
+.service-card h5 {
+  color: var(--brand-orange);
+  font-weight: 700;
 }
-.contact-section a { 
-  color: #fff !important; 
-  text-decoration: underline; 
+
+/* Contact Cards */
+.contact-card {
+  transition: all 0.3s ease;
+  border: 1px solid #e5e7eb;
 }
-.contact-section a:hover {
-  color: #ffeb3b !important;
+
+.contact-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+}
+
+.contact-card h5 {
+  color: var(--brand-orange);
+  font-weight: 700;
 }
 
 /* Gallery Styles */

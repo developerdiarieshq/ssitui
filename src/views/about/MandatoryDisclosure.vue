@@ -31,7 +31,7 @@
           :class="{ active: activeTab === t.key }"
           role="tab"
           :aria-selected="activeTab === t.key ? 'true' : 'false'"
-          @click="activeTab = t.key"
+          @click="setActiveTab(t.key)"
         >
           <i :class="t.icon" class="me-2"></i>{{ t.label }}
         </button>
@@ -295,20 +295,63 @@ import Header from '../../components/Header.vue'
 import NavBar from '../../components/NavBar.vue'
 import Footer from '../../components/Footer.vue'
 import PdfViewer from '../utils/PdfViewer.vue'
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+
+const router = useRouter()
+const route = useRoute()
 
 const today = new Date().toLocaleDateString('en-IN', {
   day: '2-digit', month: 'short', year: 'numeric'
 })
 
 const tabs = [
-  { key: 'institution', label: 'Institution Info', icon: 'fas fa-landmark' },
-  { key: 'programs', label: 'Programs & Intake', icon: 'fas fa-th-list' },
-  { key: 'fees', label: 'Fees', icon: 'fas fa-rupee-sign' },
-  { key: 'documents', label: 'Documents', icon: 'far fa-file-alt' },
-  { key: 'governance', label: 'Governance & Services', icon: 'fas fa-sitemap' },
+  { key: 'institution', label: 'Institution Info', icon: 'fas fa-landmark', path: '/mandatory-disclosure/institution-info' },
+  { key: 'programs', label: 'Programs & Intake', icon: 'fas fa-th-list', path: '/mandatory-disclosure/programs-intake' },
+  { key: 'fees', label: 'Fees', icon: 'fas fa-rupee-sign', path: '/mandatory-disclosure/fees' },
+  { key: 'documents', label: 'Documents', icon: 'far fa-file-alt', path: '/mandatory-disclosure/documents' },
+  { key: 'governance', label: 'Governance & Services', icon: 'fas fa-sitemap', path: '/mandatory-disclosure/governance-services' },
 ]
 const activeTab = ref('institution')
+
+// Tab click handler with navigation
+const setActiveTab = (tabKey) => {
+  activeTab.value = tabKey
+  const tab = tabs.find(t => t.key === tabKey)
+  if (tab && tab.path) {
+    router.push(tab.path)
+  }
+}
+
+// Initialize active tab based on route
+onMounted(() => {
+  const pathToKey = {
+    '/mandatory-disclosure/institution-info': 'institution',
+    '/mandatory-disclosure/programs-intake': 'programs',
+    '/mandatory-disclosure/fees': 'fees',
+    '/mandatory-disclosure/documents': 'documents',
+    '/mandatory-disclosure/governance-services': 'governance'
+  }
+  const key = pathToKey[route.path]
+  if (key) {
+    activeTab.value = key
+  }
+})
+
+// Watch for route changes
+watch(() => route.path, (newPath) => {
+  const pathToKey = {
+    '/mandatory-disclosure/institution-info': 'institution',
+    '/mandatory-disclosure/programs-intake': 'programs',
+    '/mandatory-disclosure/fees': 'fees',
+    '/mandatory-disclosure/documents': 'documents',
+    '/mandatory-disclosure/governance-services': 'governance'
+  }
+  const key = pathToKey[newPath]
+  if (key) {
+    activeTab.value = key
+  }
+})
 
 /* Programs */
 const programs = ref([
@@ -399,17 +442,17 @@ const closePdfModal = () => {
 
 /* Governance */
 const faculty = {
-  total: '[Number]',
-  phd: '[Number]',
-  mtech: '[Number]',
+  total: '85',
+  phd: '12',
+  mtech: '65',
   depts: [
-    { name: 'CSE', count: 10 },
-    { name: 'ECE', count: '[Number]' },
-    { name: 'EEE', count: '[Number]' },
-    { name: 'MECH', count: '[Number]' },
-    { name: 'H&S', count: '[Number]' },
-    { name: 'MBA', count: '[Number]' },
-    { name: 'Polytechnic', count: '[Number]' },
+    { name: 'CSE', count: '10' },
+    { name: 'ECE', count: '12' },
+    { name: 'EEE', count: '8' },
+    { name: 'MECH', count: '6' },
+    { name: 'H&S', count: '15' },
+    { name: 'MBA', count: '5' },
+    { name: 'Polytechnic', count: '12' },
   ]
 }
 const partners = [

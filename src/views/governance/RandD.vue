@@ -316,20 +316,24 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, watch } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import Header from '@/components/Header.vue'
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/Footer.vue'
 
+const router = useRouter()
+const route = useRoute()
+
 // Tabs configuration
 const tabs = [
-  { id: 'overview', label: 'Overview', icon: 'fa-solid fa-lightbulb' },
-  { id: 'areas', label: 'Research Areas', icon: 'fa-solid fa-microscope' },
-  { id: 'publications', label: 'Publications', icon: 'fa-solid fa-book-open' },
-  { id: 'projects', label: 'Projects', icon: 'fa-solid fa-diagram-project' },
-  { id: 'collaborations', label: 'Collaborations', icon: 'fa-solid fa-handshake' },
-  { id: 'facilities', label: 'Facilities', icon: 'fa-solid fa-flask' },
-  { id: 'contact', label: 'Contact', icon: 'fa-solid fa-address-book' }
+  { id: 'overview', label: 'Overview', icon: 'fa-solid fa-lightbulb', path: '/r-and-d/overview' },
+  { id: 'areas', label: 'Research Areas', icon: 'fa-solid fa-microscope', path: '/r-and-d/research-areas' },
+  { id: 'publications', label: 'Publications', icon: 'fa-solid fa-book-open', path: '/r-and-d/publications' },
+  { id: 'projects', label: 'Projects', icon: 'fa-solid fa-diagram-project', path: '/r-and-d/projects' },
+  { id: 'collaborations', label: 'Collaborations', icon: 'fa-solid fa-handshake', path: '/r-and-d/collaborations' },
+  { id: 'facilities', label: 'Facilities', icon: 'fa-solid fa-flask', path: '/r-and-d/facilities' },
+  { id: 'contact', label: 'Contact', icon: 'fa-solid fa-address-book', path: '/r-and-d/contact' }
 ]
 
 const tabsMap = {
@@ -346,7 +350,45 @@ const activeTab = ref('overview')
 
 const setTab = (id) => {
   activeTab.value = id
+  const tab = tabs.find(t => t.id === id)
+  if (tab && tab.path) {
+    router.push(tab.path)
+  }
 }
+
+// Initialize active tab based on route
+onMounted(() => {
+  const pathToKey = {
+    '/r-and-d/overview': 'overview',
+    '/r-and-d/research-areas': 'areas',
+    '/r-and-d/publications': 'publications',
+    '/r-and-d/projects': 'projects',
+    '/r-and-d/collaborations': 'collaborations',
+    '/r-and-d/facilities': 'facilities',
+    '/r-and-d/contact': 'contact'
+  }
+  const key = pathToKey[route.path]
+  if (key) {
+    activeTab.value = key
+  }
+})
+
+// Watch for route changes
+watch(() => route.path, (newPath) => {
+  const pathToKey = {
+    '/r-and-d/overview': 'overview',
+    '/r-and-d/research-areas': 'areas',
+    '/r-and-d/publications': 'publications',
+    '/r-and-d/projects': 'projects',
+    '/r-and-d/collaborations': 'collaborations',
+    '/r-and-d/facilities': 'facilities',
+    '/r-and-d/contact': 'contact'
+  }
+  const key = pathToKey[newPath]
+  if (key) {
+    activeTab.value = key
+  }
+})
 
 // Research Areas Data
 const researchAreas = [

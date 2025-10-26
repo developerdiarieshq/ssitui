@@ -105,13 +105,18 @@ const routes = [
     { path: '/about-us', component: AboutUs },
     { path: '/principal-desk', component: PrincipalDesk },
     { path: '/academic-council', component: AcademicCouncil },
-    { path: '/academic-council/members', component: AcademicCouncil },
-    { path: '/academic-council/meetings', component: AcademicCouncil },
+    { path: '/academic-council/current_members', component: AcademicCouncil },
+    { path: '/academic-council/Meeting-schedule_records', component: AcademicCouncil },
     { path: '/management', component: Management },
     { path: '/vision-mission', component: VisionMission },
     { path: '/quality-policy', component: Quality },
     { path: '/strength', component: Strength },
     { path: '/mandatory-disclosure', component: MandatoryDisclosure },
+    { path: '/mandatory-disclosure/institution-info', component: MandatoryDisclosure },
+    { path: '/mandatory-disclosure/programs-intake', component: MandatoryDisclosure },
+    { path: '/mandatory-disclosure/fees', component: MandatoryDisclosure },
+    { path: '/mandatory-disclosure/documents', component: MandatoryDisclosure },
+    { path: '/mandatory-disclosure/governance-services', component: MandatoryDisclosure },
     { path: '/society', component: Society },
     { path: '/contact', component: ContactUs },
     { path: '/sports', component: Sports },
@@ -145,10 +150,29 @@ const routes = [
     { path: '/policies', component: Policies },
     { path: '/organogram', component: Organogram },
     { path: '/administrative', component: Administrative },
+    { path: '/administrative/overview', component: Administrative },
+    { path: '/administrative/staff', component: Administrative },
+    { path: '/administrative/departments', component: Administrative },
+    { path: '/administrative/processes', component: Administrative },
+    { path: '/administrative/contact', component: Administrative },
     { path: '/r-and-d', component: RandD },
+    { path: '/r-and-d/overview', component: RandD },
+    { path: '/r-and-d/research-areas', component: RandD },
+    { path: '/r-and-d/publications', component: RandD },
+    { path: '/r-and-d/projects', component: RandD },
+    { path: '/r-and-d/collaborations', component: RandD },
+    { path: '/r-and-d/facilities', component: RandD },
+    { path: '/r-and-d/contact', component: RandD },
     { path: '/academic-regulations', component: AcademicRegulations },
+    { path: '/academic-regulations/documents', component: AcademicRegulations },
+    { path: '/academic-regulations/programs', component: AcademicRegulations },
+    { path: '/academic-regulations/admissions', component: AcademicRegulations },
+    { path: '/academic-regulations/fees', component: AcademicRegulations },
+    { path: '/academic-regulations/eligibility', component: AcademicRegulations },
     { path: '/academic-calendar', component: AcademicCalendar },
     { path: '/incentives', component: Incentives },
+    { path: '/incentives/students', component: Incentives },
+    { path: '/incentives/faculty', component: Incentives },
     { path: '/awards', component: Awards },
     { path: '/approvals', component: Approvals },
     { path: '/admissions', component: Admissions },
@@ -246,6 +270,11 @@ const getRouterConfig = () => {
                     (to.path.includes('/dece/') && from.path.includes('/dece/')) ||
                     (to.path.includes('/examination-branch/') && from.path.includes('/examination-branch/')) ||
                     ((to.path.startsWith('/academic-council') && from.path.startsWith('/academic-council'))) ||
+                    ((to.path.startsWith('/mandatory-disclosure') && from.path.startsWith('/mandatory-disclosure'))) ||
+                    ((to.path.startsWith('/administrative') && from.path.startsWith('/administrative'))) ||
+                    ((to.path.startsWith('/r-and-d') && from.path.startsWith('/r-and-d'))) ||
+                    ((to.path.startsWith('/academic-regulations') && from.path.startsWith('/academic-regulations'))) ||
+                    ((to.path.startsWith('/incentives') && from.path.startsWith('/incentives'))) ||
                     (to.path.includes('/placements/') && from.path.includes('/placements/'))) {
                     return false
                 }
@@ -276,6 +305,11 @@ const getRouterConfig = () => {
                     (to.path.includes('/dece/') && from.path.includes('/dece/')) ||
                     (to.path.includes('/examination-branch/') && from.path.includes('/examination-branch/')) ||
                     ((to.path.startsWith('/academic-council') && from.path.startsWith('/academic-council'))) ||
+                    ((to.path.startsWith('/mandatory-disclosure') && from.path.startsWith('/mandatory-disclosure'))) ||
+                    ((to.path.startsWith('/administrative') && from.path.startsWith('/administrative'))) ||
+                    ((to.path.startsWith('/r-and-d') && from.path.startsWith('/r-and-d'))) ||
+                    ((to.path.startsWith('/academic-regulations') && from.path.startsWith('/academic-regulations'))) ||
+                    ((to.path.startsWith('/incentives') && from.path.startsWith('/incentives'))) ||
                     (to.path.includes('/placements/') && from.path.includes('/placements/'))) {
                     return false
                 }
