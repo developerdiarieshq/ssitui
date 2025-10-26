@@ -365,96 +365,64 @@
       <!-- Student Success Stories -->
       <section :id="tabsMap.stories" class="card-section" v-show="activeTab==='stories'">
         <div class="card">
-          <div class="stories-header">
-            <div class="stories-title-section">
+          <!-- Header -->
+          <div class="stories-page-header mb-4">
             <h2 class="section-title">
-              <i class="fa-solid fa-graduation-cap"></i>
+              <i class="fa-solid fa-star"></i>
               Success Stories
             </h2>
-              <!-- Year Selector -->
-              <div class="stories-year-selector">
-                <label for="stories-year-select" class="year-label">Select Academic Year:</label>
-                <select id="stories-year-select" v-model="selectedStoriesYear" class="year-select">
-                  <option v-for="year in storiesYears" :key="year" :value="year">{{ year }}</option>
-                </select>
-              </div>
+            
+            <!-- Year Selector -->
+            <div class="year-filter">
+              <label class="year-label mb-2">Select Academic Year:</label>
+              <select v-model="selectedStoriesYear" class="year-select">
+                <option v-for="year in storiesYears" :key="year" :value="year">{{ year }}</option>
+              </select>
             </div>
-            <p class="section-description">
-              Celebrating our graduates who have achieved remarkable success in their careers
-            </p>
           </div>
           
-          <!-- Success Stories Grid -->
-          <div class="stories-grid">
-            <div v-for="student in filteredSuccessStories" :key="student.id" class="story-card">
-              <!-- Success Badge -->
-              <div class="success-badge-new">
+          <!-- Stories Grid -->
+          <div class="simple-stories-grid">
+            <div v-for="student in filteredSuccessStories" :key="student.id" class="simple-story-card">
+              <div class="story-badge">
                 <i class="fa-solid fa-trophy"></i>
-                <span>{{ student.year }}</span>
               </div>
               
-              <!-- Student Profile -->
-              <div class="student-profile">
-                <div class="profile-image-container">
-                  <div v-if="student.image" class="profile-image-wrapper">
-                    <img 
-                      :src="student.image" 
-                      :alt="student.name" 
-                      @error="handleImageError"
-                      loading="lazy"
-                      class="profile-image"
-                    />
-                  </div>
-                  <div v-else class="profile-placeholder">
-                    <i class="fa-solid fa-user-graduate"></i>
-                  </div>
-                  <div class="profile-overlay">
-                    <i class="fa-solid fa-user-graduate"></i>
+              <div class="story-header">
+                <div class="story-avatar">
+                  <img v-if="student.image" :src="student.image" :alt="student.name" />
+                  <div v-else class="avatar-placeholder">
+                    <i class="fa-solid fa-user"></i>
                   </div>
                 </div>
-                
-                <div class="student-details">
-                  <h3 class="student-name">{{ student.name }}</h3>
-                  <p class="student-branch">{{ student.branch }}</p>
+                <div class="story-info">
+                  <h4 class="story-name">{{ student.name }}</h4>
+                  <p class="story-branch">{{ student.branch }}</p>
                 </div>
               </div>
               
-              <!-- Company & Package Info -->
-              <div class="placement-info">
-                <div class="company-section">
-                  <div class="company-logo">
-                    <img :src="student.companyLogo" :alt="student.company" />
-                  </div>
-                  <div class="company-details">
-                    <h4 class="company-name">{{ student.company }}</h4>
-                    <p class="company-type">{{ student.companyType }}</p>
-                  </div>
+              <div class="story-company">
+                <div class="company-logo-small">
+                  <img :src="student.companyLogo" :alt="student.company" />
                 </div>
-                
-                <div class="package-section">
-                  <div class="package-amount">
-                    <span class="currency">₹</span>
-                    <span class="amount">{{ student.package }}</span>
-                    <span class="unit">LPA</span>
-                  </div>
-                  <p class="package-label">Annual Package</p>
+                <div class="company-info">
+                  <h5 class="company-name-small">{{ student.company }}</h5>
+                  <p class="company-role">{{ student.companyType }}</p>
                 </div>
               </div>
               
-              <!-- Success Quote -->
-              <div class="success-quote">
-                <i class="fa-solid fa-quote-left"></i>
-                <p>"{{ student.quote }}"</p>
+              <div class="story-package">
+                <span class="package-text">₹{{ student.package }} LPA</span>
               </div>
+              
+              <p class="story-quote">"{{ student.quote }}"</p>
             </div>
           </div>
           
-          <!-- View More Button -->
-          <div class="stories-footer">
-            <button class="view-more-btn">
-              <i class="fa-solid fa-arrow-right"></i>
-              <span>View All Success Stories</span>
-            </button>
+          <!-- Empty State -->
+          <div v-if="filteredSuccessStories.length === 0" class="empty-state">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <p>No success stories available for this year.</p>
           </div>
         </div>
       </section>
@@ -1303,7 +1271,7 @@ const preloadImages = () => {
   border-bottom:1px solid var(--border);
   box-shadow:0 2px 8px rgba(0,0,0,0.05);
 }
-.subnav-inner{ display:flex; gap:.5rem; padding:.6rem 1rem; overflow-x:auto; overflow-y:hidden; justify-content:flex-start; flex-wrap:nowrap; }
+.subnav-inner{ display:flex; gap:.5rem; padding:.6rem 1rem; overflow-x:auto; overflow-y:hidden; justify-content:center; flex-wrap:wrap; }
 .chip{ 
   border:1px solid var(--border); 
   background:#fff; 
@@ -2126,64 +2094,227 @@ const preloadImages = () => {
 .carousel-slide{ min-width:100%; flex-shrink:0 }
 
 
-/* SUCCESS STORIES GRID */
-.stories-header{
-  margin-bottom:3rem;
-}
-.stories-title-section{
+/* SIMPLE STORIES DESIGN */
+.stories-page-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-.stories-header .section-title{
-  margin-bottom: 0;
-}
-.stories-header .section-description{
-  font-size:1.1rem;
-  color:var(--muted);
-  max-width:600px;
-  margin:0 auto;
-  text-align: center;
+  align-items: flex-start;
+  gap: 2rem;
 }
 
-/* STORIES YEAR SELECTOR */
-.stories-year-selector{
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+.year-filter {
+  max-width: 300px;
+  margin-left: auto;
 }
-.stories-year-selector .year-label{
+
+.year-label {
+  display: block;
   font-weight: 600;
   color: var(--ink);
-  font-size: 1rem;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
 }
-.stories-year-selector .year-select{
-  padding: 0.5rem 1rem;
-  border: 2px solid var(--border);
+
+.year-select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e5e7eb;
   border-radius: 0.5rem;
   background: white;
   color: var(--ink);
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  min-width: 150px;
 }
-.stories-year-selector .year-select:hover{
+
+.year-select:hover {
+  border-color: var(--orange);
+}
+
+.year-select:focus {
+  outline: none;
   border-color: var(--orange);
   box-shadow: 0 0 0 3px rgba(249,115,22,0.1);
 }
-.stories-year-selector .year-select:focus{
-  outline: none;
-  border-color: var(--orange);
-  box-shadow: 0 0 0 3px rgba(249,115,22,0.2);
+
+@media (max-width: 768px) {
+  .stories-page-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .year-filter {
+    margin-left: 0;
+    max-width: 100%;
+  }
 }
 
-.stories-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
-  gap:1.5rem;
-  margin-bottom:3rem;
+.simple-stories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.simple-story-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.simple-story-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  border-color: var(--orange);
+}
+
+.story-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--orange);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.story-header {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.story-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--orange);
+}
+
+.story-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  background: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.story-info {
+  flex: 1;
+}
+
+.story-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 0.25rem;
+}
+
+.story-branch {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+.story-company {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background: #f9fafb;
+  border-radius: 0.5rem;
+}
+
+.company-logo-small {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 0.5rem;
+  padding: 0.25rem;
+}
+
+.company-logo-small img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.company-info {
+  flex: 1;
+}
+
+.company-name-small {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 0.15rem;
+}
+
+.company-role {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+.story-package {
+  background: var(--orange);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.package-text {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.story-quote {
+  font-size: 0.9rem;
+  color: var(--muted);
+  font-style: italic;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--muted);
+}
+
+.empty-state i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--orange);
+  opacity: 0.5;
+}
+
+.empty-state p {
+  font-size: 1.1rem;
 }
 
 .story-card{
