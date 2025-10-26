@@ -1000,10 +1000,14 @@
  * - Vue 3 SFC using Composition API
  * - Structured like CSE.vue with tabbed navigation
  */
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import Header from '@/components/Header.vue'
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/Footer.vue'
+
+const router = useRouter()
+const route = useRoute()
 
 /* About stats */
 const aboutStats = [
@@ -1025,8 +1029,32 @@ const tabs = [
   { id: 'contact', label: 'Contact', icon: 'fa-solid fa-address-book' }
 ]
 const tabsMap = tabs.reduce((acc, t) => ((acc[t.id] = t.id), acc), {})
+
+// Active tab with URL synchronization
 const activeTab = ref(tabs[0].id)
-const setTab = (id) => { activeTab.value = id } // no scroll/jump
+
+const setTab = (id) => {
+  activeTab.value = id
+  // Update URL without page reload
+  if (route.params.tab !== id) {
+    router.push({ path: `/examination-branch/${id}` })
+  }
+}
+
+// Initialize tab from URL on mount
+onMounted(() => {
+  const tabFromUrl = route.params.tab
+  if (tabFromUrl && tabs.some(tab => tab.id === tabFromUrl)) {
+    activeTab.value = tabFromUrl
+  }
+})
+
+// Watch for URL changes and update active tab
+watch(() => route.params.tab, (newTab) => {
+  if (newTab && tabs.some(tab => tab.id === newTab)) {
+    activeTab.value = newTab
+  }
+})
 
 /* FAQ accordion data */
 const faqs = [
