@@ -16,9 +16,9 @@ import Greivence from '@/views/greivence/Greivence.vue'
 import Strength from './views/about/Strength.vue'
 import MandatoryDisclosure from './views/about/MandatoryDisclosure.vue'
 import Library from './views/amenities/Library.vue'
-import Scholarship from './views/studentcorner/Scholarship.vue'
 import Cafeteria from '@/views/amenities/Cafeteria.vue'
 import SocialServices from './views/studentcorner/SocialServices.vue'
+import Scholarship from './views/studentcorner/Scholarship.vue'
 import Committees from './views/governance/Committees.vue'
 import GoverningBody from './views/governance/GoverningBody.vue'
 import iqac from './views/governance/iqac.vue'
@@ -122,9 +122,9 @@ const routes = [
     { path: '/sports', component: Sports },
     { path: '/greivence', component: Greivence },
     { path: '/library', component: Library },
-    { path: '/scholarship', component: Scholarship },
     { path: '/cafeteria', component: Cafeteria },
     { path: '/social-services', component: SocialServices },
+    { path: '/scholarship', component: Scholarship },
     // Club routes
     { path: '/elite-club', component: EliteClub },
     { path: '/cultural-club', component: CulturalClub },

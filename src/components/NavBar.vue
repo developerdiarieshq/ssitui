@@ -130,7 +130,7 @@
             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Student Corner</a>
             <ul class="dropdown-menu">
               <li><router-link to="/scholarship" class="dropdown-item">Scholarship</router-link></li>
-              <li><router-link to="/anti-ragging" class="dropdown-item">Anti Ragging</router-link></li>
+x              <li><router-link to="/anti-ragging" class="dropdown-item">Anti Ragging</router-link></li>
                <router-link to="/sports" class="dropdown-item">Sports</router-link>
               <li><router-link to="/cafeteria" class="dropdown-item">Cafeteria</router-link></li>
               <li><router-link to="/social-services" class="dropdown-item">Social Services</router-link></li>
