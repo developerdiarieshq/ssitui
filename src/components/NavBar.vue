@@ -404,6 +404,10 @@ onUnmounted(() => {
   /* Ensure navbar items are visible on mobile */
   .navbar-collapse {
     background-color: white;
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
   }
   
   .navbar-nav {
@@ -412,6 +416,14 @@ onUnmounted(() => {
   
   .nav-link {
     color: #333 !important;
+  }
+  
+  /* Make dropdown menus scrollable */
+  .dropdown-menu {
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
