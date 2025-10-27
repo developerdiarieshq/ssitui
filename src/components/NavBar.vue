@@ -130,8 +130,8 @@
             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Student Corner</a>
             <ul class="dropdown-menu">
               <li><router-link to="/scholarship" class="dropdown-item">Scholarship</router-link></li>
-x              <li><router-link to="/anti-ragging" class="dropdown-item">Anti Ragging</router-link></li>
-               <router-link to="/sports" class="dropdown-item">Sports</router-link>
+              <li><router-link to="/anti-ragging" class="dropdown-item">Anti Ragging</router-link></li>
+              <li><router-link to="/sports" class="dropdown-item">Sports</router-link></li>
               <li><router-link to="/cafeteria" class="dropdown-item">Cafeteria</router-link></li>
               <li><router-link to="/social-services" class="dropdown-item">Social Services</router-link></li>
             </ul>
@@ -386,22 +386,32 @@ onUnmounted(() => {
   }
   
   /* Mobile-specific dropdown behavior */
-  .dropdown-menu.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-  
-  /* Mobile dropdown width adjustments */
+  /* Dropdowns should be closed by default */
   .dropdown-menu {
-    min-width: 100%;
-    max-width: 100vw;
-    width: 100%;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    display: none !important;
+    transform: none !important;
   }
   
-  .nav-item.dropdown:has(.dropdown-header) .dropdown-menu {
-    min-width: 100%;
-    width: 100%;
+  /* Only show when Bootstrap adds 'show' class */
+  .dropdown-menu.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+  }
+  
+  /* Ensure navbar items are visible on mobile */
+  .navbar-collapse {
+    background-color: white;
+  }
+  
+  .navbar-nav {
+    background-color: white;
+  }
+  
+  .nav-link {
+    color: #333 !important;
   }
 }
 
