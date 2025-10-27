@@ -21,19 +21,15 @@
               <span class="qf-value">{{ facts.intakeUG }}</span>
             </li>
             <li>
-              <span class="qf-label">AI/DS Labs</span>
+              <span class="qf-label">ECE Labs</span>
               <span class="qf-value">{{ facts.labs }}</span>
-            </li>
-            <li>
-              <span class="qf-label">Top Recruiters</span>
-              <span class="qf-value">Google • Microsoft • AWS</span>
             </li>
           </ul>
         </div>
         <picture class="hero-art" aria-hidden="true">
           <img
-            src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1600&auto=format&fit=crop"
-            alt="AI & Data Science themed visual"
+            src="@/assets/engineering-students-lab.png"
+            alt="ECE Department - Electronics & Communication Engineering Laboratory"
             class="hero-img"
           />
         </picture>
@@ -41,7 +37,7 @@
     </header>
 
     <!-- STICKY SUB NAV (nav-pills) -->
-    <nav class="subnav" aria-label="Section navigation">
+    <nav id="subnav" class="subnav" aria-label="Section navigation">
       <div class="container subnav-inner">
         <button
           v-for="tab in tabs"
@@ -61,7 +57,7 @@
     <!-- CONTENT (tab panes) -->
     <main class="container content" id="content">
       <!-- ABOUT -->
-      <section class="card-section" v-show="activeTab==='overview'">
+      <section :id="tabsMap.overview" class="card-section" v-show="activeTab==='overview'">
         <div class="card">
           <h2 class="section-title"><i class="fa-solid fa-school"></i> About the Department</h2>
           <p class="lead">
@@ -95,15 +91,15 @@
 
         <div class="grid-2">
           <article class="card">
-            <h3 class="h5 text-muted mb-2">Vision</h3>
+            <h3 class="h5 mb-2" style="color: var(--ink); font-weight: 800;">Vision</h3>
             <p>
               Establish Industry ready high academic standards in Electronics and Communication Engineering education and research and accomplish this goal.
             </p>
-            <h3 class="h5 text-muted mt-4 mb-2">Mission</h3>
+            <h3 class="h5 mt-4 mb-2" style="color: var(--ink); font-weight: 800;">Mission</h3>
             <ul class="bullets">
               <li>Establish high quality interactive programmes in partnership with other eminent institutes of national importance and train the students to become leaders and masters of technology with academic excellence.</li>
             </ul>
-            <h3 class="h5 text-muted mt-4 mb-2">Our Goals:</h3>
+            <h3 class="h5 mt-4 mb-2" style="color: var(--ink); font-weight: 800;">Our Goals:</h3>
             <ul class="bullets">
               <li><strong>Research & Development</strong> — To create Research & Development Cell to accelerate Research & Development in the Department.</li>
               <li><strong>Training Programs</strong> — To conduct Industry relevant Training Programmes for students so that they are ready for Industry.</li>
@@ -144,7 +140,7 @@
               <p>Active student association "Thrushna by Access" organizing technical events.</p>
             </div>
             <div class="strength-item">
-              <h4><i class="fa-solid fa-flask"></i> Fully Equipped Laboratories</h4>
+              <h4><i class="fa-solid fa-microchip"></i> Fully Equipped Laboratories</h4>
               <p>State-of-the-art labs with specialized equipment and latest software tools.</p>
             </div>
           </div>
@@ -383,7 +379,7 @@
       </section>
 
       <!-- FACULTY DIRECTORY -->
-      <section class="card-section" v-show="activeTab==='faculty'">
+      <section :id="tabsMap.faculty" class="card-section" v-show="activeTab==='faculty'">
         <div class="card">
           <div class="section-header">
             <h2 class="section-title"><i class="fa-solid fa-users-gear"></i> Faculty Directory</h2>
@@ -435,8 +431,8 @@
       </section>
 
       <!-- LABS / INFRA -->
-      <section class="card-section" v-show="activeTab==='labs'">
-        <h2 class="section-title"><i class="fa-solid fa-flask"></i> Labs & Research Infrastructure</h2>
+      <section :id="tabsMap.labs" class="card-section" v-show="activeTab==='labs'">
+        <h2 class="section-title"><i class="fa-solid fa-microchip"></i> Labs & Research Infrastructure</h2>
         
         <div class="card">
           <h3 class="section-title-sm"><i class="fa-solid fa-microscope"></i> We have Fully Equipped Laboratories</h3>
@@ -471,7 +467,7 @@
       </section>
 
       <!-- CURRICULUM -->
-      <section class="card-section" aria-labelledby="curriculum" v-show="activeTab==='curriculum'">
+      <section :id="tabsMap.curriculum" class="card-section" aria-labelledby="curriculum" v-show="activeTab==='curriculum'">
         <div class="card">
           <h2 class="section-title" id="curriculum"><i class="fa-solid fa-file-lines"></i> Curriculum & Syllabus</h2>
           
@@ -498,19 +494,104 @@
         </div>
       </section>
 
+      <!-- BOS (Board of Studies) -->
+      <section :id="tabsMap.bos" class="card-section" v-show="activeTab==='bos'">
+        <div class="card">
+          <h2 class="section-title"><i class="fa-solid fa-graduation-cap"></i> Board of Studies (BOS)</h2>
+          <div class="bos-intro">
+            <p class="lead">
+              The Board of Studies (BOS) for Electronics and Communication Engineering is responsible for the academic planning, 
+              curriculum development, and quality assurance of the ECE program. The board ensures that the curriculum 
+              remains current with industry trends and academic standards in electronics and communication engineering.
+            </p>
+          </div>
+          
+          <div class="grid-2">
+            <article class="card">
+              <h3 class="section-title-sm"><i class="fa-solid fa-users"></i> BOS Members</h3>
+              <ul class="bullets">
+                <li><strong>Chairman:</strong> Dr. P. SEKHARBABU (HOD, ECE)</li>
+                <li><strong>Industry Expert:</strong> Mr. [Industry Expert] (Senior Engineer, Telecom Sector)</li>
+                <li><strong>Academic Expert:</strong> Dr. [Academic Expert] (Professor, IIT/NIT)</li>
+                <li><strong>Alumni Representative:</strong> Mr. [Alumni Name] (Senior Engineer, Electronics Industry)</li>
+                <li><strong>Student Representative:</strong> Ms. [Student Name] (Final Year ECE)</li>
+              </ul>
+            </article>
+            
+            <article class="card">
+              <h3 class="section-title-sm"><i class="fa-solid fa-tasks"></i> BOS Responsibilities</h3>
+              <ul class="bullets">
+                <li>Curriculum design and periodic review</li>
+                <li>Course content development and updates</li>
+                <li>Academic policy formulation</li>
+                <li>Quality assurance and assessment</li>
+                <li>Industry-academia collaboration</li>
+                <li>Research and development initiatives</li>
+              </ul>
+            </article>
+          </div>
+          
+          <div class="card mt-1">
+            <h3 class="section-title-sm"><i class="fa-solid fa-calendar-alt"></i> Recent BOS Activities</h3>
+            <div class="bos-activities">
+              <div class="activity-item">
+                <div class="activity-date">2024</div>
+                <div class="activity-content">
+                  <h4>Curriculum Revision (R22)</h4>
+                  <p>Updated curriculum to include IoT, 5G technologies, and embedded systems specializations</p>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-date">2023</div>
+                <div class="activity-content">
+                  <h4>Industry Partnership Program</h4>
+                  <p>Established partnerships with leading telecom and electronics companies for curriculum enhancement</p>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-date">2023</div>
+                <div class="activity-content">
+                  <h4>Faculty Development Program</h4>
+                  <p>Conducted workshops on emerging communication technologies and teaching methodologies</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- ACTIVITIES -->
-      <section class="card-section" v-show="activeTab==='activities'">
-        <h2 class="section-title"><i class="fa-solid fa-rocket"></i> Student Activities & Achievements</h2>
-        <div class="grid-3">
-          <article class="card" v-for="a in activities" :key="a.title">
-            <h3 class="h6">{{ a.title }}</h3>
-            <p class="muted">{{ a.desc }}</p>
-          </article>
+      <section :id="tabsMap.activities" class="card-section" v-show="activeTab==='activities'">
+        <div class="card">
+          <h2 class="section-title"><i class="fa-solid fa-rocket"></i> Student Development Activities</h2>
+          <div class="activities-hero">
+            <p class="lead">
+              THRUSHNA is a NATIONAL LEVEL TECHNICAL SYMPOSIUM organized by the Department of ECE. 
+              It provides a platform for students to showcase their technical skills and innovative projects 
+              in Electronics and Communication Engineering.
+            </p>
+          </div>
+          <div class="activities-grid">
+            <article v-for="activity in activities" :key="activity.title" class="activity-card">
+              <div class="activity-icon">
+                <i :class="activity.icon"></i>
+              </div>
+              <div class="activity-content">
+                <h3 class="activity-title">{{ activity.title }}</h3>
+                <p class="activity-desc">{{ activity.desc }}</p>
+              </div>
+            </article>
+          </div>
+          <div class="activities-footer">
+            <button class="btn btn-primary" @click="openEventsModal">
+              <i class="fa-solid fa-images"></i> View All Events Images
+            </button>
+          </div>
         </div>
       </section>
 
       <!-- RESEARCH & INDUSTRY -->
-      <section class="card-section" v-show="activeTab==='research'">
+      <section :id="tabsMap.research" class="card-section" v-show="activeTab==='research'">
         <div class="grid-2">
           <article class="card">
             <h2 class="section-title"><i class="fa-solid fa-microscope"></i> Research Highlights</h2>
@@ -537,7 +618,7 @@
       </section>
 
       <!-- PLACEMENTS -->
-      <section class="card-section" v-show="activeTab==='placements'">
+      <section :id="tabsMap.placements" class="card-section" v-show="activeTab==='placements'">
         <div class="card">
           <h2 class="section-title"><i class="fa-solid fa-briefcase"></i> Placements & Opportunities</h2>
           <div class="stats">
@@ -570,27 +651,20 @@
       </section>
 
       <!-- ALUMNI -->
-      <section class="card-section" v-show="activeTab==='alumni'">
+      <section :id="tabsMap.alumni" class="card-section" v-show="activeTab==='alumni'">
         <h2 class="section-title"><i class="fa-solid fa-user-graduate"></i> Alumni Network</h2>
-        <div class="alumni-grid">
-          <article v-for="al in alumni" :key="al.name" class="alumni-card">
-            <img :src="al.photo" :alt="al.name" class="avatar" />
-            <div>
-              <h3 class="h6">{{ al.name }}</h3>
-              <p class="muted">{{ al.role }} — {{ al.company }}</p>
-              <a v-if="al.linkedin" :href="al.linkedin" target="_blank" rel="noopener" class="icon-link">
-                <i class="fa-brands fa-linkedin"></i> Connect
-              </a>
-            </div>
-          </article>
-        </div>
-        <div class="row-actions mt-1">
-          <a class="btn btn-primary" href="mailto:alumni@ssit.edu.in">Join Alumni Mentoring</a>
+        <div class="under-construction">
+          <div class="construction-content">
+            <i class="fa-solid fa-hammer"></i>
+            <h3>Under Construction</h3>
+            <p>Our alumni network section is currently being updated with the latest information about our ECE graduates and their achievements.</p>
+            <p>Please check back soon for inspiring stories from our alumni community.</p>
+          </div>
         </div>
       </section>
 
       <!-- CONTACT -->
-      <section class="card-section" v-show="activeTab==='contact'">
+      <section :id="tabsMap.contact" class="card-section" v-show="activeTab==='contact'">
         <div class="card contact-card">
           <h2 class="section-title"><i class="fa-solid fa-address-book"></i> Contact Us</h2>
           <div class="contact-grid">
@@ -604,7 +678,7 @@
             </div>
             <aside class="note">
               <p class="mb-0"><i class="fa-solid fa-circle-info"></i> Follow our LinkedIn page for news, internships, and events.</p>
-              <a class="btn btn-soft mt-1" href="#" aria-label="AI & DS LinkedIn">AI & DS LinkedIn</a>
+              <a class="btn btn-soft mt-1" href="#" aria-label="ECE LinkedIn">ECE LinkedIn</a>
             </aside>
           </div>
         </div>
@@ -621,15 +695,27 @@
       :images="labImagesForModal"
       :initial-index="currentImageIndex"
       title="Laboratory Images"
-      title-icon="fa-solid fa-flask"
+      title-icon="fa-solid fa-microchip"
       title-icon-color="var(--orange)"
       :show-image-info="false"
+    />
+
+    <!-- Events Image Modal -->
+    <ImagePreviewer
+      v-model:show="showEventsModal"
+      :images="eventImages"
+      :initial-index="currentEventImageIndex"
+      title="ECE Events Gallery"
+      title-icon="fa-solid fa-rocket"
+      title-icon-color="var(--primary)"
+      :show-image-info="true"
     />
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import Header from '@/components/Header.vue'
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/Footer.vue'
@@ -641,7 +727,7 @@ const facts = { established: '2001', intakeUG: '60', labs: '8+' }
 /* About stats */
 const aboutStats = [
   { label: 'Faculty', value: '14+', icon: 'fa-solid fa-user-tie' },
-  { label: 'ECE Labs', value: '8+', icon: 'fa-solid fa-flask' },
+  { label: 'ECE Labs', value: '8+', icon: 'fa-solid fa-microchip' },
   { label: 'Graduates', value: '1200+', icon: 'fa-solid fa-graduation-cap' },
   { label: 'Placement', value: '90%+', icon: 'fa-solid fa-briefcase' }
 ]
@@ -650,16 +736,63 @@ const aboutStats = [
 const tabs = [
   { id: 'overview',   label: 'Overview',   icon: 'fa-solid fa-circle-dot' },
   { id: 'faculty',    label: 'Faculty',    icon: 'fa-solid fa-users' },
-  { id: 'labs',       label: 'Labs',       icon: 'fa-solid fa-flask' },
+  { id: 'labs',       label: 'Labs',       icon: 'fa-solid fa-microchip' },
   { id: 'curriculum', label: 'Curriculum', icon: 'fa-solid fa-file-lines' },
+  { id: 'bos',        label: 'BOS',        icon: 'fa-solid fa-graduation-cap' },
   { id: 'activities', label: 'Activities', icon: 'fa-solid fa-rocket' },
   { id: 'research',   label: 'Research',   icon: 'fa-solid fa-microscope' },
   { id: 'placements', label: 'Placements', icon: 'fa-solid fa-briefcase' },
   { id: 'alumni',     label: 'Alumni',     icon: 'fa-solid fa-user-graduate' },
   { id: 'contact',    label: 'Contact',    icon: 'fa-solid fa-address-book' }
 ]
+// Router setup
+const route = useRoute()
+const router = useRouter()
+
+// Tab mapping for URL synchronization
+const tabsMap = {
+  overview: 'overview',
+  faculty: 'faculty', 
+  labs: 'labs',
+  curriculum: 'curriculum',
+  bos: 'bos',
+  activities: 'activities',
+  research: 'research',
+  placements: 'placements',
+  alumni: 'alumni',
+  contact: 'contact'
+}
+
 const activeTab = ref(tabs[0].id)
-const setTab = (id) => { activeTab.value = id } // tabbed view, no scroll
+
+// Enhanced setTab function with router navigation
+const setTab = (id) => {
+  activeTab.value = id
+  router.push(`/ece/${id}`)
+  
+  // Smooth scroll to section
+  setTimeout(() => {
+    const element = document.getElementById(tabsMap[id])
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, 100)
+}
+
+// Initialize tab from URL on mount
+onMounted(() => {
+  const tabFromUrl = route.params.tab
+  if (tabFromUrl && tabs.some(tab => tab.id === tabFromUrl)) {
+    activeTab.value = tabFromUrl
+  }
+})
+
+// Watch for route changes
+watch(() => route.params.tab, (newTab) => {
+  if (newTab && tabs.some(tab => tab.id === newTab)) {
+    activeTab.value = newTab
+  }
+})
 
 /* Faculty */
 const faculty = ref([
@@ -669,7 +802,7 @@ const faculty = ref([
     qualification: 'Ph.D',
     expertise: ['Digital Communications', 'Signal Processing'],
     email: 'hod.ece@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&w=400',
+    photo: new URL('@/assets/departments/ece/faculty/ECE_01.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 31
   },
@@ -679,7 +812,7 @@ const faculty = ref([
     qualification: 'Ph.D',
     expertise: ['VLSI Design', 'Embedded Systems'],
     email: 'sekhar@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400',
+    photo: new URL('@/assets/departments/ece/faculty/ECE_02.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 19
   },
@@ -689,7 +822,7 @@ const faculty = ref([
     qualification: 'M.TECH',
     expertise: ['Electronics', 'Circuit Design'],
     email: 'rambabu@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=400',
+    photo: new URL('@/assets/departments/ece/faculty/ECE_03.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 18
   },
@@ -699,7 +832,7 @@ const faculty = ref([
     qualification: 'M.TECH',
     expertise: ['Analog Electronics', 'Communication Systems'],
     email: 'sundara@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=400',
+    photo: new URL('@/assets/departments/ece/faculty/ECE_04.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 14
   },
@@ -709,7 +842,7 @@ const faculty = ref([
     qualification: 'M.TECH, (Ph.D)',
     expertise: ['Digital Signal Processing', 'MATLAB'],
     email: 'nagasekhar@ssit.edu.in',
-    photo: '#',
+    photo: new URL('@/assets/departments/ece/faculty/ECE_05.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 18
   },
@@ -719,7 +852,7 @@ const faculty = ref([
     qualification: 'M.TECH, (Ph.D)',
     expertise: ['Microcontrollers', 'Embedded Programming'],
     email: 'narendar@ssit.edu.in',
-    photo: '#',
+    photo: new URL('@/assets/departments/ece/faculty/ECE_07.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 11
   },
@@ -729,7 +862,7 @@ const faculty = ref([
     qualification: 'M.TECH, (Ph.D)',
     expertise: ['VLSI', 'Digital Design'],
     email: 'varaprasad@ssit.edu.in',
-    photo: '#',
+    photo: new URL('@/assets/departments/ece/faculty/ECE_10.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 11
   },
@@ -769,7 +902,7 @@ const faculty = ref([
     qualification: 'M.TECH',
     expertise: ['RF Engineering', 'Microwave Engineering'],
     email: 'anusha@ssit.edu.in',
-    photo: '#',
+    photo: new URL('@/assets/departments/ece/faculty/ECE_08.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 4
   },
@@ -779,7 +912,7 @@ const faculty = ref([
     qualification: 'M.TECH, (Ph.D)',
     expertise: ['Communication Networks', 'Data Communications'],
     email: 'gopalakrishna@ssit.edu.in',
-    photo: '#',
+    photo: new URL('@/assets/departments/ece/faculty/ECE_06.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 11
   },
@@ -789,7 +922,7 @@ const faculty = ref([
     qualification: 'M.TECH, (Ph.D)',
     expertise: ['Image Processing', 'Computer Vision'],
     email: 'rani@ssit.edu.in',
-    photo: '#',
+    photo: new URL('@/assets/departments/ece/faculty/ECE_09.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 5
   },
@@ -799,7 +932,7 @@ const faculty = ref([
     qualification: 'M.TECH',
     expertise: ['Electromagnetic Fields', 'Antenna Theory'],
     email: 'veerla@ssit.edu.in',
-    photo: '#',
+    photo: new URL('@/assets/departments/ece/faculty/ECE_11.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 4
   }
@@ -822,54 +955,55 @@ const labs = [
   {
     title: 'Simulation Lab',
     desc: 'Advanced simulation software for circuit design and analysis using MATLAB, Multisim, and Xilinx tools.',
-    img: '@/assets/engineering-students-lab.png',
+    img: new URL('@/assets/departments/ece/labs/simulation_lab_1_1.jpg', import.meta.url).href,
     images: [
-      '@/assets/engineering-students-lab.png',
-      '@/assets/campuslife/engineering-students-lab.png',
-      '@/assets/campuslife/students-in-college-library-studying.jpg'
+      new URL('@/assets/departments/ece/labs/simulation_lab_1_1.jpg', import.meta.url).href,
+      new URL('@/assets/departments/ece/labs/simulation_lab_1_2.jpg', import.meta.url).href,
+      new URL('@/assets/departments/ece/labs/simulation_lab_1_3.jpg', import.meta.url).href
     ],
     tags: ['MATLAB', 'Multisim', 'Xilinx']
   },
   {
     title: 'MP&MC Lab',
     desc: 'Microprocessors and Microcontrollers laboratory with 8085, 8086, and ARM processors for hands-on training.',
-    img: '@/assets/campuslife/engineering-students-lab.png',
+    img: new URL('@/assets/departments/ece/labs/mp_n_mc_lab_1_1.jpg', import.meta.url).href,
     images: [
-      '@/assets/campuslife/engineering-students-lab.png',
-      '@/assets/engineering-students-lab.png',
-      '@/assets/campuslife/students-in-college-library-studying.jpg'
+      new URL('@/assets/departments/ece/labs/mp_n_mc_lab_1_1.jpg', import.meta.url).href,
+      new URL('@/assets/engineering-students-lab.png', import.meta.url).href,
+      new URL('@/assets/campuslife/engineering-students-lab.png', import.meta.url).href
     ],
     tags: ['8085', '8086', 'ARM', 'Assembly']
   },
   {
     title: 'IC/DSD Lab',
     desc: 'Integrated Circuits and Digital System Design lab with VLSI design tools and FPGA development boards.',
-    img: '@/assets/campuslife/students-in-college-library-studying.jpg',
+    img: new URL('@/assets/engineering-students-lab.png', import.meta.url).href,
     images: [
-      '@/assets/campuslife/students-in-college-library-studying.jpg',
-      '@/assets/engineering-students-lab.png',
-      '@/assets/campuslife/engineering-students-lab.png'
+      new URL('@/assets/engineering-students-lab.png', import.meta.url).href,
+      new URL('@/assets/campuslife/engineering-students-lab.png', import.meta.url).href,
+      new URL('@/assets/campuslife/students-in-college-library-studying.jpg', import.meta.url).href
     ],
     tags: ['VLSI', 'FPGA', 'Digital Design']
   },
   {
     title: 'Communication Lab',
     desc: 'Advanced communication systems lab with analog/digital modulation, antenna measurement, and RF equipment.',
-    img: '@/assets/engineering-students-lab.png',
+    img: new URL('@/assets/departments/ece/labs/communication_lab_1_1.jpg', import.meta.url).href,
     images: [
-      '@/assets/engineering-students-lab.png',
-      '@/assets/campuslife/engineering-students-lab.png',
-      '@/assets/campuslife/students-in-college-library-studying.jpg'
+      new URL('@/assets/departments/ece/labs/communication_lab_1_1.jpg', import.meta.url).href,
+      new URL('@/assets/departments/ece/labs/communication_lab_1_2.jpg', import.meta.url).href,
+      new URL('@/assets/departments/ece/labs/Communication_lab_1_3.jpg', import.meta.url).href
     ],
     tags: ['RF', 'Antenna', 'Modulation']
   },
   {
     title: 'EDC Lab',
     desc: 'Electronic Devices and Circuits laboratory with semiconductor devices, amplifiers, and circuit analysis equipment.',
-    img: '@/assets/campuslife/engineering-students-lab.png',
+    img: new URL('@/assets/departments/ece/labs/edc_lab_1_1.jpg', import.meta.url).href,
     images: [
-      '@/assets/campuslife/engineering-students-lab.png',
-      '@/assets/engineering-students-lab.png'
+      new URL('@/assets/departments/ece/labs/edc_lab_1_1.jpg', import.meta.url).href,
+      new URL('@/assets/departments/ece/labs/edc_lab_1_2.jpg', import.meta.url).href,
+      new URL('@/assets/engineering-students-lab.png', import.meta.url).href
     ],
     tags: ['Semiconductors', 'Amplifiers', 'Diodes']
   }
@@ -885,9 +1019,55 @@ const syllabus = [
 
 /* Activities */
 const activities = [
-  { title: 'AI Hackathon', desc: '24-hour innovation sprint across CV, NLP, RL.' },
-  { title: 'Workshops & Bootcamps', desc: 'Deep Learning, MLOps, Data Engineering.' },
-  { title: 'Clubs & SIGs', desc: 'AI Club, Data Viz Guild, Kaggle Circle.' }
+  {
+    title: 'Paper Presentations',
+    desc: 'Students present their research work in the form of 5-slide PowerPoint presentations covering technology concepts, methodology, and conclusions.',
+    icon: 'fa-solid fa-presentation-screen'
+  },
+  {
+    title: 'Circuit Design Competition',
+    desc: 'Competitive event focusing on designing and implementing electronic circuits with real-time problem-solving challenges.',
+    icon: 'fa-solid fa-microchip'
+  },
+  {
+    title: 'Technical Quiz',
+    desc: 'Mind sport where students attempt to answer questions correctly on electronics, communication systems, and digital technologies.',
+    icon: 'fa-solid fa-question-circle'
+  },
+  {
+    title: 'Project Exhibition',
+    desc: 'Showcase of innovative ECE projects including IoT applications, embedded systems, and communication devices.',
+    icon: 'fa-solid fa-rocket'
+  },
+  {
+    title: 'Workshops',
+    desc: 'Hands-on training sessions on latest technologies like VLSI design, antenna systems, and wireless communication.',
+    icon: 'fa-solid fa-tools'
+  },
+  {
+    title: 'Guest Lectures',
+    desc: 'Industry experts and academicians share insights on emerging trends in electronics and communication engineering.',
+    icon: 'fa-solid fa-chalkboard-teacher'
+  }
+]
+
+// Event Images for ECE Activities
+const eventImages = [
+  {
+    src: new URL('@/assets/departments/ece/activities/ece_thrushna_1.jpg', import.meta.url).href,
+    title: 'THRUSHNA Symposium',
+    desc: 'National Level Technical Symposium'
+  },
+  {
+    src: new URL('@/assets/departments/ece/activities/ece_thrushna_2.jpg', import.meta.url).href,
+    title: 'Technical Events',
+    desc: 'Circuit Design and Paper Presentations'
+  },
+  {
+    src: new URL('@/assets/departments/ece/activities/ece_thrushna_3.jpg', import.meta.url).href,
+    title: 'Student Activities',
+    desc: 'ECE Department Events and Competitions'
+  }
 ]
 
 /* Research & Industry */
@@ -951,11 +1131,11 @@ const alumni = [
 
 /* Contact */
 const hod = {
-  name: 'Dr. R. Anitha',
-  designation: 'Professor & Head, CSE (AI & DS)',
-  location: 'AI & DS Block, Room 301',
-  phone: '+91-98765-43210',
-  email: 'hod.aids@ssit.edu.in'
+  name: 'Dr. P. SEKHARBABU',
+  designation: 'HOD & Associate Professor',
+  location: 'ECE Block, Room 302',
+  phone: '+91-98765-43212',
+  email: 'suma.sekhar3@gmail.com'
 }
 
 const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })
@@ -968,10 +1148,21 @@ const toggleAccordion = (section) => {
 
 // Modal functions now handled by ImagePreviewer component
 
+// Events modal function
+const openEventsModal = () => {
+  showEventsModal.value = true
+  currentEventImageIndex.value = 0
+}
+
 // Image Modal state
 const showImageModal = ref(false)
 const currentImageIndex = ref(0)
 const currentLabImages = ref([])
+
+// Events Modal state
+const showEventsModal = ref(false)
+const currentEventImageIndex = ref(0)
+const isEventsFullscreen = ref(false)
 const isFullscreen = ref(false)
 
 // Computed properties for ImagePreviewer
@@ -1055,9 +1246,22 @@ const openImageModal = (labImages) => {
 .filters input, .filters select{
   border:1px solid var(--border); border-radius:.6rem; padding:.55rem .8rem; min-width:220px; background:#fff;
 }
-.faculty-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem; margin-top:1rem }
-.faculty-card{ border:1px solid var(--border); border-radius:1rem; overflow:hidden; display:flex; gap:.85rem; padding:.9rem; background:#fff; transition:transform .2s ease, box-shadow .2s ease }
-.faculty-card:focus, .faculty-card:hover{ transform:translateY(-3px); box-shadow:0 12px 30px rgba(0,0,0,.08) }
+.faculty-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(350px,1fr)); gap:1rem; margin-top:1rem }
+.faculty-card{ 
+  border:1px solid var(--border); 
+  border-radius:1rem; 
+  overflow:visible; 
+  display:flex; 
+  gap:.85rem; 
+  padding:1rem; 
+  background:#fff; 
+  transition:all 0.3s ease;
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
+}
+.faculty-card:focus, .faculty-card:hover{ 
+  transform:translateY(-4px); 
+  box-shadow:0 8px 25px rgba(0,0,0,.12);
+}
 .avatar{ width:86px; height:86px; object-fit:cover; border-radius:.75rem }
 .fc-name{ font-size:1.05rem; font-weight:800; color:var(--ink); margin:0 0 .15rem }
 .fc-meta{ color:var(--muted); margin:0 0 .35rem }
@@ -1070,6 +1274,49 @@ const openImageModal = (labImages) => {
 /* LABS */
 .labs-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem }
 .lab-card{ border:1px solid var(--border); border-radius:1rem; overflow:hidden; background:#fff; display:flex; flex-direction:column }
+
+/* BOS */
+.bos-intro{ margin:1.5rem 0 }
+.bos-activities{ margin-top:1rem }
+.activity-item{ 
+  display:flex; 
+  gap:1rem; 
+  align-items:flex-start; 
+  padding:1rem 0; 
+  border-bottom:1px solid var(--border);
+  transition:all 0.3s ease;
+}
+.activity-item:last-child{ border-bottom:none }
+.activity-item:hover{ 
+  background:rgba(249,115,22,0.02); 
+  border-radius:.5rem; 
+  padding:1rem; 
+  margin:0 -1rem;
+}
+.activity-date{ 
+  background:var(--orange); 
+  color:#fff; 
+  border-radius:.5rem; 
+  padding:.4rem .8rem; 
+  font-weight:700; 
+  font-size:.85rem; 
+  min-width:60px; 
+  text-align:center;
+  flex-shrink:0;
+}
+.activity-content h4{ 
+  font-size:1rem; 
+  font-weight:700; 
+  color:var(--ink); 
+  margin:0 0 .3rem;
+  line-height:1.3;
+}
+.activity-content p{ 
+  color:#000; 
+  font-size:.9rem; 
+  line-height:1.5; 
+  margin:0;
+}
 .lab-card img{ width:100%; height:160px; object-fit:cover }
 .lab-body{ padding:1rem; flex:1; display:flex; flex-direction:column }
 .lab-title{ margin:0 0 .25rem; font-weight:800; color:var(--ink) }
@@ -1131,6 +1378,105 @@ const openImageModal = (labImages) => {
 .alumni-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem }
 .alumni-card{ border:1px solid var(--border); border-radius:1rem; background:#fff; padding:.9rem; display:flex; gap:.8rem; align-items:center }
 .alumni-card .avatar{ width:70px; height:70px; border-radius:.7rem }
+
+/* UNDER CONSTRUCTION */
+.under-construction{ 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  min-height: 300px; 
+  background: linear-gradient(135deg, #f8fafc 0%, #eef4ff 100%); 
+  border: 2px dashed var(--border); 
+  border-radius: 1rem; 
+  margin: 1rem 0 
+}
+.construction-content{ 
+  text-align: center; 
+  max-width: 400px; 
+  padding: 2rem 
+}
+.construction-content i{ 
+  font-size: 3rem; 
+  color: var(--primary); 
+  margin-bottom: 1rem; 
+  opacity: 0.7 
+}
+.construction-content h3{ 
+  color: var(--ink); 
+  margin-bottom: 1rem; 
+  font-size: 1.5rem 
+}
+.construction-content p{ 
+  color: var(--muted); 
+  line-height: 1.6; 
+  margin-bottom: 0.8rem 
+}
+
+/* ACTIVITIES */
+.activities-hero{
+  background: linear-gradient(135deg, #f8fafc 0%, #eef4ff 100%);
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border: 1px solid var(--border);
+}
+.activities-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.activity-card{
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.activity-card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  border-color: var(--primary);
+}
+.activity-icon{
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--primary), var(--orange));
+  border-radius: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.activity-icon i{
+  font-size: 1.2rem;
+  color: white;
+}
+.activity-content{
+  flex: 1;
+}
+.activity-title{
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 0.5rem;
+  line-height: 1.3;
+}
+.activity-desc{
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+.activities-footer{
+  text-align: center;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
 
 /* CONTACT */
 .contact-card .contact-grid{ display:grid; grid-template-columns:2fr 1fr; gap:1rem; align-items:start }

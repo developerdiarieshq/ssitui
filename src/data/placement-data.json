@@ -1,0 +1,125 @@
+{
+    "campusPlacements2025": {
+        "title": "Campus Placements 2025:",
+        "companies": [
+            {
+                "name": "Cognizant",
+                "students": 154
+            },
+            {
+                "name": "Infosys",
+                "students": 42
+            },
+            {
+                "name": "Tech Mahindra",
+                "students": 28
+            },
+            {
+                "name": "HCL Tech",
+                "students": 27
+            },
+            {
+                "name": "Capgemini",
+                "students": 17
+            },
+            {
+                "name": "GlobalLogic",
+                "students": 38
+            },
+            {
+                "name": "TCS",
+                "students": 18
+            }
+        ]
+    },
+    "topPlacements": [
+        {
+            "id": 1,
+            "company": "Capgemini",
+            "students": "180",
+            "logo": "@/assets/companies/Capgemini.svg"
+        },
+        {
+            "id": 2,
+            "company": "Hexaware",
+            "students": "179",
+            "logo": "@/assets/companies/HW.png"
+        },
+        {
+            "id": 3,
+            "company": "Infosys",
+            "students": "64",
+            "logo": "@/assets/companies/Infosys.png"
+        },
+        {
+            "id": 4,
+            "company": "Cybage",
+            "students": "30",
+            "logo": "@/assets/companies/TechM.png"
+        },
+        {
+            "id": 5,
+            "company": "Accenture",
+            "students": "19",
+            "logo": "@/assets/companies/Accenture.png"
+        }
+    ],
+    "topRecruiters": [
+        {
+            "name": "Tech Mahindra",
+            "logo": "@/assets/companies/TechM.png",
+            "info": "Leading IT Services"
+        },
+        {
+            "name": "Infosys",
+            "logo": "@/assets/companies/infosys.png",
+            "info": "Global Technology"
+        },
+        {
+            "name": "Wipro",
+            "logo": "@/assets/wipro.png",
+            "info": "IT Solutions"
+        },
+        {
+            "name": "Microsoft",
+            "logo": "@/assets/microsoft.png",
+            "info": "Technology Giant"
+        },
+        {
+            "name": "Oracle",
+            "logo": "@/assets/oracle.png",
+            "info": "Database Solutions"
+        },
+        {
+            "name": "Cisco",
+            "logo": "@/assets/cisco.png",
+            "info": "Networking Leader"
+        }
+    ],
+    "placementStats": {
+        "totalStudents": 1000,
+        "totalCompanies": 150,
+        "averagePackage": "6.5 LPA",
+        "highestPackage": "12 LPA"
+    },
+    "placementYears": {
+        "2025": {
+            "totalOffers": 324,
+            "totalCompanies": 45,
+            "averagePackage": "6.5 LPA",
+            "highestPackage": "12 LPA"
+        },
+        "2024": {
+            "totalOffers": 298,
+            "totalCompanies": 42,
+            "averagePackage": "6.2 LPA",
+            "highestPackage": "11.5 LPA"
+        },
+        "2023": {
+            "totalOffers": 275,
+            "totalCompanies": 38,
+            "averagePackage": "5.8 LPA",
+            "highestPackage": "10.5 LPA"
+        }
+    }
+}

@@ -1,23 +1,26 @@
 {
-  "name": "ssit-college-website",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "deploy": "gh-pages -d dist"
-  },
-  "dependencies": {
-    "@fortawesome/fontawesome-free": "^7.0.1",
-    "bootstrap": "^5.3.8",
-    "vue": "^3.5.18",
-    "vue-router": "^4.5.1"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-vue": "^6.0.1",
-    "gh-pages": "^6.3.0",
-    "vite": "^7.1.2"
-  }
+    "name": "ssit-college-website",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "build:github": "vite build --base=/ssitui/",
+        "build:netlify": "vite build --base=/",
+        "build:vercel": "vite build --base=/",
+        "preview": "vite preview",
+        "deploy": "gh-pages -d dist"
+    },
+    "dependencies": {
+        "@fortawesome/fontawesome-free": "^7.0.1",
+        "bootstrap": "^5.3.8",
+        "vue": "^3.5.18",
+        "vue-router": "^4.5.1"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-vue": "^6.0.1",
+        "gh-pages": "^6.3.0",
+        "vite": "^7.1.2"
+    }
 }

@@ -9,7 +9,7 @@
       <div class="overlay"></div>
       <div class="hero-content container text-center">
         <h1 class="display-4 fw-bold">Social Services</h1>
-        <p class="lead">
+        <p class="lead" style="color: white;">
           Empowering Communities — Serving Society through Sai Spurthi Students Seva Samithi (SSSSS)
         </p>
       </div>
@@ -44,17 +44,70 @@
       </div>
     </section>
 
-    <!-- Footer Contact -->
-    <footer class="contact-section py-5">
-      <div class="container text-center">
-        <h2 class="section-title">Get Involved</h2>
-        <p>Join us in making a difference through volunteering, donations, or partnerships.</p>
-        <p>
-          Email: <a href="mailto:socialservices@ssit.edu.in">socialservices@ssit.edu.in</a>
+    <!-- Image Gallery -->
+    <section class="py-5">
+      <div class="container">
+        <h2 class="section-title">Gallery - Our Social Service Activities</h2>
+        <p class="text-center text-muted mb-4">
+          Capturing moments of compassion and community service in action
         </p>
-        <p>Phone: +91-98765-43210</p>
+        <div class="row g-3">
+          <div v-for="(image, index) in galleryImages" :key="index" class="col-md-4 col-lg-3">
+            <div class="gallery-item" @click="openImageModal(index)">
+              <img :src="image.src" :alt="image.alt" class="img-fluid rounded shadow-sm" />
+              <div class="gallery-overlay">
+                <i class="fa-solid fa-expand"></i>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </footer>
+    </section>
+
+    <!-- Image Previewer -->
+    <ImagePreviewer 
+      :show="showImageModal" 
+      :images="galleryImages"
+      :initial-index="currentImageIndex"
+      title="Social Service Activities Gallery"
+      title-icon="fa-solid fa-heart"
+      title-icon-color="var(--brand-orange)"
+      @close="closeImageModal"
+    />
+
+    <!-- Footer Contact -->
+    <section class="py-5 bg-light">
+      <div class="container">
+        <h2 class="section-title">Get Involved</h2>
+        <p class="text-center text-muted mb-4">
+          Join us in making a difference through volunteering, donations, or partnerships.
+        </p>
+        
+        <div class="row g-4">
+          <div class="col-md-6">
+            <div class="card h-100 shadow-sm contact-card">
+              <div class="card-body text-center">
+                <i class="fa-solid fa-envelope fa-2x contact-icon mb-3" style="color: var(--brand-orange);"></i>
+                <h5 class="mb-2">Email</h5>
+                <p class="text-muted mb-0">
+                  <a href="mailto:socialservices@ssit.edu.in" class="text-decoration-none">socialservices@ssit.edu.in</a>
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            <div class="card h-100 shadow-sm contact-card">
+              <div class="card-body text-center">
+                <i class="fa-solid fa-phone fa-2x contact-icon mb-3" style="color: var(--brand-orange);"></i>
+                <h5 class="mb-2">Phone</h5>
+                <p class="text-muted mb-0">+91-98765-43210</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Global Footer -->
     <Footer />
@@ -65,10 +118,11 @@
 import Header from "../../components/Header.vue";
 import NavBar from "../../components/NavBar.vue";
 import Footer from "../../components/Footer.vue";
+import ImagePreviewer from "../utils/ImagePreviewer.vue";
 
 export default {
   name: "SocialServices",
-  components: { Header, NavBar, Footer },
+  components: { Header, NavBar, Footer, ImagePreviewer },
   data() {
     return {
       activities: [
@@ -98,7 +152,65 @@ export default {
           icon: "fa-solid fa-chalkboard-user fa-2x text-info",
         },
       ],
+      galleryImages: [
+        { 
+          src: new URL('@/assets/images/social_service/1.jpg', import.meta.url).href, 
+          title: 'Community Service Activity',
+          desc: 'Students engaging in community service activities'
+        },
+        { 
+          src: new URL('@/assets/images/social_service/2.jpg', import.meta.url).href, 
+          title: 'Health Camp Initiative',
+          desc: 'Organizing health checkup camps for rural communities'
+        },
+        { 
+          src: new URL('@/assets/images/social_service/3.jpg', import.meta.url).href, 
+          title: 'Educational Support',
+          desc: 'Providing educational support to underprivileged children'
+        },
+        { 
+          src: new URL('@/assets/images/social_service/4.jpg', import.meta.url).href, 
+          title: 'Blood Donation Drive',
+          desc: 'Students participating in blood donation campaigns'
+        },
+        { 
+          src: new URL('@/assets/images/social_service/5.jpg', import.meta.url).href, 
+          title: 'Rural Development',
+          desc: 'Contributing to rural development initiatives'
+        },
+        { 
+          src: new URL('@/assets/images/social_service/DSC02740.JPG', import.meta.url).href, 
+          title: 'Social Service Event',
+          desc: 'Students organizing social service events'
+        },
+        { 
+          src: new URL('@/assets/images/social_service/sservice1.jpg', import.meta.url).href, 
+          title: 'Community Outreach',
+          desc: 'Reaching out to local communities with support'
+        },
+        { 
+          src: new URL('@/assets/images/social_service/sservice2.JPG', import.meta.url).href, 
+          title: 'Volunteer Activities',
+          desc: 'Students volunteering for social causes'
+        },
+        { 
+          src: new URL('@/assets/images/social_service/sservice3.jpg', import.meta.url).href, 
+          title: 'Social Welfare',
+          desc: 'Contributing to social welfare programs'
+        },
+      ],
+      showImageModal: false,
+      currentImageIndex: 0,
     };
+  },
+  methods: {
+    openImageModal(index) {
+      this.currentImageIndex = index;
+      this.showImageModal = true;
+    },
+    closeImageModal() {
+      this.showImageModal = false;
+    },
   },
 };
 </script>
@@ -130,19 +242,96 @@ export default {
 
 /* Section Titles */
 .section-title {
-  color: var(--brand-blue);
+  color: var(--brand-orange);
   font-weight: 700;
   margin-bottom: 1rem;
   text-align: center;
 }
 
 /* Service Cards */
-.service-card i { font-size: 2rem; color: var(--brand-orange); }
-
-/* Contact */
-.contact-section {
-  background: var(--brand-blue);
-  color: #fff;
+.service-card {
+  transition: all 0.3s ease;
+  border: 1px solid #e5e7eb;
 }
-.contact-section a { color: #fff; text-decoration: underline; }
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+  border-color: var(--brand-orange);
+}
+
+.service-card i { 
+  font-size: 2rem; 
+  color: var(--brand-orange); 
+}
+
+.service-card h5 {
+  color: var(--brand-orange);
+  font-weight: 700;
+}
+
+/* Contact Cards */
+.contact-card {
+  transition: all 0.3s ease;
+  border: 1px solid #e5e7eb;
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+}
+
+.contact-card h5 {
+  color: var(--brand-orange);
+  font-weight: 700;
+}
+
+/* Gallery Styles */
+.gallery-item {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+.gallery-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+  opacity: 1;
+}
+
+.gallery-overlay i {
+  color: white;
+  font-size: 2rem;
+}
+
 </style>

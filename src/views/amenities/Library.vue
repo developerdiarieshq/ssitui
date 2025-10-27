@@ -50,10 +50,10 @@
 
     <!-- CONTENT -->
     <main id="content" tabindex="-1">
-      <div class="container py-5">
+      <div class="container">
 
     <!-- STICKY SUB NAV (nav-pills) -->
-    <nav class="subnav" aria-label="Section navigation">
+    <nav id="subnav" class="subnav" aria-label="Section navigation">
       <div class="container subnav-inner">
         <button
           v-for="tab in tabs"
@@ -460,10 +460,10 @@ export default {
         { service: "Reference Section", days: "Monday–Saturday", hours: "8:00 A.M to 8:00 P.M" },
       ],
       team: [
-        { name: "G. UPENDRA RAO", degree: "MA, B.Ed., MLISc, PGDCA", role: "LIBRARIAN", photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" },
-        { name: "V. VENKATESWER RAO", degree: "BA, B.LISc", role: "Library Assistant", photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" },
-        { name: "O. VENKATA KRISHNA", degree: "BSc Computers", role: "Book Keeper", photo: "https://images.unsplash.com/photo-1560250097-0b93528c311a" },
-        { name: "M. MAHA LAKSHMI", degree: "SSC", role: "Attender", photo: "https://images.unsplash.com/photo-1494790108755-2616b612b786" },
+        { name: "G. UPENDRA RAO", degree: "MA, B.Ed., MLISc, PGDCA", role: "LIBRARIAN", photo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNmOTczMTYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiAxNkMxOC4yMDkxIDE2IDIwIDE0LjIwOTEgMjAgMTJDMjAgOS43OTA5MSAxOC4yMDkxIDggMTYgOEMxMy43OTA5IDggMTIgOS43OTA5MSAxMiAxMkMxMiAxNC4yMDkxIDEzLjc5MDkgMTYgMTYgMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTYgMTlDMTEuNTgxNyAxOSA4IDIyLjU4MTcgOCAyN1YyOUgyNFYyN0MyNCAyMi41ODE3IDIwLjQxODMgMTkgMTYgMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+" },
+        { name: "V. VENKATESWER RAO", degree: "BA, B.LISc", role: "Library Assistant", photo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNmOTczMTYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiAxNkMxOC4yMDkxIDE2IDIwIDE0LjIwOTEgMjAgMTJDMjAgOS43OTA5MSAxOC4yMDkxIDggMTYgOEMxMy43OTA5IDggMTIgOS43OTA5MSAxMiAxMkMxMiAxNC4yMDkxIDEzLjc5MDkgMTYgMTYgMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTYgMTlDMTEuNTgxNyAxOSA4IDIyLjU4MTcgOCAyN1YyOUgyNFYyN0MyNCAyMi41ODE3IDIwLjQxODMgMTkgMTYgMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+" },
+        { name: "O. VENKATA KRISHNA", degree: "BSc Computers", role: "Book Keeper", photo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNmOTczMTYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiAxNkMxOC4yMDkxIDE2IDIwIDE0LjIwOTEgMjAgMTJDMjAgOS43OTA5MSAxOC4yMDkxIDggMTYgOEMxMy43OTA5IDggMTIgOS43OTA5MSAxMiAxMkMxMiAxNC4yMDkxIDEzLjc5MDkgMTYgMTYgMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTYgMTlDMTEuNTgxNyAxOSA4IDIyLjU4MTcgOCAyN1YyOUgyNFYyN0MyNCAyMi41ODE3IDIwLjQxODMgMTkgMTYgMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+" },
+        { name: "M. MAHA LAKSHMI", degree: "SSC", role: "Attender", photo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNmOTczMTYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiAxNkMxOC4yMDkxIDE2IDIwIDE0LjIwOTEgMjAgMTJDMjAgOS43OTA5MSAxOC4yMDkxIDggMTYgOEMxMy43OTA5IDggMTIgOS43OTA5MSAxMiAxMkMxMiAxNC4yMDkxIDEzLjc5MDkgMTYgMTYgMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTYgMTlDMTEuNTgxNyAxOSA4IDIyLjU4MTcgOCAyN1YyOUgyNFYyN0MyNCAyMi41ODE3IDIwLjQxODMgMTkgMTYgMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+" },
       ],
       downloads: [
         { label: "Membership Form", icon: "fa-solid fa-file-pdf" },
@@ -507,7 +507,7 @@ export default {
 .mb-0{margin-bottom:0} .mt-1{margin-top:1rem} .mt-2{margin-top:1.25rem}
 .mb-2{margin-bottom:.75rem} .h5{font-size:1.1rem} .h6{font-size:1rem}
 .text-muted{color:var(--muted)} .muted{color:var(--muted)}
-.lead{font-size:1.2rem; color:#fff; font-weight:600}
+.lead{font-size:1.05rem; color:#000; line-height:1.6}
 
 /* PAGE BACKGROUND */
 .page-bg { background: linear-gradient(180deg, #fff 0%, #eef3ff 100%); }
@@ -520,19 +520,77 @@ export default {
 .stat-number { font-weight:800; color:#0b3d91; }
 
 /* SUBNAV */
-.subnav{ position:sticky; top:0; z-index:20; background:#fff; border-bottom:1px solid var(--border); }
+.subnav{ 
+  position:sticky; 
+  top:0; 
+  z-index:20; 
+  background:#fff; 
+  border-bottom:1px solid var(--border);
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+}
 .subnav-inner{ display:flex; gap:.5rem; padding:.6rem 1rem; overflow-x:auto; overflow-y:hidden; justify-content:flex-start; flex-wrap:nowrap; }
-.chip{ border:1px solid var(--border); background:#fff; color:#111; border-radius:999px; padding:.5rem .9rem; font-weight:600; display:flex; align-items:center; gap:.5rem; white-space:nowrap; cursor:pointer; transition:all 0.3s ease; flex-shrink:0; }
+.chip{ 
+  border:1px solid var(--border); 
+  background:#fff; 
+  color:var(--ink); 
+  border-radius:999px; 
+  padding:.6rem 1rem; 
+  font-weight:600; 
+  display:flex; 
+  align-items:center; 
+  gap:.6rem; 
+  white-space:nowrap;
+  transition:all 0.3s ease;
+  cursor:pointer;
+  flex-shrink:0;
+  box-shadow:0 2px 4px rgba(0,0,0,0.05);
+  font-size:0.95rem;
+}
 .chip i{ color:var(--orange) }
-.chip.active{ border-color:var(--orange); background:var(--orange); color:#fff }
-.chip:hover{ border-color:var(--orange); background:var(--orange); color:#fff; }
+.chip:hover{ 
+  background:var(--orange); 
+  color:#fff; 
+  border-color:var(--orange);
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(249,115,22,0.3);
+}
 .chip:hover i{ color:#fff }
+.chip.active{ 
+  border-color:var(--orange); 
+  background:var(--orange); 
+  color:#fff;
+  box-shadow:0 4px 12px rgba(249,115,22,0.3);
+  transform:translateY(-2px);
+  font-weight:700;
+}
+.chip.active i{ color:#fff }
 
 /* CONTENT */
-.content{ padding:1rem 0 2.6rem }
+.content{ padding:1.8rem 0 2.6rem }
 .card-section{ margin:1.2rem 0 }
+.card{ 
+  background:var(--card); 
+  border:1px solid var(--border); 
+  border-radius:1rem; 
+  padding:1.5rem 1.25rem; 
+  box-shadow:0 6px 24px rgba(0,0,0,.06);
+  transition:all 0.3s ease;
+}
+.card:hover{
+  box-shadow:0 8px 32px rgba(0,0,0,.1);
+  transform:translateY(-2px);
+}
 .elev-card { border-radius:1rem; box-shadow:0 6px 24px rgba(0,0,0,.08); background:#fff; }
-.section-title { color:#0b3d91; font-weight:800; }
+.section-title{ 
+  font-size:1.35rem; 
+  font-weight:800; 
+  color:var(--ink); 
+  display:flex; 
+  align-items:center; 
+  gap:.6rem; 
+  margin:0 0 1rem 
+}
+.section-title i{ color:var(--orange) }
 .contact-chip { border:1px dashed rgba(0,0,0,.1); border-radius:999px; padding:.35rem .75rem; }
 
 /* Ensure all text is visible */
@@ -610,6 +668,25 @@ export default {
 
 .stat-icon i {
   font-size: 1.5rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px){
+  .hero-inner{ grid-template-columns:1fr; }
+  .hero-art .hero-img{ max-width:350px; max-height:250px; }
+}
+@media (max-width: 768px){
+  .grid-2{ grid-template-columns:1fr }
+  .grid-3{ grid-template-columns:1fr }
+  .contact-card .contact-grid{ grid-template-columns:1fr }
+  .quickfacts li{ min-width:140px }
+  .hero-art .hero-img{ max-width:300px; max-height:200px; }
+  .outcome-grid{ grid-template-columns:1fr }
+  .outcome-card{ flex-direction:column; gap:.8rem }
+  .outcome-number{ align-self:flex-start }
+  .accordion-header{ padding:1rem 1.2rem }
+  .accordion-title{ font-size:1rem }
+  .accordion-count{ font-size:.75rem; padding:.15rem .5rem }
 }
 </style>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         

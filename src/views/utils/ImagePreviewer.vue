@@ -28,9 +28,9 @@
               :alt="currentImage.title || `Image ${currentIndex + 1}`"
               class="modal-image"
             />
-            <div class="image-info" v-if="showImageInfo && (currentImage.title || currentImage.desc)">
-              <h4 class="image-title">{{ currentImage.title }}</h4>
-              <p class="image-desc">{{ currentImage.desc }}</p>
+            <div class="image-info" v-if="showImageInfo && isFullscreen">
+              <h4 class="image-title" v-if="currentImage.title">{{ currentImage.title }}</h4>
+              <p class="image-desc" v-if="currentImage.desc">{{ currentImage.desc }}</p>
             </div>
           </div>
           

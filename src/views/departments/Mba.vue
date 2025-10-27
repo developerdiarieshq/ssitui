@@ -41,7 +41,7 @@
     </header>
 
     <!-- STICKY SUB NAV -->
-    <nav class="subnav" aria-label="Section navigation">
+    <nav id="subnav" class="subnav" aria-label="Section navigation">
       <div class="container subnav-inner">
         <button
           v-for="tab in tabs"
@@ -61,7 +61,7 @@
     <!-- CONTENT -->
     <main class="container content" id="content">
       <!-- OVERVIEW -->
-      <section class="card-section" v-show="activeTab==='overview'">
+      <section :id="tabsMap.overview" class="card-section" v-show="activeTab==='overview'">
         <div class="card">
           <h2 class="section-title"><i class="fa-solid fa-school"></i> About the Department</h2>
           <p class="lead">
@@ -80,11 +80,11 @@
 
         <div class="grid-2">
           <article class="card">
-            <h3 class="h5 text-muted mb-2">Vision</h3>
+            <h3 class="h5 mb-2" style="color: var(--ink); font-weight: 800;">Vision</h3>
             <p>
               To be a premier business school that nurtures innovative leaders and entrepreneurs who can drive sustainable growth and create positive impact in the global business landscape.
             </p>
-            <h3 class="h5 text-muted mt-4 mb-2">Mission</h3>
+            <h3 class="h5 mt-4 mb-2" style="color: var(--ink); font-weight: 800;">Mission</h3>
             <p>
               To provide world-class management education through innovative pedagogy, industry partnerships, and experiential learning that develops competent, ethical, and socially responsible business professionals.
             </p>
@@ -109,7 +109,7 @@
       </section>
 
       <!-- FACULTY -->
-      <section class="card-section" v-show="activeTab==='faculty'">
+      <section :id="tabsMap.faculty" class="card-section" v-show="activeTab==='faculty'">
         <div class="card">
           <div class="section-header">
             <h2 class="section-title"><i class="fa-solid fa-users-gear"></i> Faculty Directory</h2>
@@ -161,7 +161,7 @@
       </section>
 
       <!-- LABS -->
-      <section class="card-section" v-show="activeTab==='labs'">
+      <section :id="tabsMap.labs" class="card-section" v-show="activeTab==='labs'">
         <h2 class="section-title"><i class="fa-solid fa-flask"></i> Business Labs & Infrastructure</h2>
         <div class="labs-intro">
           <p class="lead">
@@ -195,7 +195,7 @@
       </section>
 
       <!-- CURRICULUM -->
-      <section class="card-section" aria-labelledby="curriculum" v-show="activeTab==='curriculum'">
+      <section :id="tabsMap.curriculum" class="card-section" aria-labelledby="curriculum" v-show="activeTab==='curriculum'">
         <div class="card">
           <h2 class="section-title" id="curriculum"><i class="fa-solid fa-file-lines"></i> Curriculum & Syllabus</h2>
           <div class="downloads">
@@ -215,7 +215,7 @@
       </section>
 
       <!-- ACTIVITIES -->
-      <section class="card-section" v-show="activeTab==='activities'">
+      <section :id="tabsMap.activities" class="card-section" v-show="activeTab==='activities'">
         <h2 class="section-title"><i class="fa-solid fa-rocket"></i> Student Activities & Achievements</h2>
         <div class="grid-3">
           <article class="card" v-for="a in activities" :key="a.title">
@@ -226,7 +226,7 @@
       </section>
 
       <!-- RESEARCH & INDUSTRY -->
-      <section class="card-section" v-show="activeTab==='research'">
+      <section :id="tabsMap.research" class="card-section" v-show="activeTab==='research'">
         <div class="grid-2">
           <article class="card">
             <h2 class="section-title"><i class="fa-solid fa-microscope"></i> Research Highlights</h2>
@@ -253,7 +253,7 @@
       </section>
 
       <!-- PLACEMENTS -->
-      <section class="card-section" v-show="activeTab==='placements'">
+      <section :id="tabsMap.placements" class="card-section" v-show="activeTab==='placements'">
         <div class="card">
           <h2 class="section-title"><i class="fa-solid fa-briefcase"></i> Placements</h2>
           <div class="stats">
@@ -286,27 +286,20 @@
       </section>
 
       <!-- ALUMNI -->
-      <section class="card-section" v-show="activeTab==='alumni'">
+      <section :id="tabsMap.alumni" class="card-section" v-show="activeTab==='alumni'">
         <h2 class="section-title"><i class="fa-solid fa-user-graduate"></i> Alumni Network</h2>
-        <div class="alumni-grid">
-          <article v-for="al in alumni" :key="al.name" class="alumni-card">
-            <img :src="al.photo" :alt="al.name" class="avatar" />
-            <div>
-              <h3 class="h6">{{ al.name }}</h3>
-              <p class="muted">{{ al.role }} — {{ al.company }}</p>
-              <a v-if="al.linkedin" :href="al.linkedin" target="_blank" rel="noopener" class="icon-link">
-                <i class="fa-brands fa-linkedin"></i> Connect
-              </a>
-            </div>
-          </article>
-        </div>
-        <div class="row-actions mt-1">
-          <a class="btn btn-primary" href="mailto:alumni@ssit.edu.in">Join Alumni Network</a>
+        <div class="under-construction">
+          <div class="construction-content">
+            <i class="fa-solid fa-hammer"></i>
+            <h3>Under Construction</h3>
+            <p>Our alumni network section is currently being updated with the latest information about our MBA graduates and their achievements.</p>
+            <p>Please check back soon for inspiring stories from our alumni community.</p>
+          </div>
         </div>
       </section>
 
       <!-- CONTACT -->
-      <section class="card-section" v-show="activeTab==='contact'">
+      <section :id="tabsMap.contact" class="card-section" v-show="activeTab==='contact'">
         <div class="card contact-card">
           <h2 class="section-title"><i class="fa-solid fa-address-book"></i> Contact Us</h2>
           <div class="contact-grid">
@@ -345,7 +338,8 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import Header from '@/components/Header.vue'
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/Footer.vue'
@@ -375,46 +369,108 @@ const tabs = [
   { id: 'alumni',     label: 'Alumni',     icon: 'fa-solid fa-user-graduate' },
   { id: 'contact',    label: 'Contact',    icon: 'fa-solid fa-address-book' }
 ]
-const tabsMap = tabs.reduce((acc, t) => ((acc[t.id] = t.id), acc), {})
+// Router setup
+const route = useRoute()
+const router = useRouter()
+
+// Tab mapping for URL synchronization
+const tabsMap = {
+  overview: 'overview',
+  faculty: 'faculty', 
+  labs: 'labs',
+  curriculum: 'curriculum',
+  activities: 'activities',
+  research: 'research',
+  placements: 'placements',
+  alumni: 'alumni',
+  contact: 'contact'
+}
+
 const activeTab = ref(tabs[0].id)
-const setTab = (id) => { activeTab.value = id }
+
+// Enhanced setTab function with router navigation
+const setTab = (id) => {
+  activeTab.value = id
+  router.push(`/mba/${id}`)
+  
+  // Smooth scroll to section
+  setTimeout(() => {
+    const element = document.getElementById(tabsMap[id])
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, 100)
+}
+
+// Initialize tab from URL on mount
+onMounted(() => {
+  const tabFromUrl = route.params.tab
+  if (tabFromUrl && tabs.some(tab => tab.id === tabFromUrl)) {
+    activeTab.value = tabFromUrl
+  }
+})
+
+// Watch for route changes
+watch(() => route.params.tab, (newTab) => {
+  if (newTab && tabs.some(tab => tab.id === newTab)) {
+    activeTab.value = newTab
+  }
+})
 
 /* Faculty */
 const faculty = ref([
   {
-    name: 'Dr. Rajesh Kumar',
+    name: 'DESIREDDY N.V. KRISHNAREDDY',
     designation: 'Professor & HOD',
     qualification: 'Ph.D., MBA',
     expertise: ['Strategic Management', 'Leadership', 'Organizational Behavior'],
-    email: 'hod.mba@ssit.edu.in',
+    email: 'krishnareddy.desireddy@ssit.edu.in',
     photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400',
     profile: '#', linkedin: '#'
   },
   {
-    name: 'Dr. Priya Sharma',
+    name: 'GOGINENI NARENDRA BABU',
     designation: 'Associate Professor',
-    qualification: 'Ph.D., Finance',
+    qualification: 'Ph.D., MBA',
     expertise: ['Financial Management', 'Investment Analysis', 'Risk Management'],
-    email: 'priya.sharma@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?q=80&w=400',
-    profile: '#', linkedin: '#'
-  },
-  {
-    name: 'Prof. Amit Patel',
-    designation: 'Assistant Professor',
-    qualification: 'MBA, M.Phil',
-    expertise: ['Marketing Management', 'Digital Marketing', 'Consumer Behavior'],
-    email: 'amit.patel@ssit.edu.in',
+    email: 'narendra.gogineni@ssit.edu.in',
     photo: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=400',
     profile: '#', linkedin: '#'
   },
   {
-    name: 'Dr. Sunita Reddy',
+    name: 'VEERNALA SURESH KUMAR',
     designation: 'Assistant Professor',
-    qualification: 'Ph.D., HR',
+    qualification: 'MBA, M.Phil',
+    expertise: ['Marketing Management', 'Digital Marketing', 'Consumer Behavior'],
+    email: 'suresh.veernala@ssit.edu.in',
+    photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400',
+    profile: '#', linkedin: '#'
+  },
+  {
+    name: 'VANTLA RAMBABU',
+    designation: 'Assistant Professor',
+    qualification: 'MBA, Ph.D.',
     expertise: ['Human Resource Management', 'Training & Development', 'Performance Management'],
-    email: 'sunita.reddy@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=400',
+    email: 'rambabu.vantla@ssit.edu.in',
+    photo: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=400',
+    profile: '#', linkedin: '#'
+  },
+  {
+    name: 'DASARI NAGA TEJA',
+    designation: 'Assistant Professor',
+    qualification: 'MBA, M.Phil',
+    expertise: ['Operations Management', 'Supply Chain', 'Project Management'],
+    email: 'nagateja.dasari@ssit.edu.in',
+    photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400',
+    profile: '#', linkedin: '#'
+  },
+  {
+    name: 'TALLAPENTA NAGALAKSHMI',
+    designation: 'Assistant Professor',
+    qualification: 'MBA, Ph.D.',
+    expertise: ['Information Technology Management', 'Business Analytics', 'Digital Business'],
+    email: 'nagalakshmi.tallapenta@ssit.edu.in',
+    photo: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?q=80&w=400',
     profile: '#', linkedin: '#'
   }
 ])
@@ -693,9 +749,22 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 .filters input, .filters select{
   border:1px solid var(--border); border-radius:.6rem; padding:.55rem .8rem; min-width:220px; background:#fff;
 }
-.faculty-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem; margin-top:1rem }
-.faculty-card{ border:1px solid var(--border); border-radius:1rem; overflow:hidden; display:flex; gap:.85rem; padding:.9rem; background:#fff; transition:transform .2s ease, box-shadow .2s ease }
-.faculty-card:focus, .faculty-card:hover{ transform:translateY(-3px); box-shadow:0 12px 30px rgba(0,0,0,.08) }
+.faculty-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(350px,1fr)); gap:1rem; margin-top:1rem }
+.faculty-card{ 
+  border:1px solid var(--border); 
+  border-radius:1rem; 
+  overflow:visible; 
+  display:flex; 
+  gap:.85rem; 
+  padding:1rem; 
+  background:#fff; 
+  transition:all 0.3s ease;
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
+}
+.faculty-card:focus, .faculty-card:hover{ 
+  transform:translateY(-4px); 
+  box-shadow:0 8px 25px rgba(0,0,0,.12);
+}
 .avatar{ width:86px; height:86px; object-fit:cover; border-radius:.75rem }
 .fc-name{ font-size:1.05rem; font-weight:800; color:var(--ink); margin:0 0 .15rem }
 .fc-meta{ color:var(--muted); margin:0 0 .35rem }
@@ -804,6 +873,39 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 .alumni-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem }
 .alumni-card{ border:1px solid var(--border); border-radius:1rem; background:#fff; padding:.9rem; display:flex; gap:.8rem; align-items:center }
 .alumni-card .avatar{ width:70px; height:70px; border-radius:.7rem }
+
+/* UNDER CONSTRUCTION */
+.under-construction{ 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  min-height: 300px; 
+  background: linear-gradient(135deg, #f8fafc 0%, #eef4ff 100%); 
+  border: 2px dashed var(--border); 
+  border-radius: 1rem; 
+  margin: 1rem 0 
+}
+.construction-content{ 
+  text-align: center; 
+  max-width: 400px; 
+  padding: 2rem 
+}
+.construction-content i{ 
+  font-size: 3rem; 
+  color: var(--primary); 
+  margin-bottom: 1rem; 
+  opacity: 0.7 
+}
+.construction-content h3{ 
+  color: var(--ink); 
+  margin-bottom: 1rem; 
+  font-size: 1.5rem 
+}
+.construction-content p{ 
+  color: var(--muted); 
+  line-height: 1.6; 
+  margin-bottom: 0.8rem 
+}
 
 /* CONTACT */
 .contact-card .contact-grid{ display:grid; grid-template-columns:2fr 1fr; gap:1rem; align-items:start }

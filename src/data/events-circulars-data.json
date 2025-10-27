@@ -1,0 +1,161 @@
+{
+    "events": [
+        {
+            "id": 1,
+            "day": "15",
+            "month": "Sep",
+            "title": "Access - Engineers Day",
+            "time": "10:00 AM",
+            "venue": "Auditorium",
+            "brochure": "#",
+            "link": "#",
+            "description": "Annual celebration of National Engineers Day with various competitions and exhibitions",
+            "category": "Academic",
+            "status": "completed"
+        },
+        {
+            "id": 2,
+            "day": "28",
+            "month": "FEB",
+            "title": "Workshop on AI & ML",
+            "time": "2:00 PM",
+            "venue": "Seminar Hall",
+            "brochure": "#",
+            "link": "#",
+            "description": "Hands-on workshop covering latest trends in Artificial Intelligence and Machine Learning",
+            "category": "Technical",
+            "status": "upcoming"
+        },
+        {
+            "id": 3,
+            "day": "05",
+            "month": "MAR",
+            "title": "Annual Sports Meet",
+            "time": "9:00 AM",
+            "venue": "College Grounds",
+            "brochure": "#",
+            "link": "#",
+            "description": "Annual sports competition featuring various athletic events and competitions",
+            "category": "Sports",
+            "status": "upcoming"
+        },
+        {
+            "id": 4,
+            "day": "12",
+            "month": "MAR",
+            "title": "Tech Fest 2025",
+            "time": "9:00 AM",
+            "venue": "Main Campus",
+            "brochure": "#",
+            "link": "#",
+            "description": "Annual technical festival showcasing innovative projects and competitions",
+            "category": "Technical",
+            "status": "upcoming"
+        },
+        {
+            "id": 5,
+            "day": "20",
+            "month": "MAR",
+            "title": "Cultural Day Celebration",
+            "time": "6:00 PM",
+            "venue": "Auditorium",
+            "brochure": "#",
+            "link": "#",
+            "description": "Cultural performances and competitions celebrating diversity and talent",
+            "category": "Cultural",
+            "status": "upcoming"
+        }
+    ],
+    "circulars": [
+        {
+            "id": 1,
+            "day": "28",
+            "month": "SEPT",
+            "title": "Dussehra Holidays 2025",
+            "date": "28 Sep 2025",
+            "link": "#",
+            "description": "College will remain closed for Dussehra holidays",
+            "category": "Holiday",
+            "priority": "high",
+            "status": "active"
+        },
+        {
+            "id": 2,
+            "day": "05",
+            "month": "SEPT",
+            "title": "Mid-Semester Examination Schedule",
+            "date": "5 SEPT 2025",
+            "link": "#",
+            "description": "Detailed schedule for mid-semester examinations for all courses",
+            "category": "Academic",
+            "priority": "high",
+            "status": "active"
+        }
+    ],
+    "eventCategories": [
+        {
+            "id": 1,
+            "name": "Academic",
+            "color": "#FF7701",
+            "icon": "fas fa-graduation-cap"
+        },
+        {
+            "id": 2,
+            "name": "Technical",
+            "color": "#28a745",
+            "icon": "fas fa-laptop-code"
+        },
+        {
+            "id": 3,
+            "name": "Sports",
+            "color": "#007bff",
+            "icon": "fas fa-running"
+        },
+        {
+            "id": 4,
+            "name": "Cultural",
+            "color": "#6f42c1",
+            "icon": "fas fa-music"
+        }
+    ],
+    "circularCategories": [
+        {
+            "id": 1,
+            "name": "Academic",
+            "color": "#FF7701",
+            "icon": "fas fa-book"
+        },
+        {
+            "id": 2,
+            "name": "Holiday",
+            "color": "#dc3545",
+            "icon": "fas fa-calendar-times"
+        },
+        {
+            "id": 3,
+            "name": "Facility",
+            "color": "#17a2b8",
+            "icon": "fas fa-building"
+        },
+        {
+            "id": 4,
+            "name": "Financial",
+            "color": "#28a745",
+            "icon": "fas fa-rupee-sign"
+        }
+    ],
+    "settings": {
+        "maxEventsDisplay": 3,
+        "maxCircularsDisplay": 3,
+        "showCategories": true,
+        "enableFilters": true,
+        "autoRefresh": false,
+        "refreshInterval": 300000
+    },
+    "links": {
+        "viewAllEvents": "/events",
+        "viewAllCirculars": "/circulars",
+        "eventRegistration": "/events/register",
+        "circularArchive": "/circulars/archive"
+    }
+}

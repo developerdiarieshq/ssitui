@@ -1,18 +1,15 @@
 <template>
   <div class="notice-bar">
     <div class="scrolling-text">
-      <span>✨ Welcome to Sai Spurthi Institute of Technology ✨</span>
+      <span><i class="fa-solid fa-hands-praying"></i> Welcome to Sai Spurthi Institute of Technology <i class="fa-solid fa-hands-praying"></i></span>
+     
       <span>
-        🔔 NEW: Click here to
-        <router-link to="/btech-b-category-seats">BTECH B- Category Seats Advertisement</router-link> 🔔
+        <i class="fa-solid fa-graduation-cap"></i> NEW: Click here to
+        <router-link to="/btech-b-category-seats">BTECH B- Category Seats Advertisement & Application Form</router-link> <i class="fa-solid fa-bullhorn"></i>
       </span>
       <span>
-        📢 NEW: Click here to
-        <router-link to="/btech-b-category-seats">BTECH B- Category Seats Application Form</router-link> 📢
-      </span>
-      <span>
-        🎓 NEW: Click here to
-        <router-link to="/mba-b-category-seats">MBA B- Category Seats Application Form</router-link> 🎓
+        <i class="fa-solid fa-graduation-cap"></i> NEW: Click here to
+        <router-link to="/mba-b-category-seats">MBA B- Category Seats Advertisement & Application Form</router-link> <i class="fa-solid fa-graduation-cap"></i>
       </span>
     </div>
   </div>
@@ -24,7 +21,7 @@
 
 <style scoped>
 .notice-bar {
-  background: #FF7701; /* brand orange */
+  background: #111827; /* ink color */
   color: #fff;
   font-weight: 600;
   padding: 8px 0;
@@ -51,6 +48,10 @@
 
 .scrolling-text span {
   margin-right: 50px; /* gap between messages */
+}
+
+.scrolling-text span i {
+  margin: 0 4px; /* spacing around icons */
 }
 
 /* Pause animation when hovered */

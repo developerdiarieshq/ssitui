@@ -131,7 +131,8 @@ const committee = [
 /* THEME */
 :root {
   --navy: #1e40af;
-  --orange: #f97316;
+  --orange: #FF7701;
+  --ink: #1a2238;
   --bg: #f7f9fc;
   --card: #fff;
   --border: #e5e7eb;
@@ -149,37 +150,74 @@ const committee = [
 
 /* HERO */
 .hero {
-  background: linear-gradient(60deg, var(--navy), #153a9c);
+  background: var(--ink);
   color: #fff;
   padding: 3rem 1rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(255, 119, 1, 0.08) 0%, transparent 50%),
+              radial-gradient(circle at 70% 80%, rgba(255, 119, 1, 0.05) 0%, transparent 50%);
+  pointer-events: none;
 }
 .title {
   font-size: 2.2rem;
   font-weight: 800;
+  position: relative;
+  z-index: 1;
 }
 .subtitle {
   font-size: 1.1rem;
-  color: #dbeafe;
+  color: rgba(255, 255, 255, 0.9);
   margin-top: 0.5rem;
+  position: relative;
+  z-index: 1;
 }
 
 /* CARD */
 .card {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 0.75rem;
+  border-radius: 1rem;
   padding: 2rem;
   margin: 2rem 0;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(255, 119, 1, 0.15);
+  border-color: rgba(255, 119, 1, 0.3);
 }
 .section-title {
   font-size: 1.4rem;
   font-weight: 700;
-  color: var(--navy);
+  color: var(--ink);
   margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
   gap: 0.6rem;
+  position: relative;
+}
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: var(--orange);
+  border-radius: 2px;
+}
+.section-title i {
+  color: var(--orange);
 }
 p {
   color: #374151;
@@ -197,6 +235,24 @@ p {
   margin-bottom: 0.75rem;
   font-size: 1rem;
   color: #374151;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: rgba(255, 119, 1, 0.05);
+  border-left: 3px solid var(--orange);
+  border-radius: 0 8px 8px 0;
+  transition: all 0.3s ease;
+}
+.rules-list li:hover {
+  background: rgba(255, 119, 1, 0.1);
+  transform: translateX(5px);
+}
+.rules-list li i {
+  color: var(--orange);
+  font-size: 1.1rem;
+  margin-top: 0.15rem;
+  flex-shrink: 0;
 }
 
 /* COMMITTEE */
@@ -206,24 +262,41 @@ p {
   gap: 1.5rem;
 }
 .member-card {
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   border-left: 5px solid var(--orange);
-  border-radius: 0.5rem;
-  padding: 1rem;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  background: var(--card);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+.member-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 119, 1, 0.15);
+  border-color: var(--orange);
 }
 .member-card h5 {
   font-size: 1.1rem;
   font-weight: 700;
   margin-bottom: 0.25rem;
-  color: var(--navy);
+  color: var(--ink);
 }
 .member-card .role {
   font-size: 0.95rem;
   color: var(--muted);
   margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+.member-card p {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
 }
 
 /* HELPLINE */
+.helpline {
+  background: linear-gradient(135deg, rgba(255, 119, 1, 0.05) 0%, rgba(255, 119, 1, 0.02) 100%);
+  border: 2px solid rgba(255, 119, 1, 0.2);
+}
 .helpline ul {
   list-style: none;
   padding: 0;
@@ -232,16 +305,62 @@ p {
   margin-bottom: 0.75rem;
   font-size: 1rem;
   color: #374151;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+  border-left: 3px solid var(--orange);
+  transition: all 0.3s ease;
+}
+.helpline li:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateX(5px);
+  box-shadow: 0 2px 8px rgba(255, 119, 1, 0.1);
 }
 .text-orange {
   color: var(--orange);
-  margin-right: 0.5rem;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.helpline a {
+  color: var(--orange);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+.helpline a:hover {
+  color: #e55a00;
+  text-decoration: underline;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
   .title {
     font-size: 1.7rem;
+  }
+  .hero {
+    padding: 2rem 1rem;
+  }
+  .card {
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .section-title {
+    font-size: 1.2rem;
+  }
+  .committee-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .member-card {
+    padding: 1rem;
+  }
+  .rules-list li,
+  .helpline li {
+    padding: 0.5rem;
+    gap: 0.5rem;
   }
 }
 </style>

@@ -24,10 +24,6 @@
               <span class="qf-label">AI/DS Labs</span>
               <span class="qf-value">{{ facts.labs }}</span>
             </li>
-            <li>
-              <span class="qf-label">Top Recruiters</span>
-              <span class="qf-value">Google • Microsoft • AWS</span>
-            </li>
           </ul>
         </div>
         <picture class="hero-art" aria-hidden="true">
@@ -41,7 +37,7 @@
     </header>
 
     <!-- STICKY SUB NAV (nav-pills) -->
-    <nav class="subnav" aria-label="Section navigation">
+    <nav id="subnav" class="subnav" aria-label="Section navigation">
       <div class="container subnav-inner">
         <button
           v-for="tab in tabs"
@@ -61,7 +57,7 @@
     <!-- CONTENT (tab panes) -->
     <main class="container content" id="content">
       <!-- ABOUT -->
-      <section class="card-section" v-show="activeTab==='overview'">
+      <section :id="tabsMap.overview" class="card-section" v-show="activeTab==='overview'">
         <div class="card">
           <h2 class="section-title"><i class="fa-solid fa-school"></i> About the Department</h2>
           <p class="lead">
@@ -86,12 +82,12 @@
 
         <div class="grid-2">
           <article class="card">
-            <h3 class="h5 text-muted mb-2">Vision</h3>
+            <h3 class="h5 mb-2" style="color: var(--ink); font-weight: 800;">Vision</h3>
             <p>
               To be a premier center for Artificial Intelligence and Data Science, creating intelligent, ethical,
               and scalable solutions that advance society.
             </p>
-            <h3 class="h5 text-muted mt-4 mb-2">Mission</h3>
+            <h3 class="h5 mt-4 mb-2" style="color: var(--ink); font-weight: 800;">Mission</h3>
             <ul class="bullets">
               <li>Deliver advanced AI & DS education aligned with global industry trends.</li>
               <li>Foster research, innovation, and entrepreneurship with societal impact.</li>
@@ -351,7 +347,7 @@
       </section>
 
       <!-- FACULTY DIRECTORY -->
-      <section class="card-section" v-show="activeTab==='faculty'">
+      <section :id="tabsMap.faculty" class="card-section" v-show="activeTab==='faculty'">
         <div class="card">
           <div class="section-header">
             <h2 class="section-title"><i class="fa-solid fa-users-gear"></i> Faculty Directory</h2>
@@ -403,36 +399,56 @@
       </section>
 
       <!-- LABS / INFRA -->
-      <section class="card-section" v-show="activeTab==='labs'">
-        <h2 class="section-title"><i class="fa-solid fa-flask"></i> Labs & Research Infrastructure</h2>
+      <section :id="tabsMap.labs" class="card-section" v-show="activeTab==='labs'">
+        <div class="card">
+        <h2 class="section-title"><i class="fa-solid fa-laptop-code"></i> Laboratories & Infrastructure</h2>
+          <div class="labs-intro">
+            <p class="lead">
+              We have Fully Equipped AI/DS Laboratories with several Computer Labs equipped with latest AI/DS software's and high-performance workstations. 
+              It is connected to internet through a lease line to facilitate high speed internet access. All the computers 
+              are connected through a structured network. GPU servers and cloud computing facilities are also available in the lab. 
+              Our dedicated faculty and staff are proud of their impressive credentials, which are comparable to those 
+              of the best career instructors in AI/DS domain.
+            </p>
+          </div>
+        </div>
+        
         <div class="labs-grid">
           <article v-for="lab in labs" :key="lab.title" class="lab-card">
             <img :src="lab.img" :alt="lab.title" />
             <div class="lab-body">
               <h3 class="lab-title">{{ lab.title }}</h3>
               <p class="lab-text">{{ lab.desc }}</p>
-              <ul class="lab-tags"><li v-for="t in lab.tags" :key="t">{{ t }}</li></ul>
+              <ul class="lab-tags">
+                <li v-for="t in lab.tags" :key="t">{{ t }}</li>
+              </ul>
+              <div class="lab-actions">
+                <button 
+                  class="btn btn-primary view-images-btn" 
+                  @click="openImageModal(lab.images)"
+                >
+                  <i class="fa-solid fa-images"></i> View Images
+                </button>
+              </div>
             </div>
           </article>
         </div>
-        <div class="muted mt-1">
-          <i class="fa-solid fa-server"></i> GPU servers • <i class="fa-solid fa-cloud"></i> Cloud credits •
-          <i class="fa-solid fa-database"></i> Open datasets • <i class="fa-solid fa-gear"></i> TF • PyTorch • Scikit-learn
-        </div>
+        <div class="muted mt-1"><i class="fa-solid fa-wifi"></i> Wi-Fi campus • Smart Classrooms • Industry MoU Labs</div>
       </section>
 
       <!-- CURRICULUM -->
-      <section class="card-section" aria-labelledby="curriculum" v-show="activeTab==='curriculum'">
+      <section :id="tabsMap.curriculum" class="card-section" aria-labelledby="curriculum" v-show="activeTab==='curriculum'">
         <div class="card">
           <h2 class="section-title" id="curriculum"><i class="fa-solid fa-file-lines"></i> Curriculum & Syllabus</h2>
           <div class="downloads">
-            <a v-for="d in syllabus" :key="d.label" :href="d.href" class="download" target="_blank" rel="noopener">
+            <div v-for="d in syllabus" :key="d.label" class="download" :class="{ 'coming-soon': d.type === 'coming-soon' }" @click="handleSyllabusClick(d)">
               <i class="fa-solid fa-file-pdf"></i>
               <div>
                 <div class="dl-label">{{ d.label }}</div>
                 <div class="dl-sub">{{ d.note }}</div>
+                <div v-if="d.type === 'coming-soon'" class="dl-status">Coming Soon</div>
               </div>
-            </a>
+            </div>
           </div>
           <div class="row-actions mt-1">
             <a class="btn btn-soft" href="/academics/regulations">Academic Regulations</a>
@@ -441,19 +457,123 @@
         </div>
       </section>
 
+      <!-- BOS (Board of Studies) -->
+      <section
+        v-show="activeTab === 'bos'"
+        :id="`panel-bos`"
+        class="card-section"
+        role="tabpanel"
+        aria-labelledby="bos"
+      >
+        <div class="card">
+          <h2 class="section-title"><i class="fa-solid fa-graduation-cap"></i> Board of Studies (BOS)</h2>
+          <div class="bos-intro">
+            <p class="lead">
+              The Board of Studies (BOS) for Computer Science and Engineering (AI & DS) is responsible for the academic planning, 
+              curriculum development, and quality assurance of the CSE AI/DS program. The board ensures that the curriculum 
+              remains current with industry trends and academic standards.
+            </p>
+          </div>
+          
+          <div class="grid-2">
+            <article class="card">
+              <h3 class="section-title-sm"><i class="fa-solid fa-users"></i> BOS Members</h3>
+              <ul class="bullets">
+                <li><strong>Chairman:</strong> Dr. Anitha R (HOD, CSE AI/DS)</li>
+                <li><strong>Industry Expert:</strong> Mr. Rajesh Kumar (AI Lead, Google)</li>
+                <li><strong>Academic Expert:</strong> Dr. Priya Sharma (Professor, IIT Delhi)</li>
+                <li><strong>Alumni Representative:</strong> Mr. Akhil Abothu (Senior AI Engineer, Capgemini)</li>
+                <li><strong>Student Representative:</strong> Ms. Ananya Singh (Final Year CSE AI/DS)</li>
+              </ul>
+            </article>
+            
+            <article class="card">
+              <h3 class="section-title-sm"><i class="fa-solid fa-tasks"></i> BOS Responsibilities</h3>
+              <ul class="bullets">
+                <li>AI/DS curriculum design and periodic review</li>
+                <li>Course content development and updates</li>
+                <li>Academic policy formulation</li>
+                <li>Quality assurance and assessment</li>
+                <li>Industry-academia collaboration</li>
+                <li>Research and development initiatives</li>
+              </ul>
+            </article>
+          </div>
+          
+          <div class="card mt-1">
+            <h3 class="section-title-sm"><i class="fa-solid fa-calendar-alt"></i> Recent BOS Activities</h3>
+            <div class="bos-activities">
+              <div class="activity-item">
+                <div class="activity-date">2024</div>
+                <div class="activity-content">
+                  <h4>AI/DS Curriculum Revision (R22)</h4>
+                  <p>Updated curriculum to include Deep Learning, NLP, Computer Vision, and Data Science specializations</p>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-date">2023</div>
+                <div class="activity-content">
+                  <h4>Industry Partnership Program</h4>
+                  <p>Established partnerships with leading AI/DS companies for curriculum enhancement</p>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-date">2023</div>
+                <div class="activity-content">
+                  <h4>Faculty Development Program</h4>
+                  <p>Conducted workshops on emerging AI/DS technologies and teaching methodologies</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- ACTIVITIES -->
-      <section class="card-section" v-show="activeTab==='activities'">
-        <h2 class="section-title"><i class="fa-solid fa-rocket"></i> Student Activities & Achievements</h2>
-        <div class="grid-3">
-          <article class="card" v-for="a in activities" :key="a.title">
-            <h3 class="h6">{{ a.title }}</h3>
-            <p class="muted">{{ a.desc }}</p>
+      <section :id="tabsMap.activities" class="card-section" v-show="activeTab==='activities'">
+        <div class="card">
+          <h2 class="section-title"><i class="fa-solid fa-rocket"></i> Student Development Activities</h2>
+          <div class="activities-hero">
+            <p class="lead">
+              The AI/DS Club (Association of Computer Science and Engineering in Sai Spurthi) is started on 15.09.09 (Engineer's Day) 
+              by the Student and Staff of the CSE AI/DS Department to strengthen research and advanced education in AI/DS and allied fields. 
+              It is mainly targeted to adopt new fields of knowledge and communication through co-curricular activities.
+            </p>
+            <p class="lead">
+              It does this by working to influence policy that impacts departmental activities, encouraging the development of human resources, 
+              contributing to the cohesiveness of the professional students community and collecting and disseminating information about the 
+              importance and the state of AI/DS research. Each plays an important role in achieving the AI/DS Club objectives.
+            </p>
+          </div>
+          
+          <div class="activities-grid">
+            <article v-for="activity in activities" :key="activity.title" class="activity-card">
+              <div class="activity-icon">
+                <i :class="activity.icon"></i>
+              </div>
+              <div class="activity-content">
+                <h3 class="activity-title">{{ activity.title }}</h3>
+                <p class="activity-desc">{{ activity.desc }}</p>
+              </div>
           </article>
+          </div>
+          
+          <div class="activities-footer">
+            <div class="text-center">
+              <button class="btn btn-primary" @click="openEventsModal">
+                <i class="fa-solid fa-images me-2"></i>View All Events Images
+              </button>
+              <p class="muted mt-3">
+                <i class="fa-solid fa-calendar-alt"></i> 
+                Explore our gallery of student activities and events
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
       <!-- RESEARCH & INDUSTRY -->
-      <section class="card-section" v-show="activeTab==='research'">
+      <section :id="tabsMap.research" class="card-section" v-show="activeTab==='research'">
         <div class="grid-2">
           <article class="card">
             <h2 class="section-title"><i class="fa-solid fa-microscope"></i> Research Highlights</h2>
@@ -480,7 +600,7 @@
       </section>
 
       <!-- PLACEMENTS -->
-      <section class="card-section" v-show="activeTab==='placements'">
+      <section :id="tabsMap.placements" class="card-section" v-show="activeTab==='placements'">
         <div class="card">
           <h2 class="section-title"><i class="fa-solid fa-briefcase"></i> Placements & Opportunities</h2>
           <div class="stats">
@@ -513,27 +633,20 @@
       </section>
 
       <!-- ALUMNI -->
-      <section class="card-section" v-show="activeTab==='alumni'">
+      <section :id="tabsMap.alumni" class="card-section" v-show="activeTab==='alumni'">
         <h2 class="section-title"><i class="fa-solid fa-user-graduate"></i> Alumni Network</h2>
-        <div class="alumni-grid">
-          <article v-for="al in alumni" :key="al.name" class="alumni-card">
-            <img :src="al.photo" :alt="al.name" class="avatar" />
-            <div>
-              <h3 class="h6">{{ al.name }}</h3>
-              <p class="muted">{{ al.role }} — {{ al.company }}</p>
-              <a v-if="al.linkedin" :href="al.linkedin" target="_blank" rel="noopener" class="icon-link">
-                <i class="fa-brands fa-linkedin"></i> Connect
-              </a>
-            </div>
-          </article>
-        </div>
-        <div class="row-actions mt-1">
-          <a class="btn btn-primary" href="mailto:alumni@ssit.edu.in">Join Alumni Mentoring</a>
+        <div class="under-construction">
+          <div class="construction-content">
+            <i class="fa-solid fa-hammer"></i>
+            <h3>Under Construction</h3>
+            <p>Our alumni network section is currently being updated with the latest information about our CSE AI & DS graduates and their achievements.</p>
+            <p>Please check back soon for inspiring stories from our alumni community.</p>
+          </div>
         </div>
       </section>
 
       <!-- CONTACT -->
-      <section class="card-section" v-show="activeTab==='contact'">
+      <section :id="tabsMap.contact" class="card-section" v-show="activeTab==='contact'">
         <div class="card contact-card">
           <h2 class="section-title"><i class="fa-solid fa-address-book"></i> Contact Us</h2>
           <div class="contact-grid">
@@ -557,14 +670,43 @@
 
     <!-- FOOTER -->
     <Footer />
+
+    <!-- Image Preview Modal -->
+    <ImagePreviewer 
+      :show="showImageModal"
+      :images="currentLabImages"
+      :initialIndex="currentImageIndex"
+      @close="showImageModal = false"
+      @update:currentIndex="currentImageIndex = $event"
+    />
+
+    <!-- Events Images Modal -->
+    <ImagePreviewer 
+      :show="showEventsModal"
+      :images="eventImages"
+      :initialIndex="currentEventImageIndex"
+      @close="showEventsModal = false"
+      @update:currentIndex="currentEventImageIndex = $event"
+    />
+
+    <!-- PDF Viewer Modal -->
+    <PdfViewer 
+      :show="showPdfModal"
+      :url="currentPdfUrl"
+      :title="currentPdfTitle"
+      @close="closePdfModal"
+    />
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import Header from '@/components/Header.vue'
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/Footer.vue'
+import ImagePreviewer from '@/views/utils/ImagePreviewer.vue'
+import PdfViewer from '@/views/utils/PdfViewer.vue'
 import Strengths from '@/views/about/Strengths.vue'
 
 /* Facts / Quick Stats */
@@ -582,16 +724,63 @@ const aboutStats = [
 const tabs = [
   { id: 'overview',   label: 'Overview',   icon: 'fa-solid fa-circle-dot' },
   { id: 'faculty',    label: 'Faculty',    icon: 'fa-solid fa-users' },
-  { id: 'labs',       label: 'Labs',       icon: 'fa-solid fa-flask' },
+  { id: 'labs',       label: 'Labs',       icon: 'fa-solid fa-laptop-code' },
   { id: 'curriculum', label: 'Curriculum', icon: 'fa-solid fa-file-lines' },
+  { id: 'bos',        label: 'BOS',        icon: 'fa-solid fa-graduation-cap' },
   { id: 'activities', label: 'Activities', icon: 'fa-solid fa-rocket' },
   { id: 'research',   label: 'Research',   icon: 'fa-solid fa-microscope' },
   { id: 'placements', label: 'Placements', icon: 'fa-solid fa-briefcase' },
   { id: 'alumni',     label: 'Alumni',     icon: 'fa-solid fa-user-graduate' },
   { id: 'contact',    label: 'Contact',    icon: 'fa-solid fa-address-book' }
 ]
+// Router setup
+const route = useRoute()
+const router = useRouter()
+
+// Tab mapping for URL synchronization
+const tabsMap = {
+  overview: 'overview',
+  faculty: 'faculty', 
+  labs: 'labs',
+  curriculum: 'curriculum',
+  bos: 'bos',
+  activities: 'activities',
+  research: 'research',
+  placements: 'placements',
+  alumni: 'alumni',
+  contact: 'contact'
+}
+
 const activeTab = ref(tabs[0].id)
-const setTab = (id) => { activeTab.value = id } // tabbed view, no scroll
+
+// Enhanced setTab function with router navigation
+const setTab = (id) => {
+  activeTab.value = id
+  router.push(`/cse-ai-ds/${id}`)
+  
+  // Smooth scroll to section
+  setTimeout(() => {
+    const element = document.getElementById(tabsMap[id])
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, 100)
+}
+
+// Initialize tab from URL on mount
+onMounted(() => {
+  const tabFromUrl = route.params.tab
+  if (tabFromUrl && tabs.some(tab => tab.id === tabFromUrl)) {
+    activeTab.value = tabFromUrl
+  }
+})
+
+// Watch for route changes
+watch(() => route.params.tab, (newTab) => {
+  if (newTab && tabs.some(tab => tab.id === newTab)) {
+    activeTab.value = newTab
+  }
+})
 
 /* Faculty */
 const faculty = ref([
@@ -601,7 +790,7 @@ const faculty = ref([
     qualification: 'M.TECH, (Ph.D)',
     expertise: ['Data Science', 'Big Data Analytics'],
     email: 'hod.aids@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&w=400',
+    photo: new URL('@/assets/departments/cse_ai_ds/faculty/cse_ml_01.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 19
   },
@@ -611,7 +800,7 @@ const faculty = ref([
     qualification: 'M.TECH, (Ph.D)',
     expertise: ['Machine Learning', 'Statistical Analysis'],
     email: 'adinarayana@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400',
+    photo: new URL('@/assets/departments/cse_ai_ds/faculty/cse_ml_02.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 19
   },
@@ -621,7 +810,7 @@ const faculty = ref([
     qualification: 'M.TECH',
     expertise: ['Python Programming', 'Data Visualization'],
     email: 'anjaneyulu@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=400',
+    photo: new URL('@/assets/departments/cse_ai_ds/faculty/cse_ml_04.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 10
   },
@@ -631,7 +820,7 @@ const faculty = ref([
     qualification: 'M.TECH',
     expertise: ['Database Systems', 'SQL'],
     email: 'srinivasa@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=400',
+    photo: new URL('@/assets/departments/cse_ai_ds/faculty/cse_ml_05.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 4
   },
@@ -641,7 +830,7 @@ const faculty = ref([
     qualification: 'M.TECH',
     expertise: ['Data Mining', 'Predictive Analytics'],
     email: 'pragnya@ssit.edu.in',
-    photo: '#',
+    photo: new URL('@/assets/departments/cse_ai_ds/faculty/cse_ml_06.jpg', import.meta.url).href,
     profile: '#', linkedin: '#',
     experience: 4
   },
@@ -702,43 +891,101 @@ const filteredFaculty = computed(() => {
 /* Labs & Infrastructure */
 const labs = [
   {
-    title: 'AI Lab',
-    desc: 'Model training with TensorFlow & PyTorch; MLOps pipelines.',
-    img: 'https://images.unsplash.com/photo-1555255707-c07966088b7b?q=80&w=1200',
-    tags: ['TensorFlow', 'PyTorch', 'MLOps']
+    title: 'Computer Lab 1',
+    desc: 'Programming fundamentals laboratory equipped with C, Java, and Data Structures development environment. Features modern workstations with comprehensive development tools and debugging software.',
+    img: 'https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=800&h=600',
+    images: [
+      new URL('@/assets/departments/cse/labs/cselab1-1.jpg', import.meta.url).href,
+      new URL('@/assets/departments/cse/labs/cselab1-2.jpg', import.meta.url).href,
+      new URL('@/assets/departments/cse/labs/cselab1-3.jpg', import.meta.url).href
+    ],
+    tags: ['C Programming', 'Java', 'DSA']
   },
   {
-    title: 'Data Science Studio',
-    desc: 'Analytics, visualization, and data engineering workflows.',
-    img: 'https://images.unsplash.com/photo-1534759846116-5797a4d0f2c1?q=80&w=1200',
-    tags: ['Pandas', 'Spark', 'Visualization']
+    title: 'Computer Lab 2',
+    desc: 'Advanced AI/ML laboratory featuring cutting-edge artificial intelligence and machine learning tools. Equipped with powerful GPUs, deep learning frameworks, and specialized software for neural network development.',
+    img: 'https://images.pexels.com/photos/325229/pexels-photo-325229.jpeg?auto=compress&cs=tinysrgb&w=800&h=600',
+    images: [
+      new URL('@/assets/departments/cse/labs/cselab2-1.jpg', import.meta.url).href,
+      new URL('@/assets/departments/cse/labs/cselab2-2.jpg', import.meta.url).href,
+      new URL('@/assets/departments/cse/labs/cselab2-3.jpg', import.meta.url).href
+    ],
+    tags: ['AI', 'ML', 'DL']
   },
   {
-    title: 'IoT & Robotics Lab',
-    desc: 'Edge AI, sensors, embedded vision & control systems.',
-    img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200',
-    tags: ['Edge AI', 'Arduino', 'Robotics']
+    title: 'Computer Lab 3',
+    desc: 'Data Science and Visualization laboratory specializing in data analysis, visualization, and statistical computing. Features advanced analytics tools, interactive dashboards, and comprehensive data visualization software.',
+    img: 'https://images.pexels.com/photos/270366/pexels-photo-270366.jpeg?auto=compress&cs=tinysrgb&w=800&h=600',
+    images: [
+      new URL('@/assets/departments/cse/labs/cselab3-1.jpg', import.meta.url).href,
+      new URL('@/assets/departments/cse/labs/cselab3-2.jpg', import.meta.url).href,
+      new URL('@/assets/departments/cse/labs/cselab3-3.jpg', import.meta.url).href
+    ],
+    tags: ['Pandas', 'Visualization']
   },
   {
-    title: 'Cloud AI Lab',
-    desc: 'Cloud credits & GPU instances for scalable model training.',
-    img: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=1200',
-    tags: ['AWS', 'Azure', 'Kubernetes']
+    title: 'Common Internet Center',
+    desc: 'Centralized internet facility providing high-speed connectivity for research and academic activities. Accessible to all students and faculty members with 24/7 availability.',
+    img: 'https://images.pexels.com/photos/1181243/pexels-photo-1181243.jpeg?auto=compress&cs=tinysrgb&w=800&h=600',
+    images: [
+      new URL('@/assets/departments/cse/labs/cselab4-1.jpg', import.meta.url).href,
+      new URL('@/assets/departments/cse/labs/cselab4-2.jpg', import.meta.url).href,
+      new URL('@/assets/departments/cse/labs/cselab4-3.jpg', import.meta.url).href
+    ],
+    tags: ['High-Speed Internet', 'Research Access', 'Faculty Support']
   }
 ]
 
 /* Syllabus / Downloads */
 const syllabus = [
-  { label: 'B.Tech CSE (AI & DS) Syllabus (R22)', note: 'Current Scheme', href: '#' },
-  { label: 'Electives & Tracks', note: 'DL • NLP • CV • Data Engg', href: '#' },
-  { label: 'Project-Based Learning Modules', note: 'Capstones & Industry Projects', href: '#' }
+  { 
+    label: 'B.Tech CSE (AI & DS) Syllabus (R22)', 
+    note: 'Current Scheme', 
+    href: '#',
+    pdfUrl: 'https://drive.google.com/file/d/1vbz4wKP2Nadda3FtZC-DyV16yqXVAkn1/preview',
+    type: 'pdf'
+  },
+  { 
+    label: 'B.Tech CSE (AI & DS) Syllabus (R18)', 
+    note: 'Previous Scheme', 
+    href: '#',
+    pdfUrl: 'https://drive.google.com/file/d/1zYoF3FIQ956g_-zrjSHIYxQR-NXAZXN2/preview',
+    type: 'pdf'
+  }
 ]
 
 /* Activities */
 const activities = [
-  { title: 'AI Hackathon', desc: '24-hour innovation sprint across CV, NLP, RL.' },
-  { title: 'Workshops & Bootcamps', desc: 'Deep Learning, MLOps, Data Engineering.' },
-  { title: 'Clubs & SIGs', desc: 'AI Club, Data Viz Guild, Kaggle Circle.' }
+  {
+    title: 'Access Events',
+    desc: 'Annual technical symposium showcasing student projects and innovations in computer science and engineering.',
+    icon: 'fa-solid fa-calendar-check'
+  },
+  {
+    title: 'Technical Workshops',
+    desc: 'Hands-on workshops covering latest technologies, programming languages, and development frameworks.',
+    icon: 'fa-solid fa-laptop-code'
+  },
+  {
+    title: 'Hackathons',
+    desc: 'Intensive coding competitions where students collaborate to solve real-world problems using technology.',
+    icon: 'fa-solid fa-code'
+  },
+  {
+    title: 'Industry Seminars',
+    desc: 'Expert talks and seminars by industry professionals on emerging technologies and career opportunities.',
+    icon: 'fa-solid fa-chalkboard-teacher'
+  },
+  {
+    title: 'Project Exhibitions',
+    desc: 'Showcase of innovative student projects demonstrating practical applications of computer science concepts.',
+    icon: 'fa-solid fa-project-diagram'
+  },
+  {
+    title: 'Tech Competitions',
+    desc: 'Competitive events testing students skills in programming, problem-solving, and technical knowledge.',
+    icon: 'fa-solid fa-trophy'
+  }
 ]
 
 /* Research & Industry */
@@ -811,6 +1058,80 @@ const hod = {
 
 const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })
 
+// Modal state
+const showImageModal = ref(false)
+const currentImageIndex = ref(0)
+const currentLabImages = ref([])
+const showEventsModal = ref(false)
+const currentEventImageIndex = ref(0)
+const showPdfModal = ref(false)
+const currentPdfUrl = ref('')
+const currentPdfTitle = ref('')
+const isPdfLoading = ref(false)
+
+// Modal functions
+const openImageModal = (images) => {
+  currentLabImages.value = images
+  currentImageIndex.value = 0
+  showImageModal.value = true
+}
+
+const openEventsModal = () => {
+  currentEventImageIndex.value = 0
+  showEventsModal.value = true
+}
+
+const openPdfModal = (pdfUrl, title) => {
+  currentPdfUrl.value = pdfUrl
+  currentPdfTitle.value = title
+  showPdfModal.value = true
+}
+
+const closePdfModal = () => {
+  showPdfModal.value = false
+  currentPdfUrl.value = ''
+  currentPdfTitle.value = ''
+}
+
+const handleSyllabusClick = (item) => {
+  if (item.type === 'pdf' && item.pdfUrl) {
+    openPdfModal(item.pdfUrl, item.label)
+  } else if (item.href && item.href !== '#') {
+    window.open(item.href, '_blank')
+  }
+}
+
+// Event images data
+const eventImages = [
+  {
+    src: new URL('@/assets/departments/cse/activities/cse_acsess_1.jpg', import.meta.url).href,
+    title: 'CSE Access Events - Technical Symposium',
+    desc: 'Annual technical symposium showcasing student projects and innovations'
+  },
+  {
+    src: new URL('@/assets/departments/cse/activities/cse_acsess_2.jpg', import.meta.url).href,
+    title: 'CSE Access Events - Workshops',
+    desc: 'Hands-on technical workshops and training sessions'
+  },
+  {
+    src: new URL('@/assets/departments/cse/activities/cse_acsess_3.jpg', import.meta.url).href,
+    title: 'CSE Access Events - Competitions',
+    desc: 'Technical competitions and hackathons for students'
+  },
+  {
+    src: new URL('@/assets/departments/cse/activities/cse_acsess_4.jpg', import.meta.url).href,
+    title: 'CSE Access Events - Seminars',
+    desc: 'Industry seminars and expert talks on emerging technologies'
+  }
+]
+
+// Computed properties
+const labImagesForModal = computed(() => {
+  return labs.flatMap(lab => lab.images || [])
+})
+
+// PDF modal keyboard events now handled by PdfViewer component
+
 // Accordion state
 const activeAccordion = ref('')
 const toggleAccordion = (section) => {
@@ -847,7 +1168,7 @@ const toggleAccordion = (section) => {
 /* SUBNAV */
 .subnav{ position:sticky; top:0; z-index:20; background:#fff; border-bottom:1px solid var(--border); box-shadow:0 2px 8px rgba(0,0,0,0.06); }
 .subnav-inner{ display:flex; gap:.5rem; padding:.6rem 1rem; overflow-x:auto; overflow-y:hidden; justify-content:flex-start; flex-wrap:nowrap; }
-.chip{ border:1px solid var(--border); background:#fff; color:#111; border-radius:999px; padding:.6rem 1rem; font-weight:600; display:flex; align-items:center; gap:.6rem; white-space:nowrap; font-size:.9rem; box-shadow:0 2px 4px rgba(0,0,0,0.04); transition:all 0.2s ease; }
+.chip{ border:1px solid var(--border); background:#fff; color:#111; border-radius:999px; padding:.6rem 1rem; font-weight:600; display:flex; align-items:center; gap:.6rem; white-space:nowrap; font-size:.9rem; box-shadow:0 2px 4px rgba(0,0,0,0.04); transition:all 0.2s ease; cursor:pointer; }
 .chip i{ color:var(--ink); }
 .chip.active{ border-color:var(--orange); background:var(--orange); color:#fff; box-shadow:0 4px 12px rgba(249,115,22,0.3); transform:translateY(-2px); font-weight:700; }
 .chip:not(.active):hover{ border-color:var(--ink); background:rgba(17,24,39,.04); box-shadow:0 2px 8px rgba(0,0,0,0.08); }
@@ -883,9 +1204,22 @@ const toggleAccordion = (section) => {
 .filters input, .filters select{
   border:1px solid var(--border); border-radius:.6rem; padding:.55rem .8rem; min-width:220px; background:#fff;
 }
-.faculty-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem; margin-top:1rem }
-.faculty-card{ border:1px solid var(--border); border-radius:1rem; overflow:hidden; display:flex; gap:.85rem; padding:.9rem; background:#fff; transition:transform .2s ease, box-shadow .2s ease }
-.faculty-card:focus, .faculty-card:hover{ transform:translateY(-3px); box-shadow:0 12px 30px rgba(0,0,0,.08) }
+.faculty-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(350px,1fr)); gap:1rem; margin-top:1rem }
+.faculty-card{ 
+  border:1px solid var(--border); 
+  border-radius:1rem; 
+  overflow:visible; 
+  display:flex; 
+  gap:.85rem; 
+  padding:1rem; 
+  background:#fff; 
+  transition:all 0.3s ease;
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
+}
+.faculty-card:focus, .faculty-card:hover{ 
+  transform:translateY(-4px); 
+  box-shadow:0 8px 25px rgba(0,0,0,.12);
+}
 .avatar{ width:86px; height:86px; object-fit:cover; border-radius:.75rem }
 .fc-name{ font-size:1.05rem; font-weight:800; color:var(--ink); margin:0 0 .15rem }
 .fc-meta{ color:var(--muted); margin:0 0 .35rem }
@@ -897,7 +1231,8 @@ const toggleAccordion = (section) => {
 
 /* LABS */
 .labs-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem }
-.lab-card{ border:1px solid var(--border); border-radius:1rem; overflow:hidden; background:#fff; display:flex; flex-direction:column }
+.lab-card{ border:1px solid var(--border); border-radius:1rem; overflow:hidden; background:#fff; display:flex; flex-direction:column; transition:all 0.3s ease; }
+.lab-card:hover{ border-color:var(--orange); box-shadow:0 8px 25px rgba(249,115,22,0.15); transform:translateY(-4px); }
 .lab-card img{ width:100%; height:160px; object-fit:cover }
 .lab-body{ padding:1rem }
 .lab-title{ margin:0 0 .25rem; font-weight:800; color:var(--ink) }
@@ -908,9 +1243,10 @@ const toggleAccordion = (section) => {
 /* DOWNLOADS */
 .downloads{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:.8rem }
 .download{
-  border:1px solid var(--border); border-radius:.9rem; padding:.8rem; display:flex; gap:.7rem; align-items:flex-start; text-decoration:none; color:inherit; background:#fff;
+  border:1px solid var(--border); border-radius:.9rem; padding:.8rem; display:flex; gap:.7rem; align-items:flex-start; text-decoration:none; color:inherit; background:#fff; cursor:pointer; transition:all 0.3s ease;
 }
 .download i{ color:var(--orange); font-size:1.25rem; margin-top:.15rem }
+.download:hover{ border-color:var(--orange); background:rgba(249,115,22,0.02); transform:translateY(-2px); box-shadow:0 4px 12px rgba(249,115,22,0.15); }
 .dl-label{ font-weight:800; color:var(--ink) }
 .dl-sub{ font-size:.85rem; color:var(--muted) }
 
@@ -920,16 +1256,51 @@ const toggleAccordion = (section) => {
 .logo-row img:hover{ filter:none; opacity:1 }
 
 /* BUTTONS */
-.btn{ border-radius:.7rem; padding:.55rem .9rem; font-weight:700; border:1px solid transparent; display:inline-flex; gap:.5rem; align-items:center }
+.btn{ border-radius:.7rem; padding:.55rem .9rem; font-weight:700; border:1px solid transparent; display:inline-flex; gap:.5rem; align-items:center; cursor:pointer; transition:all 0.3s ease; }
 .btn-primary{ background:var(--orange); color:#fff }
 .btn-soft{ background:#fff; color:var(--ink); border-color:var(--ink) }
-.btn:hover{ filter:brightness(1.02) }
+.btn:hover{ filter:brightness(1.02); transform:translateY(-1px); box-shadow:0 4px 8px rgba(0,0,0,0.1); }
+.btn-primary:hover{ background:#ea580c; }
+.btn-soft:hover{ background:#f8f9fa; border-color:var(--orange); color:var(--orange); }
 .row-actions{ display:flex; gap:.6rem; flex-wrap:wrap }
 
 /* ALUMNI */
 .alumni-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem }
 .alumni-card{ border:1px solid var(--border); border-radius:1rem; background:#fff; padding:.9rem; display:flex; gap:.8rem; align-items:center }
 .alumni-card .avatar{ width:70px; height:70px; border-radius:.7rem }
+
+/* UNDER CONSTRUCTION */
+.under-construction{ 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  min-height: 300px; 
+  background: linear-gradient(135deg, #f8fafc 0%, #eef4ff 100%); 
+  border: 2px dashed var(--border); 
+  border-radius: 1rem; 
+  margin: 1rem 0 
+}
+.construction-content{ 
+  text-align: center; 
+  max-width: 400px; 
+  padding: 2rem 
+}
+.construction-content i{ 
+  font-size: 3rem; 
+  color: var(--primary); 
+  margin-bottom: 1rem; 
+  opacity: 0.7 
+}
+.construction-content h3{ 
+  color: var(--ink); 
+  margin-bottom: 1rem; 
+  font-size: 1.5rem 
+}
+.construction-content p{ 
+  color: var(--muted); 
+  line-height: 1.6; 
+  margin-bottom: 0.8rem 
+}
 
 /* CONTACT */
 .contact-card .contact-grid{ display:grid; grid-template-columns:2fr 1fr; gap:1rem; align-items:start }
@@ -1062,5 +1433,175 @@ const toggleAccordion = (section) => {
   .quickfacts li{ min-width:140px }
   .outcome-grid{ grid-template-columns:1fr }
   .outcome-grid.grid-2{ grid-template-columns:1fr }
+}
+
+/* Labs Section Styles */
+.labs-intro {
+  margin-bottom: 2rem;
+}
+
+.lab-actions {
+  margin-top: 1rem;
+}
+
+.view-images-btn {
+  width: 100%;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Activities Section Styles */
+.activities-hero {
+  margin-bottom: 2rem;
+}
+
+.activities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.activity-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.activity-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.activity-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  background: var(--orange);
+  color: white;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.activity-content {
+  flex: 1;
+}
+
+.activity-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--ink);
+}
+
+.activity-desc {
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.activities-footer {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid #eee;
+}
+
+/* BOS Section Styles */
+.bos-intro {
+  margin-bottom: 2rem;
+}
+
+.bos-activities {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.activity-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.activity-date {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  background: var(--orange);
+  color: white;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.activity-content h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--ink);
+}
+
+.activity-content p {
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* PDF Modal Styles now handled by PdfViewer component */
+
+/* Coming Soon Styles */
+.download.coming-soon {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.dl-status {
+  font-size: 0.8rem;
+  color: var(--orange);
+  font-weight: 500;
+  margin-top: 0.25rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .activities-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .activity-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .activity-icon {
+    align-self: center;
+  }
+  
+  .bos-activities {
+    gap: 1rem;
+  }
+  
+  .activity-item {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .activity-date {
+    align-self: center;
+  }
+  
+  /* PDF Modal responsive styles now handled by PdfViewer component */
 }
 </style>

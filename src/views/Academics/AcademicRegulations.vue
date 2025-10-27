@@ -24,7 +24,7 @@
         :key="tab.id"
         class="tab"
         :class="{ active: activeTab === tab.id }"
-        @click="activeTab = tab.id"
+        @click="setTab(tab.id)"
         :aria-selected="activeTab === tab.id"
         role="tab"
       >
@@ -210,20 +210,62 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, watch } from "vue";
+import { useRouter, useRoute } from "vue-router";
 import Header from "@/components/Header.vue";
 import NavBar from "@/components/NavBar.vue";
 import Footer from "@/components/Footer.vue";
 
+const router = useRouter();
+const route = useRoute();
+
 const tabs = [
-  { id: "docs", label: "Documents", icon: "fa-regular fa-file-pdf" },
-  { id: "programs", label: "Programs Offered", icon: "fa-solid fa-graduation-cap" },
-  { id: "admissions", label: "Admission Requirements", icon: "fa-regular fa-id-card" },
-  { id: "fees", label: "Fee Structure", icon: "fa-solid fa-indian-rupee-sign" },
-  { id: "eligibility", label: "Eligibility Criteria", icon: "fa-solid fa-user-check" },
+  { id: "docs", label: "Documents", icon: "fa-regular fa-file-pdf", path: "/academic-regulations/documents" },
+  { id: "programs", label: "Programs Offered", icon: "fa-solid fa-graduation-cap", path: "/academic-regulations/programs" },
+  { id: "admissions", label: "Admission Requirements", icon: "fa-regular fa-id-card", path: "/academic-regulations/admissions" },
+  { id: "fees", label: "Fee Structure", icon: "fa-solid fa-indian-rupee-sign", path: "/academic-regulations/fees" },
+  { id: "eligibility", label: "Eligibility Criteria", icon: "fa-solid fa-user-check", path: "/academic-regulations/eligibility" },
 ];
 
 const activeTab = ref("docs");
+
+const setTab = (id) => {
+  activeTab.value = id;
+  const tab = tabs.find(t => t.id === id);
+  if (tab && tab.path) {
+    router.push(tab.path);
+  }
+};
+
+// Initialize active tab based on route
+onMounted(() => {
+  const pathToKey = {
+    "/academic-regulations/documents": "docs",
+    "/academic-regulations/programs": "programs",
+    "/academic-regulations/admissions": "admissions",
+    "/academic-regulations/fees": "fees",
+    "/academic-regulations/eligibility": "eligibility"
+  };
+  const key = pathToKey[route.path];
+  if (key) {
+    activeTab.value = key;
+  }
+});
+
+// Watch for route changes
+watch(() => route.path, (newPath) => {
+  const pathToKey = {
+    "/academic-regulations/documents": "docs",
+    "/academic-regulations/programs": "programs",
+    "/academic-regulations/admissions": "admissions",
+    "/academic-regulations/fees": "fees",
+    "/academic-regulations/eligibility": "eligibility"
+  };
+  const key = pathToKey[newPath];
+  if (key) {
+    activeTab.value = key;
+  }
+});
 
 const docsUG = [
   { id: 1, title: "R22 Academic Regulations", href: "/docs/R22-BTech.pdf" },
@@ -334,20 +376,39 @@ const docsPG = [
   gap: .5rem;
   white-space: nowrap;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   min-height: 40px;
   min-width: fit-content;
   flex-shrink: 0;
 }
 
 .tab i {
-  color: var(--ink);
+  color: var(--orange);
+}
+
+.tab:hover {
+  background: var(--orange);
+  color: #fff;
+  border-color: var(--orange);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+}
+
+.tab:hover i {
+  color: #fff;
 }
 
 .tab.active {
-  border-color: var(--ink);
-  background: rgba(30, 64, 175, 0.08);
-  color: var(--ink);
+  border-color: var(--orange);
+  background: var(--orange);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+  transform: translateY(-2px);
+  font-weight: 700;
+}
+
+.tab.active i {
+  color: #fff;
 }
 
 .section-title {

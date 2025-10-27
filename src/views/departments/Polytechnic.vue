@@ -41,7 +41,7 @@
     </header>
 
     <!-- STICKY SUB NAV (nav-pills) -->
-    <nav class="subnav" aria-label="Section navigation">
+    <nav id="subnav" class="subnav" aria-label="Section navigation">
       <div class="container subnav-inner">
         <button
           v-for="tab in tabs"
@@ -61,7 +61,7 @@
     <!-- CONTENT (tab panes) -->
     <main class="container content" id="content">
       <!-- ABOUT -->
-      <section class="card-section" v-show="activeTab==='overview'">
+      <section :id="tabsMap.overview" class="card-section" v-show="activeTab==='overview'">
         <div class="card">
           <h2 class="section-title"><i class="fa-solid fa-school"></i> About the Department</h2>
           <p class="lead">
@@ -80,11 +80,11 @@
 
         <div class="grid-2">
           <article class="card">
-            <h3 class="h5 text-muted mb-2">Vision</h3>
+            <h3 class="h5 mb-2" style="color: var(--ink); font-weight: 800;">Vision</h3>
             <p>
               To be recognized as the center for excellence in polytechnic education, producing skilled technicians and engineers who contribute to the technological advancement of society.
             </p>
-            <h3 class="h5 text-muted mt-4 mb-2">Mission</h3>
+            <h3 class="h5 mt-4 mb-2" style="color: var(--ink); font-weight: 800;">Mission</h3>
             <ul class="bullets">
               <li>Offer technical courses that prepare students to develop into quality professionals.</li>
               <li>Provide practical skills and hands-on training in mechanical, electrical, and computer engineering.</li>
@@ -114,7 +114,7 @@
       </section>
 
       <!-- FACULTY DIRECTORY -->
-      <section class="card-section" v-show="activeTab==='faculty'">
+      <section :id="tabsMap.faculty" class="card-section" v-show="activeTab==='faculty'">
         <div class="card">
           <div class="section-header">
             <h2 class="section-title"><i class="fa-solid fa-users-gear"></i> Faculty Directory</h2>
@@ -166,7 +166,7 @@
       </section>
 
       <!-- LABS / INFRA -->
-      <section class="card-section" v-show="activeTab==='labs'">
+      <section :id="tabsMap.labs" class="card-section" v-show="activeTab==='labs'">
         <h2 class="section-title"><i class="fa-solid fa-flask"></i> Labs & Research Infrastructure</h2>
         <div class="labs-grid">
           <article v-for="lab in labs" :key="lab.title" class="lab-card">
@@ -185,7 +185,7 @@
       </section>
 
       <!-- CURRICULUM -->
-      <section class="card-section" aria-labelledby="curriculum" v-show="activeTab==='curriculum'">
+      <section :id="tabsMap.curriculum" class="card-section" aria-labelledby="curriculum" v-show="activeTab==='curriculum'">
         <div class="card">
           <h2 class="section-title" id="curriculum"><i class="fa-solid fa-file-lines"></i> Course Structure for all Years</h2>
           <p class="lead">
@@ -265,7 +265,7 @@
       </section>
 
       <!-- ACTIVITIES -->
-      <section class="card-section" v-show="activeTab==='activities'">
+      <section :id="tabsMap.activities" class="card-section" v-show="activeTab==='activities'">
         <h2 class="section-title"><i class="fa-solid fa-rocket"></i> Student Activities & Achievements</h2>
         <div class="grid-3">
           <article class="card" v-for="a in activities" :key="a.title">
@@ -276,7 +276,7 @@
       </section>
 
       <!-- RESEARCH & INDUSTRY -->
-      <section class="card-section" v-show="activeTab==='research'">
+      <section :id="tabsMap.research" class="card-section" v-show="activeTab==='research'">
         <div class="grid-2">
           <article class="card">
             <h2 class="section-title"><i class="fa-solid fa-microscope"></i> Research Highlights</h2>
@@ -303,7 +303,7 @@
       </section>
 
       <!-- PLACEMENTS -->
-      <section class="card-section" v-show="activeTab==='placements'">
+      <section :id="tabsMap.placements" class="card-section" v-show="activeTab==='placements'">
         <div class="card">
           <h2 class="section-title"><i class="fa-solid fa-briefcase"></i> Placements & Opportunities</h2>
           <div class="stats">
@@ -336,52 +336,20 @@
       </section>
 
       <!-- ALUMNI -->
-      <section class="card-section" v-show="activeTab==='alumni'">
-        <div class="alumni-header">
-          <h2 class="section-title"><i class="fa-solid fa-user-graduate"></i> Alumni Network</h2>
-          <div class="year-filter">
-            <label for="yearSelect" class="filter-label">Filter by Year:</label>
-            <select 
-              id="yearSelect" 
-              v-model="selectedYear" 
-              class="year-select"
-              aria-label="Filter alumni by graduation year"
-            >
-              <option 
-                v-for="year in availableYears" 
-                :key="year" 
-                :value="year"
-              >
-                {{ year === 'ALL' ? 'All Years' : year }}
-              </option>
-            </select>
+      <section :id="tabsMap.alumni" class="card-section" v-show="activeTab==='alumni'">
+        <h2 class="section-title"><i class="fa-solid fa-user-graduate"></i> Alumni Network</h2>
+        <div class="under-construction">
+          <div class="construction-content">
+            <i class="fa-solid fa-hammer"></i>
+            <h3>Under Construction</h3>
+            <p>Our alumni network section is currently being updated with the latest information about our Polytechnic graduates and their achievements.</p>
+            <p>Please check back soon for inspiring stories from our alumni community.</p>
           </div>
-        </div>
-        <div class="alumni-grid">
-          <article v-for="al in filteredAlumni" :key="al.name" class="alumni-card">
-            <img :src="al.photo" :alt="al.name" class="avatar" />
-            <div class="alumni-info">
-              <h3 class="h6">{{ al.name }}</h3>
-              <p class="muted">{{ al.role }} — {{ al.company }}</p>
-              <p class="yop" v-if="al.yop"><strong>YOP:</strong> {{ al.yop }}</p>
-              <div class="social-links">
-                <a v-if="al.linkedin" :href="al.linkedin" target="_blank" rel="noopener" class="social-link" title="LinkedIn">
-                  <i class="fa-brands fa-linkedin"></i>
-                </a>
-                <a v-if="al.github" :href="al.github" target="_blank" rel="noopener" class="social-link" title="GitHub">
-                  <i class="fa-brands fa-github"></i>
-                </a>
-              </div>
-            </div>
-          </article>
-        </div>
-        <div class="row-actions mt-1">
-          <a class="btn btn-primary" href="mailto:alumni@ssit.edu.in">Join Alumni Network</a>
         </div>
       </section>
 
       <!-- CONTACT -->
-      <section class="card-section" v-show="activeTab==='contact'">
+      <section :id="tabsMap.contact" class="card-section" v-show="activeTab==='contact'">
         <div class="card contact-card">
           <h2 class="section-title"><i class="fa-solid fa-address-book"></i> Contact Us</h2>
           <div class="contact-grid">
@@ -395,7 +363,7 @@
             </div>
             <aside class="note">
               <p class="mb-0"><i class="fa-solid fa-circle-info"></i> Follow our LinkedIn page for news, internships, and events.</p>
-              <a class="btn btn-soft mt-1" href="#" aria-label="AI & DS LinkedIn">AI & DS LinkedIn</a>
+              <a class="btn btn-soft mt-1" href="#" aria-label="Polytechnic LinkedIn">Polytechnic LinkedIn</a>
             </aside>
           </div>
         </div>
@@ -409,7 +377,8 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import Header from '@/components/Header.vue'
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/Footer.vue'
@@ -437,8 +406,53 @@ const tabs = [
   { id: 'alumni',     label: 'Alumni',     icon: 'fa-solid fa-user-graduate' },
   { id: 'contact',    label: 'Contact',    icon: 'fa-solid fa-address-book' }
 ]
+// Router setup
+const route = useRoute()
+const router = useRouter()
+
+// Tab mapping for URL synchronization
+const tabsMap = {
+  overview: 'overview',
+  faculty: 'faculty', 
+  labs: 'labs',
+  curriculum: 'curriculum',
+  activities: 'activities',
+  research: 'research',
+  placements: 'placements',
+  alumni: 'alumni',
+  contact: 'contact'
+}
+
 const activeTab = ref(tabs[0].id)
-const setTab = (id) => { activeTab.value = id } // tabbed view, no scroll
+
+// Enhanced setTab function with router navigation
+const setTab = (id) => {
+  activeTab.value = id
+  router.push(`/polytechnic/${id}`)
+  
+  // Smooth scroll to section
+  setTimeout(() => {
+    const element = document.getElementById(tabsMap[id])
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, 100)
+}
+
+// Initialize tab from URL on mount
+onMounted(() => {
+  const tabFromUrl = route.params.tab
+  if (tabFromUrl && tabs.some(tab => tab.id === tabFromUrl)) {
+    activeTab.value = tabFromUrl
+  }
+})
+
+// Watch for route changes
+watch(() => route.params.tab, (newTab) => {
+  if (newTab && tabs.some(tab => tab.id === newTab)) {
+    activeTab.value = newTab
+  }
+})
 
 /* Faculty */
 const faculty = ref([
@@ -759,9 +773,22 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 .filters input, .filters select{
   border:1px solid var(--border); border-radius:.6rem; padding:.55rem .8rem; min-width:220px; background:#fff;
 }
-.faculty-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem; margin-top:1rem }
-.faculty-card{ border:1px solid var(--border); border-radius:1rem; overflow:hidden; display:flex; gap:.85rem; padding:.9rem; background:#fff; transition:transform .2s ease, box-shadow .2s ease }
-.faculty-card:focus, .faculty-card:hover{ transform:translateY(-3px); box-shadow:0 12px 30px rgba(0,0,0,.08) }
+.faculty-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(350px,1fr)); gap:1rem; margin-top:1rem }
+.faculty-card{ 
+  border:1px solid var(--border); 
+  border-radius:1rem; 
+  overflow:visible; 
+  display:flex; 
+  gap:.85rem; 
+  padding:1rem; 
+  background:#fff; 
+  transition:all 0.3s ease;
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
+}
+.faculty-card:focus, .faculty-card:hover{ 
+  transform:translateY(-4px); 
+  box-shadow:0 8px 25px rgba(0,0,0,.12);
+}
 .avatar{ width:86px; height:86px; object-fit:cover; border-radius:.75rem }
 .fc-name{ font-size:1.05rem; font-weight:800; color:var(--ink); margin:0 0 .15rem }
 .fc-meta{ color:var(--muted); margin:0 0 .35rem }
@@ -1015,6 +1042,39 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
   border-color:var(--orange);
   background:rgba(249,115,22,0.05);
   transform:translateY(-1px);
+}
+
+/* UNDER CONSTRUCTION */
+.under-construction{ 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  min-height: 300px; 
+  background: linear-gradient(135deg, #f8fafc 0%, #eef4ff 100%); 
+  border: 2px dashed var(--border); 
+  border-radius: 1rem; 
+  margin: 1rem 0 
+}
+.construction-content{ 
+  text-align: center; 
+  max-width: 400px; 
+  padding: 2rem 
+}
+.construction-content i{ 
+  font-size: 3rem; 
+  color: var(--primary); 
+  margin-bottom: 1rem; 
+  opacity: 0.7 
+}
+.construction-content h3{ 
+  color: var(--ink); 
+  margin-bottom: 1rem; 
+  font-size: 1.5rem 
+}
+.construction-content p{ 
+  color: var(--muted); 
+  line-height: 1.6; 
+  margin-bottom: 0.8rem 
 }
 
 /* Responsive Alumni Header */

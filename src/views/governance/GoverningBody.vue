@@ -242,14 +242,14 @@
               </div>
               <div class="minute-content">
                 <h6 class="minute-date">{{ minute.date }}</h6>
-                <p class="minute-description">{{ minute.title || 'Meeting Minutes' }}</p>
+                <p class="minute-description">{{ minute.summary || 'Meeting Minutes' }}</p>
                 <button 
-                  @click="openPdfViewer(minute)" 
-                  class="btn btn-outline-primary btn-sm me-2"
+                  @click="openPdfModal(minute)" 
+                  class="btn btn-orange btn-sm me-2"
                 >
                   <i class="fa-solid fa-eye me-1"></i>View
                 </button>
-                <a :href="minute.link" target="_blank" class="btn btn-outline-secondary btn-sm">
+                <a :href="minute.document" target="_blank" class="btn btn-outline-primary btn-sm">
                   <i class="fa-solid fa-download me-1"></i>Download
                 </a>
               </div>
@@ -283,16 +283,16 @@
                   <span class="minute-date-list">{{ minute.date }}</span>
                 </div>
                 <div class="col-md-4">
-                  <span class="minute-title-list">{{ minute.title || 'Meeting Minutes' }}</span>
+                  <span class="minute-title-list">{{ minute.summary || 'Meeting Minutes' }}</span>
                 </div>
                 <div class="col-md-3 text-center">
                   <button 
-                    @click="openPdfViewer(minute)" 
-                    class="btn btn-outline-primary btn-sm me-1"
+                    @click="openPdfModal(minute)" 
+                    class="btn btn-orange btn-sm me-1"
                   >
                     <i class="fa-solid fa-eye"></i>
                   </button>
-                  <a :href="minute.link" target="_blank" class="btn btn-outline-secondary btn-sm">
+                  <a :href="minute.document" target="_blank" class="btn btn-outline-primary btn-sm">
                     <i class="fa-solid fa-download"></i>
                   </a>
                 </div>
@@ -309,43 +309,12 @@
         </section>
 
         <!-- PDF Viewer Modal -->
-        <div v-if="showPdfViewer" class="pdf-modal-overlay" @click="closePdfViewer">
-          <div class="pdf-modal" @click.stop>
-            <div class="pdf-modal-header">
-              <h5 class="pdf-modal-title">{{ selectedMinute?.title || 'Meeting Minutes' }}</h5>
-              <button @click="closePdfViewer" class="pdf-close-btn">
-                <i class="fa-solid fa-times"></i>
-              </button>
-            </div>
-            <div class="pdf-modal-body">
-              <div v-if="pdfLoading" class="pdf-loading">
-                <i class="fa-solid fa-spinner fa-spin"></i>
-                <p>Loading PDF...</p>
-              </div>
-              <div v-else-if="pdfError" class="pdf-error">
-                <i class="fa-solid fa-exclamation-triangle"></i>
-                <p>{{ pdfError }}</p>
-                <button @click="closePdfViewer" class="btn btn-primary">Close</button>
-              </div>
-              <div v-else class="pdf-container">
-                <iframe 
-                  :src="pdfViewerUrl" 
-                  class="pdf-iframe"
-                  sandbox="allow-scripts allow-same-origin"
-                  referrerpolicy="no-referrer"
-                ></iframe>
-              </div>
-            </div>
-            <div class="pdf-modal-footer">
-              <button @click="downloadPdf" class="btn btn-outline-primary">
-                <i class="fa-solid fa-download me-1"></i>Download PDF
-              </button>
-              <button @click="closePdfViewer" class="btn btn-secondary">
-                <i class="fa-solid fa-times me-1"></i>Close
-              </button>
-            </div>
-          </div>
-      </div>
+        <PdfViewer 
+          :show="showPdfModal" 
+          :url="currentPdfUrl" 
+          :title="currentPdfTitle"
+          @close="closePdfModal"
+        />
       </main>
     </main>
 
@@ -357,10 +326,11 @@
 import Header from "../../components/Header.vue";
 import NavBar from "../../components/NavBar.vue";
 import Footer from "../../components/Footer.vue";
+import PdfViewer from '../utils/PdfViewer.vue';
 
 export default {
   name: "GoverningBody",
-  components: { Header, NavBar, Footer },
+  components: { Header, NavBar, Footer, PdfViewer },
   data() {
     return {
       activeTab: 'members',
@@ -384,6 +354,10 @@ export default {
       pdfLoading: false,
       pdfError: null,
       pdfViewerUrl: '',
+      // PDF Viewer state
+      showPdfModal: false,
+      currentPdfUrl: '',
+      currentPdfTitle: '',
       members: [
         { 
           name: "Dr. B. Pardha Saradhi Reddy", 
@@ -398,12 +372,12 @@ export default {
         { 
           name: "Sri. B. Vamsi Krishna Reddy", 
           role: "Member",
-          image: new URL('@/assets/management/Trustee-1.png', import.meta.url).href
+          image: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
         },
         { 
           name: "Dr. K. Ratnakar Reddy", 
           role: "Member",
-          image: new URL('@/assets/management/principal.jpg', import.meta.url).href
+          image: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
         },
         { 
           name: "Smt. B. Anvida", 
@@ -413,27 +387,27 @@ export default {
         { 
           name: "Smt. B. Kalavathi", 
           role: "Member",
-          image: new URL('@/assets/management/Trustee-1.png', import.meta.url).href
+          image: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
         },
         { 
           name: "Dr. M. Venu Gopala Rao", 
           role: "Member",
-          image: new URL('@/assets/management/principal.jpg', import.meta.url).href
+          image: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
         },
         { 
           name: "Dr. V. Venkateswara Reddy", 
           role: "JNTUH Nominee",
-          image: new URL('@/assets/management/principal.jpg', import.meta.url).href
+          image: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
         },
         { 
           name: "Sri. M. Raj Kumar", 
           role: "SBTET Nominee",
-          image: new URL('@/assets/management/principal.jpg', import.meta.url).href
+          image: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
         },
         { 
           name: "Sri. K.V. Jawahar", 
           role: "Member",
-          image: new URL('@/assets/management/principal.jpg', import.meta.url).href
+          image: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
         },
         { 
           name: "Dr. V.S.R. Kumari", 
@@ -441,35 +415,76 @@ export default {
           image: new URL('@/assets/management/principal.jpg', import.meta.url).href
         },
       ],
-      minutes: [
-        { date: "15-12-2025", title: "Annual Meeting 2025", link: "#", year: "2025", month: "12" },
-        { date: "10-11-2025", title: "Monthly Review Meeting", link: "#", year: "2025", month: "11" },
-        { date: "20-10-2025", title: "Academic Policy Review", link: "#", year: "2025", month: "10" },
-        { date: "05-09-2025", title: "Budget Planning Session", link: "#", year: "2025", month: "09" },
-        { date: "18-08-2025", title: "Infrastructure Development", link: "#", year: "2025", month: "08" },
-        { date: "25-07-2025", title: "Faculty Recruitment", link: "#", year: "2025", month: "07" },
-        { date: "12-06-2025", title: "Examination Committee", link: "#", year: "2025", month: "06" },
-        { date: "30-05-2025", title: "Research & Development", link: "#", year: "2025", month: "05" },
-        { date: "15-04-2025", title: "Placement Review", link: "#", year: "2025", month: "04" },
-        { date: "22-03-2025", title: "Academic Calendar 2025-26", link: "#", year: "2025", month: "03" },
-        { date: "08-02-2025", title: "Strategic Planning", link: "#", year: "2025", month: "02" },
-        { date: "20-01-2025", title: "New Year Planning", link: "#", year: "2025", month: "01" },
-        { date: "18-12-2024", title: "Annual Meeting 2024", link: "#", year: "2024", month: "12" },
-        { date: "15-11-2024", title: "NAAC Preparation", link: "#", year: "2024", month: "11" },
-        { date: "28-10-2024", title: "Autonomous Status Review", link: "#", year: "2024", month: "10" },
-        { date: "10-09-2024", title: "Academic Excellence", link: "#", year: "2024", month: "09" },
-        { date: "25-08-2024", title: "Student Welfare", link: "#", year: "2024", month: "08" },
-        { date: "12-07-2024", title: "Faculty Development", link: "#", year: "2024", month: "07" },
-        { date: "30-06-2024", title: "Mid-Year Review", link: "#", year: "2024", month: "06" },
-        { date: "15-05-2024", title: "Technology Integration", link: "#", year: "2024", month: "05" },
-        { date: "22-04-2024", title: "Industry Collaboration", link: "#", year: "2024", month: "04" },
-        { date: "08-03-2024", title: "Research Initiatives", link: "#", year: "2024", month: "03" },
-        { date: "20-02-2024", title: "Quality Assurance", link: "#", year: "2024", month: "02" },
-        { date: "10-01-2024", title: "Annual Planning", link: "#", year: "2024", month: "01" },
-        { date: "20-12-2023", title: "Year End Review 2023", link: "#", year: "2023", month: "12" },
-        { date: "15-11-2023", title: "Academic Performance", link: "#", year: "2023", month: "11" },
-        { date: "28-10-2023", title: "Infrastructure Updates", link: "#", year: "2023", month: "10" },
-      ],
+      meetings: {
+        "2016": [
+          { 
+            no: "GB Meeting", 
+            status: "Completed", 
+            summary: "Governing Body Meeting Minutes - February 2016",
+            date: "04-02-2016",
+            document: new URL('@/assets/docs/governing_body/04.02.2016.pdf', import.meta.url).href
+          },
+          { 
+            no: "GB Meeting", 
+            status: "Completed", 
+            summary: "Governing Body Meeting Minutes - September 2016",
+            date: "08-09-2016",
+            document: new URL('@/assets/docs/governing_body/08.09.2016.pdf', import.meta.url).href
+          },
+        ],
+        "2017": [
+          { 
+            no: "GB Meeting", 
+            status: "Completed", 
+            summary: "Governing Body Meeting Minutes - August 2017",
+            date: "10-08-2017",
+            document: new URL('@/assets/docs/governing_body/10.08.2017.pdf', import.meta.url).href
+          },
+        ],
+        "2018": [
+          { 
+            no: "GB Meeting", 
+            status: "Completed", 
+            summary: "Governing Body Meeting Minutes - August 2018",
+            date: "09-08-2018",
+            document: new URL('@/assets/docs/governing_body/09.08.2018.pdf', import.meta.url).href
+          },
+        ],
+        "2019": [
+          { 
+            no: "GB Meeting", 
+            status: "Completed", 
+            summary: "Governing Body Meeting Minutes - January 2019",
+            date: "10-01-2019",
+            document: new URL('@/assets/docs/governing_body/10.01.2019.pdf', import.meta.url).href
+          },
+        ],
+        "2020": [
+          { 
+            no: "GB Meeting", 
+            status: "Completed", 
+            summary: "Governing Body Meeting Minutes - January 2020",
+            date: "12-01-2020",
+            document: new URL('@/assets/docs/governing_body/12.01.2020.pdf', import.meta.url).href
+          },
+          { 
+            no: "GB Meeting", 
+            status: "Completed", 
+            summary: "Governing Body Meeting Minutes - September 2020",
+            date: "10-09-2020",
+            document: new URL('@/assets/docs/governing_body/10.09.2020.pdf', import.meta.url).href
+          },
+        ],
+        "2021": [
+          { 
+            no: "GB Meeting", 
+            status: "Completed", 
+            summary: "Governing Body Meeting Minutes - January 2021",
+            date: "12-01-2021",
+            document: new URL('@/assets/docs/governing_body/12.01.2021.pdf', import.meta.url).href
+          },
+        ],
+      },
     };
   },
   computed: {
@@ -491,31 +506,41 @@ export default {
       return filtered;
     },
     filteredMinutes() {
-      let filtered = this.minutes;
+      // If no year is selected, show all meetings from all years
+      let filtered = []
+      
+      if (this.selectedYear) {
+        // Show meetings from selected year only
+        filtered = this.meetings[this.selectedYear] || []
+      } else {
+        // Show all meetings from all years in chronological order
+        const sortedYears = Object.keys(this.meetings).sort((a, b) => a - b)
+        sortedYears.forEach(year => {
+          filtered = filtered.concat(this.meetings[year])
+        })
+      }
       
       // Filter by search query
       if (this.minutesSearchQuery) {
         filtered = filtered.filter(minute => 
           minute.date.toLowerCase().includes(this.minutesSearchQuery.toLowerCase()) ||
-          (minute.title && minute.title.toLowerCase().includes(this.minutesSearchQuery.toLowerCase()))
-        );
-      }
-      
-      // Filter by selected year
-      if (this.selectedYear) {
-        filtered = filtered.filter(minute => minute.year === this.selectedYear);
+          (minute.summary && minute.summary.toLowerCase().includes(this.minutesSearchQuery.toLowerCase()))
+        )
       }
       
       // Filter by selected month
       if (this.selectedMonth) {
-        filtered = filtered.filter(minute => minute.month === this.selectedMonth);
+        filtered = filtered.filter(minute => {
+          const month = minute.date.split('-')[1]
+          return month === this.selectedMonth
+        })
       }
       
-      return filtered;
+      return filtered
     },
     availableYears() {
-      const years = [...new Set(this.minutes.map(minute => minute.year))];
-      return years.sort((a, b) => b - a); // Descending order (newest first)
+      const years = Object.keys(this.meetings);
+      return years.sort((a, b) => a - b); // Ascending order (oldest first)
     }
   },
   methods: {
@@ -534,10 +559,8 @@ export default {
       this.pdfError = null;
       this.showPdfViewer = true;
       
-      // Create secure PDF viewer URL
-      // Using PDF.js viewer with security measures
-      const pdfUrl = encodeURIComponent(minute.link);
-      this.pdfViewerUrl = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${pdfUrl}&toolbar=1&navpanes=1&scrollbar=1&statusbar=1&messages=1&wrap=1`;
+      // Use the document URL directly
+      this.pdfViewerUrl = minute.document;
       
       // Simulate loading (in real implementation, you'd check if PDF loads successfully)
       setTimeout(() => {
@@ -554,17 +577,28 @@ export default {
       this.pdfViewerUrl = '';
     },
     downloadPdf() {
-      if (this.selectedMinute && this.selectedMinute.link) {
+      if (this.selectedMinute && this.selectedMinute.document) {
         // Create a secure download link
         const link = document.createElement('a');
-        link.href = this.selectedMinute.link;
-        link.download = `${this.selectedMinute.title || 'meeting-minutes'}-${this.selectedMinute.date}.pdf`;
+        link.href = this.selectedMinute.document;
+        link.download = `${this.selectedMinute.summary || 'meeting-minutes'}-${this.selectedMinute.date}.pdf`;
         link.target = '_blank';
         link.rel = 'noopener noreferrer';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
       }
+    },
+    // PDF Viewer methods
+    openPdfModal(minute) {
+      this.showPdfModal = true;
+      this.currentPdfUrl = minute.document;
+      this.currentPdfTitle = `${minute.no} - ${minute.summary}`;
+    },
+    closePdfModal() {
+      this.showPdfModal = false;
+      this.currentPdfUrl = '';
+      this.currentPdfTitle = '';
     }
   }
 };
@@ -573,11 +607,12 @@ export default {
 <style scoped>
 /* CSS Variables */
 :root {
-  --ink: #1a2238;
-  --navy: #1e40af;
-  --orange: #FF7701;
+  --ink: #111827;
+  --navy: #111827;
+  --orange: #f97316;
   --border: #e5e7eb;
   --card: #fff;
+  --muted: #6b7280;
 }
 
 /* Hero - Academic Council Style */
@@ -631,13 +666,32 @@ export default {
 }
 
 .chip i {
-  color: var(--navy);
+  color: var(--orange);
+}
+
+.chip:hover {
+  background: var(--orange);
+  color: #fff;
+  border-color: var(--orange);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+}
+
+.chip:hover i {
+  color: #fff;
 }
 
 .chip.active {
-  border-color: var(--navy);
-  background: rgba(30, 64, 175, 0.08);
-  color: var(--navy);
+  border-color: var(--orange);
+  background: var(--orange);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+  transform: translateY(-2px);
+  font-weight: 700;
+}
+
+.chip.active i {
+  color: #fff;
 }
 
 /* Content */
@@ -654,7 +708,7 @@ export default {
   border-radius: 12px;
   padding: 2rem;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(255, 119, 1, 0.1);
+  border: 1px solid rgba(249, 115, 22, 0.1);
   margin-bottom: 2rem;
 }
 
@@ -664,7 +718,7 @@ export default {
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(255, 119, 1, 0.1);
+  border: 1px solid rgba(249, 115, 22, 0.1);
   margin-bottom: 2rem;
 }
 
@@ -692,7 +746,7 @@ export default {
 
 .search-input:focus {
   border-color: var(--orange);
-  box-shadow: 0 0 0 0.2rem rgba(255, 119, 1, 0.1);
+  box-shadow: 0 0 0 0.2rem rgba(249, 115, 22, 0.1);
 }
 
 /* Filter Select */
@@ -705,7 +759,7 @@ export default {
 
 .filter-select:focus {
   border-color: var(--orange);
-  box-shadow: 0 0 0 0.2rem rgba(255, 119, 1, 0.1);
+  box-shadow: 0 0 0 0.2rem rgba(249, 115, 22, 0.1);
 }
 
 /* View Toggle */
@@ -720,7 +774,7 @@ export default {
   border: 2px solid var(--border);
   border-radius: 8px;
   padding: 0.5rem 1rem;
-  color: var(--navy);
+  color: var(--ink);
   transition: all 0.3s ease;
   cursor: pointer;
   display: flex;
@@ -750,7 +804,7 @@ export default {
 }
 
 .count-text {
-  color: var(--navy);
+  color: var(--ink);
   font-weight: 600;
   font-size: 0.9rem;
 }
@@ -758,7 +812,7 @@ export default {
 /* Section Titles */
 .section-title {
   font-weight: 800;
-  color: var(--navy);
+  color: var(--ink);
   margin-bottom: 1rem;
   display: flex;
   align-items: center;
@@ -785,13 +839,13 @@ export default {
   text-align: center;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
-  border: 1px solid rgba(255, 119, 1, 0.1);
+  border: 1px solid rgba(249, 115, 22, 0.1);
 }
 
 .member-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 28px rgba(255, 119, 1, 0.15);
-  border-color: #FF7701;
+  box-shadow: 0 8px 28px rgba(249, 115, 22, 0.15);
+  border-color: #f97316;
 }
 
 .member-header {
@@ -816,7 +870,7 @@ export default {
   font-weight: 600;
   font-size: 0.9rem;
   z-index: 2;
-  box-shadow: 0 2px 8px rgba(255, 119, 1, 0.3);
+  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.3);
 }
 
 .member-photo {
@@ -828,7 +882,7 @@ export default {
   height: 100px;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid rgba(255, 119, 1, 0.15);
+  border: 4px solid rgba(249, 115, 22, 0.15);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
 }
@@ -840,7 +894,7 @@ export default {
 .member-name {
   font-weight: 700;
   margin-bottom: 0.5rem;
-  color: #1a2238;
+  color: #111827;
 }
 
 .member-position {
@@ -863,15 +917,15 @@ export default {
   padding: 1.5rem;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
-  border: 1px solid rgba(255, 119, 1, 0.1);
+  border: 1px solid rgba(249, 115, 22, 0.1);
   display: flex;
   flex-direction: column;
 }
 
 .minute-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 28px rgba(255, 119, 1, 0.15);
-  border-color: #FF7701;
+  box-shadow: 0 8px 28px rgba(249, 115, 22, 0.15);
+  border-color: #f97316;
 }
 
 .minute-header {
@@ -907,7 +961,7 @@ export default {
 
 .minute-date {
   font-weight: 700;
-  color: #1a2238;
+  color: #111827;
   margin-bottom: 0.5rem;
 }
 
@@ -922,10 +976,22 @@ export default {
   color: var(--orange);
 }
 
-.btn-outline-primary:hover {
+/* Custom button */
+.btn-orange {
   background: var(--orange);
-  border-color: var(--orange);
-  color: white;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 6px 12px;
+}
+
+.btn-orange:hover {
+  background: #e65f00;
+}
+
+/* Orange Accent */
+.text-orange {
+  color: var(--orange);
 }
 
 /* List View */
@@ -933,12 +999,12 @@ export default {
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(255, 119, 1, 0.1);
+  border: 1px solid rgba(249, 115, 22, 0.1);
   overflow: hidden;
 }
 
 .list-header {
-  background: var(--navy);
+  background: var(--ink);
   color: white;
   padding: 1rem;
   font-size: 0.95rem;
@@ -955,7 +1021,7 @@ export default {
 }
 
 .member-list-item:hover {
-  background: rgba(255, 119, 1, 0.05);
+  background: rgba(249, 115, 22, 0.05);
 }
 
 .member-serial-list {
@@ -969,12 +1035,12 @@ export default {
   justify-content: center;
   font-weight: 600;
   font-size: 0.9rem;
-  box-shadow: 0 2px 8px rgba(255, 119, 1, 0.3);
+  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.3);
 }
 
 .member-name-list {
   font-weight: 700;
-  color: var(--navy);
+  color: var(--ink);
   margin-bottom: 0;
 }
 
@@ -988,7 +1054,7 @@ export default {
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid rgba(255, 119, 1, 0.15);
+  border: 2px solid rgba(249, 115, 22, 0.15);
 }
 
 /* Minutes List View */
@@ -996,7 +1062,7 @@ export default {
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(255, 119, 1, 0.1);
+  border: 1px solid rgba(249, 115, 22, 0.1);
   overflow: hidden;
 }
 
@@ -1011,7 +1077,7 @@ export default {
 }
 
 .minute-list-item:hover {
-  background: rgba(255, 119, 1, 0.05);
+  background: rgba(249, 115, 22, 0.05);
 }
 
 .minute-number-list {
@@ -1029,7 +1095,7 @@ export default {
 
 .minute-date-list {
   font-weight: 700;
-  color: var(--navy);
+  color: var(--ink);
 }
 
 .minute-title-list {
@@ -1044,7 +1110,7 @@ export default {
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(255, 119, 1, 0.1);
+  border: 1px solid rgba(249, 115, 22, 0.1);
 }
 
 .no-results i {
@@ -1054,7 +1120,7 @@ export default {
 }
 
 .no-results h5 {
-  color: var(--navy);
+  color: var(--ink);
   margin-bottom: 0.5rem;
 }
 
@@ -1096,7 +1162,7 @@ export default {
   justify-content: space-between;
   padding: 1rem 1.5rem;
   border-bottom: 1px solid var(--border);
-  background: var(--navy);
+  background: var(--ink);
   color: white;
   border-radius: 12px 12px 0 0;
 }
@@ -1133,7 +1199,7 @@ export default {
 
 .pdf-loading {
   text-align: center;
-  color: var(--navy);
+  color: var(--ink);
 }
 
 .pdf-loading i {
@@ -1144,7 +1210,7 @@ export default {
 
 .pdf-error {
   text-align: center;
-  color: var(--navy);
+  color: var(--ink);
 }
 
 .pdf-error i {

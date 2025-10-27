@@ -31,7 +31,7 @@
           :class="{ active: activeTab === t.key }"
           role="tab"
           :aria-selected="activeTab === t.key ? 'true' : 'false'"
-          @click="activeTab = t.key"
+          @click="setActiveTab(t.key)"
         >
           <i :class="t.icon" class="me-2"></i>{{ t.label }}
         </button>
@@ -202,20 +202,25 @@
             <!-- Right: PDF Viewer -->
             <div class="col-md-8">
               <div v-if="currentDoc" class="pdf-viewer shadow-sm">
+                <div class="pdf-controls mb-3">
+                  <button @click="openPdfViewer" class="btn btn-sm btn-orange me-2">
+                    <i class="fas fa-expand me-1"></i> View Fullscreen
+                  </button>
+                  <a :href="currentDoc.href" target="_blank" class="btn btn-sm btn-outline-primary">
+                    <i class="fas fa-download me-1"></i> Download
+                  </a>
+                </div>
                 <h6 class="fw-bold mb-2">
                   <i class="fas fa-file-pdf text-danger me-2"></i>
                   {{ currentDoc.title }} - {{ currentDoc.year }}
                 </h6>
-                <iframe
-                  :src="currentDoc.href"
-                  width="100%"
-                  height="600px"
-                  style="border:1px solid #ddd; border-radius:6px;"
-                ></iframe>
-                <div class="mt-2">
-                  <a :href="currentDoc.href" target="_blank" class="btn btn-sm btn-orange">
-                    <i class="fas fa-download me-1"></i> Download
-                  </a>
+                <div class="pdf-preview">
+                  <iframe
+                    :src="currentDoc.href"
+                    width="100%"
+                    height="400px"
+                    style="border:1px solid #ddd; border-radius:6px;"
+                  ></iframe>
                 </div>
               </div>
               <div v-else class="alert alert-info text-center">
@@ -272,6 +277,15 @@
       </section>
     </div>
     </section>
+    
+    <!-- PDF Viewer Modal -->
+    <PdfViewer 
+      :show="showPdfModal" 
+      :url="currentPdfUrl" 
+      :title="currentPdfTitle"
+      @close="closePdfModal"
+    />
+    
     <Footer/>
   </div>
 </template>
@@ -280,20 +294,64 @@
 import Header from '../../components/Header.vue'
 import NavBar from '../../components/NavBar.vue'
 import Footer from '../../components/Footer.vue'
-import { ref, computed } from 'vue'
+import PdfViewer from '../utils/PdfViewer.vue'
+import { ref, computed, onMounted, watch } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+
+const router = useRouter()
+const route = useRoute()
 
 const today = new Date().toLocaleDateString('en-IN', {
   day: '2-digit', month: 'short', year: 'numeric'
 })
 
 const tabs = [
-  { key: 'institution', label: 'Institution Info', icon: 'fas fa-landmark' },
-  { key: 'programs', label: 'Programs & Intake', icon: 'fas fa-th-list' },
-  { key: 'fees', label: 'Fees', icon: 'fas fa-rupee-sign' },
-  { key: 'documents', label: 'Documents', icon: 'far fa-file-alt' },
-  { key: 'governance', label: 'Governance & Services', icon: 'fas fa-sitemap' },
+  { key: 'institution', label: 'Institution Info', icon: 'fas fa-landmark', path: '/mandatory-disclosure/institution-info' },
+  { key: 'programs', label: 'Programs & Intake', icon: 'fas fa-th-list', path: '/mandatory-disclosure/programs-intake' },
+  { key: 'fees', label: 'Fees', icon: 'fas fa-rupee-sign', path: '/mandatory-disclosure/fees' },
+  { key: 'documents', label: 'Documents', icon: 'far fa-file-alt', path: '/mandatory-disclosure/documents' },
+  { key: 'governance', label: 'Governance & Services', icon: 'fas fa-sitemap', path: '/mandatory-disclosure/governance-services' },
 ]
 const activeTab = ref('institution')
+
+// Tab click handler with navigation
+const setActiveTab = (tabKey) => {
+  activeTab.value = tabKey
+  const tab = tabs.find(t => t.key === tabKey)
+  if (tab && tab.path) {
+    router.push(tab.path)
+  }
+}
+
+// Initialize active tab based on route
+onMounted(() => {
+  const pathToKey = {
+    '/mandatory-disclosure/institution-info': 'institution',
+    '/mandatory-disclosure/programs-intake': 'programs',
+    '/mandatory-disclosure/fees': 'fees',
+    '/mandatory-disclosure/documents': 'documents',
+    '/mandatory-disclosure/governance-services': 'governance'
+  }
+  const key = pathToKey[route.path]
+  if (key) {
+    activeTab.value = key
+  }
+})
+
+// Watch for route changes
+watch(() => route.path, (newPath) => {
+  const pathToKey = {
+    '/mandatory-disclosure/institution-info': 'institution',
+    '/mandatory-disclosure/programs-intake': 'programs',
+    '/mandatory-disclosure/fees': 'fees',
+    '/mandatory-disclosure/documents': 'documents',
+    '/mandatory-disclosure/governance-services': 'governance'
+  }
+  const key = pathToKey[newPath]
+  if (key) {
+    activeTab.value = key
+  }
+})
 
 /* Programs */
 const programs = ref([
@@ -331,17 +389,32 @@ const feeRows = ref([
 
 /* Documents */
 const docs = ref([
-  { title: 'AICTE Extension of Approval', year: '2023-24', href: '/docs/AICTE_EOA_2023_24.pdf' },
-  { title: 'AICTE Extension of Approval', year: '2022-23', href: '/docs/AICTE_EOA_2022_23.pdf' },
-  { title: 'AICTE Extension of Approval', year: '2021-22', href: '/docs/AICTE_EOA_2021_22.pdf' },
+  { title: 'AICTE Extension of Approval', year: '2023-24', href: new URL('@/assets/docs/mandatory_disclosure/EOAReport2023-24.pdf', import.meta.url).href },
+  { title: 'AICTE Extension of Approval', year: '2022-23', href: new URL('@/assets/docs/mandatory_disclosure/EOAReport2022-23.pdf', import.meta.url).href },
+  { title: 'AICTE Extension of Approval', year: '2021-22', href: new URL('@/assets/docs/mandatory_disclosure/EOAReport2021-22.pdf', import.meta.url).href },
+  { title: 'AICTE Extension of Approval', year: '2020-21', href: new URL('@/assets/docs/mandatory_disclosure/EOAReport2020-21.pdf', import.meta.url).href },
+  { title: 'AICTE Extension of Approval', year: '2019-20', href: new URL('@/assets/docs/mandatory_disclosure/EOAReport2019-20.pdf', import.meta.url).href },
+  { title: 'AICTE Extension of Approval', year: '2018-19', href: new URL('@/assets/docs/mandatory_disclosure/EOAReport2018-19.pdf', import.meta.url).href },
+  { title: 'AICTE Extension of Approval', year: '2017-18', href: new URL('@/assets/docs/mandatory_disclosure/EOAReport2017-18.pdf', import.meta.url).href },
+  { title: 'AICTE Extension of Approval', year: '2016-17', href: new URL('@/assets/docs/mandatory_disclosure/EOAReport2016-17.pdf', import.meta.url).href },
+  { title: 'AICTE Extension of Approval', year: '2015-16', href: new URL('@/assets/docs/mandatory_disclosure/EOAReport2015-16.pdf', import.meta.url).href },
+  { title: 'AICTE Extension of Approval', year: '2014-15', href: new URL('@/assets/docs/mandatory_disclosure/EOAReport2014-15.pdf', import.meta.url).href },
+  { title: 'AICTE Extension of Approval', year: '2013-14', href: new URL('@/assets/docs/mandatory_disclosure/EOAReport2013-14.pdf', import.meta.url).href },
+  { title: 'AICTE Extension of Approval', year: '2001-2012', href: new URL('@/assets/docs/mandatory_disclosure/EOAReportfrom2001-2012.pdf', import.meta.url).href },
   { title: 'University Affiliation', year: 'JNTUH', href: '/docs/JNTUH_Affiliation.pdf' },
   { title: 'NAAC Assessment Report', year: 'Grade B', href: '/docs/NAAC_Report.pdf' },
-  { title: 'ISO 9001:2008 Certificate', year: 'ISO', href: '/docs/ISO_9001_2008.pdf' },
+  { title: 'ISO 9001:2015 Certificate', year: 'ISO', href: '/docs/ISO_9001_2015.pdf' },
   { title: 'Fire Safety Certificate', year: 'Latest', href: '/docs/Fire_Safety.pdf' },
   { title: 'Building Approval Certificate', year: 'Latest', href: '/docs/Building_Approval.pdf' },
+  { title: 'Environmental Clearance', year: 'Latest', href: '/docs/Environmental_Clearance.pdf' },
 ])
 const docSearch = ref('')
 const currentDoc = ref(null)
+
+// PDF Viewer state
+const showPdfModal = ref(false)
+const currentPdfUrl = ref('')
+const currentPdfTitle = ref('')
 const filteredDocs = computed(() => {
   const q = docSearch.value.trim().toLowerCase()
   if (!q) return docs.value
@@ -353,19 +426,33 @@ const viewDoc = (doc) => {
   currentDoc.value = doc
 }
 
+const openPdfViewer = () => {
+  if (currentDoc.value) {
+    showPdfModal.value = true
+    currentPdfUrl.value = currentDoc.value.href
+    currentPdfTitle.value = `${currentDoc.value.title} - ${currentDoc.value.year}`
+  }
+}
+
+const closePdfModal = () => {
+  showPdfModal.value = false
+  currentPdfUrl.value = ''
+  currentPdfTitle.value = ''
+}
+
 /* Governance */
 const faculty = {
-  total: '[Number]',
-  phd: '[Number]',
-  mtech: '[Number]',
+  total: '85',
+  phd: '12',
+  mtech: '65',
   depts: [
-    { name: 'CSE', count: 10 },
-    { name: 'ECE', count: '[Number]' },
-    { name: 'EEE', count: '[Number]' },
-    { name: 'MECH', count: '[Number]' },
-    { name: 'H&S', count: '[Number]' },
-    { name: 'MBA', count: '[Number]' },
-    { name: 'Polytechnic', count: '[Number]' },
+    { name: 'CSE', count: '10' },
+    { name: 'ECE', count: '12' },
+    { name: 'EEE', count: '8' },
+    { name: 'MECH', count: '6' },
+    { name: 'H&S', count: '15' },
+    { name: 'MBA', count: '5' },
+    { name: 'Polytechnic', count: '12' },
   ]
 }
 const partners = [
@@ -381,7 +468,7 @@ const partners = [
 
 /* Hero */
 .hero{
-  background:linear-gradient(180deg,rgba(26,34,56,.96),rgba(26,34,56,.92)),url('https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+  background: var(--ink);
   color:#fff;
   padding:3rem 0;
   margin-bottom:18px;
@@ -430,7 +517,7 @@ const partners = [
 }
 
 /* Tabs */
-.tabs{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 6px}
+.tabs{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 6px;justify-content:center}
 .tab{background:#fff;border:1px solid #e9e9f4;border-radius:999px;padding:8px 14px;font-weight:700;letter-spacing:.2px;color:var(--ink);transition:.25s;outline:0}
 .tab.active{background:var(--orange);border-color:var(--orange);color:#fff;box-shadow:0 6px 18px rgba(255,119,1,.25)}
 
@@ -469,6 +556,8 @@ const partners = [
 .doc-sub{display:block;color:var(--muted);font-size:.9rem}
 .doc-cta{margin-left:auto;font-weight:800;color:var(--orange)}
 .pdf-viewer{background:#fff;padding:15px;border-radius:10px}
+.pdf-preview{background:#f8f9fa;border-radius:6px;overflow:hidden}
+.pdf-controls{display:flex;gap:0.5rem;align-items:center}
 
 /* Chips */
 .chips{display:flex;flex-wrap:wrap;gap:10px}

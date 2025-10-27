@@ -96,6 +96,66 @@
           </table>
         </div>
       </section>
+
+      <!-- B-Category Seats -->
+      <section class="card">
+        <h2 class="section-title">
+          <i class="fa-solid fa-graduation-cap"></i> B-Category Seats Application
+        </h2>
+        <p>
+          Apply for B-Category seats in our various programs. Click on the program below to access 
+          the application form and advertisement details.
+        </p>
+        <div class="b-category-grid">
+          <div class="b-category-card">
+            <div class="card-icon">
+              <i class="fa-solid fa-laptop-code"></i>
+            </div>
+            <h3>B.Tech</h3>
+            <p>Bachelor of Technology</p>
+            <div class="card-details">
+              <span class="duration">4 Years</span>
+              <span class="fee">₹70,000/year</span>
+            </div>
+            <router-link to="/btech-b-category-seats" class="card-link">
+              <i class="fa-solid fa-arrow-right"></i>
+              Apply Now
+            </router-link>
+          </div>
+
+          <div class="b-category-card">
+            <div class="card-icon">
+              <i class="fa-solid fa-briefcase"></i>
+            </div>
+            <h3>MBA</h3>
+            <p>Master of Business Administration</p>
+            <div class="card-details">
+              <span class="duration">2 Years</span>
+              <span class="fee">₹54,000/year</span>
+            </div>
+            <router-link to="/mba-b-category-seats" class="card-link">
+              <i class="fa-solid fa-arrow-right"></i>
+              Apply Now
+            </router-link>
+          </div>
+
+          <div class="b-category-card">
+            <div class="card-icon">
+              <i class="fa-solid fa-cogs"></i>
+            </div>
+            <h3>Polytechnic</h3>
+            <p>Diploma Programs</p>
+            <div class="card-details">
+              <span class="duration">3 Years</span>
+              <span class="fee">₹14,900/year</span>
+            </div>
+            <router-link to="/polytechnic-b-category-seats" class="card-link">
+              <i class="fa-solid fa-arrow-right"></i>
+              Apply Now
+            </router-link>
+          </div>
+        </div>
+      </section>
     </main>
 
     <!-- FOOTER -->
@@ -159,6 +219,7 @@ const eligibility = [
 :root {
   --navy: #1e40af;
   --orange: #f97316;
+  --ink: #1a2238;
   --bg: #f7f9fc;
   --card: #fff;
   --border: #e5e7eb;
@@ -176,37 +237,53 @@ const eligibility = [
 
 /* HERO */
 .hero {
-  background: linear-gradient(60deg, var(--navy), #153a9c);
+  background: var(--ink);
   color: #fff;
   padding: 3rem 1rem;
 }
-.title {
+
+.hero .title {
   font-size: 2.2rem;
   font-weight: 800;
+  color: #fff;
+  margin-bottom: 1rem;
 }
-.subtitle {
+
+.hero .subtitle {
   font-size: 1.1rem;
-  color: #dbeafe;
+  color: rgba(255, 255, 255, 0.9);
   margin-top: 0.5rem;
+  font-weight: 500;
 }
 
 /* CARD */
 .card {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 0.75rem;
+  border-radius: 1rem;
   padding: 2rem;
   margin: 2rem 0;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(249, 115, 22, 0.15);
+  border-color: rgba(249, 115, 22, 0.3);
 }
 .section-title {
   font-size: 1.4rem;
   font-weight: 700;
-  color: var(--navy);
+  color: var(--ink);
   margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
   gap: 0.6rem;
+}
+
+.section-title i {
+  color: var(--orange);
 }
 p {
   color: #374151;
@@ -238,6 +315,101 @@ p {
   background: #f9fafb;
 }
 
+/* B-Category Cards */
+.b-category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.b-category-card {
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.b-category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(249, 115, 22, 0.15);
+  border-color: var(--orange);
+}
+
+.card-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--orange) 0%, #e55a00 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  color: white;
+  font-size: 2rem;
+}
+
+.b-category-card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+
+.b-category-card p {
+  color: var(--muted);
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.card-details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding: 0.75rem;
+  background: rgba(249, 115, 22, 0.05);
+  border-radius: 0.5rem;
+}
+
+.card-details span {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.duration {
+  color: var(--orange);
+}
+
+.fee {
+  color: var(--ink);
+}
+
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--orange);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  width: 100%;
+  justify-content: center;
+}
+
+.card-link:hover {
+  background: #e55a00;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+  color: white;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .title {
@@ -246,6 +418,25 @@ p {
   .table th,
   .table td {
     font-size: 0.9rem;
+  }
+  
+  .b-category-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .b-category-card {
+    padding: 1.5rem;
+  }
+  
+  .card-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+  
+  .b-category-card h3 {
+    font-size: 1.3rem;
   }
 }
 </style>

@@ -207,6 +207,34 @@
           </div>
         </div>
 
+        <!-- Staff Quarters Gallery -->
+        <div class="elev-card p-4 p-md-5 mb-4">
+          <h2 class="section-title h4">Staff Quarters Gallery</h2>
+          <p class="section-subtitle">Capturing moments of comfortable living and modern residential facilities</p>
+          
+          <div class="row g-3 mt-3">
+            <div v-for="(image, index) in quartersImages" :key="index" class="col-md-4 col-lg-3">
+              <div class="gallery-item" @click="openImageModal(index)">
+                <img :src="image.src" :alt="image.title" class="img-fluid rounded shadow-sm" />
+                <div class="gallery-overlay">
+                  <i class="fa-solid fa-expand"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image Previewer -->
+        <ImagePreviewer 
+          :show="showImageModal" 
+          :images="quartersImages"
+          :initial-index="currentImageIndex"
+          title="Staff Quarters Gallery"
+          title-icon="fa-solid fa-home"
+          title-icon-color="var(--orange)"
+          @close="closeImageModal"
+        />
+
         <!-- Contact -->
         <section class="my-5">
           <div class="elev-card p-4 p-md-5 contact-card">
@@ -257,13 +285,15 @@
 import Header from '@/components/Header.vue'
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/Footer.vue'
+import ImagePreviewer from '../utils/ImagePreviewer.vue'
 
 export default {
   name: 'StaffQuarters',
   components: {
     Header,
     NavBar,
-    Footer
+    Footer,
+    ImagePreviewer
   },
   data() {
     return {
@@ -273,7 +303,50 @@ export default {
         { value: "30", label: "Children Transport", icon: "fa-solid fa-bus fa-lg text-warning" },
         { value: "24/7", label: "Security", icon: "fa-solid fa-shield-halved fa-lg text-info" },
       ],
+      quartersImages: [
+        { 
+          src: new URL('@/assets/images/quarters/a_quarters.jpg', import.meta.url).href,
+          title: 'A-Block Quarters',
+          desc: 'A-Block (Krishna) - Principal, HOD & Professors quarters'
+        },
+        { 
+          src: new URL('@/assets/images/quarters/a_quarters1.jpg', import.meta.url).href,
+          title: 'A-Block Quarters Interior',
+          desc: 'Modern two-bedroom flat in A-Block quarters'
+        },
+        { 
+          src: new URL('@/assets/images/quarters/a_quarters2.jpg', import.meta.url).href,
+          title: 'A-Block Quarters Facility',
+          desc: 'A-Block quarters with complete amenities'
+        },
+        { 
+          src: new URL('@/assets/images/quarters/a_quarters3.jpg', import.meta.url).href,
+          title: 'A-Block Quarters View',
+          desc: 'A-Block quarters exterior and surroundings'
+        },
+        { 
+          src: new URL('@/assets/images/quarters/b_quarters.jpg', import.meta.url).href,
+          title: 'B-Block Quarters',
+          desc: 'B-Block (Godhavari) - Associate & Assistant Professors quarters'
+        },
+        { 
+          src: new URL('@/assets/images/quarters/c_quarters.jpg', import.meta.url).href,
+          title: 'C-Block Quarters',
+          desc: 'C-Block (Kinnerasani) - Non-teaching staff quarters'
+        },
+      ],
+      showImageModal: false,
+      currentImageIndex: 0,
     };
+  },
+  methods: {
+    openImageModal(index) {
+      this.currentImageIndex = index;
+      this.showImageModal = true;
+    },
+    closeImageModal() {
+      this.showImageModal = false;
+    },
   },
 };
 </script>
@@ -354,5 +427,53 @@ export default {
   .hero .display-5 { font-size: 2rem; }
   .content { padding: 0.5rem 0 2rem; }
   .elev-card { padding: 1.5rem !important; }
+}
+
+/* Gallery Styles */
+.gallery-item {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+.gallery-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+  opacity: 1;
+}
+
+.gallery-overlay i {
+  color: white;
+  font-size: 2rem;
 }
 </style>

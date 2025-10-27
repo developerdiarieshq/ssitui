@@ -43,11 +43,11 @@
 
 <script setup>
 const campusItems = [
-  { title: "Students in Laboratory", img: new URL('@/assets/campuslife/engineering-students-lab.png', import.meta.url).href },
-  { title: "Sports Activities", img: new URL('@/assets/campuslife/college-campus-sports-activities.jpg', import.meta.url).href },
-  { title: "Hostel Facilities", img: new URL('@/assets/campuslife/modern-college-hostel-rooms.jpg', import.meta.url).href },
-  { title: "Library Study", img: new URL('@/assets/campuslife/students-in-college-library-studying.jpg', import.meta.url).href },
-  { title: "Cultural Events", img: new URL('@/assets/campuslife/college-cultural-fest-and-events.jpg', import.meta.url).href },
+  { title: "Students in Laboratory", img: new URL('@/assets/campuslife/students_in_lab.jpg', import.meta.url).href },
+  { title: "Sports Activities", img: new URL('@/assets/campuslife/sports.jpg', import.meta.url).href },
+  { title: "Hostel Facilities", img: new URL('@/assets/campuslife/hostel.jpg', import.meta.url).href },
+  { title: "Library Study", img: new URL('@/assets/campuslife/library.jpg', import.meta.url).href },
+  { title: "Cultural Events", img: new URL('@/assets/campuslife/culturals.png', import.meta.url).href },
   { title: "Auditorium", img: new URL('@/assets/campuslife/engineering-college-auditorium.jpg', import.meta.url).href }
 ]
 

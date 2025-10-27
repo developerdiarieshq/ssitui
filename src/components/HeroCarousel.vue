@@ -50,24 +50,20 @@ import { ref } from 'vue'
 // Carousel data object
 const carouselData = ref([
 {
-    image: new URL('@/assets/image.png', import.meta.url).href,
-    // alt: 'College Events',
-    // title: 'College Events'
-  },
-  {
-    image: new URL('@/assets/campus2.jpg', import.meta.url).href,
+    image: new URL('@/assets/3.png', import.meta.url).href,
     // alt: 'Modern Labs and Infrastructure',
     // title: 'Laboratory Facilities'
   },
-  {
-    image: new URL('@/assets/6.jpg', import.meta.url).href,
-    // alt: 'Campus View',
-    // title: 'Campus Overview'
-  },
-  {
-    image: new URL('@/assets/8.jpg', import.meta.url).href,
+{
+    image: new URL('@/assets/1.png', import.meta.url).href,
     // alt: 'College Events',
     // title: 'College Events'
+  },
+  
+  {
+    image: new URL('@/assets/2.png', import.meta.url).href,
+    // alt: 'Campus View',
+    // title: 'Campus Overview'
   }
 ])
 
@@ -100,8 +96,10 @@ defineExpose({
 <style scoped>
 /* Carousel Container */
 #heroCarousel {
-  height: 85vh;
+  width: 1920px;
+  height: 677px;
   overflow: hidden;
+  margin: 0 auto;
 }
 
 .carousel-inner {
@@ -185,9 +183,19 @@ defineExpose({
 }
 
 /* Responsive Design */
+@media (max-width: 1920px) {
+  #heroCarousel {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1920 / 677;
+  }
+}
+
 @media (max-width: 768px) {
   #heroCarousel {
-    height: 70vh;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1920 / 677;
   }
   
   .carousel-caption h2 {
@@ -201,7 +209,9 @@ defineExpose({
 
 @media (max-width: 576px) {
   #heroCarousel {
-    height: 60vh;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1920 / 677;
   }
   
   .carousel-caption h2 {

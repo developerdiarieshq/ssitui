@@ -34,30 +34,39 @@
         </div>
 
         <div class="filters">
-          <fieldset class="filter-chips" aria-label="Category filters">
-            <legend class="visually-hidden">Filter by category</legend>
-            <button
-              v-for="c in categories"
-              :key="c.key"
-              class="chip"
-              :class="{ active: activeCats.includes(c.key) }"
-              @click="toggleCat(c.key)"
-              :aria-pressed="activeCats.includes(c.key)"
+          <div class="filter-select">
+            <label for="category-filter" class="visually-hidden">Filter by category</label>
+            <select 
+              id="category-filter"
+              v-model="selectedCategory" 
+              @change="updateCategoryFilter"
+              aria-label="Filter by category"
             >
-              <i :class="c.icon" aria-hidden="true"></i>
-              <span>{{ c.label }}</span>
-            </button>
-          </fieldset>
+              <option value="">All Categories</option>
+              <option 
+                v-for="c in categories" 
+                :key="c.key" 
+                :value="c.key"
+              >
+                {{ c.label }}
+              </option>
+            </select>
+            <i class="fa-solid fa-filter"></i>
+          </div>
 
-          <label class="sort-select">
-            <span class="visually-hidden">Sort committees</span>
-            <select v-model="sortBy" aria-label="Sort committees">
+          <div class="sort-select">
+            <label for="sort-select" class="visually-hidden">Sort committees</label>
+            <select 
+              id="sort-select"
+              v-model="sortBy" 
+              aria-label="Sort committees"
+            >
               <option value="name-asc">Sort: A → Z</option>
               <option value="name-desc">Sort: Z → A</option>
               <option value="category">Sort: Category</option>
             </select>
             <i class="fa-solid fa-arrow-up-a-z"></i>
-          </label>
+          </div>
         </div>
       </div>
       <div class="result-meta" role="status" aria-live="polite">
@@ -200,7 +209,7 @@
               <i class="fa-solid fa-address-book"></i>
               <span>Quick Contacts (Coordinators)</span>
             </h2>
-            <a class="btn dl" href="#" @click.prevent title="Download PDF (sample)">
+            <a class="btn dl" href="#" @click.prevent="downloadQuickContactsPDF" title="Download Quick Contacts PDF">
               <i class="fa-solid fa-download"></i>
               <span>Download PDF</span>
             </a>
@@ -308,7 +317,7 @@ export default {
     return {
       // UI state
       q: "",
-      activeCats: [],
+      selectedCategory: "",
       sortBy: "name-asc",
       openId: null,
       page: 1,
@@ -546,7 +555,7 @@ export default {
       let arr = this.committees.filter((c) => {
         const hay = `${c.name} ${c.coordinator} ${c.email} ${c.mobile}`.toLowerCase();
         const matchesSearch = !term || hay.includes(term);
-        const matchesCat = this.activeCats.length === 0 || this.activeCats.includes(c.category);
+        const matchesCat = !this.selectedCategory || c.category === this.selectedCategory;
         return matchesSearch && matchesCat;
       });
 
@@ -580,17 +589,15 @@ export default {
   },
   watch: {
     q() { this.resetPage(); },
-    activeCats() { this.resetPage(); },
+    selectedCategory() { this.resetPage(); },
     sortBy() { this.resetPage(); },
   },
   methods: {
     resetPage() {
       this.page = 1;
     },
-    toggleCat(cat) {
-      const i = this.activeCats.indexOf(cat);
-      if (i >= 0) this.activeCats.splice(i, 1);
-      else this.activeCats.push(cat);
+    updateCategoryFilter() {
+      this.resetPage();
     },
     toggleOpen(id) {
       this.openId = this.openId === id ? null : id;
@@ -609,8 +616,204 @@ export default {
     shareText(c) {
       return `${c.name} — Coordinator: ${c.coordinator} (${c.email}, ${c.mobile}) — SSIT`;
     },
+    downloadQuickContactsPDF() {
+      // Create a new window for printing
+      const printWindow = window.open('', '_blank');
+      
+      // Get current date for the PDF
+      const currentDate = new Date().toLocaleDateString('en-IN', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+      
+      // Generate HTML content for PDF
+      const pdfContent = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="UTF-8">
+          <title>Quick Contacts - SSIT Committees</title>
+          <style>
+            @page {
+              margin: 0.5in;
+              size: A4 landscape;
+            }
+            body {
+              font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+              line-height: 1.6;
+              color: #333;
+              margin: 0;
+              padding: 0;
+            }
+            .header {
+              text-align: center;
+              margin-bottom: 1.5rem;
+              border-bottom: 2px solid #1e40af;
+              padding-bottom: 0.75rem;
+            }
+            .header h1 {
+              color: #1e40af;
+              margin: 0;
+              font-size: 1.8rem;
+            }
+            .header p {
+              margin: 0.3rem 0 0 0;
+              color: #666;
+              font-size: 1rem;
+            }
+            .contacts-grid {
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              gap: 0.75rem;
+              margin-top: 1rem;
+            }
+            .contact-item {
+              border: 1px solid #e5e7eb;
+              border-radius: 6px;
+              padding: 0.75rem;
+              background: #f9fafb;
+              page-break-inside: avoid;
+              min-height: 120px;
+            }
+            .contact-header {
+              display: flex;
+              align-items: center;
+              gap: 0.5rem;
+              margin-bottom: 0.5rem;
+            }
+            .contact-icon {
+              width: 32px;
+              height: 32px;
+              border-radius: 6px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: white;
+              font-size: 1rem;
+            }
+            .contact-info h3 {
+              margin: 0;
+              font-size: 0.9rem;
+              color: #1e40af;
+              line-height: 1.2;
+            }
+            .contact-info p {
+              margin: 0;
+              font-size: 0.8rem;
+              color: #666;
+              font-weight: 600;
+            }
+            .contact-details {
+              display: flex;
+              flex-direction: column;
+              gap: 0.3rem;
+            }
+            .contact-detail {
+              display: flex;
+              align-items: center;
+              gap: 0.4rem;
+              font-size: 0.8rem;
+            }
+            .contact-detail i {
+              width: 14px;
+              color: #1e40af;
+            }
+            .footer {
+              margin-top: 2rem;
+              text-align: center;
+              font-size: 0.9rem;
+              color: #666;
+              border-top: 1px solid #e5e7eb;
+              padding-top: 1rem;
+            }
+            @media print {
+              .contacts-grid {
+                grid-template-columns: repeat(3, 1fr);
+              }
+              .contact-item {
+                page-break-inside: avoid;
+                break-inside: avoid;
+              }
+            }
+          </style>
+        </head>
+        <body>
+          <div class="header">
+            <h1>Quick Contacts - Committee Coordinators</h1>
+            <p>Sai Spurthi Institute of Technology</p>
+            <p>Generated on: ${currentDate}</p>
+          </div>
+          
+          <div class="contacts-grid">
+            ${this.filtered.map(committee => `
+              <div class="contact-item">
+                <div class="contact-header">
+                  <div class="contact-icon" style="background-color: ${this.categoryColor(committee.category)}">
+                    <i class="${committee.icon}"></i>
+                  </div>
+                  <div class="contact-info">
+                    <h3>${committee.name}</h3>
+                    <p>${committee.coordinator}</p>
+                  </div>
+                </div>
+                <div class="contact-details">
+                  <div class="contact-detail">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>${committee.email}</span>
+                  </div>
+                  <div class="contact-detail">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>${committee.mobile}</span>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+          
+          <div class="footer">
+            <p>For more information, visit: www.saispurthi.ac.in</p>
+            <p>This document contains contact information for ${this.filtered.length} committee coordinators</p>
+          </div>
+        </body>
+        </html>
+      `;
+      
+      // Write content to the new window
+      printWindow.document.write(pdfContent);
+      printWindow.document.close();
+      
+      // Wait for content to load, then trigger print dialog
+      printWindow.onload = function() {
+        printWindow.print();
+        // Close the window after printing
+        printWindow.onafterprint = function() {
+          printWindow.close();
+        };
+      };
+    },
     getCommitteeRoute(c) {
-      // Generate a URL-friendly slug from committee name
+      // Handle specific committee routes
+      if (c.name === "Anti Ragging Cell") {
+        return "/anti-ragging-cell";
+      }
+      if (c.name === "Research & Development Cell") {
+        return "/rd-cell";
+      }
+      if (c.name === "SC/ST Cell") {
+        return "/scst-cell";
+      }
+      if (c.name === "Women Empowerment Cell") {
+        return "/women-empowerment-cell";
+      }
+      if (c.name === "Entrepreneurship Development Cell") {
+        return "/entrepreneurship-cell";
+      }
+      if (c.name === "Grievance Redressal & Internal Compliance Cell") {
+        return "/grievance-cell";
+      }
+      
+      // Generate a URL-friendly slug from committee name for other committees
       const slug = c.name
         .toLowerCase()
         .replace(/[^a-z0-9\s]/g, '') // Remove special characters
@@ -690,14 +893,12 @@ export default {
 }
 .search-box i { position: absolute; right: .9rem; top: 50%; transform: translateY(-50%); color: var(--muted); }
 .filters { display: flex; gap: .75rem 1rem; align-items: center; flex-wrap: wrap; }
-.filter-chips { display: flex; gap: .5rem; border: 0; margin: 0; padding: 0; }
-.chip {
-  display: inline-flex; align-items: center; gap: .5rem; border: 1px solid var(--border);
-  background: #fff; color: var(--text); padding: .5rem .75rem; border-radius: 999px; cursor: pointer;
-  transition: all .25s ease;
+.filter-select { position: relative; }
+.filter-select select {
+  appearance: none; padding: .6rem 2.2rem .6rem .8rem; border-radius: .6rem; border: 1px solid var(--border);
+  background: #fff; color: var(--text); min-width: 150px;
 }
-.chip i{ color: var(--muted); }
-.chip.active { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(30,64,175,.15); }
+.filter-select i { position: absolute; right: .6rem; top: 50%; transform: translateY(-50%); color: var(--muted); }
 .sort-select { position: relative; }
 .sort-select select {
   appearance: none; padding: .6rem 2.2rem .6rem .8rem; border-radius: .6rem; border: 1px solid var(--border);

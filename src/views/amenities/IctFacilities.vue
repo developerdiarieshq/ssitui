@@ -34,102 +34,269 @@
       </div>
     </header>
 
-    <!-- UNDER CONSTRUCTION MESSAGE -->
+    <!-- CONTENT -->
     <main class="content">
       <div class="container">
-        <div class="elev-card p-4 p-md-5 mb-4">
-          <div class="text-center">
-            <!-- Construction Icon -->
-            <div class="construction-icon mb-4">
-              <i class="fa-solid fa-hammer fa-4x text-warning"></i>
-            </div>
-            
-            <!-- Main Message -->
-            <h2 class="section-title h3 mb-3">Page Under Construction</h2>
-            <p class="lead mb-4">
-              We're working hard to bring you comprehensive information about our ICT Facilities. 
-              This page will be available soon with detailed information about our technology infrastructure.
-            </p>
-            
-            <!-- What's Coming -->
-            <div class="row g-4 mt-4">
-              <div class="col-md-4">
-                <div class="elev-card p-4 h-100 text-center">
-                  <i class="fa-solid fa-server fa-2x text-primary mb-3"></i>
-                  <h5 class="h6">Server Infrastructure</h5>
-                  <p class="small mb-0">Advanced server systems and data centers</p>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="elev-card p-4 h-100 text-center">
-                  <i class="fa-solid fa-network-wired fa-2x text-success mb-3"></i>
-                  <h5 class="h6">Network Systems</h5>
-                  <p class="small mb-0">Campus-wide networking and connectivity solutions</p>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="elev-card p-4 h-100 text-center">
-                  <i class="fa-solid fa-shield-halved fa-2x text-warning mb-3"></i>
-                  <h5 class="h6">Security Systems</h5>
-                  <p class="small mb-0">Cybersecurity and information protection</p>
-                </div>
+        
+        <!-- Overview Section -->
+        <div class="elev-card p-4 mb-4">
+          <h2 class="section-title mb-3">
+            <i class="fa-solid fa-desktop text-primary me-2"></i>
+            ICT Infrastructure Overview
+          </h2>
+          <p class="lead-text mb-3">
+            Sai Spurthi Institute of Technology is equipped with state-of-the-art Information and Communication Technology (ICT) 
+            infrastructure to support modern teaching, learning, research, and administrative operations. Our comprehensive ICT 
+            facilities ensure seamless connectivity, efficient resource management, and enhanced educational experiences.
+          </p>
+          
+          <!-- Statistics -->
+          <div class="row g-4 mt-3">
+            <div class="col-md-3">
+              <div class="stat-card text-center p-3">
+                <i class="fa-solid fa-laptop fa-2x text-primary mb-2"></i>
+                <h3 class="stat-number mb-1">400+</h3>
+                <p class="stat-label mb-0">Computer Systems</p>
               </div>
             </div>
+            <div class="col-md-3">
+              <div class="stat-card text-center p-3">
+                <i class="fa-solid fa-network-wired fa-2x text-success mb-2"></i>
+                <h3 class="stat-number mb-1">100 Mbps</h3>
+                <p class="stat-label mb-0">Internet Speed</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="stat-card text-center p-3">
+                <i class="fa-solid fa-wifi fa-2x text-info mb-2"></i>
+                <h3 class="stat-number mb-1">100%</h3>
+                <p class="stat-label mb-0">Wi-Fi Coverage</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="stat-card text-center p-3">
+                <i class="fa-solid fa-server fa-2x text-warning mb-2"></i>
+                <h3 class="stat-number mb-1">24/7</h3>
+                <p class="stat-label mb-0">Server Uptime</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Computing Infrastructure -->
+        <div class="row g-4 mb-4">
+          <div class="col-md-6">
+            <div class="elev-card p-4 h-100">
+              <h3 class="section-title-sm mb-3">
+                <i class="fa-solid fa-computer text-primary me-2"></i>
+                Computer Labs
+              </h3>
+              <ul class="facility-list">
+                <li><strong>400+ Systems:</strong> Latest configuration computers with LAN connectivity</li>
+                <li><strong>Multiple Platforms:</strong> Windows, Linux, and Ubuntu operating systems</li>
+                <li><strong>Licensed Software:</strong> AutoCAD, MATLAB, MS Office, and specialized engineering tools</li>
+                <li><strong>Department Labs:</strong> Dedicated computer labs for CSE, ECE, EEE, and MECH departments</li>
+                <li><strong>CAD/CAM Lab:</strong> Advanced design and manufacturing software</li>
+                <li><strong>Separate Project Room:</strong> 66 systems dedicated for final year projects</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="elev-card p-4 h-100">
+              <h3 class="section-title-sm mb-3">
+                <i class="fa-solid fa-network-wired text-success me-2"></i>
+                Network Infrastructure
+              </h3>
+              <ul class="facility-list">
+                <li><strong>High-Speed Connectivity:</strong> 100 Mbps dedicated internet connection</li>
+                <li><strong>Multiple ISPs:</strong> Network redundancy through three different service providers</li>
+                <li><strong>Campus-Wide LAN:</strong> All systems connected through structured cabling</li>
+                <li><strong>Wi-Fi Coverage:</strong> Wireless internet access across campus</li>
+                <li><strong>Network Security:</strong> Firewalls and content filtering systems</li>
+                <li><strong>Bandwidth Management:</strong> Optimized distribution for academic and administrative use</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Software & Applications -->
+        <div class="elev-card p-4 mb-4">
+          <h3 class="section-title-sm mb-3">
+            <i class="fa-solid fa-code text-info me-2"></i>
+            Software & Applications
+          </h3>
+          <div class="row g-4">
+            <div class="col-md-6">
+              <h4 class="h6 text-primary mb-3">Academic Software</h4>
+              <ul class="facility-list">
+                <li><strong>Engineering Tools:</strong> AutoCAD, SolidWorks, ANSYS</li>
+                <li><strong>Programming:</strong> Microsoft Visual Studio, Eclipse, NetBeans</li>
+                <li><strong>Simulation:</strong> MATLAB, Simulink, LabVIEW</li>
+                <li><strong>Database:</strong> Oracle, MySQL, SQL Server</li>
+                <li><strong>Web Development:</strong> Dreamweaver, VS Code</li>
+                <li><strong>Cloud Platforms:</strong> AWS Academy, Microsoft Azure</li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <h4 class="h6 text-primary mb-3">Administrative Software</h4>
+              <ul class="facility-list">
+                <li><strong>ERP System:</strong> Integrated campus management software</li>
+                <li><strong>Accounts:</strong> Tally ERP 9.0 for financial management</li>
+                <li><strong>Office Suite:</strong> Microsoft Office 365</li>
+                <li><strong>Record Management:</strong> Digital documentation system</li>
+                <li><strong>Examination:</strong> Online examination and result portal</li>
+                <li><strong>Communication:</strong> Email and collaboration tools</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- E-Learning & Digital Resources -->
+        <div class="row g-4 mb-4">
+          <div class="col-md-6">
+            <div class="elev-card p-4 h-100">
+              <h3 class="section-title-sm mb-3">
+                <i class="fa-solid fa-graduation-cap text-warning me-2"></i>
+                E-Learning Resources
+              </h3>
+              <ul class="facility-list">
+                <li><strong>Digital Library:</strong> Access to e-books, e-journals, and online databases</li>
+                <li><strong>NPTEL Videos:</strong> IIT/IISc lecture videos and online courses</li>
+                <li><strong>MOOCs Platform:</strong> Integration with Coursera, edX, and SWAYAM</li>
+                <li><strong>Learning Management System:</strong> Online assignment submission and grading</li>
+                <li><strong>Virtual Labs:</strong> Remote access to experimental simulations</li>
+                <li><strong>Video Conferencing:</strong> Facilities for online lectures and seminars</li>
+              </ul>
+            </div>
+            </div>
             
-            <!-- Additional Features -->
-            <div class="row g-4 mt-3">
+          <div class="col-md-6">
+            <div class="elev-card p-4 h-100">
+              <h3 class="section-title-sm mb-3">
+                <i class="fa-solid fa-shield-halved text-danger me-2"></i>
+                Security & Support
+              </h3>
+              <ul class="facility-list">
+                <li><strong>Antivirus Protection:</strong> Licensed antivirus on all systems</li>
+                <li><strong>Data Backup:</strong> Regular automated backup systems</li>
+                <li><strong>CCTV Integration:</strong> Digital surveillance and monitoring</li>
+                <li><strong>Access Control:</strong> Secure authentication and user management</li>
+                <li><strong>Technical Support:</strong> Dedicated IT helpdesk for troubleshooting</li>
+                <li><strong>Maintenance:</strong> Regular hardware and software updates</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Student Access & Services -->
+        <div class="elev-card p-4 mb-4">
+          <h3 class="section-title-sm mb-3">
+            <i class="fa-solid fa-users text-success me-2"></i>
+            Student Access & Services
+          </h3>
+          <div class="row g-4">
               <div class="col-md-4">
-                <div class="elev-card p-4 h-100 text-center">
-                  <i class="fa-solid fa-cloud fa-2x text-info mb-3"></i>
-                  <h5 class="h6">Cloud Services</h5>
-                  <p class="small mb-0">Cloud computing and storage solutions</p>
+              <div class="service-card">
+                <i class="fa-solid fa-clock fa-2x text-primary mb-3"></i>
+                <h4 class="h6">Extended Hours</h4>
+                <p class="mb-0">Computer labs open from 8:00 AM to 8:00 PM on working days</p>
                 </div>
               </div>
               <div class="col-md-4">
-                <div class="elev-card p-4 h-100 text-center">
-                  <i class="fa-solid fa-database fa-2x text-danger mb-3"></i>
-                  <h5 class="h6">Database Systems</h5>
-                  <p class="small mb-0">Student and administrative database management</p>
+              <div class="service-card">
+                <i class="fa-solid fa-user-graduate fa-2x text-success mb-3"></i>
+                <h4 class="h6">Student Accounts</h4>
+                <p class="mb-0">Individual login credentials for all students with email access</p>
                 </div>
               </div>
               <div class="col-md-4">
-                <div class="elev-card p-4 h-100 text-center">
-                  <i class="fa-solid fa-mobile-screen fa-2x text-secondary mb-3"></i>
-                  <h5 class="h6">Mobile Solutions</h5>
-                  <p class="small mb-0">Mobile applications and responsive systems</p>
+              <div class="service-card">
+                <i class="fa-solid fa-print fa-2x text-info mb-3"></i>
+                <h4 class="h6">Printing Facilities</h4>
+                <p class="mb-0">Multiple printers and scanners available across labs</p>
+              </div>
+                </div>
+              </div>
+            </div>
+            
+        <!-- Future Plans -->
+        <div class="elev-card p-4 mb-4">
+          <h3 class="section-title-sm mb-3">
+            <i class="fa-solid fa-rocket text-primary me-2"></i>
+            Future Enhancements
+          </h3>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="enhancement-item">
+                <i class="fa-solid fa-check-circle text-success me-2"></i>
+                <span>Upgrading to 1 Gbps internet connectivity</span>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="enhancement-item">
+                <i class="fa-solid fa-check-circle text-success me-2"></i>
+                <span>Implementation of AI and Machine Learning labs</span>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="enhancement-item">
+                <i class="fa-solid fa-check-circle text-success me-2"></i>
+                <span>Expansion of cloud computing infrastructure</span>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="enhancement-item">
+                <i class="fa-solid fa-check-circle text-success me-2"></i>
+                <span>Mobile app for campus services</span>
+                </div>
+              </div>
+            <div class="col-md-6">
+              <div class="enhancement-item">
+                <i class="fa-solid fa-check-circle text-success me-2"></i>
+                <span>Enhanced cybersecurity measures</span>
+                </div>
+              </div>
+            <div class="col-md-6">
+              <div class="enhancement-item">
+                <i class="fa-solid fa-check-circle text-success me-2"></i>
+                <span>IoT lab for research and development</span>
+              </div>
                 </div>
               </div>
             </div>
             
             <!-- Contact Information -->
-            <div class="mt-5 pt-4 border-top">
-              <h4 class="h5 mb-3">Need Information Now?</h4>
-              <p class="mb-3">
-                For immediate assistance regarding ICT facilities, please contact our IT department:
-              </p>
+        <div class="elev-card p-4">
+          <h3 class="section-title-sm mb-4 text-center">
+            <i class="fa-solid fa-address-book text-primary me-2"></i>
+            IT Department Contact
+          </h3>
               <div class="row g-3 justify-content-center">
                 <div class="col-md-4">
-                  <div class="contact-chip">
-                    <i class="fa-solid fa-envelope text-primary me-2"></i>
-                    <strong>Email:</strong> ict@ssit.edu.in
+              <div class="contact-chip text-center p-3">
+                <i class="fa-solid fa-envelope text-primary fa-2x mb-2"></i>
+                <p class="mb-1"><strong>Email</strong></p>
+                <p class="mb-0">ict@ssit.edu.in</p>
                   </div>
                 </div>
                 <div class="col-md-4">
-                  <div class="contact-chip">
-                    <i class="fa-solid fa-phone text-success me-2"></i>
-                    <strong>Phone:</strong> +91-98765-43210
+              <div class="contact-chip text-center p-3">
+                <i class="fa-solid fa-phone text-success fa-2x mb-2"></i>
+                <p class="mb-1"><strong>Phone</strong></p>
+                <p class="mb-0">08761-288278</p>
                   </div>
                 </div>
                 <div class="col-md-4">
-                  <div class="contact-chip">
-                    <i class="fa-solid fa-map-marker-alt text-warning me-2"></i>
-                    <strong>Location:</strong> SSIT Campus, Khammam
+              <div class="contact-chip text-center p-3">
+                <i class="fa-solid fa-map-marker-alt text-warning fa-2x mb-2"></i>
+                <p class="mb-1"><strong>Location</strong></p>
+                <p class="mb-0">IT Block, SSIT Campus</p>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+
       </div>
     </main>
 
@@ -190,21 +357,66 @@ export default {
 .section-title { color:#0b3d91; font-weight:800; }
 .contact-chip { border:1px dashed rgba(0,0,0,.1); border-radius:999px; padding:.35rem .75rem; }
 
-/* Construction Icon Animation */
-.construction-icon {
-  animation: bounce 2s infinite;
+/* Additional Styles */
+.section-title-sm {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--ink);
 }
 
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-10px);
-  }
-  60% {
-    transform: translateY(-5px);
-  }
+.lead-text {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #374151;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.facility-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.facility-list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed rgba(0,0,0,0.1);
+  color: #374151;
+  line-height: 1.6;
+}
+
+.facility-list li:last-child {
+  border-bottom: none;
+}
+
+.service-card {
+  text-align: center;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background: rgba(11, 61, 145, 0.03);
+  transition: all 0.3s ease;
+}
+
+.service-card:hover {
+  background: rgba(11, 61, 145, 0.08);
+  transform: translateY(-3px);
+}
+
+.enhancement-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  background: rgba(34, 197, 94, 0.05);
+  transition: all 0.3s ease;
+}
+
+.enhancement-item:hover {
+  background: rgba(34, 197, 94, 0.1);
+  transform: translateX(5px);
 }
 
 /* Ensure all text is visible */

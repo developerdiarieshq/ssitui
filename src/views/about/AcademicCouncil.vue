@@ -1,7 +1,8 @@
 <template>
+  <div class="academic-council-wrapper">
     <Header/>
     <NavBar/>
-  <section class="academic-council-page">
+    <section class="academic-council-page">
     <!-- Hero Section -->
     <header class="hero text-center text-white">
       <div class="container">
@@ -171,183 +172,100 @@
 
       <!-- Meetings -->
       <section :id="tabsMap.meetings" class="card-section" v-show="activeTab==='meetings'">
-        <div class="meeting-info row text-center mb-5">
-          <div class="col-md-4">
-            <div class="p-3 shadow-sm rounded bg-light">
-              <h6 class="fw-bold">Meeting Frequency</h6>
-              <p class="text-muted small mb-0">
-                Twice per academic year + special/emergency meetings
-              </p>
-            </div>
+        <div class="card">
+          <div class="card-head">
+            <h5 class="card-title mb-0">Meeting Minutes & Records</h5>
+            <input
+              v-model="meetingsSearchQuery"
+              type="text"
+              class="search"
+              placeholder="Search meeting minutes by year or summary…"
+              aria-label="Search meeting minutes"
+            />
           </div>
-          <div class="col-md-4">
-            <div class="p-3 shadow-sm rounded bg-light">
-              <h6 class="fw-bold">Quorum & Procedures</h6>
-              <p class="text-muted small mb-0">
-                One-third members required, simple majority, Chairman casting vote
-              </p>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="p-3 shadow-sm rounded bg-light">
-              <h6 class="fw-bold">Documentation</h6>
-              <p class="text-muted small mb-0">
-                Minutes circulated, archived & transparent decision-making
-              </p>
-            </div>
-          </div>
-        </div>
 
-
-        <!-- Search and Filter Controls for Meetings -->
-        <div class="controls-card">
-          <div class="row g-3 align-items-center">
-            <div class="col-md-3">
-              <div class="search-box">
-                <i class="fa-solid fa-search search-icon"></i>
-                <input 
-                  type="text" 
-                  class="form-control search-input" 
-                  placeholder="Search meetings by summary..."
-                  v-model="meetingsSearchQuery"
+          <div class="row">
+            <!-- Left: List -->
+            <div class="col-md-4">
+              <div class="doc-grid">
+                <button
+                  v-for="meeting in filteredMeetings"
+                  :key="meeting.no + meeting.summary"
+                  class="doc w-100 text-start"
+                  @click="viewMeetingDoc(meeting)"
                 >
-              </div>
-            </div>
-            <div class="col-md-2">
-              <select class="form-select filter-select" v-model="selectedMeetingYear">
-                <option value="">All Years</option>
-                <option v-for="year in meetingYears" :key="year" :value="year">{{ year }}</option>
-              </select>
-            </div>
-            <div class="col-md-2">
-              <select class="form-select filter-select" v-model="selectedMeetingStatus">
-                <option value="">All Status</option>
-                <option value="Completed">Completed</option>
-                <option value="Scheduled">Scheduled</option>
-                <option value="Cancelled">Cancelled</option>
-              </select>
-            </div>
-            <div class="col-md-3">
-              <div class="view-toggle">
-                <button 
-                  class="view-btn" 
-                  :class="{ active: meetingsViewMode === 'grid' }"
-                  @click="setMeetingsViewMode('grid')"
-                  title="Grid View"
-                >
-                  <i class="fa-solid fa-th"></i>
-                </button>
-                <button 
-                  class="view-btn" 
-                  :class="{ active: meetingsViewMode === 'list' }"
-                  @click="setMeetingsViewMode('list')"
-                  title="List View"
-                >
-                  <i class="fa-solid fa-list"></i>
+                  <i class="far fa-file-pdf doc-icon"></i>
+                  <div class="doc-meta">
+                    <strong class="doc-title">{{ meeting.no }}</strong>
+                    <span class="doc-sub">{{ meeting.summary }}</span>
+                  </div>
+                  <span class="doc-cta" v-if="meeting.document">View</span>
+                  <span class="doc-cta text-muted" v-else>N/A</span>
                 </button>
               </div>
             </div>
-            <div class="col-md-2">
-              <div class="results-count">
-                <span class="count-text">{{ filteredMeetings.length }} meeting(s)</span>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <!-- Meetings Display - Grid View -->
-        <div v-if="meetingsViewMode === 'grid'" class="meetings-grid">
-          <div class="meeting-card-grid" v-for="(meeting, index) in filteredMeetings" :key="index">
-            <div class="meeting-header">
-              <i class="fa-solid fa-file-alt meeting-icon"></i>
-              <span class="meeting-number">{{ index + 1 }}</span>
-            </div>
-            <div class="meeting-content">
-              <h6 class="meeting-no">{{ meeting.no }}</h6>
-              <p class="meeting-summary">{{ meeting.summary }}</p>
-              <div class="meeting-status">
-                <span class="badge" :class="meeting.status === 'Completed' ? 'bg-success' : meeting.status === 'Scheduled' ? 'bg-primary' : 'bg-warning'">
-                  {{ meeting.status }}
-                </span>
+            <!-- Right: PDF Viewer -->
+            <div class="col-md-8">
+              <div v-if="currentMeetingDoc" class="pdf-viewer shadow-sm">
+                <div class="pdf-controls mb-3">
+                  <button @click="openPdfViewer" class="btn btn-sm btn-orange me-2">
+                    <i class="fas fa-expand me-1"></i> View Fullscreen
+                  </button>
+                  <a :href="currentMeetingDoc.document" target="_blank" class="btn btn-sm btn-outline-primary">
+                    <i class="fas fa-download me-1"></i> Download
+                  </a>
+                </div>
+                <h6 class="fw-bold mb-2">
+                  <i class="fas fa-file-pdf text-danger me-2"></i>
+                  {{ currentMeetingDoc.no }} - {{ currentMeetingDoc.summary }}
+                </h6>
+                <div class="pdf-preview">
+                  <iframe
+                    :src="currentMeetingDoc.document"
+                    width="100%"
+                    height="400px"
+                    style="border:1px solid #ddd; border-radius:6px;"
+                  ></iframe>
+                </div>
               </div>
-              <div class="meeting-actions mt-3">
-                <button class="btn btn-outline-primary btn-sm me-2">
-                  <i class="fa-solid fa-eye me-1"></i>View
-                </button>
-                <button class="btn btn-outline-secondary btn-sm">
-                  <i class="fa-solid fa-download me-1"></i>Download
-                </button>
+              <div v-else class="alert alert-info text-center">
+                <i class="fas fa-info-circle me-2"></i>
+                Select a meeting from the left to preview minutes
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- Meetings Display - List View -->
-        <div v-if="meetingsViewMode === 'list'" class="meetings-list">
-          <div class="list-header">
-            <div class="row">
-              <div class="col-md-2">
-                <strong>No.</strong>
-              </div>
-              <div class="col-md-2">
-                <strong>Meeting No.</strong>
-              </div>
-              <div class="col-md-4">
-                <strong>Summary</strong>
-              </div>
-              <div class="col-md-2">
-                <strong>Status</strong>
-              </div>
-              <div class="col-md-2 text-center">
-                <strong>Actions</strong>
-              </div>
-            </div>
+          <div class="muted mt-2">
+            Missing a meeting record? Write to <a href="mailto:sssit.principal@gmail.com">sssit.principal@gmail.com</a>
           </div>
-          <div class="meeting-list-item" v-for="(meeting, index) in filteredMeetings" :key="index">
-            <div class="row align-items-center">
-              <div class="col-md-2">
-                <span class="meeting-number-list">{{ index + 1 }}</span>
-              </div>
-              <div class="col-md-2">
-                <h6 class="meeting-no-list">{{ meeting.no }}</h6>
-              </div>
-              <div class="col-md-4">
-                <span class="meeting-summary-list">{{ meeting.summary }}</span>
-              </div>
-              <div class="col-md-2">
-                <span class="badge" :class="meeting.status === 'Completed' ? 'bg-success' : meeting.status === 'Scheduled' ? 'bg-primary' : 'bg-warning'">
-                  {{ meeting.status }}
-                </span>
-              </div>
-              <div class="col-md-2 text-center">
-                <button class="btn btn-outline-primary btn-sm me-1">
-                  <i class="fa-solid fa-eye"></i>
-                </button>
-                <button class="btn btn-outline-secondary btn-sm">
-                  <i class="fa-solid fa-download"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- No Results Message -->
-        <div v-if="filteredMeetings.length === 0" class="no-results">
-          <i class="fa-solid fa-calendar-days"></i>
-          <h5>No meetings found</h5>
-          <p>Try adjusting your search or filter criteria</p>
         </div>
       </section>
     </main>
-  </section>
-  <Footer/>
+    </section>
+    
+    <!-- PDF Viewer Modal -->
+    <PdfViewer 
+      :show="showPdfModal" 
+      :url="currentPdfUrl" 
+      :title="currentPdfTitle"
+      @close="closePdfModal"
+    />
+    
+    <Footer/>
+  </div>
 </template>
 
 <script setup>
 import Header from '../../components/Header.vue';
 import NavBar from '../../components/NavBar.vue';
 import Footer from '../../components/Footer.vue';
-import { ref, computed } from "vue"
+import PdfViewer from '../utils/PdfViewer.vue';
+import { ref, computed, onMounted, watch } from "vue"
+import { useRouter, useRoute } from 'vue-router'
+
+const router = useRouter()
+const route = useRoute()
 
 const activeTab = ref("members")
 const searchQuery = ref('')
@@ -360,8 +278,8 @@ const meetingsViewMode = ref('grid') // 'grid' or 'list'
 
 // Tabs configuration
 const tabs = [
-  { id: 'members', label: 'Current Members', icon: 'fa-solid fa-users' },
-  { id: 'meetings', label: 'Meeting Schedule & Records', icon: 'fa-solid fa-calendar-days' }
+  { id: 'members', label: 'Current Members', icon: 'fa-solid fa-users', path: '/academic-council/current_members' },
+  { id: 'meetings', label: 'Meeting Schedule & Records', icon: 'fa-solid fa-calendar-days', path: '/academic-council/Meeting-schedule_records' }
 ]
 
 const tabsMap = {
@@ -372,7 +290,40 @@ const tabsMap = {
 // Tab navigation method
 const setTab = (id) => {
   activeTab.value = id
+  const tab = tabs.find(t => t.id === id)
+  if (tab && tab.path) {
+    router.push(tab.path)
+  }
+  // Keep the user at the same scroll position - no auto-scroll
 }
+
+// Initialize active tab based on current route
+onMounted(() => {
+  const currentTab = tabs.find(t => t.path === route.path)
+  if (currentTab) {
+    activeTab.value = currentTab.id
+  } else if (route.path === '/academic-council') {
+    activeTab.value = 'members'
+  } else if (route.path === '/academic-council/current_members') {
+    activeTab.value = 'members'
+  } else if (route.path === '/academic-council/Meeting-schedule_records') {
+    activeTab.value = 'meetings'
+  }
+})
+
+// Watch for route changes and update active tab
+watch(() => route.path, (newPath) => {
+  const tab = tabs.find(t => t.path === newPath)
+  if (tab) {
+    activeTab.value = tab.id
+  } else if (newPath === '/academic-council') {
+    activeTab.value = 'members'
+  } else if (newPath === '/academic-council/current_members') {
+    activeTab.value = 'members'
+  } else if (newPath === '/academic-council/Meeting-schedule_records') {
+    activeTab.value = 'meetings'
+  }
+})
 
 // View mode methods
 const setViewMode = (mode) => {
@@ -383,62 +334,108 @@ const setMeetingsViewMode = (mode) => {
   meetingsViewMode.value = mode
 }
 
+// Document handling methods
+const viewDocument = (meeting) => {
+  if (meeting.document) {
+    window.open(meeting.document, '_blank')
+  }
+}
+
+const downloadDocument = (meeting) => {
+  if (meeting.document) {
+    const link = document.createElement('a')
+    link.href = meeting.document
+    link.download = `${meeting.summary}.pdf`
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+}
+
+// Mandatory Disclosure style document handling
+const currentMeetingDoc = ref(null)
+
+// PDF Viewer state
+const showPdfModal = ref(false)
+const currentPdfUrl = ref('')
+const currentPdfTitle = ref('')
+
+const viewMeetingDoc = (meeting) => {
+  if (meeting.document) {
+    currentMeetingDoc.value = meeting
+  }
+}
+
+const openPdfViewer = () => {
+  if (currentMeetingDoc.value) {
+    showPdfModal.value = true
+    currentPdfUrl.value = currentMeetingDoc.value.document
+    currentPdfTitle.value = `${currentMeetingDoc.value.no} - ${currentMeetingDoc.value.summary}`
+  }
+}
+
+const closePdfModal = () => {
+  showPdfModal.value = false
+  currentPdfUrl.value = ''
+  currentPdfTitle.value = ''
+}
+
 // Members Data (from your uploaded committee)
 const members = [
   { 
     name: "Dr. V S Ratna Kumari", 
-    position: "Chairman & Principal",
-    image: new URL('@/assets/management/principal.jpg', import.meta.url).href
+    position: "Principal",
+    image: new URL('@/assets/academic_council/1.jpg', import.meta.url).href
   },
   { 
     name: "Sri. D. Prabhakar Reddy", 
     position: "Management Member",
-    image: new URL('@/assets/management/secretary.jpg', import.meta.url).href
+    image: new URL('@/assets/academic_council/2.jpg', import.meta.url).href
   },
   { 
     name: "Sri. K. Ramakrishna Prasad", 
     position: "HOD - EEE",
-    image: new URL('@/assets/faculty/cse/CS04.jpg', import.meta.url).href
+    image: new URL('@/assets/academic_council/3.jpg', import.meta.url).href
   },
   { 
     name: "Dr. K. Bhaskar Mutyalu", 
     position: "HOD - MECH",
-    image: new URL('@/assets/faculty/cse/CS07.jpg', import.meta.url).href
+    image: new URL('@/assets/academic_council/4.jpg', import.meta.url).href
   },
   { 
     name: "Dr. P. Sekhar Babu", 
     position: "HOD - ECE",
-    image: new URL('@/assets/faculty/cse/CS10.jpg', import.meta.url).href
+    image: new URL('@/assets/academic_council/5.jpg', import.meta.url).href
   },
   { 
     name: "Dr. Sk. Yakoob", 
     position: "HOD - CSE",
-    image: new URL('@/assets/faculty/cse/CS11.jpg', import.meta.url).href
+    image: new URL('@/assets/academic_council/6.jpg', import.meta.url).href
   },
   { 
     name: "Dr. Sk. MeeraSaheb", 
     position: "HOD - H&S",
-    image: new URL('@/assets/faculty/cse/CS18.jpg', import.meta.url).href
+    image: new URL('@/assets/academic_council/7.jpg', import.meta.url).href
   },
   { 
     name: "Dr. D. N. V. Krishna Reddy", 
     position: "HOD - MBA",
-    image: new URL('@/assets/faculty/cse/CS22.jpg', import.meta.url).href
+    image: new URL('@/assets/academic_council/8.jpg', import.meta.url).href
   },
   { 
     name: "Sri. G. Upendra", 
     position: "Librarian",
-    image: new URL('@/assets/faculty/cse/CS04.jpg', import.meta.url).href
+    image: new URL('@/assets/academic_council/9.jpg', import.meta.url).href
   },
   { 
     name: "Dr. CH. Vijaya Kumar", 
     position: "NAAC Coordinator",
-    image: new URL('@/assets/faculty/cse/CS07.jpg', import.meta.url).href
+    image: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNmOTczMTYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiAxNkMxOC4yMDkxIDE2IDIwIDE0LjIwOTEgMjAgMTJDMjAgOS43OTA5MSAxOC4yMDkxIDggMTYgOEMxMy43OTA5IDggMTIgOS43OTA5MSAxMiAxMkMxMiAxNC4yMDkxIDEzLjc5MDkgMTYgMTYgMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTYgMTlDMTEuNTgxNyAxOSA4IDIyLjU4MTcgOCAyN1YyOUgyNFYyN0MyNCAyMi41ODE3IDIwLjQxODMgMTkgMTYgMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+"
   },
   { 
     name: "Sri. K. Ramakrishna Prasad", 
     position: "IQAC Coordinator",
-    image: new URL('@/assets/faculty/cse/CS10.jpg', import.meta.url).href
+    image: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNmOTczMTYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiAxNkMxOC4yMDkxIDE2IDIwIDE0LjIwOTEgMjAgMTJDMjAgOS43OTA5MSAxOC4yMDkxIDggMTYgOEMxMy43OTA5IDggMTIgOS43OTA5MSAxMiAxMkMxMiAxNC4yMDkxIDEzLjc5MDkgMTYgMTYgMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTYgMTlDMTEuNTgxNyAxOSA4IDIyLjU4MTcgOCAyN1YyOUgyNFYyN0MyNCAyMi41ODE3IDIwLjQxODMgMTkgMTYgMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+"
   },
 ]
 
@@ -463,9 +460,18 @@ const filteredMembers = computed(() => {
 
 // Computed property for filtered meetings
 const filteredMeetings = computed(() => {
-  // Start with selected year or default to current year
-  const yearToShow = selectedMeetingYear.value || activeYear.value
-  let filtered = meetings[yearToShow] || []
+  // If no year is selected, show all meetings from all years
+  let filtered = []
+  
+  if (selectedMeetingYear.value) {
+    // Show meetings from selected year only
+    filtered = meetings[selectedMeetingYear.value] || []
+  } else {
+    // Show all meetings from all years
+    Object.values(meetings).forEach(yearMeetings => {
+      filtered = filtered.concat(yearMeetings)
+    })
+  }
   
   // Filter by search query
   if (meetingsSearchQuery.value) {
@@ -482,27 +488,58 @@ const filteredMeetings = computed(() => {
   return filtered
 })
 
-const meetingYears = ["2024-25", "2023-24", "2022-23", "2021-22"]
-const activeYear = ref("2024-25")
+const meetingYears = ["2020-21", "2019-20", "2018-19", "2017-18", "2016-17"]
+const activeYear = ref("2020-21")
 
 const meetings = {
-  "2024-25": [
-    { no: "Meeting 1", status: "Completed", summary: "Approval of academic calendar & syllabus updates" },
-    { no: "Meeting 2", status: "Completed", summary: "Review of results & quality enhancement measures" },
+  "2020-21": [
+    { 
+      no: "Academic Council Meeting", 
+      status: "Completed", 
+      summary: "Academic Council Meeting Minutes 2020-21",
+      document: new URL('@/assets/docs/academic_council/2020-2021.pdf', import.meta.url).href
+    },
   ],
-  "2023-24": [
-    { no: "Meeting 1", status: "Completed", summary: "Industry collaboration review" },
+  "2019-20": [
+    { 
+      no: "Academic Council Meeting", 
+      status: "Completed", 
+      summary: "Academic Council Meeting Minutes 2019-20",
+      document: new URL('@/assets/docs/academic_council/2019-2020.pdf', import.meta.url).href
+    },
   ],
-  "2022-23": [
-    { no: "Meeting 1", status: "Completed", summary: "NAAC preparation & documentation" },
+  "2018-19": [
+    { 
+      no: "Academic Council Meeting", 
+      status: "Completed", 
+      summary: "Academic Council Meeting Minutes 2018-19",
+      document: new URL('@/assets/docs/academic_council/2018-2019.pdf', import.meta.url).href
+    },
   ],
-  "2021-22": [
-    { no: "Meeting 1", status: "Completed", summary: "Approval of R22 academic regulations" },
+  "2017-18": [
+    { 
+      no: "Academic Council Meeting", 
+      status: "Completed", 
+      summary: "Academic Council Meeting Minutes 2017-18",
+      document: new URL('@/assets/docs/academic_council/2017-2018.pdf', import.meta.url).href
+    },
+  ],
+  "2016-17": [
+    { 
+      no: "Academic Council Meeting", 
+      status: "Completed", 
+      summary: "Academic Council Meeting Minutes 2016-17",
+      document: new URL('@/assets/docs/academic_council/2016-2017.pdf', import.meta.url).href
+    },
   ],
 }
 </script>
 
 <style scoped>
+.academic-council-wrapper {
+  min-height: 100vh;
+}
+
 .academic-council-page {
   --orange: #FF7701;
   --ink: #1a2238;
@@ -669,20 +706,39 @@ const meetings = {
   gap: .5rem;
   white-space: nowrap;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   min-height: 40px;
   min-width: fit-content;
   flex-shrink: 0;
 }
 
 .chip i {
-  color: var(--navy);
+  color: var(--orange);
+}
+
+.chip:hover {
+  background: var(--orange);
+  color: #fff;
+  border-color: var(--orange);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+}
+
+.chip:hover i {
+  color: #fff;
 }
 
 .chip.active {
-  border-color: var(--navy);
-  background: rgba(30, 64, 175, 0.08);
-  color: var(--navy);
+  border-color: var(--orange);
+  background: var(--orange);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+  transform: translateY(-2px);
+  font-weight: 700;
+}
+
+.chip.active i {
+  color: #fff;
 }
 
 /* Orange Accent */
@@ -1072,4 +1128,29 @@ const meetings = {
   --border: #e5e7eb;
   --navy: #1e40af;
 }
+
+/* Mandatory Disclosure Style */
+.search{border:1px solid #e9e9f4;border-radius:8px;padding:8px 12px;max-width:320px;width:100%}
+.card-head{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:10px}
+
+/* Documents */
+.doc-grid{display:grid;grid-template-columns:1fr;gap:12px}
+.doc{display:flex;align-items:center;gap:12px;border:1px solid #eee;border-radius:12px;padding:12px;background:#fff;text-decoration:none;color:inherit;transition:.2s;cursor:pointer}
+.doc:hover{border-color:var(--orange);box-shadow:0 8px 18px rgba(255,119,1,.08);background:#fafafa}
+.doc-icon{font-size:28px;color:var(--orange)}
+.doc-title{display:block}
+.doc-sub{display:block;color:var(--muted);font-size:.9rem}
+.doc-cta{margin-left:auto;font-weight:800;color:var(--orange)}
+.pdf-viewer{background:#fff;padding:15px;border-radius:10px}
+.pdf-preview{background:#f8f9fa;border-radius:6px;overflow:hidden}
+.pdf-controls{display:flex;gap:0.5rem;align-items:center}
+
+/* Chips */
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{border:1px solid #e9e9f4;border-radius:999px;padding:6px 10px;background:#fff;font-weight:700}
+.muted{color:var(--muted);font-size:.92rem}
+
+/* Custom button */
+.btn-orange{background:var(--orange);color:#fff;font-weight:600;border-radius:6px;padding:6px 12px}
+.btn-orange:hover{background:#e65f00}
 </style>

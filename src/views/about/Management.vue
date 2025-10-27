@@ -21,7 +21,7 @@
         <div
           v-for="p in profiles"
           :key="p.name"
-          class="col-lg-3 col-md-6 col-sm-12"
+          class="col-lg-4 col-md-6 col-sm-12"
         >
           <div class="card h-100 shadow-sm border-0 text-center profile-card">
             <div class="photo-wrap">
@@ -119,15 +119,6 @@ const profiles = ref([
     desc:
       'Smt. Bandi Anvida serves as the trustee of VIPASSANA EDUCATIONAL SOCIETY, demonstrating unwavering dedication and expertise in guiding our institution. With a profound commitment to advancing education and fostering community development, Smt. Anvida plays a pivotal role in shaping the strategic direction and policies of our trust. Her visionary leadership and steadfast support are instrumental in driving our mission forward, ensuring the success and empowerment of our students and stakeholders. I am committed to fostering an inclusive environment where every student has access to quality education and opportunities for personal growth. My vision for the college is centered around academic excellence, ethical values, and community engagement. I believe in providing students with a well-rounded education that equips them with the skills and knowledge to succeed in an ever-changing world. Together, let us work towards realizing this vision and creating a brighter future for our students and communities.'
   },
-  {
-    role: 'PRINCIPAL',
-    name: 'Dr. V.S.R Kumari',
-    img: new URL('@/assets/management/principal.jpg', import.meta.url).href,
-    summary:
-      'Leading Principal committed to academic excellence with global technical and industry orientation.',
-    desc:
-      'Dr. V.S.R Kumari, a leading Principal. It is an extreme honour to be a part of achieving academic excellence with the institute and I am much obliged to felicitate the infrastructure of global technical and industry orientation while safeguarding the values and esteem of the institute and taking them to the next level by integrating my research, academic and technical exposure and also in collaboration with good many value nurturing institutions.'
-  }
 ])
 
 const selectedProfile = ref(null)
@@ -172,6 +163,8 @@ const closeModal = () => {
 .profile-card {
   border-radius: 12px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 350px;
+  margin: 0 auto;
 }
 .profile-card:hover {
   transform: translateY(-6px);
@@ -264,5 +257,22 @@ const closeModal = () => {
   color: white;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(255, 119, 1, 0.3);
+}
+
+/* Responsive adjustments for 3 cards */
+@media (min-width: 1200px) {
+  .row {
+    justify-content: center;
+  }
+  .col-lg-4 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .profile-card {
+    max-width: 400px;
+  }
 }
 </style>

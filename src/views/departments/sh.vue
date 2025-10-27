@@ -24,16 +24,12 @@
               <span class="qf-label">Total Students</span>
               <span class="qf-value">{{ facts.totalStudents }}</span>
             </li>
-            <li>
-              <span class="qf-label">Programs</span>
-              <span class="qf-value">Basic Sciences • English</span>
-            </li>
           </ul>
         </div>
         <picture class="hero-art" aria-hidden="true">
           <img
-            src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1600&auto=format&fit=crop"
-            alt="AI & Data Science themed visual"
+            src="https://images.unsplash.com/photo-1509228468518-180dd4864904?q=80&w=1600&auto=format&fit=crop"
+            alt="Science & Humanities Department"
             class="hero-img"
           />
         </picture>
@@ -41,7 +37,7 @@
     </header>
 
     <!-- STICKY SUB NAV (nav-pills) -->
-    <nav class="subnav" aria-label="Section navigation">
+    <nav id="subnav" class="subnav" aria-label="Section navigation">
       <div class="container subnav-inner">
         <button
           v-for="tab in tabs"
@@ -61,7 +57,7 @@
     <!-- CONTENT (tab panes) -->
     <main class="container content" id="content">
       <!-- ABOUT -->
-      <section class="card-section" v-show="activeTab==='overview'">
+      <section :id="tabsMap.overview" class="card-section" v-show="activeTab==='overview'">
         <div class="card">
           <h2 class="section-title"><i class="fa-solid fa-school"></i> About the Department</h2>
           <p class="lead">
@@ -83,11 +79,11 @@
 
         <div class="grid-2">
           <article class="card">
-            <h3 class="h5 text-muted mb-2">Vision</h3>
+            <h3 class="h5 mb-2" style="color: var(--ink); font-weight: 800;">Vision</h3>
             <p>
               To make the students achieve latest knowledge of Basic Science and English skills along with morals and character needed for Engineering Profession
             </p>
-            <h3 class="h5 text-muted mt-4 mb-2">Mission</h3>
+            <h3 class="h5 mt-4 mb-2" style="color: var(--ink); font-weight: 800;">Mission</h3>
             <p>
               To awaken the students of their hidden potentials and talents and systematically grooming these potentials to build up great career for students.
             </p>
@@ -113,7 +109,7 @@
       </section>
 
       <!-- FACULTY DIRECTORY -->
-      <section class="card-section" v-show="activeTab==='faculty'">
+      <section :id="tabsMap.faculty" class="card-section" v-show="activeTab==='faculty'">
         <div class="card">
           <div class="section-header">
             <h2 class="section-title"><i class="fa-solid fa-users-gear"></i> Faculty Directory</h2>
@@ -165,7 +161,7 @@
       </section>
 
       <!-- LABS / INFRA -->
-      <section class="card-section" v-show="activeTab==='labs'">
+      <section :id="tabsMap.labs" class="card-section" v-show="activeTab==='labs'">
         <h2 class="section-title"><i class="fa-solid fa-flask"></i> Laboratories & Infrastructure</h2>
         <div class="labs-intro">
           <p class="lead">
@@ -199,30 +195,31 @@
       </section>
 
       <!-- CURRICULUM -->
-      <section class="card-section" aria-labelledby="curriculum" v-show="activeTab==='curriculum'">
+      <section :id="tabsMap.curriculum" class="card-section" aria-labelledby="curriculum" v-show="activeTab==='curriculum'">
         <div class="card">
           <h2 class="section-title" id="curriculum"><i class="fa-solid fa-file-lines"></i> Course Structure for all Years</h2>
           <p class="lead">
-            Download the Course Structure and Syllabus of four years of CSE course and other engineering programs. All syllabi follow the R22 regulation scheme.
+            Download the Course Structure and Syllabus for all engineering programs. The Science & Humanities department provides foundational courses in Mathematics, Physics, Chemistry, and English Communication for all B.Tech programs following the R22 regulation scheme.
           </p>
           <div class="downloads">
-            <a v-for="d in syllabus" :key="d.label" :href="d.href" class="download" target="_blank" rel="noopener">
+            <div v-for="d in syllabus" :key="d.label" class="download" :class="{ 'coming-soon': d.type === 'coming-soon' }" @click="handleSyllabusClick(d)">
               <i class="fa-solid fa-file-pdf"></i>
               <div>
                 <div class="dl-label">{{ d.label }}</div>
                 <div class="dl-sub">{{ d.note }}</div>
+                <div v-if="d.type === 'coming-soon'" class="dl-status">Coming Soon</div>
               </div>
-            </a>
+            </div>
           </div>
           <div class="row-actions mt-1">
-            <a class="btn btn-soft" href="/academics/regulations">Academic Regulations</a>
-            <a class="btn btn-soft" href="/academics/calendar">Academic Calendar</a>
+            <a class="btn btn-soft" href="/academics/academic-regulations">Academic Regulations</a>
+            <a class="btn btn-soft" href="/academics/academic-calendar">Academic Calendar</a>
           </div>
         </div>
       </section>
 
       <!-- ACTIVITIES -->
-      <section class="card-section" v-show="activeTab==='activities'">
+      <section :id="tabsMap.activities" class="card-section" v-show="activeTab==='activities'">
         <h2 class="section-title"><i class="fa-solid fa-rocket"></i> Student Activities & Achievements</h2>
         <div class="grid-3">
           <article class="card" v-for="a in activities" :key="a.title">
@@ -233,7 +230,7 @@
       </section>
 
       <!-- RESEARCH & INDUSTRY -->
-      <section class="card-section" v-show="activeTab==='research'">
+      <section :id="tabsMap.research" class="card-section" v-show="activeTab==='research'">
         <div class="grid-2">
           <article class="card">
             <h2 class="section-title"><i class="fa-solid fa-microscope"></i> Research Highlights</h2>
@@ -293,27 +290,20 @@
       </section>
 
       <!-- ALUMNI -->
-      <section class="card-section" v-show="activeTab==='alumni'">
+      <section :id="tabsMap.alumni" class="card-section" v-show="activeTab==='alumni'">
         <h2 class="section-title"><i class="fa-solid fa-user-graduate"></i> Alumni Network</h2>
-        <div class="alumni-grid">
-          <article v-for="al in alumni" :key="al.name" class="alumni-card">
-            <img :src="al.photo" :alt="al.name" class="avatar" />
-            <div>
-              <h3 class="h6">{{ al.name }}</h3>
-              <p class="muted">{{ al.role }} — {{ al.company }}</p>
-              <a v-if="al.linkedin" :href="al.linkedin" target="_blank" rel="noopener" class="icon-link">
-                <i class="fa-brands fa-linkedin"></i> Connect
-              </a>
-            </div>
-          </article>
-        </div>
-        <div class="row-actions mt-1">
-          <a class="btn btn-primary" href="mailto:alumni@ssit.edu.in">Join Alumni Mentoring</a>
+        <div class="under-construction">
+          <div class="construction-content">
+            <i class="fa-solid fa-hammer"></i>
+            <h3>Under Construction</h3>
+            <p>Our alumni network section is currently being updated with the latest information about our Science & Humanities graduates and their achievements.</p>
+            <p>Please check back soon for inspiring stories from our alumni community.</p>
+          </div>
         </div>
       </section>
 
       <!-- CONTACT -->
-      <section class="card-section" v-show="activeTab==='contact'">
+      <section :id="tabsMap.contact" class="card-section" v-show="activeTab==='contact'">
         <div class="card contact-card">
           <h2 class="section-title"><i class="fa-solid fa-address-book"></i> Contact Us</h2>
           <div class="contact-grid">
@@ -327,7 +317,7 @@
             </div>
             <aside class="note">
               <p class="mb-0"><i class="fa-solid fa-circle-info"></i> Follow our LinkedIn page for news, internships, and events.</p>
-              <a class="btn btn-soft mt-1" href="#" aria-label="AI & DS LinkedIn">AI & DS LinkedIn</a>
+              <a class="btn btn-soft mt-1" href="#" aria-label="SH LinkedIn">SH LinkedIn</a>
             </aside>
           </div>
         </div>
@@ -348,16 +338,26 @@
       title-icon-color="var(--orange)"
       :show-image-info="false"
     />
+
+    <!-- PDF Viewer Modal -->
+    <PdfViewer 
+      :show="showPdfModal"
+      :url="currentPdfUrl"
+      :title="currentPdfTitle"
+      @close="closePdfModal"
+    />
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import Header from '@/components/Header.vue'
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/Footer.vue'
 import Strengths from '@/views/about/Strengths.vue'
 import ImagePreviewer from '@/views/utils/ImagePreviewer.vue'
+import PdfViewer from '@/views/utils/PdfViewer.vue'
 
 /* Facts / Quick Stats */
 const facts = { established: '2007', intakeUG: '120', totalStudents: '480', labs: '4' }
@@ -382,46 +382,176 @@ const tabs = [
   { id: 'alumni',     label: 'Alumni',     icon: 'fa-solid fa-user-graduate' },
   { id: 'contact',    label: 'Contact',    icon: 'fa-solid fa-address-book' }
 ]
-const tabsMap = tabs.reduce((acc, t) => ((acc[t.id] = t.id), acc), {})
+// Router setup
+const route = useRoute()
+const router = useRouter()
+
+// Tab mapping for URL synchronization
+const tabsMap = {
+  overview: 'overview',
+  faculty: 'faculty', 
+  labs: 'labs',
+  curriculum: 'curriculum',
+  activities: 'activities',
+  research: 'research',
+  placements: 'placements',
+  alumni: 'alumni',
+  contact: 'contact'
+}
+
 const activeTab = ref(tabs[0].id)
-const setTab = (id) => { activeTab.value = id } // tabbed view, no scroll
+
+// Enhanced setTab function with router navigation
+const setTab = (id) => {
+  activeTab.value = id
+  router.push(`/sh/${id}`)
+  
+  // Smooth scroll to section
+  setTimeout(() => {
+    const element = document.getElementById(tabsMap[id])
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, 100)
+}
+
+// Initialize tab from URL on mount
+onMounted(() => {
+  const tabFromUrl = route.params.tab
+  if (tabFromUrl && tabs.some(tab => tab.id === tabFromUrl)) {
+    activeTab.value = tabFromUrl
+  }
+})
+
+// Watch for route changes
+watch(() => route.params.tab, (newTab) => {
+  if (newTab && tabs.some(tab => tab.id === newTab)) {
+    activeTab.value = newTab
+  }
+})
 
 /* Faculty */
 const faculty = ref([
+  // Head of Department
   {
-    name: 'Dr. R. Anitha', designation: 'Professor & HOD',
-    qualification: 'Ph.D., AI',
-    expertise: ['AI', 'NLP', 'Responsible AI'],
-    email: 'hod.aids@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&w=400',
+    name: 'Dr. SK MEERA SHAHEB', designation: 'PROFESSOR & HOD',
+    qualification: 'Ph.D',
+    expertise: ['Physics', 'Research', 'Advanced Physics', 'Department Leadership'],
+    email: 'hod.sh@ssit.edu.in',
+    photo: new URL('@/assets/departments/sh/faculty/SH_01.jpg', import.meta.url).href,
+    profile: '#', linkedin: '#'
+  },
+  // BSH(MATHS) Department
+  {
+    name: 'Dr. A SINDHUJA', designation: 'ASST.PROF',
+    qualification: 'Ph.D',
+    expertise: ['Mathematics', 'Applied Mathematics', 'Research'],
+    email: 'a.sindhuja@ssit.edu.in',
+    photo: new URL('@/assets/departments/sh/faculty/SH_02.jpg', import.meta.url).href,
     profile: '#', linkedin: '#'
   },
   {
-    name: 'Mr. K. Manoj', designation: 'Assistant Professor',
-    qualification: 'M.Tech (Data Science)',
-    expertise: ['Data Science', 'Big Data', 'Python'],
-    email: 'manoj@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400',
+    name: 'CHILUKURI LEELAVATHI', designation: 'ASST.PROF',
+    qualification: 'M.Sc',
+    expertise: ['Mathematics', 'Statistics', 'Applied Mathematics'],
+    email: 'chilukuri.leelavathi@ssit.edu.in',
+    photo: new URL('@/assets/departments/sh/faculty/SH_03.jpg', import.meta.url).href,
     profile: '#', linkedin: '#'
   },
   {
-    name: 'Ms. Neha Varma', designation: 'Assistant Professor',
-    qualification: 'M.Tech (AI)',
-    expertise: ['Computer Vision', 'Deep Learning'],
-    email: 'neha.varma@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=400',
+    name: 'DOSAPATI SRIDEVI', designation: 'ASST.PROF',
+    qualification: 'M.Sc',
+    expertise: ['Mathematics', 'Algebra', 'Geometry'],
+    email: 'dosapati.sridevi@ssit.edu.in',
+    photo: new URL('@/assets/departments/sh/faculty/SH_04.jpg', import.meta.url).href,
     profile: '#', linkedin: '#'
   },
   {
-    name: 'Dr. T. Raghav', designation: 'Associate Professor',
-    qualification: 'Ph.D., ML',
-    expertise: ['Time Series', 'Reinforcement Learning'],
-    email: 'raghav@ssit.edu.in',
-    photo: 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=400',
+    name: 'KOTHA VASAVI', designation: 'ASST.PROF',
+    qualification: 'M.Sc',
+    expertise: ['Mathematics', 'Calculus', 'Differential Equations'],
+    email: 'kotha.vasavi@ssit.edu.in',
+    photo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNmOTczMTYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiAxNkMxOC4yMDkxIDE2IDIwIDE0LjIwOTEgMjAgMTJDMjAgOS43OTA5MSAxOC4yMDkxIDggMTYgOEMxMy43OTA5IDggMTIgOS43OTA5MSAxMiAxMkMxMiAxNC4yMDkxIDEzLjc5MDkgMTYgMTYgMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTYgMTlDMTEuNTgxNyAxOSA4IDIyLjU4MTcgOCAyN1YyOUgyNFYyN0MyNCAyMi41ODE3IDIwLjQxODMgMTkgMTYgMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+",
+    profile: '#', linkedin: '#'
+  },
+  // BSH(ENG) Department
+  {
+    name: 'VEMULA SURESH KUMAR', designation: 'ASST.PROF',
+    qualification: 'M.A (ENG)',
+    expertise: ['English Literature', 'Communication Skills', 'Language Teaching'],
+    email: 'vemula.suresh@ssit.edu.in',
+    photo: new URL('@/assets/departments/sh/faculty/SH_05.jpg', import.meta.url).href,
+    profile: '#', linkedin: '#'
+  },
+  {
+    name: 'VAJJA VENKATESWARLU', designation: 'ASST.PROF',
+    qualification: 'M.A (ENG)',
+    expertise: ['English Language', 'Technical Communication', 'Soft Skills'],
+    email: 'vajja.venkateswarlu@ssit.edu.in',
+    photo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNmOTczMTYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiAxNkMxOC4yMDkxIDE2IDIwIDE0LjIwOTEgMjAgMTJDMjAgOS43OTA5MSAxOC4yMDkxIDggMTYgOEMxMy43OTA5IDggMTIgOS43OTA5MSAxMiAxMkMxMiAxNC4yMDkxIDEzLjc5MDkgMTYgMTYgMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTYgMTlDMTEuNTgxNyAxOSA4IDIyLjU4MTcgOCAyN1YyOUgyNFYyN0MyNCAyMi41ODE3IDIwLjQxODMgMTkgMTYgMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+",
+    profile: '#', linkedin: '#'
+  },
+  {
+    name: 'KONGA KRISHNA KUMAR', designation: 'ASST.PROF',
+    qualification: 'M.A (ENG)',
+    expertise: ['English Literature', 'Communication', 'Language Lab'],
+    email: 'konga.krishna@ssit.edu.in',
+    photo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNmOTczMTYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiAxNkMxOC4yMDkxIDE2IDIwIDE0LjIwOTEgMjAgMTJDMjAgOS43OTA5MSAxOC4yMDkxIDggMTYgOEMxMy43OTA5IDggMTIgOS43OTA5MSAxMiAxMkMxMiAxNC4yMDkxIDEzLjc5MDkgMTYgMTYgMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTYgMTlDMTEuNTgxNyAxOSA4IDIyLjU4MTcgOCAyN1YyOUgyNFYyN0MyNCAyMi41ODE3IDIwLjQxODMgMTkgMTYgMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+",
+    profile: '#', linkedin: '#'
+  },
+  // BSH(CHE) Department
+  {
+    name: 'BOLLA RAMA KRISHNA', designation: 'ASSOC.PROF',
+    qualification: 'M.Sc',
+    expertise: ['Chemistry', 'Organic Chemistry', 'Research'],
+    email: 'bolla.ramakrishna@ssit.edu.in',
+    photo: new URL('@/assets/departments/sh/faculty/SH_09.jpg', import.meta.url).href,
+    profile: '#', linkedin: '#'
+  },
+  {
+    name: 'BALUSUPATI SEETHARAMULU', designation: 'ASST.PROF',
+    qualification: 'M.Sc',
+    expertise: ['Chemistry', 'Inorganic Chemistry', 'Analytical Chemistry'],
+    email: 'balusupati.seetharamulu@ssit.edu.in',
+    photo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNmOTczMTYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiAxNkMxOC4yMDkxIDE2IDIwIDE0LjIwOTEgMjAgMTJDMjAgOS43OTA5MSAxOC4yMDkxIDggMTYgOEMxMy43OTA5IDggMTIgOS43OTA5MSAxMiAxMkMxMiAxNC4yMDkxIDEzLjc5MDkgMTYgMTYgMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTYgMTlDMTEuNTgxNyAxOSA4IDIyLjU4MTcgOCAyN1YyOUgyNFYyN0MyNCAyMi41ODE3IDIwLjQxODMgMTkgMTYgMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+",
+    profile: '#', linkedin: '#'
+  },
+  {
+    name: 'MADAMSETTI N. V.SATYAVENI', designation: 'ASST.PROF',
+    qualification: 'M.Sc',
+    expertise: ['Chemistry', 'Physical Chemistry', 'Laboratory Techniques'],
+    email: 'madamsetti.satyaveni@ssit.edu.in',
+    photo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNmOTczMTYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiAxNkMxOC4yMDkxIDE2IDIwIDE0LjIwOTEgMjAgMTJDMjAgOS43OTA5MSAxOC4yMDkxIDggMTYgOEMxMy43OTA5IDggMTIgOS43OTA5MSAxMiAxMkMxMiAxNC4yMDkxIDEzLjc5MDkgMTYgMTYgMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTYgMTlDMTEuNTgxNyAxOSA4IDIyLjU4MTcgOCAyN1YyOUgyNFYyN0MyNCAyMi41ODE3IDIwLjQxODMgMTkgMTYgMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+",
+    profile: '#', linkedin: '#'
+  },
+  // BSH(PHY) Department
+  {
+    name: 'CHINTALA. SAILAJA', designation: 'ASST.PROF',
+    qualification: 'M.Sc',
+    expertise: ['Physics', 'Applied Physics', 'Laboratory Physics'],
+    email: 'chintala.sailaja@ssit.edu.in',
+    photo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNmOTczMTYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiAxNkMxOC4yMDkxIDE2IDIwIDE0LjIwOTEgMjAgMTJDMjAgOS43OTA5MSAxOC4yMDkxIDggMTYgOEMxMy43OTA5IDggMTIgOS43OTA5MSAxMiAxMkMxMiAxNC4yMDkxIDEzLjc5MDkgMTYgMTYgMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTYgMTlDMTEuNTgxNyAxOSA4IDIyLjU4MTcgOCAyN1YyOUgyNFYyN0MyNCAyMi41ODE3IDIwLjQxODMgMTkgMTYgMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+",
+    profile: '#', linkedin: '#'
+  },
+  {
+    name: 'YERNAM VIJAYA', designation: 'ASST.PROF',
+    qualification: 'M.Sc',
+    expertise: ['Physics', 'Modern Physics', 'Experimental Physics'],
+    email: 'yernam.vijaya@ssit.edu.in',
+    photo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNmOTczMTYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiAxNkMxOC4yMDkxIDE2IDIwIDE0LjIwOTEgMjAgMTJDMjAgOS43OTA5MSAxOC4yMDkxIDggMTYgOEMxMy43OTA5IDggMTIgOS43OTA5MSAxMiAxMkMxMiAxNC4yMDkxIDEzLjc5MDkgMTYgMTYgMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTYgMTlDMTEuNTgxNyAxOSA4IDIyLjU4MTcgOCAyN1YyOUgyNFYyN0MyNCAyMi41ODE3IDIwLjQxODMgMTkgMTYgMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+",
+    profile: '#', linkedin: '#'
+  },
+  // MBA Department
+  {
+    name: 'PUNNAM SIRESHA', designation: 'ASST.PROF',
+    qualification: 'MBA',
+    expertise: ['Management', 'Business Administration', 'Management Studies'],
+    email: 'punnam.siresha@ssit.edu.in',
+    photo: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNmOTczMTYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xNiAxNkMxOC4yMDkxIDE2IDIwIDE0LjIwOTEgMjAgMTJDMjAgOS43OTA5MSAxOC4yMDkxIDggMTYgOEMxMy43OTA5IDggMTIgOS43OTA5MSAxMiAxMkMxMiAxNC4yMDkxIDEzLjc5MDkgMTYgMTYgMTZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTYgMTlDMTEuNTgxNyAxOSA4IDIyLjU4MTcgOCAyN1YyOUgyNFYyN0MyNCAyMi41ODE3IDIwLjQxODMgMTkgMTYgMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+",
     profile: '#', linkedin: '#'
   }
 ])
-const designations = ['Professor & HOD', 'Professor', 'Associate Professor', 'Assistant Professor']
+const designations = ['PROFESSOR & HOD', 'PROFESSOR', 'ASSOC.PROF', 'ASST.PROF']
 const query = ref('')
 const designation = ref('ALL')
 const filteredFaculty = computed(() => {
@@ -488,11 +618,41 @@ const labs = [
 
 /* Syllabus / Downloads */
 const syllabus = [
-  { label: 'I Btech-AIDS- R22', note: 'AI & Data Science Program', href: '#' },
-  { label: 'I Btech-AIML- R22', note: 'AI & Machine Learning Program', href: '#' },
-  { label: 'I Btech-CSE- R22', note: 'Computer Science & Engineering', href: '#' },
-  { label: 'I Btech-ECE- R22', note: 'Electronics & Communication Engineering', href: '#' },
-  { label: 'I Btech-EEE- R22', note: 'Electrical & Electronics Engineering', href: '#' }
+  { 
+    label: 'I Btech-AIDS- R22', 
+    note: 'AI & Data Science Program', 
+    href: 'https://drive.google.com/file/d/1F9thRq3PAhLzsbJ2Hbg0hEICUOs9OXrh/view?usp=sharing',
+    pdfUrl: 'https://drive.google.com/file/d/1F9thRq3PAhLzsbJ2Hbg0hEICUOs9OXrh/preview',
+    type: 'pdf'
+  },
+  { 
+    label: 'I Btech-AIML- R22', 
+    note: 'AI & Machine Learning Program', 
+    href: 'https://drive.google.com/file/d/14pzfcpk4OYvXowFPsnYVw86qCIHfBCWU/view?usp=drive_link',
+    pdfUrl: 'https://drive.google.com/file/d/14pzfcpk4OYvXowFPsnYVw86qCIHfBCWU/preview',
+    type: 'pdf'
+  },
+  { 
+    label: 'I Btech-CSE- R22', 
+    note: 'Computer Science & Engineering', 
+    href: 'https://drive.google.com/file/d/1nUjgOH4_qsgCdig-utG6pbr6FYxpxQ_T/view?usp=drive_link',
+    pdfUrl: 'https://drive.google.com/file/d/1nUjgOH4_qsgCdig-utG6pbr6FYxpxQ_T/preview',
+    type: 'pdf'
+  },
+  { 
+    label: 'I Btech-ECE- R22', 
+    note: 'Electronics & Communication Engineering', 
+    href: 'https://drive.google.com/file/d/1uuJl4ZJt3lJAsSuME0bbk4OSRz7FhbP8/view?usp=drive_link',
+    pdfUrl: 'https://drive.google.com/file/d/1uuJl4ZJt3lJAsSuME0bbk4OSRz7FhbP8/preview',
+    type: 'pdf'
+  },
+  { 
+    label: 'I Btech-EEE- R22', 
+    note: 'Electrical & Electronics Engineering', 
+    href: 'https://drive.google.com/file/d/1bo6vv2QXEjNWTtCR8JKv_McByfHmGd1H/view?usp=drive_link',
+    pdfUrl: 'https://drive.google.com/file/d/1bo6vv2QXEjNWTtCR8JKv_McByfHmGd1H/preview',
+    type: 'pdf'
+  }
 ]
 
 /* Activities */
@@ -563,17 +723,23 @@ const alumni = [
 
 /* Contact */
 const hod = {
-  name: 'Dr. R. Anitha',
-  designation: 'Professor & Head, CSE (AI & DS)',
-  location: 'AI & DS Block, Room 301',
-  phone: '+91-98765-43210',
-  email: 'hod.aids@ssit.edu.in'
+  name: 'Dr. SK Meera Saheb',
+  designation: 'HOD & Associate Professor',
+  location: 'SH Block, Room 101',
+  phone: '+91-98765-43214',
+  email: 'shaikmeerasaheb7@gmail.com'
 }
 
 // Image Modal state
 const showImageModal = ref(false)
 const currentImageIndex = ref(0)
 const currentLabImages = ref([])
+
+// PDF Modal state
+const showPdfModal = ref(false)
+const currentPdfUrl = ref('')
+const currentPdfTitle = ref('')
+const isPdfLoading = ref(false)
 
 // Computed properties for ImagePreviewer
 const labImagesForModal = computed(() => {
@@ -584,6 +750,28 @@ const openImageModal = (labImages) => {
   currentLabImages.value = labImages
   currentImageIndex.value = 0
   showImageModal.value = true
+}
+
+// PDF Modal functions
+const openPdfModal = (pdfUrl, title) => {
+  currentPdfUrl.value = pdfUrl
+  currentPdfTitle.value = title
+  showPdfModal.value = true
+}
+
+const closePdfModal = () => {
+  showPdfModal.value = false
+  currentPdfUrl.value = ''
+  currentPdfTitle.value = ''
+}
+
+const handleSyllabusClick = (syllabusItem) => {
+  if (syllabusItem.type === 'pdf' && syllabusItem.pdfUrl) {
+    openPdfModal(syllabusItem.pdfUrl, syllabusItem.label)
+  } else if (syllabusItem.type === 'coming-soon') {
+    // Show a message or do nothing for coming soon items
+    console.log('Coming soon:', syllabusItem.label)
+  }
 }
 
 const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })
@@ -704,9 +892,22 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 .filters input, .filters select{
   border:1px solid var(--border); border-radius:.6rem; padding:.55rem .8rem; min-width:220px; background:#fff;
 }
-.faculty-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem; margin-top:1rem }
-.faculty-card{ border:1px solid var(--border); border-radius:1rem; overflow:hidden; display:flex; gap:.85rem; padding:.9rem; background:#fff; transition:transform .2s ease, box-shadow .2s ease }
-.faculty-card:focus, .faculty-card:hover{ transform:translateY(-3px); box-shadow:0 12px 30px rgba(0,0,0,.08) }
+.faculty-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(350px,1fr)); gap:1rem; margin-top:1rem }
+.faculty-card{ 
+  border:1px solid var(--border); 
+  border-radius:1rem; 
+  overflow:visible; 
+  display:flex; 
+  gap:.85rem; 
+  padding:1rem; 
+  background:#fff; 
+  transition:all 0.3s ease;
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
+}
+.faculty-card:focus, .faculty-card:hover{ 
+  transform:translateY(-4px); 
+  box-shadow:0 8px 25px rgba(0,0,0,.12);
+}
 .avatar{ width:86px; height:86px; object-fit:cover; border-radius:.75rem }
 .fc-name{ font-size:1.05rem; font-weight:800; color:var(--ink); margin:0 0 .15rem }
 .fc-meta{ color:var(--muted); margin:0 0 .35rem }
@@ -792,6 +993,39 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
 .alumni-card{ border:1px solid var(--border); border-radius:1rem; background:#fff; padding:.9rem; display:flex; gap:.8rem; align-items:center }
 .alumni-card .avatar{ width:70px; height:70px; border-radius:.7rem }
 
+/* UNDER CONSTRUCTION */
+.under-construction{ 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  min-height: 300px; 
+  background: linear-gradient(135deg, #f8fafc 0%, #eef4ff 100%); 
+  border: 2px dashed var(--border); 
+  border-radius: 1rem; 
+  margin: 1rem 0 
+}
+.construction-content{ 
+  text-align: center; 
+  max-width: 400px; 
+  padding: 2rem 
+}
+.construction-content i{ 
+  font-size: 3rem; 
+  color: var(--primary); 
+  margin-bottom: 1rem; 
+  opacity: 0.7 
+}
+.construction-content h3{ 
+  color: var(--ink); 
+  margin-bottom: 1rem; 
+  font-size: 1.5rem 
+}
+.construction-content p{ 
+  color: var(--muted); 
+  line-height: 1.6; 
+  margin-bottom: 0.8rem 
+}
+
 /* CONTACT */
 .contact-card .contact-grid{ display:grid; grid-template-columns:2fr 1fr; gap:1rem; align-items:start }
 .note{ background:linear-gradient(180deg,#f8fafc,#eef4ff); border:1px dashed var(--border); border-radius:.9rem; padding:.9rem }
@@ -833,6 +1067,41 @@ const lastUpdated = new Date().toLocaleDateString('en-IN', { year: 'numeric', mo
   justify-content:center; 
   font-size:.9rem;
   padding:.7rem 1rem;
+}
+
+/* PDF Modal Styles */
+.download{
+  border:1px solid var(--border); 
+  border-radius:.9rem; 
+  padding:.8rem; 
+  display:flex; 
+  gap:.7rem; 
+  align-items:flex-start; 
+  text-decoration:none; 
+  color:inherit; 
+  background:#fff;
+  transition:all 0.3s ease;
+  cursor:pointer;
+}
+.download:hover{
+  border-color:var(--orange);
+  background:rgba(249,115,22,0.05);
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(0,0,0,.1);
+}
+.download.coming-soon{
+  opacity:0.6;
+  cursor:not-allowed;
+}
+.download.coming-soon:hover{
+  transform:none;
+  box-shadow:none;
+}
+.dl-status{
+  font-size:0.8rem;
+  color:var(--orange);
+  font-weight:600;
+  margin-top:0.2rem;
 }
 
 /* RESPONSIVE */
