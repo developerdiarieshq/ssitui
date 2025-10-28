@@ -63,6 +63,7 @@ import Temple from './views/amenities/Temple.vue'
 import DigitalLibrary from './views/amenities/DigitalLibrary.vue'
 import IctFacilities from './views/amenities/IctFacilities.vue'
 import Placements from './views/Placements.vue'
+import EventsCircularsPage from './views/EventsCirculars.vue'
 
 // EXAMINATIONS
 import Coe from './views/examinations/Coe.vue'
@@ -178,6 +179,7 @@ const routes = [
     { path: '/admissions', component: Admissions },
     { path: '/placements', component: Placements },
     { path: '/placements/:tab', component: Placements },
+    { path: '/events-circulars', name: 'events_circulars', component: EventsCircularsPage },
     { path: '/anti-ragging', component: AntiRagging },
     { path: '/internet', component: Internet },
     { path: '/english-labs', component: EnglishLabs },

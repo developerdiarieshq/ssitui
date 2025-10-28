@@ -38,7 +38,7 @@
           </ul>
           <!-- View All Events Button -->
           <div class="text-center">
-            <a :href="links.viewAllEvents" class="btn btn-outline-orange">View All</a>
+            <router-link :to="{ name: 'events_circulars' }" class="btn btn-outline-orange">View All</router-link>
           </div>
         </div>
 
@@ -71,7 +71,7 @@
           </ul>
           <!-- View All Circulars Button -->
           <div class="text-center">
-            <a :href="links.viewAllCirculars" class="btn btn-outline-orange">View All</a>
+            <router-link :to="{ name: 'events_circulars' }" class="btn btn-outline-orange">View All</router-link>
           </div>
         </div>
       </div>
