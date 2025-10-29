@@ -359,17 +359,17 @@ const accreditationDocs = [
   {
     id: 6,
     title: "NAAC Assessment Report",
-    year: "Grade B",
+    year: "Grade B+",
     size: "3.2 MB",
-    description: "National Assessment and Accreditation Council assessment report with Grade B accreditation",
+    description: "National Assessment and Accreditation Council assessment report with Grade B+ accreditation",
     href: "/docs/NAAC_Report.pdf"
   },
   {
     id: 7,
     title: "NAAC Certificate",
-    year: "Grade B",
+    year: "Grade B+",
     size: "0.5 MB",
-    description: "Official NAAC certificate confirming Grade B accreditation status",
+    description: "Official NAAC certificate confirming Grade B+ accreditation status",
     href: "/docs/NAAC_Certificate.pdf"
   }
 ];

@@ -10,7 +10,7 @@
         <p class="subtitle">Highest Academic Authority of Sai Spurthi Institute of Technology</p>
         <p class="context">
           Affiliated to Jawaharlal Nehru Technological University, Hyderabad (JNTUH) | 
-          NAAC 'B' Grade Accredited | Established in 2001 by VIPASSANA Educational Society
+          NAAC 'B+' Grade Accredited | Established in 2001 by VIPASSANA Educational Society
         </p>
       </div>
     </header>

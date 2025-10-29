@@ -71,7 +71,7 @@
               <li>AICTE Approval: Valid for AY 2023-24 (Application No: 1-36458076014)</li>
               <li>Affiliation: JNTU Hyderabad (JNTUH)</li>
               <li>State Board (Diploma): SBTET, Hyderabad</li>
-              <li>NAAC: Accredited “B” Grade</li>
+              <li>NAAC: Accredited “B+” Grade</li>
               <li>ISO 9001:2008 Certified</li>
             </ul>
           </div>
@@ -402,7 +402,7 @@ const docs = ref([
   { title: 'AICTE Extension of Approval', year: '2013-14', href: new URL('@/assets/docs/mandatory_disclosure/EOAReport2013-14.pdf', import.meta.url).href },
   { title: 'AICTE Extension of Approval', year: '2001-2012', href: new URL('@/assets/docs/mandatory_disclosure/EOAReportfrom2001-2012.pdf', import.meta.url).href },
   { title: 'University Affiliation', year: 'JNTUH', href: '/docs/JNTUH_Affiliation.pdf' },
-  { title: 'NAAC Assessment Report', year: 'Grade B', href: '/docs/NAAC_Report.pdf' },
+  { title: 'NAAC Assessment Report', year: 'Grade B+', href: '/docs/NAAC_Report.pdf' },
   { title: 'ISO 9001:2015 Certificate', year: 'ISO', href: '/docs/ISO_9001_2015.pdf' },
   { title: 'Fire Safety Certificate', year: 'Latest', href: '/docs/Fire_Safety.pdf' },
   { title: 'Building Approval Certificate', year: 'Latest', href: '/docs/Building_Approval.pdf' },

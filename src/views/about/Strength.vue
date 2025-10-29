@@ -48,7 +48,7 @@ import Footer from '../../components/Footer.vue';
 const strengths = [
   {
     title: "NAAC Accreditation",
-    desc: "Only College in Telangana (Except Greater Hyderabad), Accredited by NAAC of UGC as ‘B’ Grade.",
+    desc: "Only College in Telangana (Except Greater Hyderabad), Accredited by NAAC of UGC as ‘B+’ Grade.",
     icon: "fas fa-award"
   },
   {

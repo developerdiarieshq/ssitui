@@ -10,7 +10,7 @@
             <img src="@/assets/college-logo.png" alt="SSIT College Logo" class="footer-logo me-3" />
             <div>
               <h5 class="fw-bold text-white mb-1">Sai Spurthi Institute of Technology</h5>
-              <small class="text-light-muted">NAAC 'B' Grade • AICTE Approved</small>
+              <small class="text-light-muted">NAAC 'B+' Grade • AICTE Approved</small>
             </div>
           </div>
           <p class="text-light-muted mb-3">
@@ -22,7 +22,7 @@
           <div class="accreditation-badges">
             <div class="badge-item">
               <i class="fa-solid fa-award"></i>
-              <span>NAAC 'B'</span>
+              <span>NAAC 'B+'</span>
             </div>
             <div class="badge-item">
               <i class="fa-solid fa-certificate"></i>

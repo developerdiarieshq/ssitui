@@ -15,7 +15,7 @@
             <div class="stat-label">Established</div>
           </div>
           <div class="stat-card">
-            <div class="stat-number">B Grade</div>
+            <div class="stat-number">B+ Grade</div>
             <div class="stat-label">NAAC Accreditation</div>
           </div>
           <div class="stat-card">
@@ -283,7 +283,7 @@
                     <i class="fa-solid fa-award text-primary" style="font-size: 3rem;"></i>
                   </div>
                   <h5 class="fw-bold text-primary mb-3">NAAC Accreditation</h5>
-                  <p class="text-muted mb-3">Accredited by NAAC with B Grade, demonstrating our commitment to quality education and institutional excellence.</p>
+                  <p class="text-muted mb-3">Accredited by NAAC with B+ Grade, demonstrating our commitment to quality education and institutional excellence.</p>
                   <div class="d-flex gap-2">
                     <button @click="openPdfModal({filename: 'naac_cer.pdf', title: 'NAAC Accreditation Certificate'})" class="btn btn-outline-primary flex-fill">
                       <i class="fa-solid fa-eye me-2"></i>View
